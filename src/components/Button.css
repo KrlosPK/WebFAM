@@ -1,0 +1,9 @@
+.button {
+	background: var(--orange-gradient);
+	border: none;
+	border-radius: 15px;
+	color: var(--white-color);
+	cursor: pointer;
+	font-family: 'Syne', sans-serif;
+	padding: 10px 1rem;
+}

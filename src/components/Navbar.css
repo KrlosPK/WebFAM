@@ -1,0 +1,83 @@
+nav {
+	background-color: var(--white-color);
+	display: flex;
+	justify-content: space-evenly;
+	min-height: 2.6rem;
+	padding: 0 1.5rem;
+}
+.wrapper {
+	background: linear-gradient(#222, #222), var(--orange-gradient);
+	background-origin: padding-box, border-box;
+	background-repeat: no-repeat;
+	border: 0.1px solid transparent;
+}
+ul {
+	align-items: center;
+	display: flex;
+	font-size: 14px;
+	gap: 1rem;
+	justify-content: center;
+	list-style: none;
+	width: 100%;
+}
+
+a {
+	color: #333;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/* Menú responsive */
+.menu {
+	display: none;
+}
+.menu__button {
+	background-color: transparent;
+	border: 0;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	height: 0.9rem;
+	justify-content: space-between;
+	transition: translate 500ms ease-in-out;
+	width: 1.3rem;
+	z-index: 2;
+}
+.menu__button > div {
+	background-color: var(--text-color);
+	border-radius: 5px;
+	height: 2px;
+	transition: background 200ms ease-in-out;
+	width: 100%;
+}
+.menu__button:hover > div {
+	background-color: #777;
+}
+
+.navigation {
+	background-color: #09f;
+	height: 40vh;
+	height: 100vh;
+	left: 0;
+	position: absolute;
+	top: 0;
+	transition: translate 500ms ease-in-out;
+	width: 50%;
+	z-index: 1;
+}
+.open-menu {
+	translate: -100%;
+}
+
+@media (max-width: 857px) {
+	.left,
+	.right {
+		display: none;
+	}
+	.menu {
+		align-items: center;
+		display: flex;
+	}
+}
