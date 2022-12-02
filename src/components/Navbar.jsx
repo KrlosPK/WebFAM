@@ -34,7 +34,7 @@ const Navbar = () => {
 						</a>
 						<a href='' className='flex gap'>
 							<FcTwoSmartphones />
-							ola
+							Productos
 						</a>
 						<a href='' className='flex gap'>
 							<FcTodoList />
