@@ -78,11 +78,13 @@ a {
 	height: 100vh;
 	justify-content: center;
 	left: 0;
+	overflow: auto;
 	position: absolute;
 	top: 0;
 	transition: translate 500ms ease-in-out;
 	width: 50%;
 	z-index: 1;
+	padding-block: 3rem 1rem;
 }
 .navigation > * {
 	color: white;

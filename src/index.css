@@ -19,6 +19,15 @@ body,
 	padding: 0;
 }
 
+::-webkit-scrollbar {
+	background: transparent;
+	width: 6px;
+}
+::-webkit-scrollbar-thumb {
+	background: #777;
+	border-radius: 10px;
+}
+
 .flex {
 	align-items: center;
 	display: flex;
