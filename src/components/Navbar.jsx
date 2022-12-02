@@ -1,27 +1,27 @@
-import './Navbar.css';
+import './Navbar.css'
 
 // Components
-import { Button } from './Button';
+import { Button } from './Button'
 
 // React Icons
-import { FcHome } from 'react-icons/fc'; // Inicio
-import { FcAssistant } from 'react-icons/fc'; // Usuarios
-import { FcTodoList } from 'react-icons/fc'; // Servicios
-import { FcTwoSmartphones } from 'react-icons/fc'; // Productos
-import { FcConferenceCall } from 'react-icons/fc'; // Roles
-import { FcPositiveDynamic } from 'react-icons/fc'; // Facturas
-import { FcOnlineSupport } from 'react-icons/fc'; // Citas
-import { useState } from 'react';
+import { FcHome } from 'react-icons/fc' // Inicio
+import { FcAssistant } from 'react-icons/fc' // Usuarios
+import { FcTodoList } from 'react-icons/fc' // Servicios
+import { FcTwoSmartphones } from 'react-icons/fc' // Productos
+import { FcConferenceCall } from 'react-icons/fc' // Roles
+import { FcPositiveDynamic } from 'react-icons/fc' // Facturas
+import { FcOnlineSupport } from 'react-icons/fc' // Citas
+import { useState } from 'react'
 
 const Navbar = () => {
-	const [isClicked, setIsClicked] = useState('clicked');
-	let buttonClassName = 'menu__button ';
-	buttonClassName += isClicked === 'clicked' ? 'open-menu' : '';
+	const [isClicked, setIsClicked] = useState('clicked')
+	let buttonClassName = 'menu__button '
+	buttonClassName += isClicked === 'clicked' ? 'open-menu' : ''
 
 	const handleClick = () => {
-		isClicked ? setIsClicked('') : setIsClicked('clicked');
-		console.log(isClicked);
-	};
+		isClicked ? setIsClicked('') : setIsClicked('clicked')
+		console.log(isClicked)
+	}
 
 	return (
 		<>
@@ -34,7 +34,7 @@ const Navbar = () => {
 						</a>
 						<a href='' className='flex gap'>
 							<FcTwoSmartphones />
-							Productos
+							ola
 						</a>
 						<a href='' className='flex gap'>
 							<FcTodoList />
@@ -93,11 +93,7 @@ const Navbar = () => {
 					</li>
 				</ul>
 				<ul className='logo'>
-					<img
-						src='assets/WebFAM_logo.png'
-						width={120}
-						alt='WebFAM logo'
-					/>
+					<img src='assets/WebFAM_logo.png' width={120} alt='WebFAM logo' />
 				</ul>
 				<ul className='right'>
 					<li>
@@ -127,7 +123,7 @@ const Navbar = () => {
 			</nav>
 			<div className='wrapper'></div>
 		</>
-	);
-};
+	)
+}
 
-export { Navbar };
+export { Navbar }
