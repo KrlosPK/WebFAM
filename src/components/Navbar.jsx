@@ -1,3 +1,4 @@
+// Styles
 import './Navbar.css';
 
 // Components
@@ -11,23 +12,32 @@ import { FcTwoSmartphones } from 'react-icons/fc'; // Productos
 import { FcConferenceCall } from 'react-icons/fc'; // Roles
 import { FcPositiveDynamic } from 'react-icons/fc'; // Facturas
 import { FcOnlineSupport } from 'react-icons/fc'; // Citas
+
+// Hooks
 import { useState } from 'react';
 
 const Navbar = () => {
-	const [isClicked, setIsClicked] = useState('clicked');
-	let buttonClassName = 'menu__button ';
-	buttonClassName += isClicked === 'clicked' ? 'open-menu' : '';
+	const [navIsClicked, setNavIsClicked] = useState('clicked');
+	let navClassName = 'navigation';
+	navClassName += navIsClicked === 'clicked' ? ' close-menu' : '';
+
+	const [buttonIsClicked, setButtonIsClicked] = useState('');
+	let buttonClassName = 'menu__button';
+	buttonClassName += buttonIsClicked === 'clicked' ? ' hover' : '';
 
 	const handleClick = () => {
-		isClicked ? setIsClicked('') : setIsClicked('clicked');
-		console.log(isClicked);
+		navIsClicked ? setNavIsClicked('') : setNavIsClicked('clicked');
+
+		buttonIsClicked
+			? setButtonIsClicked('')
+			: setButtonIsClicked('clicked');
 	};
 
 	return (
 		<>
 			<nav>
 				<div className='menu'>
-					<div className={'navigation ' + buttonClassName}>
+					<div className={navClassName}>
 						<a href='' className='flex gap'>
 							<FcHome />
 							Inicio
@@ -56,11 +66,9 @@ const Navbar = () => {
 							<FcOnlineSupport />
 							Citas
 						</a>
-						<a href=''>
-							<Button text='Ingresar' />
-						</a>
+						<Button width={120} className='ingresar' text='Ingresar' />
 					</div>
-					<button className='menu__button' onClick={handleClick}>
+					<button className={buttonClassName} onClick={handleClick}>
 						<div></div>
 						<div></div>
 						<div></div>
