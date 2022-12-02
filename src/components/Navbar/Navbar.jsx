@@ -2,7 +2,7 @@
 import './Navbar.css';
 
 // Components
-import { Button } from './Button';
+import { Button } from '../Assets/Button';
 
 // React Icons
 import { FcHome } from 'react-icons/fc'; // Inicio
@@ -39,34 +39,38 @@ const Navbar = () => {
 				<div className='menu'>
 					<div className={navClassName}>
 						<a href='' className='flex gap'>
-							<FcHome />
 							Inicio
+							<FcHome />
 						</a>
 						<a href='' className='flex gap'>
-							<FcTwoSmartphones />
 							Productos
+							<FcTwoSmartphones />
 						</a>
 						<a href='' className='flex gap'>
-							<FcTodoList />
 							Servicios
+							<FcTodoList />
 						</a>
 						<a href='' className='flex gap'>
-							<FcAssistant />
 							Usuarios
+							<FcAssistant />
 						</a>
 						<a href='' className='flex gap'>
-							<FcConferenceCall />
 							Roles
+							<FcConferenceCall />
 						</a>
 						<a href='' className='flex gap'>
-							<FcPositiveDynamic />
 							Facturas
+							<FcPositiveDynamic />
 						</a>
 						<a href='' className='flex gap'>
-							<FcOnlineSupport />
 							Citas
+							<FcOnlineSupport />
 						</a>
-						<Button width={120} className='ingresar' text='Ingresar' />
+						<Button
+							width={120}
+							className='ingresar'
+							text='Ingresar'
+						/>
 					</div>
 					<button className={buttonClassName} onClick={handleClick}>
 						<div></div>
@@ -77,26 +81,26 @@ const Navbar = () => {
 				<ul className='left'>
 					<li>
 						<a href='' className='flex gap'>
-							<FcHome />
 							Inicio
+							<FcHome />
 						</a>
 					</li>
 					<li>
 						<a href='' className='flex gap'>
-							<FcTwoSmartphones />
 							Productos
+							<FcTwoSmartphones />
 						</a>
 					</li>
 					<li>
 						<a href='' className='flex gap'>
-							<FcTodoList />
 							Servicios
+							<FcTodoList />
 						</a>
 					</li>
 					<li>
 						<a href='' className='flex gap'>
-							<FcAssistant />
 							Usuarios
+							<FcAssistant />
 						</a>
 					</li>
 				</ul>
@@ -110,20 +114,20 @@ const Navbar = () => {
 				<ul className='right'>
 					<li>
 						<a href='' className='flex gap'>
-							<FcConferenceCall />
 							Roles
+							<FcConferenceCall />
 						</a>
 					</li>
 					<li>
 						<a href='' className='flex gap'>
-							<FcPositiveDynamic />
 							Facturas
+							<FcPositiveDynamic />
 						</a>
 					</li>
 					<li>
 						<a href='' className='flex gap'>
-							<FcOnlineSupport />
 							Citas
+							<FcOnlineSupport />
 						</a>
 					</li>
 					<li>

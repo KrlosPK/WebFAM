@@ -2,14 +2,15 @@ nav {
 	background-color: var(--white-color);
 	display: flex;
 	justify-content: space-evenly;
-	min-height: 2.6rem;
+	min-height: 3rem;
 	padding: 0 1.5rem;
 }
 .wrapper {
 	background: linear-gradient(#222, #222), var(--orange-gradient);
 	background-origin: padding-box, border-box;
 	background-repeat: no-repeat;
-	border: 0.1px solid transparent;
+	height: .1px;
+	/* border: 1px solid transparent; */
 }
 ul {
 	align-items: center;

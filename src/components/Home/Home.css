@@ -1,0 +1,68 @@
+.container {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	height: 500px;
+	justify-content: center;
+	position: relative;
+}
+.container::before {
+	background: radial-gradient(
+		50% 50% at 50% 50%,
+		#f76b1c 0%,
+		rgba(251, 172, 127, 0.5625) 43.75%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	content: '';
+	filter: blur(69.6px);
+	height: 100%;
+	inset: 0;
+	opacity: 0.6;
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+}
+.container h1 {
+	color: white;
+	font-size: calc(5em + 1vmin);
+	letter-spacing: 9px;
+	position: relative;
+	text-align: center;
+	width: 800px;
+}
+.container h1 span {
+	color: var(--text-color);
+	left: 7px;
+	letter-spacing: 9px;
+	position: absolute;
+	top: -3px;
+}
+.container p {
+	text-align: center;
+	width: 54vw;
+}
+
+.container .buttons {
+	display: flex;
+	gap: 0.8rem;
+}
+
+@media (max-width: 857px) {
+	.container h1 {
+		font-size: calc(3em + 1vmin);
+		width: 600px;
+	}
+}
+@media (max-width: 630px) {
+	.container h1 {
+		font-size: calc(1.5em + 1vmin);
+		width: 320px;
+	}
+}
+@media (max-width: 320px) {
+	.container h1 {
+		font-size: calc(0.8em + 1vmin);
+		width: 220px;
+	}
+}

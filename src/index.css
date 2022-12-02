@@ -6,7 +6,7 @@
 	--icon-hover-color: #fd5d21;
 	--text-color: #181515;
 	--white-color: #eeeeee;
-	--orange-gradient: linear-gradient(152deg, #ff2525, #ffe53b);
+	--orange-gradient: linear-gradient(-160deg, #ff2525 40%, #ffe53b);
 }
 
 *,
