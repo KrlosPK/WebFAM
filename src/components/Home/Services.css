@@ -1,0 +1,25 @@
+.services {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: center;
+	margin: 0 auto;
+	width: 70%;
+}
+.service {
+	display: flex;
+	gap: 7px;
+	justify-content: center;
+}
+.service__image {
+	display: flex;
+}
+.service__image img {
+	aspect-ratio: 1;
+	width: 35px;
+}
+.service__text {
+	align-items: center;
+	color: var(--text-color);
+	display: flex;
+}
