@@ -7,7 +7,7 @@ import { Services } from './Services';
 const Home = () => {
 	return (
 		<>
-			<div className='container'>
+			<main className='container'>
 				<h1>
 					SOLDANDO SUEÑOS
 					<span>SOLDANDO SUEÑOS</span>
@@ -21,7 +21,7 @@ const Home = () => {
 					<Button text='Contáctanos »' />
 					<Button text='⚡ Quiénes somos?' />
 				</div>
-			</div>
+			</main>
 			<Services />
 		</>
 	);

@@ -1,4 +1,4 @@
-.container {
+main {
 	align-items: center;
 	display: flex;
 	flex-direction: column;
@@ -7,7 +7,7 @@
 	justify-content: center;
 	position: relative;
 }
-.container::before {
+main::before {
 	background: radial-gradient(
 		50% 50% at 50% 50%,
 		#f76b1c 0%,
@@ -23,7 +23,7 @@
 	width: 100%;
 	z-index: -1;
 }
-.container h1 {
+main h1 {
 	color: white;
 	font-size: calc(5em + 1vmin);
 	letter-spacing: 9px;
@@ -31,37 +31,37 @@
 	text-align: center;
 	width: 800px;
 }
-.container h1 span {
+main h1 span {
 	color: var(--text-color);
 	left: 7px;
 	letter-spacing: 9px;
 	position: absolute;
 	top: -3px;
 }
-.container p {
+main p {
 	text-align: center;
 	width: 54vw;
 }
 
-.container .buttons {
+main .buttons {
 	display: flex;
 	gap: 0.8rem;
 }
 
 @media (max-width: 857px) {
-	.container h1 {
+	main h1 {
 		font-size: calc(3em + 1vmin);
 		width: 600px;
 	}
 }
 @media (max-width: 630px) {
-	.container h1 {
+	main h1 {
 		font-size: calc(1.5em + 1vmin);
 		width: 320px;
 	}
 }
 @media (max-width: 320px) {
-	.container h1 {
+	main h1 {
 		font-size: calc(0.8em + 1vmin);
 		width: 220px;
 	}
