@@ -80,25 +80,25 @@ const Navbar = () => {
 				</div>
 				<ul className='left'>
 					<li>
-						<a href='' className='flex gap'>
+						<a href='' className='flex gap fade-gray'>
 							Inicio
 							<FcHome />
 						</a>
 					</li>
 					<li>
-						<a href='' className='flex gap'>
+						<a href='' className='flex gap fade-gray'>
 							Productos
 							<FcTwoSmartphones />
 						</a>
 					</li>
 					<li>
-						<a href='' className='flex gap'>
+						<a href='' className='flex gap fade-gray'>
 							Servicios
 							<FcTodoList />
 						</a>
 					</li>
 					<li>
-						<a href='' className='flex gap'>
+						<a href='' className='flex gap fade-gray'>
 							Usuarios
 							<FcAssistant />
 						</a>
@@ -113,19 +113,19 @@ const Navbar = () => {
 				</ul>
 				<ul className='right'>
 					<li>
-						<a href='' className='flex gap'>
+						<a href='' className='flex gap fade-gray'>
 							Roles
 							<FcConferenceCall />
 						</a>
 					</li>
 					<li>
-						<a href='' className='flex gap'>
+						<a href='' className='flex gap fade-gray'>
 							Facturas
 							<FcPositiveDynamic />
 						</a>
 					</li>
 					<li>
-						<a href='' className='flex gap'>
+						<a href='' className='flex gap fade-gray'>
 							Citas
 							<FcOnlineSupport />
 						</a>

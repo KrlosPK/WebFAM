@@ -114,3 +114,10 @@ a {
 		display: flex;
 	}
 }
+
+.fade-gray {
+	transition: color 150ms ease-out;
+}
+.fade-gray:hover {
+	color: #777;
+}
