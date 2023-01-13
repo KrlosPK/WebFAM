@@ -15,6 +15,7 @@ import { FcOnlineSupport } from 'react-icons/fc'; // Citas
 
 // Hooks
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 	const [navIsClicked, setNavIsClicked] = useState('clicked');
@@ -67,9 +68,9 @@ const Navbar = () => {
 							<FcOnlineSupport />
 						</a>
 						<Button
-							width={120}
 							className='ingresar'
 							text='Ingresar'
+							width={120}
 						/>
 					</div>
 					<button className={buttonClassName} onClick={handleClick}>
@@ -131,9 +132,9 @@ const Navbar = () => {
 						</a>
 					</li>
 					<li>
-						<a href=''>
+						<Link to='/login'>
 							<Button text='Ingresar' />
-						</a>
+						</Link>
 					</li>
 				</ul>
 			</nav>

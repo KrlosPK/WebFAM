@@ -18,8 +18,8 @@ const Home = () => {
 					asfálticas.
 				</p>
 				<div className='buttons'>
-					<Button text='Contáctanos »' />
-					<Button text='⚡ Quiénes somos?' />
+					<Button text='Contáctanos »' width={200}/>
+					<Button text='⚡ Quiénes somos?'  width={200}/>
 				</div>
 			</main>
 			<Services />
