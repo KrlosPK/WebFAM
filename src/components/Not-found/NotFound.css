@@ -1,0 +1,11 @@
+.nf-container {
+	display: grid;
+	place-content: center;
+	height: 100vh;
+	width: 100vw;
+}
+
+.nf-container h1 {
+	color: #ff2525;
+	font-size: 5rem;
+}

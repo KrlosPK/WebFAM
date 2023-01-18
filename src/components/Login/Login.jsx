@@ -7,6 +7,7 @@ const Login = () => {
 		<div className='login-div'>
 			<header className='login-header'>
 				<img src='assets/WebFAM_logo.png' width={120} alt='WebFAM logo' />
+				<Link className='go-back' to='/'>← Volver</Link>
 			</header>
 			<hr className='header-line' />
 			<section className='login-form'>
