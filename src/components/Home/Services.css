@@ -5,6 +5,7 @@
 	justify-content: center;
 	margin: 0 auto;
 	width: 70%;
+	margin-bottom: 20vh;
 }
 .service {
 	display: flex;

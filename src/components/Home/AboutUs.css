@@ -1,0 +1,33 @@
+.AboutUs-container {
+	background: url('../../Assets/Images/bg-home.jpg') no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	display: grid;
+	height: 100vh;
+	place-items: center;
+	position: relative;
+	z-index: 1;
+}
+.AboutUs-container::before {
+	background: rgba(0, 0, 0, 0.7);
+	content: '';
+	height: 100%;
+	inset: 0;
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+}
+.info {
+	width: 80%;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+.cards {
+	display: inherit;
+	justify-content: space-around;
+}
+.AboutUs-container h1 {
+	color: white;
+}

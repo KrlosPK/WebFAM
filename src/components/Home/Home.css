@@ -1,4 +1,4 @@
-main {
+.home-container {
 	align-items: center;
 	display: flex;
 	flex-direction: column;
@@ -7,13 +7,8 @@ main {
 	justify-content: center;
 	position: relative;
 }
-main::before {
-	background: radial-gradient(
-		50% 50% at 50% 50%,
-		#f76b1c 0%,
-		rgba(251, 172, 127, 0.5625) 43.75%,
-		rgba(255, 255, 255, 0) 100%
-	);
+.home-container::before {
+	background: radial-gradient(50% 50% at 50% 50%, #f76b1c 0%, rgba(251, 172, 127, 0.5625) 43.75%, rgba(255, 255, 255, 0) 100%);
 	content: '';
 	filter: blur(69.6px);
 	height: 100%;
@@ -23,7 +18,7 @@ main::before {
 	width: 100%;
 	z-index: -1;
 }
-main h1 {
+.home-container h1 {
 	color: white;
 	font-size: calc(5em + 1vmin);
 	letter-spacing: 9px;
@@ -31,37 +26,37 @@ main h1 {
 	text-align: center;
 	width: 800px;
 }
-main h1 span {
+.home-container h1 span {
 	color: var(--text-color);
 	left: 7px;
 	letter-spacing: 9px;
 	position: absolute;
 	top: -3px;
 }
-main p {
+.home-container p {
 	text-align: center;
 	width: 54vw;
 }
 
-main .buttons {
+.home-container .buttons {
 	display: flex;
 	gap: 0.8rem;
 }
 
 @media (max-width: 857px) {
-	main h1 {
+	.home-container h1 {
 		font-size: calc(3em + 1vmin);
 		width: 600px;
 	}
 }
 @media (max-width: 630px) {
-	main h1 {
+	.home-container h1 {
 		font-size: calc(1.5em + 1vmin);
 		width: 320px;
 	}
 }
 @media (max-width: 320px) {
-	main h1 {
+	.home-container h1 {
 		font-size: calc(0.8em + 1vmin);
 		width: 220px;
 	}

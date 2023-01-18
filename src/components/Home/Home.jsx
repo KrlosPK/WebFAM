@@ -1,13 +1,14 @@
 import './Home.css';
 
 // Components
-import { Button } from '../Assets/Button';
+import { Button } from '../../Assets/Button/Button';
 import { Services } from './Services';
+import AboutUs from './AboutUs';
 
 const Home = () => {
 	return (
 		<>
-			<main className='container'>
+			<main className='home-container'>
 				<h1>
 					SOLDANDO SUEÑOS
 					<span>SOLDANDO SUEÑOS</span>
@@ -23,6 +24,7 @@ const Home = () => {
 				</div>
 			</main>
 			<Services />
+			<AboutUs/>
 		</>
 	);
 };
