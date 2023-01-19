@@ -2,7 +2,7 @@
 import './Navbar.css';
 
 // Components
-import { Button } from '../Assets/Button';
+import { Button } from '../Utils'
 
 // React Icons
 import { FcHome } from 'react-icons/fc'; // Inicio

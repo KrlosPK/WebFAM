@@ -21,7 +21,7 @@ export const App = () => {
 				<Route path='/login' element={<Login />}>
 					<Route path='recuperar-contraseña' />
 				</Route>
-				<Route path='*' element={<NotFound/>}/>
+				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</>
 	)

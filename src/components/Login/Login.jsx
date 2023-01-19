@@ -1,6 +1,6 @@
 import './login.css'
-import { Button } from '../Assets/Button'
 import { Link } from 'react-router-dom'
+import { Button } from '../Utils'
 
 const Login = () => {
 	return (
