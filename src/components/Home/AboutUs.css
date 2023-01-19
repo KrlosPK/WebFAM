@@ -4,6 +4,7 @@
 	background-size: 100% 100%;
 	display: grid;
 	height: 100vh;
+	outline: 1px solid red;
 	place-items: center;
 	position: relative;
 	z-index: 1;
@@ -18,16 +19,22 @@
 	z-index: -1;
 }
 .info {
-	width: 80%;
-	height: 80vh;
 	display: flex;
 	flex-direction: column;
 	gap: 3rem;
+	height: 80vh;
+	width: 80%;
 }
 .cards {
 	display: inherit;
 	justify-content: space-around;
 }
+/* ! No funciona, hace overflow horrible ! */
+/* @media screen and (max-width: 768px) {
+	.cards {
+		flex-direction: column;
+	}
+} */
 .AboutUs-container h1 {
 	color: white;
 }

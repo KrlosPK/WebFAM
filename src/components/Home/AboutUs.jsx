@@ -1,5 +1,5 @@
-import Card from '../../Assets/Card/Card'
 import './AboutUs.css'
+import { Card, Button } from '../Utils'
 
 const AboutUs = () => {
 	return (
@@ -16,4 +16,4 @@ const AboutUs = () => {
 	)
 }
 
-export default AboutUs
+export { AboutUs }

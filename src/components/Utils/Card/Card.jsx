@@ -16,4 +16,4 @@ const Card = ({ background, title, description, titleColor, descriptionColor, si
 	)
 }
 
-export default Card
+export { Card }
