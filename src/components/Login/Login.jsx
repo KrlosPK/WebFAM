@@ -1,22 +1,35 @@
-import './login.css'
-import { Link } from 'react-router-dom'
-import { Button } from '../Utils'
+import './login.css';
+import { Link } from 'react-router-dom';
+import { Button } from '../Utils';
+
+//? Icons
+import { AiFillFacebook } from 'react-icons/ai';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
 	return (
 		<div className='login-div'>
 			<header className='login-header'>
-				<img src='assets/WebFAM_logo.png' width={120} alt='WebFAM logo' />
-				<Link className='go-back' to='/'>← Volver</Link>
+				<img
+					src='assets/WebFAM_logo.png'
+					width={120}
+					alt='WebFAM logo'
+				/>
+				<Link className='go-back' to='/'>
+					← Volver
+				</Link>
 			</header>
 			<hr className='header-line' />
 			<section className='login-form'>
 				<div className='first-login'>
 					<p>Para continuar, inicie sesión</p>
 					<div className='buttons'>
-						{/* TODO: Poner los iconos */}
-						<button className='Login-button button_fb'>Continua con Facebook</button>
-						<button className='Login-button button_gg'>Continua con Google</button>
+						<button className='Login-button button_fb'>
+							<AiFillFacebook /> Continúa con Facebook
+						</button>
+						<button className='Login-button button_gg'>
+							<FcGoogle /> Continúa con<div className='google_gradient'>Google</div>
+						</button>
 					</div>
 					<div className='between-session'>
 						<div className='line-breaker' />
@@ -32,7 +45,9 @@ const Login = () => {
 						<input type='password' placeholder='Contraseña' />
 					</div>
 					<div className='forgot-password'>
-						<Link to={'recuperar-contraseña'}>¿Olvidaste tú contraseña?</Link>
+						<Link to={'recuperar-contraseña'}>
+							¿Olvidaste tú contraseña?
+						</Link>
 					</div>
 					<div className='remind-me'>
 						<div>
@@ -50,7 +65,7 @@ const Login = () => {
 				<button>Regístrate</button>
 			</section>
 		</div>
-	)
-}
+	);
+};
 
-export { Login }
+export { Login };
