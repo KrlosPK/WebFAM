@@ -1,9 +1,3 @@
-/* Layout */
-.login-div {
-	margin: auto;
-	width: 95%;
-}
-
 /* Header */
 .login-header {
 	display: grid;
@@ -28,8 +22,9 @@
 
 /* first login form */
 .login-form {
-	display: grid;
-	place-items: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
 }
 .login-form p {
 	font-size: 14px;
@@ -43,24 +38,25 @@
 	flex-direction: column;
 	gap: 1.3rem;
 	justify-content: center;
+	width: 320px;
 }
 .Login-button {
-	display: flex;
-	justify-content: center;
 	align-items: center;
-	gap: 5px;
 	border: 1px solid gray;
 	border-radius: 20px;
 	cursor: pointer;
+	display: flex;
 	font-family: 'Syne', sans-serif;
+	gap: 5px;
+	justify-content: center;
 	letter-spacing: 1.3px;
 	padding: 10px 1rem;
-	width: 30vw;
 }
 .button_fb {
 	background: #3b5998;
 	color: #eef;
 	transition: background 300ms ease-in-out;
+	width: 100%;
 }
 .button_fb:hover {
 	background: #2c4375;
@@ -68,6 +64,7 @@
 .button_gg {
 	color: #777;
 	transition: background 300ms ease-in-out;
+	width: 100%;
 }
 .button_gg:hover {
 	background: rgba(226, 226, 226, 0.7);
@@ -92,17 +89,18 @@
 	justify-content: center;
 }
 .line-breaker {
-	content: '';
 	height: 1px;
 	outline: 1px solid rgb(211, 210, 210);
-	width: 10rem;
+	width: 100%;
 }
 
 /* Second login form */
 .second-login {
-	display: grid;
-	padding-bottom: 1.5rem;
-	width: 30%;
+	display: flex;
+	flex-direction: column;
+	padding-block: 1.5rem;
+	padding-inline: 0.7rem;
+	width: 400px;
 }
 .input-login {
 	color: rgba(0, 0, 0, 0.7);
@@ -152,11 +150,11 @@
 
 /* Register section */
 .breaker-footer {
-	content: '';
 	height: 1px;
 	margin: auto;
+	max-width: 410px;
 	outline: 1px solid rgb(211, 210, 210);
-	width: 25rem;
+	width: 100%;
 }
 .register-section {
 	align-items: center;
@@ -179,9 +177,32 @@
 	letter-spacing: 1px;
 	padding: 0.5rem;
 	transition: border-color 300ms ease-in-out, color 300ms ease-in-out;
-	width: 25rem;
+	width: 300px;
 }
 .register-section button:hover {
 	border-color: #f39a25;
 	color: #f39a25;
+}
+
+@media (max-width: 630px) {
+	.second-login {
+		width: 100%;
+	}
+}
+@media (max-width: 450px) {
+	.line-breaker {
+		width: 100%;
+	}
+	.button_fb {
+		width: 300px;
+	}
+	.button_gg {
+		width: 300px;
+	}
+	.first-login {
+		width: 300px;
+	}
+	.buttons {
+		width: 300px;
+	}
 }
