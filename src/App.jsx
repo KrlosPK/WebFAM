@@ -2,7 +2,8 @@
 import { Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/Navbar/Navbar'
 import { Home } from './components/Home/Home'
-import { Login } from './components/Login/login'
+import { Login } from './components/Login/Login'
+import { Register } from './components/Register/Register'
 import { NotFound } from './components/Not-found/NotFound'
 
 export const App = () => {
@@ -18,9 +19,10 @@ export const App = () => {
 						</>
 					}
 				/>
-				<Route path='/login' element={<Login />}>
+				<Route path='/Login' element={<Login />}>
 					<Route path='recuperar-contraseña' />
 				</Route>
+				<Route path='/Register' element={<Register />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</>

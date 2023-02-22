@@ -1,4 +1,4 @@
-import './login.css'
+import './Login.css'
 import { Link } from 'react-router-dom'
 import { Button } from '../Utils'
 
@@ -59,14 +59,16 @@ const Login = () => {
 							<input type='checkbox' name='check' id='check' />
 							<label htmlFor='check'>Recuérdame</label>
 						</div>
-						<Button text={'INGRESAR'} />
+						<Button text={'Ingresar'} />
 					</div>
 				</form>
 			</section>
 			<div className='breaker-footer' />
 			<section className='register-section'>
 				<h4>¿Aún no tienes cuenta?</h4>
-				<button>Regístrate</button>
+				<Link to={'/register'}>
+					<button>Regístrate</button>
+				</Link>
 			</section>
 		</div>
 	)

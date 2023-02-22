@@ -147,6 +147,9 @@
 	display: inherit;
 	gap: 5px;
 }
+.remind-me > Button {
+	color: white;
+}
 
 /* Register section */
 .breaker-footer {
@@ -186,10 +189,13 @@
 
 @media (max-width: 630px) {
 	.second-login {
-		width: 100%;
+		width: 70%;
 	}
 }
 @media (max-width: 450px) {
+	.second-login {
+		width: 100%;
+	}
 	.line-breaker {
 		width: 100%;
 	}

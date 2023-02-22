@@ -49,7 +49,7 @@ const Navbar = () => {
 						<a href='' className='flex gap'>
 							Citas
 						</a>
-						<Link to='/login'>
+						<Link to='/Login'>
 							<Button
 								className='ingresar'
 								text='Ingresar'
