@@ -1,12 +1,12 @@
 .button {
 	background: var(--orange-gradient);
+	background-size: 200%;
 	border: none;
 	border-radius: 15px;
 	color: var(--white-color);
 	cursor: pointer;
 	font-family: 'Syne', sans-serif;
 	padding: 10px 1rem;
-	background-size: 200%;
 	transition: background-position 600ms;
 }
 .button:hover {

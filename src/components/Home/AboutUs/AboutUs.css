@@ -1,0 +1,34 @@
+.AboutUs-container {
+	display: grid;
+	height: 100vh;
+	place-items: center;
+	position: relative;
+	z-index: 1;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	height: 80vh;
+	width: 80%;
+}
+.info__title {
+	text-align: center;
+}
+.info__subtitle {
+	font-size: 1rem;
+	font-weight: 400;
+	text-align: center;
+}
+.cards {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+/* ! No funciona, hace overflow horrible ! */
+@media screen and (max-width: 768px) {
+	.cards {
+		flex-direction: column;
+	}
+}

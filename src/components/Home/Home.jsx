@@ -2,8 +2,8 @@ import './Home.css'
 
 // Components
 import { Button } from '../Utils'
-import { Services } from './Services'
-import { AboutUs } from './AboutUs'
+import { Services } from './Services/Services'
+import { AboutUs } from './AboutUs/AboutUs'
 
 const Home = () => {
 	return (

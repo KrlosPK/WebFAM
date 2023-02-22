@@ -5,12 +5,13 @@
 	justify-content: center;
 	margin: 0 auto;
 	width: 70%;
-	margin-bottom: 20vh;
+	height: 35vh;
+	align-content: center;
 }
 .service {
 	display: flex;
-	gap: 7px;
-	justify-content: center;
+	gap: 17px;
+	align-items: center;
 }
 .service__image {
 	display: flex;
