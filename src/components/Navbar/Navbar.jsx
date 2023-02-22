@@ -1,38 +1,36 @@
 // Styles
-import './Navbar.css';
+import './Navbar.css'
 
 // Components
 import { Button } from '../Utils'
 
 // React Icons
-import { FcHome } from 'react-icons/fc'; // Inicio
-import { FcAssistant } from 'react-icons/fc'; // Usuarios
-import { FcTodoList } from 'react-icons/fc'; // Servicios
-import { FcTwoSmartphones } from 'react-icons/fc'; // Productos
-import { FcConferenceCall } from 'react-icons/fc'; // Roles
-import { FcPositiveDynamic } from 'react-icons/fc'; // Facturas
-import { FcOnlineSupport } from 'react-icons/fc'; // Citas
+import { FcHome } from 'react-icons/fc' // Inicio
+import { FcAssistant } from 'react-icons/fc' // Usuarios
+import { FcTodoList } from 'react-icons/fc' // Servicios
+import { FcTwoSmartphones } from 'react-icons/fc' // Productos
+import { FcConferenceCall } from 'react-icons/fc' // Roles
+import { FcPositiveDynamic } from 'react-icons/fc' // Facturas
+import { FcOnlineSupport } from 'react-icons/fc' // Citas
 
 // Hooks
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
-	const [navIsClicked, setNavIsClicked] = useState('clicked');
-	let navClassName = 'navigation';
-	navClassName += navIsClicked === 'clicked' ? ' close-menu' : '';
+	const [navIsClicked, setNavIsClicked] = useState('clicked')
+	let navClassName = 'navigation'
+	navClassName += navIsClicked === 'clicked' ? ' close-menu' : ''
 
-	const [buttonIsClicked, setButtonIsClicked] = useState('');
-	let buttonClassName = 'menu__button';
-	buttonClassName += buttonIsClicked === 'clicked' ? ' hover' : '';
+	const [buttonIsClicked, setButtonIsClicked] = useState('')
+	let buttonClassName = 'menu__button'
+	buttonClassName += buttonIsClicked === 'clicked' ? ' hover' : ''
 
 	const handleClick = () => {
-		navIsClicked ? setNavIsClicked('') : setNavIsClicked('clicked');
+		navIsClicked ? setNavIsClicked('') : setNavIsClicked('clicked')
 
-		buttonIsClicked
-			? setButtonIsClicked('')
-			: setButtonIsClicked('clicked');
-	};
+		buttonIsClicked ? setButtonIsClicked('') : setButtonIsClicked('clicked')
+	}
 
 	return (
 		<>
@@ -67,11 +65,13 @@ const Navbar = () => {
 							Citas
 							<FcOnlineSupport />
 						</a>
-						<Button
-							className='ingresar'
-							text='Ingresar'
-							width={120}
-						/>
+						<Link to='/login'>
+							<Button
+								className='ingresar'
+								text='Ingresar'
+								width={120}
+							/>
+						</Link>
 					</div>
 					<button className={buttonClassName} onClick={handleClick}>
 						<div></div>
@@ -140,7 +140,7 @@ const Navbar = () => {
 			</nav>
 			<div className='wrapper'></div>
 		</>
-	);
-};
+	)
+}
 
-export { Navbar };
+export { Navbar }
