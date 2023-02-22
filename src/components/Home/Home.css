@@ -51,13 +51,7 @@
 }
 @media (max-width: 630px) {
 	.home-container h1 {
-		font-size: calc(1.5em + 1vmin);
+		font-size: calc(2em + 1vmin);
 		width: 320px;
-	}
-}
-@media (max-width: 320px) {
-	.home-container h1 {
-		font-size: calc(0.8em + 1vmin);
-		width: 220px;
 	}
 }

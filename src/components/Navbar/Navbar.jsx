@@ -4,15 +4,6 @@ import './Navbar.css'
 // Components
 import { Button } from '../Utils'
 
-// React Icons
-import { FcHome } from 'react-icons/fc' // Inicio
-import { FcAssistant } from 'react-icons/fc' // Usuarios
-import { FcTodoList } from 'react-icons/fc' // Servicios
-import { FcTwoSmartphones } from 'react-icons/fc' // Productos
-import { FcConferenceCall } from 'react-icons/fc' // Roles
-import { FcPositiveDynamic } from 'react-icons/fc' // Facturas
-import { FcOnlineSupport } from 'react-icons/fc' // Citas
-
 // Hooks
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -39,31 +30,24 @@ const Navbar = () => {
 					<div className={navClassName}>
 						<a href='' className='flex gap'>
 							Inicio
-							<FcHome />
 						</a>
 						<a href='' className='flex gap'>
 							Productos
-							<FcTwoSmartphones />
 						</a>
 						<a href='' className='flex gap'>
 							Servicios
-							<FcTodoList />
 						</a>
 						<a href='' className='flex gap'>
 							Usuarios
-							<FcAssistant />
 						</a>
 						<a href='' className='flex gap'>
 							Roles
-							<FcConferenceCall />
 						</a>
 						<a href='' className='flex gap'>
 							Facturas
-							<FcPositiveDynamic />
 						</a>
 						<a href='' className='flex gap'>
 							Citas
-							<FcOnlineSupport />
 						</a>
 						<Link to='/login'>
 							<Button
@@ -83,25 +67,21 @@ const Navbar = () => {
 					<li>
 						<a href='' className='flex gap fade-gray'>
 							Inicio
-							<FcHome />
 						</a>
 					</li>
 					<li>
 						<a href='' className='flex gap fade-gray'>
 							Productos
-							<FcTwoSmartphones />
 						</a>
 					</li>
 					<li>
 						<a href='' className='flex gap fade-gray'>
 							Servicios
-							<FcTodoList />
 						</a>
 					</li>
 					<li>
 						<a href='' className='flex gap fade-gray'>
 							Usuarios
-							<FcAssistant />
 						</a>
 					</li>
 				</ul>
@@ -116,19 +96,16 @@ const Navbar = () => {
 					<li>
 						<a href='' className='flex gap fade-gray'>
 							Roles
-							<FcConferenceCall />
 						</a>
 					</li>
 					<li>
 						<a href='' className='flex gap fade-gray'>
 							Facturas
-							<FcPositiveDynamic />
 						</a>
 					</li>
 					<li>
 						<a href='' className='flex gap fade-gray'>
 							Citas
-							<FcOnlineSupport />
 						</a>
 					</li>
 					<li>

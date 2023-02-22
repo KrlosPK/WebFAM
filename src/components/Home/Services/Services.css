@@ -1,17 +1,17 @@
 .services {
+	align-content: center;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 2rem;
+	height: 35vh;
 	justify-content: center;
 	margin: 0 auto;
 	width: 70%;
-	height: 35vh;
-	align-content: center;
 }
 .service {
+	align-items: center;
 	display: flex;
 	gap: 17px;
-	align-items: center;
 }
 .service__image {
 	display: flex;
@@ -24,4 +24,9 @@
 	align-items: center;
 	color: var(--text-color);
 	display: flex;
+}
+@media (max-width: 390px) {
+	.services {
+		margin-top: 3.5rem;
+	}
 }

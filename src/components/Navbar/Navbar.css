@@ -15,7 +15,7 @@ ul {
 	align-items: center;
 	display: flex;
 	font-size: 14px;
-	gap: 1rem;
+	gap: 2.5rem;
 	justify-content: center;
 	list-style: none;
 	width: 100%;
@@ -37,10 +37,10 @@ a {
 	flex-direction: column;
 	height: 1.3rem;
 	justify-content: space-around;
+	position: fixed;
 	transition: translate 500ms ease-in-out;
 	width: 1.3rem;
 	z-index: 20;
-	position: fixed;
 }
 .menu__button > div {
 	background-color: var(--text-color);
@@ -76,14 +76,14 @@ a {
 	height: 100vh;
 	justify-content: center;
 	left: 0;
+	left: 0;
 	overflow: auto;
-	transition: translate 500ms ease-in-out;
-	width: 50%;
-	z-index: 10;
 	padding-block: 3rem 1rem;
 	position: fixed;
 	top: 0;
-	left: 0;
+	transition: translate 500ms ease-in-out;
+	width: 50%;
+	z-index: 10;
 }
 .navigation > * {
 	color: white;
@@ -102,7 +102,7 @@ a {
 	background: #777;
 }
 
-@media (max-width: 857px) {
+@media (max-width: 900px) {
 	.left,
 	.right {
 		display: none;
