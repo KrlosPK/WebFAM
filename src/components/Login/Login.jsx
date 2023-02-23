@@ -2,11 +2,24 @@ import './Login.css'
 import { Link } from 'react-router-dom'
 import { Button } from '../Utils'
 
+//? Hooks
+import { useState } from 'react'
+
 //? Icons
 import { AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
+	const [body, setBody] = useState({ username: '', password: '' })
+
+	const inputChange = ({ target }) => {
+		const { name, value } = target
+		setBody({
+			...body,
+			[name]: value
+		})
+	}
+
 	return (
 		<div className='login-div'>
 			<header className='login-header'>
@@ -40,12 +53,28 @@ const Login = () => {
 				</div>
 				<form className='second-login'>
 					<div className='main-form'>
-						<label className='input-login'>
-							Correo electrónico
-						</label>
-						<input type='text' placeholder='Correo electrónico' />
-						<label className='input-login'>Contraseña</label>
-						<input type='password' placeholder='Contraseña' />
+						<div className='container'>
+							<input
+								className='input-login'
+								type='email'
+								value={body.username}
+								onChange={inputChange}
+								name='username'
+							/>
+							<label className='label-login'>
+								Correo electrónico
+							</label>
+						</div>
+						<div className='container'>
+							<input
+								className='input-login'
+								type='password'
+								value={body.password}
+								onChange={inputChange}
+								name='password'
+							/>
+							<label className='label-login'>Contraseña</label>
+						</div>
 					</div>
 					<div className='forgot-password'>
 						¿Olvidaste tú contraseña?
@@ -54,11 +83,11 @@ const Login = () => {
 						</Link> */}
 					</div>
 					<div className='remind-me'>
-						<div>
+						<>
 							{/* TODO: Terminar que cuando esté activo cambie el color */}
 							<input type='checkbox' name='check' id='check' />
-							<label htmlFor='check'>Recuérdame</label>
-						</div>
+							<label htmlFor='check'></label>
+						</>
 						<Button text={'Ingresar'} />
 					</div>
 				</form>

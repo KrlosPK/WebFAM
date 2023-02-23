@@ -6,6 +6,8 @@
 	color: var(--white-color);
 	cursor: pointer;
 	font-family: 'Syne', sans-serif;
+	height: 40px;
+	letter-spacing: 1px;
 	padding: 10px 1rem;
 	transition: background-position 600ms;
 }

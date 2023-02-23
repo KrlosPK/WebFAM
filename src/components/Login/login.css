@@ -30,6 +30,7 @@
 	font-size: 14px;
 	font-weight: lighter;
 	margin: 20px;
+	margin-top: 4rem;
 	text-align: center;
 }
 .buttons {
@@ -67,7 +68,7 @@
 	width: 100%;
 }
 .button_gg:hover {
-	background: rgba(226, 226, 226, 0.7);
+	background: rgba(226, 226, 226, 0.9);
 }
 .google_gradient {
 	background-clip: text;
@@ -125,9 +126,14 @@
 
 /* Forgot password */
 .forgot-password {
+	cursor: pointer;
 	font-size: 14px;
 	font-weight: 400;
 	padding: 1rem 0;
+	width: fit-content;
+}
+.forgot-password:hover {
+	text-decoration: underline;
 }
 
 /* Remind me */
@@ -135,20 +141,69 @@
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
+	margin-block: 1rem;
+	position: relative;
+	width: 100%;
 }
 .remind-me label {
-	user-select: none;
-}
-.remind-me label,
-.remind-me input {
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		from(#222222),
+		to(#45484d)
+	);
+	background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
+	background: var(--orange-gradient);
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5),
+		0px 1px 0px rgba(255, 255, 255, 0.4);
+	box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5),
+		0px 1px 0px rgba(255, 255, 255, 0.4);
 	cursor: pointer;
+	height: 20px;
+	left: 0;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	user-select: none;
+	width: 20px;
 }
-.remind-me div {
-	display: inherit;
-	gap: 5px;
+.remind-me label::before {
+	content: 'Recuérdame';
+	left: 100%;
+	padding-left: 0.8rem;
+	position: absolute;
 }
-.remind-me > Button {
+.remind-me label:after {
+	background: transparent;
+	border: 3px solid #fcfff4;
+	border-right: none;
+	border-top: none;
+	content: '';
+	height: 5px;
+	left: 6px;
+	opacity: 0;
+	position: absolute;
+	top: 7px;
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	width: 9px;
+}
+.remind-me label:hover::after {
+	opacity: 0.3;
+}
+.remind-me input[type='checkbox'] {
+	visibility: hidden;
+}
+.remind-me input[type='checkbox']:checked + label:after {
+	opacity: 1;
+}
+
+/** Login Button */
+.remind-me Button {
 	color: white;
+	width: 30%;
 }
 
 /* Register section */
@@ -189,13 +244,13 @@
 
 @media (max-width: 630px) {
 	.second-login {
-		width: 70%;
+		width: 95%;
 	}
 }
 @media (max-width: 450px) {
-	.second-login {
+	/* .second-login {
 		width: 100%;
-	}
+	} */
 	.line-breaker {
 		width: 100%;
 	}
