@@ -30,8 +30,10 @@
 	font-size: 14px;
 	font-weight: lighter;
 	margin: 20px;
-	margin-top: 4rem;
 	text-align: center;
+}
+.first-login:first-child {
+	margin-top: 3.5rem;
 }
 .buttons {
 	align-items: center;
@@ -203,7 +205,6 @@
 /** Login Button */
 .remind-me Button {
 	color: white;
-	width: 30%;
 }
 
 /* Register section */
