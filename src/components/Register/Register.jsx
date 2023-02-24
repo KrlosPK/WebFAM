@@ -6,7 +6,6 @@ import { Button, Button2, Input, Select } from '../Utils'
 import { useState, useRef } from 'react'
 
 //? Library
-import { useToasts } from 'react-toast-notifications'
 
 //? Icons
 import { FaEye } from 'react-icons/fa'
@@ -20,8 +19,8 @@ const Register = () => {
     showPassword ? setShowPassword(false) : setShowPassword(true)
   }
 
-  //? TOAST NOTIFICATIONS
-  const { addToast, removeAllToasts } = useToasts()
+  // ? TOAST NOTIFICATIONS
+  // const { addToast, removeAllToasts } = useToasts()
 
   // Función para hacer focus en el input que no cumpla con los requisitos
   const focusInput = (input) => input.current.focus()
@@ -52,25 +51,25 @@ const Register = () => {
     if (nombre.length === 0 || /^\s+$/.test(nombre)) {
       e.preventDefault()
 
-      addToast('¡El Nombre no puede estar vacío!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      /* addToast('¡El Nombre no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			}) */
+      // removeAllToasts()
 
       focusInput(nombreInputEl)
     } else if (nombre.length < 2) {
       e.preventDefault()
 
-      addToast('¡El Nombre debe tener mínimo 2 letras', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      // addToast('¡El Nombre debe tener mínimo 2 letras', {
+      // 	appearance: 'error',
+      // 	autoDismiss: true,
+      // 	autoDismissTimeout: 6000,
+      // 	transitionDuration: 700
+      // })
+      // removeAllToasts()
 
       focusInput(nombreInputEl)
     }
@@ -79,25 +78,25 @@ const Register = () => {
     else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
       e.preventDefault()
 
-      addToast('¡Los Apellidos no puede estar vacío!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      /* addToast('¡Los Apellidos no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts() */
 
       focusInput(apellidosInputEl)
     } else if (apellidos.length < 4) {
       e.preventDefault()
 
-      addToast('Los Apellidos deben tener mínimo 4 letras', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      /* addToast('Los Apellidos deben tener mínimo 4 letras', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts() */
 
       focusInput(apellidosInputEl)
     }
@@ -106,25 +105,25 @@ const Register = () => {
     else if (numCelular.length === 0) {
       e.preventDefault()
 
-      addToast('¡El Número de Celular no puede estar vacío!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      /* addToast('¡El Número de Celular no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts() */
 
       focusInput(numCelularInputEl)
     } else if (numCelular.length < 9 || numCelular.length >= 12) {
       e.preventDefault()
 
-      addToast('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      /* addToast('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts() */
 
       focusInput(numCelularInputEl)
     }
@@ -132,13 +131,13 @@ const Register = () => {
     else if (!tipoDocumento) {
       e.preventDefault()
 
-      addToast('¡Por favor seleccione su Tipo de Documento!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      // addToast('¡Por favor seleccione su Tipo de Documento!', {
+      // 	appearance: 'error',
+      // 	autoDismiss: true,
+      // 	autoDismissTimeout: 6000,
+      // 	transitionDuration: 700
+      // })
+      // removeAllToasts()
 
       focusInput(tipoDocumentoInputEl)
     }
@@ -147,25 +146,25 @@ const Register = () => {
     else if (numDocumento.length === 0) {
       e.preventDefault()
 
-      addToast('¡El Número de Documento no puede estar vacío!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      // addToast('¡El Número de Documento no puede estar vacío!', {
+      // 	appearance: 'error',
+      // 	autoDismiss: true,
+      // 	autoDismissTimeout: 6000,
+      // 	transitionDuration: 700
+      // })
+      // removeAllToasts()
 
       focusInput(numDocumentoInputEl)
     } else if (numDocumento.length < 9 || numDocumento.length >= 12) {
       e.preventDefault()
 
-      addToast('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      // addToast('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
+      // 	appearance: 'error',
+      // 	autoDismiss: true,
+      // 	autoDismissTimeout: 6000,
+      // 	transitionDuration: 700
+      // })
+      // removeAllToasts()
 
       focusInput(numDocumentoInputEl)
     }
@@ -173,37 +172,37 @@ const Register = () => {
     else if (correo.length === 0 || /^\s+$/.test(correo)) {
       e.preventDefault()
 
-      addToast('¡El correo no puede estar vacío!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      /* addToast('¡El correo no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts() */
 
       focusInput(correoInputEl)
     } else if (!/\S+@\S+/.test(correo)) {
       e.preventDefault()
 
-      addToast('¡El correo debe contener "@dominio.com"!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      /* addToast('¡El correo debe contener "@dominio.com"!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts() */
 
       focusInput(correoInputEl)
     } else if (!/\S+\.\S+/.test(correo)) {
       e.preventDefault()
 
-      addToast('¡El correo debe contener "@dominio.com"!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      /* addToast('¡El correo debe contener "@dominio.com"!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts() */
 
       focusInput(correoInputEl)
     }
@@ -212,34 +211,37 @@ const Register = () => {
     else if (contrasena.length === 0 || /^\s+$/.test(contrasena)) {
       e.preventDefault()
 
-      addToast('¡La contraseña no puede estar vacía!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      /* addToast('¡La contraseña no puede estar vacía!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts() */
 
       focusInput(contrasenaInputEl)
     } else if (!regexContrasena.test(contrasena)) {
       e.preventDefault()
 
-      addToast('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+      /* 	addToast(
+				'¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
+				{
+					appearance: 'error',
+					autoDismiss: true,
+					autoDismissTimeout: 6000,
+					transitionDuration: 700
+				}
+			)
+			removeAllToasts() */
 
       focusInput(contrasenaInputEl)
     } else {
-      addToast('Listo para implementar Axios!', {
-        appearance: 'success',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
+      // addToast('Listo para implementar Axios!', {
+      // 	appearance: 'success',
+      // 	autoDismiss: true,
+      // 	autoDismissTimeout: 6000,
+      // 	transitionDuration: 700
+      // })
     }
   }
 

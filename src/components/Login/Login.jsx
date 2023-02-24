@@ -6,7 +6,8 @@ import { Button, Button2, Input, validateMail, validatePassword } from '../Utils
 import { useState, useRef } from 'react'
 
 //? Library
-import { useToasts } from 'react-toast-notifications'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 // import bcrypt from 'bcrypt'
 
 //? Icons
@@ -16,15 +17,14 @@ import { AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
+  const toastId = useRef(null)
+
   //* Mostrar contraseña
   const [showContrasena, setShowContrasena] = useState(true)
 
   const handleShowContrasenaClick = () => {
     showContrasena ? setShowContrasena(false) : setShowContrasena(true)
   }
-
-  //? TOAST NOTIFICATIONS
-  const { addToast, removeAllToasts } = useToasts()
 
   //* Función para hacer focus en el input que no cumpla con los requisitos
   const focusInput = (input) => input.current.focus()
@@ -54,75 +54,63 @@ const Login = () => {
     // ? Validación Correo
     if (validateMail(correo, /^\s+$/)) {
       e.preventDefault()
-      addToast('¡El correo no puede estar vacío!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.error('¡El correo no puede estar vacío!', {
+          theme: 'colored'
+        })
+      }
+
       focusInput(correoInputEl)
     } else if (!validateMail(correo, /\S+@\S+/)) {
       e.preventDefault()
-      addToast('¡El correo debe contener "@dominio.com"!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.error('¡El correo debe contener "@dominio.com"!', {
+          theme: 'colored'
+        })
+      }
+
       focusInput(correoInputEl)
     } else if (!validateMail(correo, /\S+\.\S+/)) {
       e.preventDefault()
-      addToast('¡El correo debe contener "@dominio.com"!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.error('¡El correo debe contener "@dominio.com"!', {
+          theme: 'colored'
+        })
+      }
+
       focusInput(correoInputEl)
     }
 
     // Validación Contraseña
     else if (validatePassword(contrasena, /^\s+$/)) {
       e.preventDefault()
-      addToast('¡La contraseña no puede estar vacía!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
+
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.error('¡La contraseña no puede estar vacía!', {
+          theme: 'colored'
+        })
+      }
+
       focusInput(contrasenaInputEl)
     } else if (!validatePassword(contrasena, regexContrasena)) {
       e.preventDefault()
-      addToast('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
-        appearance: 'error',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
-      removeAllToasts()
-      focusInput(contrasenaInputEl)
+
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
+          theme: 'colored'
+        })
+      }
     } else {
-      addToast('¡Listo para implementar Axios!', {
-        appearance: 'success',
-        autoDismiss: true,
-        autoDismissTimeout: 6000,
-        transitionDuration: 700
-      })
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast.success('¡Listo para implementar Axios!', {
+          theme: 'colored'
+        })
+      }
     }
     setBody({ correo, contrasena })
-    // ! do bycript
-    const saltRounds = 10
-    // const myPlaintextPassword = 's0//P4$$w0rD'
-    // const someOtherPlaintextPassword = 'not_bacon'
-    /* bcrypt.hash(myPlaintextPassword, saltRounds).then((hash) => {
-      // Store hash in your password DB.
-			console.log(hash)
-    }) */
-    console.log(body)
     //TODO Axios
   }
 
@@ -139,6 +127,7 @@ const Login = () => {
 
   return (
     <div className='login-div'>
+      <ToastContainer transition={Zoom}/>
       <header className='login-header'>
         <img src='../assets/WebFAM_logo.png' width={120} alt='WebFAM logo' />
         <Link className='go-back' to='/'>

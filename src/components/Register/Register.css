@@ -1,75 +1,75 @@
 /* Header */
 .login-header {
-  display: grid;
-  height: 9vh;
-  place-items: center;
+	display: grid;
+	height: 9vh;
+	place-items: center;
 }
 .header-line {
-  border: 1pt solid rgba(226, 226, 226, 0.4);
-  margin: 1rem;
+	border: 1pt solid rgba(226, 226, 226, 0.4);
+	margin: 1rem;
 }
 .go-back {
-  color: var(--background-color);
-  font-size: 14px;
-  left: 20px;
-  position: absolute;
-  top: 4%;
-  transition: 200ms color ease-in-out;
+	color: var(--background-color);
+	font-size: 14px;
+	left: 20px;
+	position: absolute;
+	top: 4%;
+	transition: 200ms color ease-in-out;
 }
 .go-back:hover {
-  color: var(--icon-color);
+	color: var(--icon-color);
 }
 
 /* first login form */
 .login-form {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
 }
 .register-label p {
-  font-size: 24px;
-  font-weight: 500;
-  margin: 20px;
-  text-align: center;
+	font-size: 24px;
+	font-weight: 500;
+	margin: 20px;
+	text-align: center;
 }
 
 /* Second login form */
 .main-form {
-  gap: 1rem;
+	gap: 1rem;
 }
 
 /* Register */
 .register {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	margin-top: 2rem;
 }
 .register > * {
-  color: white;
-  width: 60%;
+	color: white;
+	width: 60%;
 }
 
 /* Media Queries */
 @media (max-width: 630px) {
-  .second-login {
-    width: 95%;
-  }
+	.second-login {
+		width: 95%;
+	}
 }
 @media (max-width: 450px) {
-  .line-breaker {
-    width: 100%;
-  }
-  .button_fb {
-    width: 300px;
-  }
-  .button_gg {
-    width: 300px;
-  }
-  .first-login {
-    width: 300px;
-  }
-  .buttons {
-    width: 300px;
-  }
+	.line-breaker {
+		width: 100%;
+	}
+	.button_fb {
+		width: 300px;
+	}
+	.button_gg {
+		width: 300px;
+	}
+	.first-login {
+		width: 300px;
+	}
+	.buttons {
+		width: 300px;
+	}
 }

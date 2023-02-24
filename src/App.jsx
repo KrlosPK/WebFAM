@@ -1,5 +1,5 @@
-// Toast Notifications
-import { ToastProvider } from 'react-toast-notifications'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 // import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom'
@@ -10,24 +10,24 @@ import { Register } from './components/Register/Register'
 import { NotFound } from './components/Not-found/NotFound'
 
 export const App = () => {
-  return (
-    <ToastProvider>
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <>
-              <Navbar />
-              <Home />
-            </>
-          }
-        />
-        <Route path='/login' element={<Login />}>
-          <Route path='recover-password' />
-        </Route>
-        <Route path='/register' element={<Register />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </ToastProvider>
-  )
+	return (
+		<>
+			<Routes>
+				<Route
+					path='/'
+					element={
+						<>
+							<Navbar />
+							<Home />
+						</>
+					}
+				/>
+				<Route path='/login' element={<Login />}>
+					<Route path='recover-password' />
+				</Route>
+				<Route path='/register' element={<Register />} />
+				<Route path='*' element={<NotFound />} />
+			</Routes>
+		</>
+	)
 }

@@ -15,6 +15,7 @@
   position: absolute;
   top: 1rem;
   transition: 200ms color ease-in-out;
+  user-select: none;
 }
 .go-back:hover {
   color: var(--icon-color);
