@@ -19,6 +19,7 @@ ul {
 	justify-content: center;
 	list-style: none;
 	width: 100%;
+	margin: 0.5rem;
 }
 
 a {
