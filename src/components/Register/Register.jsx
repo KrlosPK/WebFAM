@@ -6,12 +6,16 @@ import { Button, Button2, Input, Select } from '../Utils'
 import { useState, useRef } from 'react'
 
 //? Library
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 //? Icons
 import { FaEye } from 'react-icons/fa'
 import { FaEyeSlash } from 'react-icons/fa'
 
 const Register = () => {
+  const toastIdRegister = useRef(null)
+
   //* Mostrar contraseña
   const [showPassword, setShowPassword] = useState(true)
 
@@ -51,25 +55,21 @@ const Register = () => {
     if (nombre.length === 0 || /^\s+$/.test(nombre)) {
       e.preventDefault()
 
-      /* addToast('¡El Nombre no puede estar vacío!', {
-				appearance: 'error',
-				autoDismiss: true,
-				autoDismissTimeout: 6000,
-				transitionDuration: 700
-			}) */
-      // removeAllToasts()
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡El Nombre no puede estar vacío!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(nombreInputEl)
     } else if (nombre.length < 2) {
       e.preventDefault()
 
-      // addToast('¡El Nombre debe tener mínimo 2 letras', {
-      // 	appearance: 'error',
-      // 	autoDismiss: true,
-      // 	autoDismissTimeout: 6000,
-      // 	transitionDuration: 700
-      // })
-      // removeAllToasts()
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡El Nombre debe tener mínimo 2 letras!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(nombreInputEl)
     }
@@ -78,25 +78,21 @@ const Register = () => {
     else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
       e.preventDefault()
 
-      /* addToast('¡Los Apellidos no puede estar vacío!', {
-				appearance: 'error',
-				autoDismiss: true,
-				autoDismissTimeout: 6000,
-				transitionDuration: 700
-			})
-			removeAllToasts() */
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡Los Apellidos no puede estar vacío!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(apellidosInputEl)
     } else if (apellidos.length < 4) {
       e.preventDefault()
 
-      /* addToast('Los Apellidos deben tener mínimo 4 letras', {
-				appearance: 'error',
-				autoDismiss: true,
-				autoDismissTimeout: 6000,
-				transitionDuration: 700
-			})
-			removeAllToasts() */
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡Los Apellidos deben tener mínimo 4 letras!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(apellidosInputEl)
     }
@@ -105,25 +101,21 @@ const Register = () => {
     else if (numCelular.length === 0) {
       e.preventDefault()
 
-      /* addToast('¡El Número de Celular no puede estar vacío!', {
-				appearance: 'error',
-				autoDismiss: true,
-				autoDismissTimeout: 6000,
-				transitionDuration: 700
-			})
-			removeAllToasts() */
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡El Número de Celular no puede estar vacío!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(numCelularInputEl)
     } else if (numCelular.length < 9 || numCelular.length >= 12) {
       e.preventDefault()
 
-      /* addToast('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
-				appearance: 'error',
-				autoDismiss: true,
-				autoDismissTimeout: 6000,
-				transitionDuration: 700
-			})
-			removeAllToasts() */
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(numCelularInputEl)
     }
@@ -131,13 +123,11 @@ const Register = () => {
     else if (!tipoDocumento) {
       e.preventDefault()
 
-      // addToast('¡Por favor seleccione su Tipo de Documento!', {
-      // 	appearance: 'error',
-      // 	autoDismiss: true,
-      // 	autoDismissTimeout: 6000,
-      // 	transitionDuration: 700
-      // })
-      // removeAllToasts()
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡Por favor seleccione su Tipo de Documento!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(tipoDocumentoInputEl)
     }
@@ -146,25 +136,21 @@ const Register = () => {
     else if (numDocumento.length === 0) {
       e.preventDefault()
 
-      // addToast('¡El Número de Documento no puede estar vacío!', {
-      // 	appearance: 'error',
-      // 	autoDismiss: true,
-      // 	autoDismissTimeout: 6000,
-      // 	transitionDuration: 700
-      // })
-      // removeAllToasts()
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡El Número de Documento no puede estar vacío!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(numDocumentoInputEl)
     } else if (numDocumento.length < 9 || numDocumento.length >= 12) {
       e.preventDefault()
 
-      // addToast('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
-      // 	appearance: 'error',
-      // 	autoDismiss: true,
-      // 	autoDismissTimeout: 6000,
-      // 	transitionDuration: 700
-      // })
-      // removeAllToasts()
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(numDocumentoInputEl)
     }
@@ -172,37 +158,31 @@ const Register = () => {
     else if (correo.length === 0 || /^\s+$/.test(correo)) {
       e.preventDefault()
 
-      /* addToast('¡El correo no puede estar vacío!', {
-				appearance: 'error',
-				autoDismiss: true,
-				autoDismissTimeout: 6000,
-				transitionDuration: 700
-			})
-			removeAllToasts() */
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡El correo no puede estar vacío!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(correoInputEl)
     } else if (!/\S+@\S+/.test(correo)) {
       e.preventDefault()
 
-      /* addToast('¡El correo debe contener "@dominio.com"!', {
-				appearance: 'error',
-				autoDismiss: true,
-				autoDismissTimeout: 6000,
-				transitionDuration: 700
-			})
-			removeAllToasts() */
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡El correo debe contener "@dominio.com"!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(correoInputEl)
     } else if (!/\S+\.\S+/.test(correo)) {
       e.preventDefault()
 
-      /* addToast('¡El correo debe contener "@dominio.com"!', {
-				appearance: 'error',
-				autoDismiss: true,
-				autoDismissTimeout: 6000,
-				transitionDuration: 700
-			})
-			removeAllToasts() */
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡El correo debe contener "@dominio.com"!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(correoInputEl)
     }
@@ -211,37 +191,29 @@ const Register = () => {
     else if (contrasena.length === 0 || /^\s+$/.test(contrasena)) {
       e.preventDefault()
 
-      /* addToast('¡La contraseña no puede estar vacía!', {
-				appearance: 'error',
-				autoDismiss: true,
-				autoDismissTimeout: 6000,
-				transitionDuration: 700
-			})
-			removeAllToasts() */
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡La contraseña no puede estar vacía!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(contrasenaInputEl)
     } else if (!regexContrasena.test(contrasena)) {
       e.preventDefault()
 
-      /* 	addToast(
-				'¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
-				{
-					appearance: 'error',
-					autoDismiss: true,
-					autoDismissTimeout: 6000,
-					transitionDuration: 700
-				}
-			)
-			removeAllToasts() */
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
+          theme: 'colored'
+        })
+      }
 
       focusInput(contrasenaInputEl)
     } else {
-      // addToast('Listo para implementar Axios!', {
-      // 	appearance: 'success',
-      // 	autoDismiss: true,
-      // 	autoDismissTimeout: 6000,
-      // 	transitionDuration: 700
-      // })
+      if (!toast.isActive(toastIdRegister.current)) {
+        toastIdRegister.current = toast.success('¡Listo para implementar Axios!', {
+          theme: 'colored'
+        })
+      }
     }
   }
 
@@ -264,6 +236,7 @@ const Register = () => {
 
   return (
     <div className='login-div'>
+      <ToastContainer transition={Zoom} />
       <header className='login-header'>
         <img src='../assets/WebFAM_logo.png' width={120} alt='WebFAM logo' />
         <Link className='go-back' to='/'>

@@ -1,7 +1,4 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
-
-// import { Suspense } from 'react';
+import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/Navbar/Navbar'
 import { Home } from './components/Home/Home'

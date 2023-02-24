@@ -17,7 +17,7 @@ import { AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
-  const toastId = useRef(null)
+  const toastIdLogin = useRef(null)
 
   //* Mostrar contraseña
   const [showContrasena, setShowContrasena] = useState(true)
@@ -55,8 +55,8 @@ const Login = () => {
     if (validateMail(correo, /^\s+$/)) {
       e.preventDefault()
 
-      if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.error('¡El correo no puede estar vacío!', {
+      if (!toast.isActive(toastIdLogin.current)) {
+        toastIdLogin.current = toast.error('¡El correo no puede estar vacío!', {
           theme: 'colored'
         })
       }
@@ -65,8 +65,8 @@ const Login = () => {
     } else if (!validateMail(correo, /\S+@\S+/)) {
       e.preventDefault()
 
-      if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.error('¡El correo debe contener "@dominio.com"!', {
+      if (!toast.isActive(toastIdLogin.current)) {
+        toastIdLogin.current = toast.error('¡El correo debe contener "@dominio.com"!', {
           theme: 'colored'
         })
       }
@@ -75,8 +75,8 @@ const Login = () => {
     } else if (!validateMail(correo, /\S+\.\S+/)) {
       e.preventDefault()
 
-      if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.error('¡El correo debe contener "@dominio.com"!', {
+      if (!toast.isActive(toastIdLogin.current)) {
+        toastIdLogin.current = toast.error('¡El correo debe contener "@dominio.com"!', {
           theme: 'colored'
         })
       }
@@ -88,8 +88,8 @@ const Login = () => {
     else if (validatePassword(contrasena, /^\s+$/)) {
       e.preventDefault()
 
-      if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.error('¡La contraseña no puede estar vacía!', {
+      if (!toast.isActive(toastIdLogin.current)) {
+        toastIdLogin.current = toast.error('¡La contraseña no puede estar vacía!', {
           theme: 'colored'
         })
       }
@@ -98,14 +98,14 @@ const Login = () => {
     } else if (!validatePassword(contrasena, regexContrasena)) {
       e.preventDefault()
 
-      if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
+      if (!toast.isActive(toastIdLogin.current)) {
+        toastIdLogin.current = toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
           theme: 'colored'
         })
       }
     } else {
-      if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.success('¡Listo para implementar Axios!', {
+      if (!toast.isActive(toastIdLogin.current)) {
+        toastIdLogin.current = toast.success('¡Listo para implementar Axios!', {
           theme: 'colored'
         })
       }
