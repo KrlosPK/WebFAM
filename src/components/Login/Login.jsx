@@ -26,7 +26,7 @@ const Login = () => {
 	//TODO ----------------------------------------------------------
 	//TODO Separar la función en un componente a parte (Utils)
 	//? TOAST NOTIFICATIONS
-	const { addToast } = useToasts()
+	const { addToast, removeAllToasts } = useToasts()
 
 	// Función para hacer focus en el input que no cumpla con los requisitos
 	const focusInput = (input) => input.current.focus()
@@ -61,28 +61,34 @@ const Login = () => {
 			addToast('¡El correo no puede estar vacío!', {
 				appearance: 'error',
 				autoDismiss: true,
-				autoDismissTimeout: 6000
+				autoDismissTimeout: 6000,
+				transitionDuration: 600
 			})
+			removeAllToasts()
 
 			focusInput(emailInput)
 		} else if (!/\S+@\S+/.test(email)) {
 			e.preventDefault()
 
-			addToast('¡El Email debe contener "@dominio.com"!', {
+			addToast('¡El correo debe contener "@dominio.com"!', {
 				appearance: 'error',
 				autoDismiss: true,
-				autoDismissTimeout: 6000
+				autoDismissTimeout: 6000,
+				transitionDuration: 600
 			})
+			removeAllToasts()
 
 			focusInput(emailInput)
 		} else if (!/\S+\.\S+/.test(email)) {
 			e.preventDefault()
 
-			addToast('¡El Email debe contener "@dominio.com"!', {
+			addToast('¡El correo debe contener "@dominio.com"!', {
 				appearance: 'error',
 				autoDismiss: true,
-				autoDismissTimeout: 6000
+				autoDismissTimeout: 6000,
+				transitionDuration: 600
 			})
+			removeAllToasts()
 
 			focusInput(emailInput)
 		}
@@ -94,8 +100,10 @@ const Login = () => {
 			addToast('¡La contraseña no puede estar vacía!', {
 				appearance: 'error',
 				autoDismiss: true,
-				autoDismissTimeout: 6000
+				autoDismissTimeout: 6000,
+				transitionDuration: 600
 			})
+			removeAllToasts()
 
 			focusInput(passwordInput)
 		} else if (!regexPassword.test(password)) {
@@ -106,9 +114,11 @@ const Login = () => {
 				{
 					appearance: 'error',
 					autoDismiss: true,
-					autoDismissTimeout: 6000
+					autoDismissTimeout: 6000,
+					transitionDuration: 600
 				}
 			)
+			removeAllToasts()
 
 			focusInput(passwordInput)
 		}
@@ -116,7 +126,7 @@ const Login = () => {
 	}
 	//TODO ----------------------------------------------------------
 
-	//* 
+	//*
 	const [body, setBody] = useState({ email: '', password: '' })
 
 	const inputChange = ({ target }) => {
