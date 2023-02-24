@@ -1,13 +1,17 @@
 import './Select.css'
 
-const Select = ({ text }) => {
+const Select = ({ text, value, option, innerRef }) => {
 	return (
 		<div className='select-container'>
-			<select className='select-container__select'>
+			<select ref={innerRef} className='select-container__select'>
 				<option value=''>Selecciona una opción</option>
-				<option value='CC'>Cédula de Ciudadanía</option>
-				<option value='CE'>Cédula de Extranjería</option>
-				<option value='TI'>Tarjeta de Identidad</option>
+				{value.map((v, i) => {
+					return (
+						<option value={v} key={v}>
+							{option[i]}
+						</option>
+					)
+				})}
 			</select>
 			<label className='label-select'>{text}</label>
 		</div>
