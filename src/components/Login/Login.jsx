@@ -1,6 +1,6 @@
 import './Login.css'
 import { Link } from 'react-router-dom'
-import { Button } from '../Utils'
+import { Button, Button2, Input } from '../Utils'
 
 //? Hooks
 import { useState, useRef } from 'react'
@@ -61,7 +61,7 @@ const Login = () => {
 				appearance: 'error',
 				autoDismiss: true,
 				autoDismissTimeout: 6000,
-				transitionDuration: 600
+				transitionDuration: 700
 			})
 			removeAllToasts()
 
@@ -73,7 +73,7 @@ const Login = () => {
 				appearance: 'error',
 				autoDismiss: true,
 				autoDismissTimeout: 6000,
-				transitionDuration: 600
+				transitionDuration: 700
 			})
 			removeAllToasts()
 
@@ -85,7 +85,7 @@ const Login = () => {
 				appearance: 'error',
 				autoDismiss: true,
 				autoDismissTimeout: 6000,
-				transitionDuration: 600
+				transitionDuration: 700
 			})
 			removeAllToasts()
 
@@ -100,7 +100,7 @@ const Login = () => {
 				appearance: 'error',
 				autoDismiss: true,
 				autoDismissTimeout: 6000,
-				transitionDuration: 600
+				transitionDuration: 700
 			})
 			removeAllToasts()
 
@@ -109,12 +109,12 @@ const Login = () => {
 			e.preventDefault()
 
 			addToast(
-				'¡La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula y un número!',
+				'¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
 				{
 					appearance: 'error',
 					autoDismiss: true,
 					autoDismissTimeout: 6000,
-					transitionDuration: 600
+					transitionDuration: 700
 				}
 			)
 			removeAllToasts()
@@ -126,7 +126,7 @@ const Login = () => {
 	//TODO ----------------------------------------------------------
 
 	//*
-	const [body, setBody] = useState({ email: '', password: '' })
+	const [body, setBody] = useState({ correo: '', contrasena: '' })
 
 	const inputChange = ({ target }) => {
 		const { name, value } = target
@@ -169,31 +169,22 @@ const Login = () => {
 				</div>
 				<form className='second-login' onSubmit={validateLogin}>
 					<div className='main-form'>
-						<div className='container'>
-							<input
-								className='input-login'
-								type='text'
-								value={body.email}
-								onChange={inputChange}
-								name='email'
-								ref={emailInputEl}
-								maxLength={30}
-							/>
-							<label className='label-login'>
-								Correo electrónico
-							</label>
-						</div>
-						<div className='container input-password'>
-							<input
-								className='input-login'
+						<Input
+							text='Correo electrónico'
+							nameID='correo'
+							value={body.correo}
+							innerRef={emailInputEl}
+							onChange={inputChange}
+						/>
+						<div className='input-container'>
+							<Input
+								text='Contraseña'
 								type={showPassword ? 'password' : 'text'}
-								value={body.password}
+								nameID='contrasena'
+								value={body.contrasena}
+								innerRef={passwordInputEl}
 								onChange={inputChange}
-								name='password'
-								ref={passwordInputEl}
-								maxLength={30}
 							/>
-							<label className='label-login '>Contraseña</label>
 							<div onClick={handleShowPasswordClick}>
 								{showPassword ? (
 									<FaEye className='eye' />
@@ -217,7 +208,7 @@ const Login = () => {
 			<section className='register-section'>
 				<h4>¿Aún no tienes cuenta?</h4>
 				<Link to={'/register'}>
-					<button>Regístrate</button>
+					<Button2 text='Regístrate' />
 				</Link>
 			</section>
 		</div>

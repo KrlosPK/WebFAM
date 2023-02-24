@@ -242,22 +242,6 @@
 	font-weight: 400;
 	letter-spacing: 0.2px;
 }
-.register-section button {
-	background: none;
-	border: 2px solid #ff2525;
-	border-radius: 1.3rem;
-	color: #ff2525;
-	cursor: pointer;
-	font-weight: 400;
-	letter-spacing: 1px;
-	padding: 0.5rem;
-	transition: border-color 300ms ease-in-out, color 300ms ease-in-out;
-	width: 300px;
-}
-.register-section button:hover {
-	border-color: #f39a25;
-	color: #f39a25;
-}
 
 /** Toast Notifications */
 .css-rqgsqp {

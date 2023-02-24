@@ -1,4 +1,4 @@
-.button {
+.Button {
 	background: var(--orange-gradient);
 	background-size: 200%;
 	border: none;
@@ -12,6 +12,6 @@
 	transition: background-position 600ms;
 	user-select: none;
 }
-.button:hover {
-	background-position: 40%;
+.Button:hover {
+	background-position: 50%;
 }

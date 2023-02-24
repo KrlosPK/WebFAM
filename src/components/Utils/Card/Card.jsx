@@ -9,6 +9,7 @@ const Card = ({
 	size
 }) => {
 	// ? Sizes
+	if (size === 'all') size = '100%'
 	if (size === 'extralarge') size = '60%'
 	if (size === 'large') size = '50%'
 	if (size === 'medium') size = '40%'

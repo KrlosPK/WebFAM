@@ -19,7 +19,7 @@ const AboutUs = () => {
 						description={
 							'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi porro repudiandae, voluptatum neque ut ratione eligendi, illo architecto necessitatibus minima aperiam, commodi animi velit! Ratione cumque autem sequi dolorum temporibus?'
 						}
-						size={'extralarge'}
+						size={'all'}
 						background={'white'}
 					/>
 					<Card
@@ -27,7 +27,7 @@ const AboutUs = () => {
 						description={
 							'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi porro repudiandae, voluptatum neque ut ratione eligendi, illo architecto necessitatibus minima aperiam, commodi animi velit! Ratione cumque autem sequi dolorum temporibus?'
 						}
-						size={'extralarge'}
+						size={'all'}
 						background={'white'}
 					/>
 					<Card
@@ -35,7 +35,7 @@ const AboutUs = () => {
 						description={
 							'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi porro repudiandae, voluptatum neque ut ratione eligendi, illo architecto necessitatibus minima aperiam, commodi animi velit! Ratione cumque autem sequi dolorum temporibus?'
 						}
-						size={'extralarge'}
+						size={'all'}
 						background={'white'}
 					/>
 				</div>

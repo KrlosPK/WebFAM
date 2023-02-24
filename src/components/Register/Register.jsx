@@ -1,6 +1,6 @@
 import './Register.css'
 import { Link } from 'react-router-dom'
-import { Button, Input, Select } from '../Utils'
+import { Button, Button2, Input, Select } from '../Utils'
 
 //? Hooks
 import { useState, useRef } from 'react'
@@ -86,13 +86,6 @@ const Register = () => {
 						/>
 
 						<Input
-							text='Correo'
-							nameID='correo'
-							value={body.correo}
-							onChange={inputChange}
-						/>
-
-						<Input
 							text='Número celular'
 							type='number'
 							nameID='num_celular'
@@ -107,6 +100,13 @@ const Register = () => {
 							type='number'
 							nameID='num_documento'
 							value={body.num_documento}
+							onChange={inputChange}
+						/>
+
+						<Input
+							text='Correo'
+							nameID='correo'
+							value={body.correo}
 							onChange={inputChange}
 						/>
 
@@ -136,7 +136,7 @@ const Register = () => {
 			<section className='register-section'>
 				<h4>¿Ya tienes cuenta?</h4>
 				<Link to={'/login'}>
-					<button>Inicia sesión</button>
+					<Button2 text='Inicia sesión' />
 				</Link>
 			</section>
 		</div>
