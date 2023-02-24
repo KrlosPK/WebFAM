@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button, Button2, Input, validateMail, validatePassword } from '../Utils'
 
 //? Hooks
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 //? Library
 import { ToastContainer, toast, Zoom } from 'react-toastify'
@@ -88,9 +88,12 @@ const Login = () => {
     } else if (!validatePassword(contrasena, regexContrasena)) {
       e.preventDefault()
 
-      toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
-        theme: 'colored'
-      })
+      toast.error(
+        '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
+        {
+          theme: 'colored'
+        }
+      )
     } else {
       toast.success('¡Listo para implementar Axios!', {
         theme: 'colored'
@@ -141,13 +144,29 @@ const Login = () => {
         </div>
         <form className='second-login' onSubmit={validateLogin}>
           <div className='main-form'>
-            <Input text='Correo electrónico' nameID='correo' value={body.correo} innerRef={correoInputEl} onChange={inputChange} />
+            <Input
+              text='Correo electrónico'
+              type='email'
+              nameID='correo'
+              value={body.correo}
+              innerRef={correoInputEl}
+              onChange={inputChange}
+            />
             <div className='input-container'>
-              <Input text='Contraseña' type={showContrasena ? 'contrasena' : 'text'} nameID='contrasena' value={body.contrasena} innerRef={contrasenaInputEl} onChange={inputChange} />
-              <div onClick={handleShowContrasenaClick}>{showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}</div>
+              <Input
+                text='Contraseña'
+                type={showContrasena ? 'password' : 'text'}
+                nameID='contrasena'
+                value={body.contrasena}
+                innerRef={contrasenaInputEl}
+                onChange={inputChange}
+              />
+              <div onClick={handleShowContrasenaClick}>
+                {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
+              </div>
             </div>
           </div>
-          <div className='forgot-contrasena'>
+          <div className='forgot-password'>
             <Link to={'/'}>¿Olvidaste tú contraseña?</Link>
           </div>
           <div className='remind-me'>

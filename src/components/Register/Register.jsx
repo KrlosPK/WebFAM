@@ -228,7 +228,7 @@ const Register = () => {
 
             <Input text='Número de Documento' type='number' nameID='num_documento' value={body.num_documento} innerRef={numDocumentoInputEl} onChange={inputChange} />
 
-            <Input text='Correo' nameID='correo' value={body.correo} innerRef={correoInputEl} onChange={inputChange} />
+            <Input text='Correo' type='email' nameID='correo' value={body.correo} innerRef={correoInputEl} onChange={inputChange} />
 
             <div className='input-container'>
               <Input text='Contraseña' nameID='contrasena' type={showPassword ? 'password' : 'text'} value={body.contrasena} innerRef={contrasenaInputEl} onChange={inputChange} />
