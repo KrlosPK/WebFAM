@@ -120,6 +120,13 @@ const Login = () => {
 			removeAllToasts()
 
 			focusInput(contrasenaInputEl)
+		} else {
+			addToast('¡Listo para implementar Axios!', {
+				appearance: 'success',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
 		}
 		//TODO Axios
 	}
