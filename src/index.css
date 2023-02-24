@@ -1,41 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500&family=Syne:wght@600&display=swap');
 
 :root {
-	--background-color: #faa628;
-	--icon-color: #fd8b26;
-	--icon-hover-color: #fd5d21;
-	--text-color: #181515;
-	--white-color: #eeeeee;
-	--orange-gradient: linear-gradient(-160deg, #ff2525 40%, #ffe53b);
+  --background-color: #faa628;
+  --icon-color: #fd8b26;
+  --icon-hover-color: #fd5d21;
+  --text-color: #181515;
+  --white-color: #eeeeee;
+  --orange-gradient: linear-gradient(-160deg, #ff2525 40%, #ffe53b);
 }
 
 *,
 body,
 ::after,
 ::before {
-	box-sizing: border-box;
-	font-family: 'Space Grotesk', sans-serif;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  font-family: 'Space Grotesk', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 ::-webkit-scrollbar {
-	background: transparent;
-	width: 6px;
+  background: transparent;
+  width: 6px;
 }
 ::-webkit-scrollbar-thumb {
-	background: #777;
-	border-radius: 10px;
+  background: #777;
+  border-radius: 10px;
 }
 
 .flex {
-	align-items: center;
-	display: flex;
-	justify-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 .gap {
-	gap: 4px;
+  gap: 4px;
 }
 a {
-	text-decoration: none;
+  text-decoration: none;
 }

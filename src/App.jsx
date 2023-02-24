@@ -10,24 +10,24 @@ import { Register } from './components/Register/Register'
 import { NotFound } from './components/Not-found/NotFound'
 
 export const App = () => {
-	return (
-		<ToastProvider>
-			<Routes>
-				<Route
-					path='/'
-					element={
-						<>
-							<Navbar />
-							<Home />
-						</>
-					}
-				/>
-				<Route path='/login' element={<Login />}>
-					<Route path='recover-password' />
-				</Route>
-				<Route path='/register' element={<Register />} />
-				<Route path='*' element={<NotFound />} />
-			</Routes>
-		</ToastProvider>
-	)
+  return (
+    <ToastProvider>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <>
+              <Navbar />
+              <Home />
+            </>
+          }
+        />
+        <Route path='/login' element={<Login />}>
+          <Route path='recover-password' />
+        </Route>
+        <Route path='/register' element={<Register />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </ToastProvider>
+  )
 }
