@@ -10,6 +10,7 @@
 	letter-spacing: 1px;
 	padding: 10px 1rem;
 	transition: background-position 600ms;
+	user-select: none;
 }
 .button:hover {
 	background-position: 40%;

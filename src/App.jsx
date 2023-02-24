@@ -1,3 +1,6 @@
+// Toast Notifications
+import { ToastProvider } from 'react-toast-notifications'
+
 // import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/Navbar/Navbar'
@@ -8,7 +11,7 @@ import { NotFound } from './components/Not-found/NotFound'
 
 export const App = () => {
 	return (
-		<>
+		<ToastProvider>
 			<Routes>
 				<Route
 					path='/'
@@ -25,6 +28,6 @@ export const App = () => {
 				<Route path='/register' element={<Register />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
-		</>
+		</ToastProvider>
 	)
 }

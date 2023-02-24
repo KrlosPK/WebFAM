@@ -4,13 +4,120 @@ import { Button } from '../Utils'
 
 //? Hooks
 import { useState } from 'react'
+import { useRef } from 'react'
+
+//? Library
+import { useToasts } from 'react-toast-notifications'
 
 //? Icons
+import { FaEye } from 'react-icons/fa'
+import { FaEyeSlash } from 'react-icons/fa'
 import { AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
-	const [body, setBody] = useState({ username: '', password: '' })
+	//* Mostrar contraseña
+	const [showPassword, setShowPassword] = useState(true)
+
+	const handleShowPasswordClick = () => {
+		showPassword ? setShowPassword(false) : setShowPassword(true)
+	}
+
+	//TODO ----------------------------------------------------------
+	//TODO Separar la función en un componente a parte (Utils)
+	//? TOAST NOTIFICATIONS
+	const { addToast } = useToasts()
+
+	// Función para hacer focus en el input que no cumpla con los requisitos
+	const focusInput = (input) => input.current.focus()
+
+	// Variables para hacer la validación
+	let emailInput = useRef(null)
+	let passwordInput = useRef(null)
+
+	const validateLogin = (e) => {
+		e.preventDefault()
+
+		const email = e.target[0].value
+		const password = e.target[1].value
+
+		/*
+			Con el operador ?= (look ahead) compruebas que:
+				* Exista al menos 1 número (?:.*[0-9]){1}
+				* Exista al menos 1 mayúscula (?:.*[A-Z]){1}
+				* Exista al menos 1 minúscula (?:.*[a-z]){1}
+
+			? Con el cuantificador {8,} indicas que debe tener una longitud mínima de 8 sin límite máximo.
+
+			? Con \S no permite espacios en blanco.
+		*/
+		const regexPassword =
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!\s)[a-zA-Z\d]{8,16}$/
+
+		// Validación Correo
+		if (email.length === 0 || /^\s+$/.test(email)) {
+			e.preventDefault()
+
+			addToast('¡El correo no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000
+			})
+
+			focusInput(emailInput)
+		} else if (!/\S+@\S+/.test(email)) {
+			e.preventDefault()
+
+			addToast('¡El Email debe contener "@dominio.com"!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000
+			})
+
+			focusInput(emailInput)
+		} else if (!/\S+\.\S+/.test(email)) {
+			e.preventDefault()
+
+			addToast('¡El Email debe contener "@dominio.com"!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000
+			})
+
+			focusInput(emailInput)
+		}
+
+		// Validación Contraseña
+		else if (password.length === 0 || /^\s+$/.test(password)) {
+			e.preventDefault()
+
+			addToast('¡La contraseña no puede estar vacía!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000
+			})
+
+			focusInput(passwordInput)
+		} else if (!regexPassword.test(password)) {
+			e.preventDefault()
+
+			addToast(
+				'¡La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula y un número!',
+				{
+					appearance: 'error',
+					autoDismiss: true,
+					autoDismissTimeout: 6000
+				}
+			)
+
+			focusInput(passwordInput)
+		}
+		// Axios
+	}
+	//TODO ----------------------------------------------------------
+
+	//* 
+	const [body, setBody] = useState({ email: '', password: '' })
 
 	const inputChange = ({ target }) => {
 		const { name, value } = target
@@ -51,43 +158,48 @@ const Login = () => {
 						<div className='line-breaker' />
 					</div>
 				</div>
-				<form className='second-login'>
+				<form className='second-login' onSubmit={validateLogin}>
 					<div className='main-form'>
 						<div className='container'>
 							<input
 								className='input-login'
-								type='email'
-								value={body.username}
+								type='text'
+								value={body.email}
 								onChange={inputChange}
-								name='username'
+								name='email'
+								ref={emailInput}
+								maxLength={30}
 							/>
 							<label className='label-login'>
 								Correo electrónico
 							</label>
 						</div>
-						<div className='container'>
+						<div className='container input-password'>
 							<input
 								className='input-login'
-								type='password'
+								type={showPassword ? 'password' : 'text'}
 								value={body.password}
 								onChange={inputChange}
 								name='password'
+								ref={passwordInput}
+								maxLength={30}
 							/>
-							<label className='label-login'>Contraseña</label>
+							<label className='label-login '>Contraseña</label>
+							<div onClick={handleShowPasswordClick}>
+								{showPassword ? (
+									<FaEye className='eye' />
+								) : (
+									<FaEyeSlash className='eye' />
+								)}
+							</div>
 						</div>
 					</div>
 					<div className='forgot-password'>
-						¿Olvidaste tú contraseña?
-						{/*//? Hacer página de recuperar contraseña */}
-						{/* <Link to={'recuperar-contraseña'}>
-						</Link> */}
+						<Link to={'/'}>¿Olvidaste tú contraseña?</Link>
 					</div>
 					<div className='remind-me'>
-						<>
-							{/* TODO: Terminar que cuando esté activo cambie el color */}
-							<input type='checkbox' name='check' id='check' />
-							<label htmlFor='check'></label>
-						</>
+						<input type='checkbox' name='check' id='check' />
+						<label htmlFor='check'></label>
 						<Button text={'Ingresar'} />
 					</div>
 				</form>

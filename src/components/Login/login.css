@@ -122,8 +122,13 @@
 	height: 40px;
 	padding: 1em;
 }
-.main-form input:focus::placeholder {
-	opacity: 0;
+.eye {
+	cursor: pointer;
+	font-size: 18px;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 /* Forgot password */
@@ -132,6 +137,7 @@
 	font-size: 14px;
 	font-weight: 400;
 	padding: 1rem 0;
+	user-select: none;
 	width: fit-content;
 }
 .forgot-password:hover {
@@ -155,8 +161,6 @@
 		from(#222222),
 		to(#45484d)
 	);
-	background: linear-gradient(to bottom, #222222 0%, #45484d 100%);
-	background: var(--orange-gradient);
 	border-radius: 4px;
 	-webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5),
 		0px 1px 0px rgba(255, 255, 255, 0.4);
@@ -177,7 +181,7 @@
 	padding-left: 0.8rem;
 	position: absolute;
 }
-.remind-me label:after {
+.remind-me label::after {
 	background: transparent;
 	border: 3px solid #fcfff4;
 	border-right: none;
@@ -195,11 +199,23 @@
 .remind-me label:hover::after {
 	opacity: 0.3;
 }
+.remind-me label:hover {
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		from(#444444),
+		to(#55595f)
+	);
+}
 .remind-me input[type='checkbox'] {
 	visibility: hidden;
 }
-.remind-me input[type='checkbox']:checked + label:after {
+.remind-me input[type='checkbox']:checked + label::after {
 	opacity: 1;
+}
+.remind-me input[type='checkbox']:checked + label {
+	background: var(--orange-gradient);
 }
 
 /** Login Button */
@@ -241,6 +257,12 @@
 .register-section button:hover {
 	border-color: #f39a25;
 	color: #f39a25;
+}
+
+/** Toast Notifications */
+.css-rqgsqp {
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 @media (max-width: 630px) {
