@@ -1,10 +1,24 @@
 .nf-container {
-	display: grid;
-	place-content: center;
+	flex-direction: column;
+	gap: 3.5rem;
 	height: 100vh;
 }
-
-.nf-container h1 {
-	color: #ff2525;
-	font-size: 5rem;
+.nf-container__text {
+	flex-direction: column;
+}
+.nf-container__text h1 {
+	color: var(--text-color);
+	font-size: 2rem;
+	margin-bottom: 2.5rem;
+}
+.nf-container__text p {
+	margin-bottom: 0.8rem;
+}
+.nf-container__text h1 .inicio {
+	color: var(--icon-color);
+	text-decoration: underline;
+	transition: color 300ms ease;
+}
+.nf-container__text h1 .inicio:hover {
+	color: var(--icon-hover-color);
 }

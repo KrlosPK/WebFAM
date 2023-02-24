@@ -34,37 +34,8 @@
 }
 
 /* Second login form */
-.second-login {
-	display: flex;
-	flex-direction: column;
-	padding-block: 1.5rem;
-	padding-inline: 0.7rem;
-	width: 400px;
-}
 .main-form {
 	gap: 1rem;
-}
-.main-form .container {
-	display: flex;
-	flex-direction: column;
-	position: relative;
-}
-.input-login:focus ~ label,
-.input-login:valid ~ label {
-	background-color: white;
-	left: 16px;
-	padding: 0 2px;
-	top: 0;
-	user-select: none;
-}
-.label-login {
-	color: rgba(0, 0, 0, 0.7);
-	left: 16px;
-	pointer-events: none;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	transition: 250ms;
 }
 
 /* Register */
@@ -86,9 +57,6 @@
 	}
 }
 @media (max-width: 450px) {
-	/* .second-login {
-		width: 100%;
-	} */
 	.line-breaker {
 		width: 100%;
 	}

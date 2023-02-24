@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '../Utils'
 
 //? Hooks
-import { useState } from 'react'
-import { useRef } from 'react'
+import { useState, useRef } from 'react'
 
 //? Library
 import { useToasts } from 'react-toast-notifications'
@@ -32,8 +31,8 @@ const Login = () => {
 	const focusInput = (input) => input.current.focus()
 
 	// Variables para hacer la validación
-	let emailInput = useRef(null)
-	let passwordInput = useRef(null)
+	const emailInputEl = useRef(null)
+	const passwordInputEl = useRef(null)
 
 	const validateLogin = (e) => {
 		e.preventDefault()
@@ -66,7 +65,7 @@ const Login = () => {
 			})
 			removeAllToasts()
 
-			focusInput(emailInput)
+			focusInput(emailInputEl)
 		} else if (!/\S+@\S+/.test(email)) {
 			e.preventDefault()
 
@@ -78,7 +77,7 @@ const Login = () => {
 			})
 			removeAllToasts()
 
-			focusInput(emailInput)
+			focusInput(emailInputEl)
 		} else if (!/\S+\.\S+/.test(email)) {
 			e.preventDefault()
 
@@ -90,7 +89,7 @@ const Login = () => {
 			})
 			removeAllToasts()
 
-			focusInput(emailInput)
+			focusInput(emailInputEl)
 		}
 
 		// Validación Contraseña
@@ -105,7 +104,7 @@ const Login = () => {
 			})
 			removeAllToasts()
 
-			focusInput(passwordInput)
+			focusInput(passwordInputEl)
 		} else if (!regexPassword.test(password)) {
 			e.preventDefault()
 
@@ -120,9 +119,9 @@ const Login = () => {
 			)
 			removeAllToasts()
 
-			focusInput(passwordInput)
+			focusInput(passwordInputEl)
 		}
-		// Axios
+		//TODO Axios
 	}
 	//TODO ----------------------------------------------------------
 
@@ -177,7 +176,7 @@ const Login = () => {
 								value={body.email}
 								onChange={inputChange}
 								name='email'
-								ref={emailInput}
+								ref={emailInputEl}
 								maxLength={30}
 							/>
 							<label className='label-login'>
@@ -191,7 +190,7 @@ const Login = () => {
 								value={body.password}
 								onChange={inputChange}
 								name='password'
-								ref={passwordInput}
+								ref={passwordInputEl}
 								maxLength={30}
 							/>
 							<label className='label-login '>Contraseña</label>

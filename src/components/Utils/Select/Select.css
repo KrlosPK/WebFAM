@@ -1,0 +1,24 @@
+.select-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+.select-container__select {
+	border: 1px solid gray;
+	border-radius: 6px;
+	color: rgba(0, 0, 0, 0.7);
+	height: 40px;
+	padding-inline: 0.8em;
+}
+.label-select {
+	background-color: var(--white-color);
+	color: rgba(0, 0, 0, 0.7);
+	left: 16px;
+	padding: 0 2px;
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	transform: translateY(-50%);
+	transition: 250ms;
+	user-select: none;
+}

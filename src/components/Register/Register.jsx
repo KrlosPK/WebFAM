@@ -1,12 +1,48 @@
 import './Register.css'
 import { Link } from 'react-router-dom'
-import { Button } from '../Utils'
+import { Button, Input, Select } from '../Utils'
 
 //? Hooks
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+
+//? Library
+import { useToasts } from 'react-toast-notifications'
+
+//? Icons
+import { FaEye } from 'react-icons/fa'
+import { FaEyeSlash } from 'react-icons/fa'
 
 const Register = () => {
-	const [body, setBody] = useState({ username: '', password: '' })
+	//* Mostrar contraseña
+	const [showPassword, setShowPassword] = useState(true)
+
+	const handleShowPasswordClick = () => {
+		showPassword ? setShowPassword(false) : setShowPassword(true)
+	}
+
+	// Función para hacer focus en el input que no cumpla con los requisitos
+	const focusInput = (input) => input.current.focus()
+
+	// Variables para hacer la validación
+	const nombreInputEl = useRef(null)
+	const apellidosInputEl = useRef(null)
+	const correoInputEl = useRef(null)
+	const numCelularInputEl = useRef(null)
+	const tipoDocumentoInputEl = useRef(null)
+	const numDocumentoInputEl = useRef(null)
+	const contrasenaInputEl = useRef(null)
+
+	//? TOAST NOTIFICATIONS
+	const { addToast, removeAllToasts } = useToasts()
+
+	const [body, setBody] = useState({
+		nombre: '',
+		apellidos: '',
+		correo: '',
+		num_celular: '',
+		num_documento: '',
+		contrasena: ''
+	})
 
 	const inputChange = ({ target }) => {
 		const { name, value } = target
@@ -35,59 +71,60 @@ const Register = () => {
 				</div>
 				<form className='second-login'>
 					<div className='main-form'>
-						<div className='container'>
-							<input className='input-login' type='text' />
-							<label className='label-login'>Nombre</label>
-						</div>
+						<Input
+							text='Nombre'
+							nameID='nombre'
+							value={body.nombre}
+							onChange={inputChange}
+						/>
 
-						<div className='container'>
-							<input className='input-login' type='text' />
-							<label className='label-login'>Apellidos</label>
-						</div>
+						<Input
+							text='Apellidos'
+							nameID='apellidos'
+							value={body.apellidos}
+							onChange={inputChange}
+						/>
 
-						<div className='container'>
-							<input
-								className='input-login'
-								type='email'
-								value={body.username}
+						<Input
+							text='Correo'
+							nameID='correo'
+							value={body.correo}
+							onChange={inputChange}
+						/>
+
+						<Input
+							text='Número celular'
+							type='number'
+							nameID='num_celular'
+							value={body.num_celular}
+							onChange={inputChange}
+						/>
+
+						<Select text='Tipo de Documento' />
+
+						<Input
+							text='Número de Documento'
+							type='number'
+							nameID='num_documento'
+							value={body.num_documento}
+							onChange={inputChange}
+						/>
+
+						<div className='input-container'>
+							<Input
+								text='Contraseña'
+								nameID='contrasena'
+								type={showPassword ? 'password' : 'text'}
+								value={body.contrasena}
 								onChange={inputChange}
-								name='username'
 							/>
-							<label className='label-login'>
-								Correo electrónico
-							</label>
-						</div>
-
-						<div className='container'>
-							<input className='input-login' type='number' />
-							<label className='label-login'>
-								Número de Celular
-							</label>
-						</div>
-
-						<div className='container'>
-							<input className='input-login' type='text' />
-							<label className='label-login'>
-								Tipo Documento
-							</label>
-						</div>
-
-						<div className='container'>
-							<input className='input-login' type='number' />
-							<label className='label-login'>
-								Número de Documento
-							</label>
-						</div>
-
-						<div className='container'>
-							<input
-								className='input-login'
-								type='password'
-								value={body.password}
-								onChange={inputChange}
-								name='password'
-							/>
-							<label className='label-login'>Contraseña</label>
+							<div onClick={handleShowPasswordClick}>
+								{showPassword ? (
+									<FaEye className='eye' />
+								) : (
+									<FaEyeSlash className='eye' />
+								)}
+							</div>
 						</div>
 					</div>
 					<div className='register'>
