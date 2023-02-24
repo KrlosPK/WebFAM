@@ -53,7 +53,19 @@ const Register = () => {
 		if (nombre.length === 0 || /^\s+$/.test(nombre)) {
 			e.preventDefault()
 
-			addToast('¡El nombre no puede estar vacío!', {
+			addToast('¡El Nombre no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(nombreInputEl)
+		} else if (nombre.length < 2) {
+			e.preventDefault()
+
+			addToast('¡El Nombre debe tener mínimo 2 letras', {
 				appearance: 'error',
 				autoDismiss: true,
 				autoDismissTimeout: 6000,
@@ -68,7 +80,19 @@ const Register = () => {
 		else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
 			e.preventDefault()
 
-			addToast('¡Los apellidos no puede estar vacío!', {
+			addToast('¡Los Apellidos no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(apellidosInputEl)
+		} else if (apellidos.length < 4) {
+			e.preventDefault()
+
+			addToast('Los Apellidos deben tener mínimo 4 letras', {
 				appearance: 'error',
 				autoDismiss: true,
 				autoDismissTimeout: 6000,
@@ -80,7 +104,7 @@ const Register = () => {
 		}
 
 		// Validación Número de Celular
-		else if (numCelular.length === 0 || /^\s+$/.test(numCelular)) {
+		else if (numCelular.length === 0) {
 			e.preventDefault()
 
 			addToast('¡El Número de Celular no puede estar vacío!', {
@@ -92,10 +116,61 @@ const Register = () => {
 			removeAllToasts()
 
 			focusInput(numCelularInputEl)
+		} else if (numCelular.length < 9 || numCelular.length >= 12) {
+			e.preventDefault()
+
+			addToast('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(numCelularInputEl)
 		}
 		// Validación Tipo de Documento
-		
+		else if (!tipoDocumento) {
+			e.preventDefault()
+
+			addToast('¡Por favor seleccione su Tipo de Documento!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(tipoDocumentoInputEl)
+		}
+
 		// Validación Número de Documento
+		else if (numDocumento.length === 0) {
+			e.preventDefault()
+
+			addToast('¡El Número de Documento no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(numDocumentoInputEl)
+		} else if (numDocumento.length < 9 || numDocumento.length >= 12) {
+			e.preventDefault()
+
+			addToast('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(numDocumentoInputEl)
+		}
+		// Validación Correo Electrónico
 		else if (correo.length === 0 || /^\s+$/.test(correo)) {
 			e.preventDefault()
 
@@ -233,14 +308,24 @@ const Register = () => {
 							onChange={inputChange}
 						/>
 
-						<Select text='Tipo de Documento' />
+						<Select
+							text='Tipo de Documento'
+							value={['CC', 'CE', 'TI', 'NIT']}
+							option={[
+								'Cédula de Ciudadanía',
+								'Cédula de Extranjería',
+								'Tarjeta de Identidad',
+								'Número de Identificación Tributaria'
+							]}
+							innerRef={tipoDocumentoInputEl}
+						/>
 
 						<Input
 							text='Número de Documento'
 							type='number'
 							nameID='num_documento'
 							value={body.num_documento}
-							innerRef={tipoDocumentoInputEl}
+							innerRef={numDocumentoInputEl}
 							onChange={inputChange}
 						/>
 
