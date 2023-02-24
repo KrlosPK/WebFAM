@@ -17,8 +17,6 @@ import { AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
-  const toastIdLogin = useRef(null)
-
   //* Mostrar contraseña
   const [showContrasena, setShowContrasena] = useState(true)
 
@@ -55,31 +53,25 @@ const Login = () => {
     if (validateMail(correo, /^\s+$/)) {
       e.preventDefault()
 
-      if (!toast.isActive(toastIdLogin.current)) {
-        toastIdLogin.current = toast.error('¡El correo no puede estar vacío!', {
-          theme: 'colored'
-        })
-      }
+      toast.error('¡El correo no puede estar vacío!', {
+        theme: 'colored'
+      })
 
       focusInput(correoInputEl)
     } else if (!validateMail(correo, /\S+@\S+/)) {
       e.preventDefault()
 
-      if (!toast.isActive(toastIdLogin.current)) {
-        toastIdLogin.current = toast.error('¡El correo debe contener "@dominio.com"!', {
-          theme: 'colored'
-        })
-      }
+      toast.error('¡El correo debe contener "@dominio.com"!', {
+        theme: 'colored'
+      })
 
       focusInput(correoInputEl)
     } else if (!validateMail(correo, /\S+\.\S+/)) {
       e.preventDefault()
 
-      if (!toast.isActive(toastIdLogin.current)) {
-        toastIdLogin.current = toast.error('¡El correo debe contener "@dominio.com"!', {
-          theme: 'colored'
-        })
-      }
+      toast.error('¡El correo debe contener "@dominio.com"!', {
+        theme: 'colored'
+      })
 
       focusInput(correoInputEl)
     }
@@ -88,27 +80,21 @@ const Login = () => {
     else if (validatePassword(contrasena, /^\s+$/)) {
       e.preventDefault()
 
-      if (!toast.isActive(toastIdLogin.current)) {
-        toastIdLogin.current = toast.error('¡La contraseña no puede estar vacía!', {
-          theme: 'colored'
-        })
-      }
+      toast.error('¡La contraseña no puede estar vacía!', {
+        theme: 'colored'
+      })
 
       focusInput(contrasenaInputEl)
     } else if (!validatePassword(contrasena, regexContrasena)) {
       e.preventDefault()
 
-      if (!toast.isActive(toastIdLogin.current)) {
-        toastIdLogin.current = toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
-          theme: 'colored'
-        })
-      }
+      toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
+        theme: 'colored'
+      })
     } else {
-      if (!toast.isActive(toastIdLogin.current)) {
-        toastIdLogin.current = toast.success('¡Listo para implementar Axios!', {
-          theme: 'colored'
-        })
-      }
+      toast.success('¡Listo para implementar Axios!', {
+        theme: 'colored'
+      })
     }
     setBody({ correo, contrasena })
     //TODO Axios
@@ -127,7 +113,7 @@ const Login = () => {
 
   return (
     <div className='login-div'>
-      <ToastContainer transition={Zoom}/>
+      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <header className='login-header'>
         <img src='../assets/WebFAM_logo.png' width={120} alt='WebFAM logo' />
         <Link className='go-back' to='/'>
