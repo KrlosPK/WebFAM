@@ -10,9 +10,8 @@
 	padding: 10px 1rem;
 	transition: border-color 300ms ease-in-out, color 300ms ease-in-out;
 	user-select: none;
-	width: 280px;
 }
-.button-2:hover {
+.Button-2:hover {
 	border-color: #f39a25;
 	color: #f39a25;
 }

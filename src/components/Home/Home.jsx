@@ -20,7 +20,7 @@ const Home = () => {
 				</p>
 				<div className='buttons'>
 					<Button text='Contáctanos »' width={200} />
-					<Button2 text='⚡ Quiénes somos?' width={200} />
+					<Button2 text='⚡ ¿Quiénes somos?' width={200} />
 				</div>
 			</main>
 			<Services />

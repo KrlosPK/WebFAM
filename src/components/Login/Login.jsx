@@ -16,10 +16,10 @@ import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
 	//* Mostrar contraseña
-	const [showPassword, setShowPassword] = useState(true)
+	const [showcontrasena, setShowcontrasena] = useState(true)
 
-	const handleShowPasswordClick = () => {
-		showPassword ? setShowPassword(false) : setShowPassword(true)
+	const handleShowcontrasenaClick = () => {
+		showcontrasena ? setShowcontrasena(false) : setShowcontrasena(true)
 	}
 
 	//TODO ----------------------------------------------------------
@@ -31,14 +31,14 @@ const Login = () => {
 	const focusInput = (input) => input.current.focus()
 
 	// Variables para hacer la validación
-	const emailInputEl = useRef(null)
-	const passwordInputEl = useRef(null)
+	const correoInputEl = useRef(null)
+	const contrasenaInputEl = useRef(null)
 
 	const validateLogin = (e) => {
 		e.preventDefault()
 
-		const email = e.target[0].value
-		const password = e.target[1].value
+		const correo = e.target[0].value
+		const contrasena = e.target[1].value
 
 		/*
 			Con el operador ?= (look ahead) compruebas que:
@@ -50,11 +50,11 @@ const Login = () => {
 
 			? Con \S no permite espacios en blanco.
 		*/
-		const regexPassword =
+		const regexContrasena =
 			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!\s)[a-zA-Z\d]{8,16}$/
 
 		// Validación Correo
-		if (email.length === 0 || /^\s+$/.test(email)) {
+		if (correo.length === 0 || /^\s+$/.test(correo)) {
 			e.preventDefault()
 
 			addToast('¡El correo no puede estar vacío!', {
@@ -65,8 +65,8 @@ const Login = () => {
 			})
 			removeAllToasts()
 
-			focusInput(emailInputEl)
-		} else if (!/\S+@\S+/.test(email)) {
+			focusInput(correoInputEl)
+		} else if (!/\S+@\S+/.test(correo)) {
 			e.preventDefault()
 
 			addToast('¡El correo debe contener "@dominio.com"!', {
@@ -77,8 +77,8 @@ const Login = () => {
 			})
 			removeAllToasts()
 
-			focusInput(emailInputEl)
-		} else if (!/\S+\.\S+/.test(email)) {
+			focusInput(correoInputEl)
+		} else if (!/\S+\.\S+/.test(correo)) {
 			e.preventDefault()
 
 			addToast('¡El correo debe contener "@dominio.com"!', {
@@ -89,11 +89,11 @@ const Login = () => {
 			})
 			removeAllToasts()
 
-			focusInput(emailInputEl)
+			focusInput(correoInputEl)
 		}
 
 		// Validación Contraseña
-		else if (password.length === 0 || /^\s+$/.test(password)) {
+		else if (contrasena.length === 0 || /^\s+$/.test(contrasena)) {
 			e.preventDefault()
 
 			addToast('¡La contraseña no puede estar vacía!', {
@@ -104,8 +104,8 @@ const Login = () => {
 			})
 			removeAllToasts()
 
-			focusInput(passwordInputEl)
-		} else if (!regexPassword.test(password)) {
+			focusInput(contrasenaInputEl)
+		} else if (!regexContrasena.test(contrasena)) {
 			e.preventDefault()
 
 			addToast(
@@ -119,7 +119,7 @@ const Login = () => {
 			)
 			removeAllToasts()
 
-			focusInput(passwordInputEl)
+			focusInput(contrasenaInputEl)
 		}
 		//TODO Axios
 	}
@@ -173,20 +173,20 @@ const Login = () => {
 							text='Correo electrónico'
 							nameID='correo'
 							value={body.correo}
-							innerRef={emailInputEl}
+							innerRef={correoInputEl}
 							onChange={inputChange}
 						/>
 						<div className='input-container'>
 							<Input
 								text='Contraseña'
-								type={showPassword ? 'password' : 'text'}
+								type={showcontrasena ? 'contrasena' : 'text'}
 								nameID='contrasena'
 								value={body.contrasena}
-								innerRef={passwordInputEl}
+								innerRef={contrasenaInputEl}
 								onChange={inputChange}
 							/>
-							<div onClick={handleShowPasswordClick}>
-								{showPassword ? (
+							<div onClick={handleShowcontrasenaClick}>
+								{showcontrasena ? (
 									<FaEye className='eye' />
 								) : (
 									<FaEyeSlash className='eye' />
@@ -194,7 +194,7 @@ const Login = () => {
 							</div>
 						</div>
 					</div>
-					<div className='forgot-password'>
+					<div className='forgot-contrasena'>
 						<Link to={'/'}>¿Olvidaste tú contraseña?</Link>
 					</div>
 					<div className='remind-me'>
@@ -208,7 +208,7 @@ const Login = () => {
 			<section className='register-section'>
 				<h4>¿Aún no tienes cuenta?</h4>
 				<Link to={'/register'}>
-					<Button2 text='Regístrate' />
+					<Button2 text='Regístrate' width={280} />
 				</Link>
 			</section>
 		</div>

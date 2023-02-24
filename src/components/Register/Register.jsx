@@ -20,20 +20,157 @@ const Register = () => {
 		showPassword ? setShowPassword(false) : setShowPassword(true)
 	}
 
+	//? TOAST NOTIFICATIONS
+	const { addToast, removeAllToasts } = useToasts()
+
 	// Función para hacer focus en el input que no cumpla con los requisitos
 	const focusInput = (input) => input.current.focus()
 
 	// Variables para hacer la validación
 	const nombreInputEl = useRef(null)
 	const apellidosInputEl = useRef(null)
-	const correoInputEl = useRef(null)
 	const numCelularInputEl = useRef(null)
 	const tipoDocumentoInputEl = useRef(null)
 	const numDocumentoInputEl = useRef(null)
+	const correoInputEl = useRef(null)
 	const contrasenaInputEl = useRef(null)
 
-	//? TOAST NOTIFICATIONS
-	const { addToast, removeAllToasts } = useToasts()
+	const validateRegister = (e) => {
+		e.preventDefault()
+
+		const nombre = e.target[0].value
+		const apellidos = e.target[1].value
+		const numCelular = e.target[2].value
+		const tipoDocumento = e.target[3].value
+		const numDocumento = e.target[4].value
+		const correo = e.target[5].value
+		const contrasena = e.target[6].value
+
+		const regexContrasena =
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!\s)[a-zA-Z\d]{8,16}$/
+
+		// Validación Nombre
+		if (nombre.length === 0 || /^\s+$/.test(nombre)) {
+			e.preventDefault()
+
+			addToast('¡El nombre no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(nombreInputEl)
+		}
+
+		// Validación Apellidos
+		else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
+			e.preventDefault()
+
+			addToast('¡Los apellidos no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(apellidosInputEl)
+		}
+
+		// Validación Número de Celular
+		else if (numCelular.length === 0 || /^\s+$/.test(numCelular)) {
+			e.preventDefault()
+
+			addToast('¡El Número de Celular no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(numCelularInputEl)
+		}
+		// Validación Tipo de Documento
+		
+		// Validación Número de Documento
+		else if (correo.length === 0 || /^\s+$/.test(correo)) {
+			e.preventDefault()
+
+			addToast('¡El correo no puede estar vacío!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(correoInputEl)
+		} else if (!/\S+@\S+/.test(correo)) {
+			e.preventDefault()
+
+			addToast('¡El correo debe contener "@dominio.com"!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(correoInputEl)
+		} else if (!/\S+\.\S+/.test(correo)) {
+			e.preventDefault()
+
+			addToast('¡El correo debe contener "@dominio.com"!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(correoInputEl)
+		}
+
+		// Validación Contraseña
+		else if (contrasena.length === 0 || /^\s+$/.test(contrasena)) {
+			e.preventDefault()
+
+			addToast('¡La contraseña no puede estar vacía!', {
+				appearance: 'error',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+			removeAllToasts()
+
+			focusInput(contrasenaInputEl)
+		} else if (!regexContrasena.test(contrasena)) {
+			e.preventDefault()
+
+			addToast(
+				'¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
+				{
+					appearance: 'error',
+					autoDismiss: true,
+					autoDismissTimeout: 6000,
+					transitionDuration: 700
+				}
+			)
+			removeAllToasts()
+
+			focusInput(contrasenaInputEl)
+		} else {
+			addToast('Listo para implementar Axios!', {
+				appearance: 'success',
+				autoDismiss: true,
+				autoDismissTimeout: 6000,
+				transitionDuration: 700
+			})
+		}
+	}
 
 	const [body, setBody] = useState({
 		nombre: '',
@@ -69,12 +206,13 @@ const Register = () => {
 				<div className='register-label'>
 					<p>Regístrate</p>
 				</div>
-				<form className='second-login'>
+				<form className='second-login' onSubmit={validateRegister}>
 					<div className='main-form'>
 						<Input
 							text='Nombre'
 							nameID='nombre'
 							value={body.nombre}
+							innerRef={nombreInputEl}
 							onChange={inputChange}
 						/>
 
@@ -82,14 +220,16 @@ const Register = () => {
 							text='Apellidos'
 							nameID='apellidos'
 							value={body.apellidos}
+							innerRef={apellidosInputEl}
 							onChange={inputChange}
 						/>
 
 						<Input
-							text='Número celular'
+							text='Número de celular'
 							type='number'
 							nameID='num_celular'
 							value={body.num_celular}
+							innerRef={numCelularInputEl}
 							onChange={inputChange}
 						/>
 
@@ -100,6 +240,7 @@ const Register = () => {
 							type='number'
 							nameID='num_documento'
 							value={body.num_documento}
+							innerRef={tipoDocumentoInputEl}
 							onChange={inputChange}
 						/>
 
@@ -107,6 +248,7 @@ const Register = () => {
 							text='Correo'
 							nameID='correo'
 							value={body.correo}
+							innerRef={correoInputEl}
 							onChange={inputChange}
 						/>
 
@@ -116,6 +258,7 @@ const Register = () => {
 								nameID='contrasena'
 								type={showPassword ? 'password' : 'text'}
 								value={body.contrasena}
+								innerRef={contrasenaInputEl}
 								onChange={inputChange}
 							/>
 							<div onClick={handleShowPasswordClick}>
@@ -136,7 +279,7 @@ const Register = () => {
 			<section className='register-section'>
 				<h4>¿Ya tienes cuenta?</h4>
 				<Link to={'/login'}>
-					<Button2 text='Inicia sesión' />
+					<Button2 text='Inicia sesión' width={280} />
 				</Link>
 			</section>
 		</div>

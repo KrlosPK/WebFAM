@@ -5,7 +5,7 @@
 }
 .input-login:focus ~ label,
 .input-login:valid ~ label {
-	background-color: var(--white-color);
+	background-color: white;
 	left: 16px;
 	padding: 0 2px;
 	top: 0;
@@ -19,4 +19,12 @@
 	top: 50%;
 	transform: translateY(-50%);
 	transition: 250ms;
+}
+.input-login[type='number']::-webkit-inner-spin-button,
+.input-login[type='number']::-webkit-outer-spin-button,
+.input-login[type='number'] {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	margin: 0;
 }
