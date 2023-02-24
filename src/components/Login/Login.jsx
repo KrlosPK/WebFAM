@@ -118,7 +118,7 @@ const Login = () => {
     <div className='login-div'>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <header className='login-header'>
-        <img src='../assets/WebFAM_logo.png' width={120} alt='WebFAM logo' />
+        <img src='/WebFAM_logo.png' width={120} alt='WebFAM logo' />
         <Link className='go-back' to='/'>
           ← Volver
         </Link>

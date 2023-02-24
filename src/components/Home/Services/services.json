@@ -1,32 +1,32 @@
 [
-	{
-		"id": 1,
-		"name": "Plataformas",
-		"url": "./assets/aparejo.png"
-	},
-	{
-		"id": 2,
-		"name": "Casetas",
-		"url": "./assets/crisol.png"
-	},
-	{
-		"id": 3,
-		"name": "Pérgolas",
-		"url": "./assets/horno.png"
-	},
-	{
-		"id": 4,
-		"name": "Mezzanine",
-		"url": "./assets/metal.png"
-	},
-	{
-		"id": 5,
-		"name": "Cubiertas",
-		"url": "./assets/soldador.png"
-	},
-	{
-		"id": 6,
-		"name": "Asesoría",
-		"url": "./assets/yunque.png"
-	}
+  {
+    "id": 1,
+    "name": "Plataformas",
+    "url": "/aparejo.png"
+  },
+  {
+    "id": 2,
+    "name": "Casetas",
+    "url": "/crisol.png"
+  },
+  {
+    "id": 3,
+    "name": "Pérgolas",
+    "url": "/horno.png"
+  },
+  {
+    "id": 4,
+    "name": "Mezzanine",
+    "url": "/metal.png"
+  },
+  {
+    "id": 5,
+    "name": "Cubiertas",
+    "url": "/soldador.png"
+  },
+  {
+    "id": 6,
+    "name": "Asesoría",
+    "url": "/yunque.png"
+  }
 ]

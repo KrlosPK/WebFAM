@@ -3,9 +3,14 @@
   flex-direction: column;
   position: relative;
 }
+.input-login:focus {
+  border: 1.7px solid var(--icon-color);
+  outline: none;
+}
 .input-login:focus ~ label,
 .input-login:not(:placeholder-shown) ~ label {
   background-color: white;
+  font-size: 13px;
   left: 16px;
   padding: 0 2px;
   top: 0;

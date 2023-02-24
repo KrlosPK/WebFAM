@@ -1,24 +1,28 @@
 .select-container {
-	display: flex;
-	flex-direction: column;
-	position: relative;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 .select-container__select {
-	border: 1px solid gray;
-	border-radius: 6px;
-	color: rgba(0, 0, 0, 0.7);
-	height: 40px;
-	padding-inline: 0.8em;
+  border: 1px solid gray;
+  border-radius: 6px;
+  color: rgba(0, 0, 0, 0.7);
+  height: 40px;
+  padding-inline: 0.8em;
+}
+.select-container__select:focus {
+  border: 1.7px solid var(--icon-color);
+  outline: none;
 }
 .label-select {
-	background-color: white;
-	color: rgba(0, 0, 0, 0.7);
-	left: 16px;
-	padding: 0 2px;
-	pointer-events: none;
-	position: absolute;
-	top: 0;
-	transform: translateY(-50%);
-	transition: 250ms;
-	user-select: none;
+  background-color: white;
+  color: rgba(0, 0, 0, 0.7);
+  left: 16px;
+  padding: 0 2px;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translateY(-50%);
+  transition: 250ms;
+  user-select: none;
 }

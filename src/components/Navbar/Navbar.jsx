@@ -87,7 +87,7 @@ const Navbar = () => {
 				</ul>
 				<ul className='logo'>
 					<img
-						src='assets/WebFAM_logo.png'
+						src='/WebFAM_logo.png'
 						width={120}
 						alt='WebFAM logo'
 					/>
