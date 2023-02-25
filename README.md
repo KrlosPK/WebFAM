@@ -1,7 +1,7 @@
 # WebFAM
 
 ## ¿A Quién Está Dirigido?
-Este proyecto esta completamente dirigido a FADEMET Montajes S.A.S. Instagram: [https://www.instagram.com/fademetmontajes/](url)
+Este proyecto esta completamente dirigido a FADEMET Montajes S.A.S. Instagram: https://www.instagram.com/fademetmontajes/
 
 ## Título del Proyecto
 Aplicativo web E-commerce para FADEMET S.A.S
