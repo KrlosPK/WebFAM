@@ -1,0 +1,46 @@
+nav {
+  background-color: var(--white-color);
+  display: flex;
+  min-height: 3rem;
+  padding: 0 1.5rem;
+}
+.wrapper {
+  background: linear-gradient(#222, #222), var(--orange-gradient);
+  background-origin: padding-box, border-box;
+  background-repeat: no-repeat;
+  height: 0.1px;
+}
+ul {
+  align-items: center;
+  display: flex;
+  font-size: 14px;
+  gap: 2.5rem;
+  justify-content: center;
+  list-style: none;
+  margin: 0.5rem;
+  width: 100%;
+}
+a {
+  color: #333;
+}
+
+
+
+.register-login-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 1000px) {
+  .left,
+  .right {
+    display: none;
+  }
+}
+
+.fade-gray {
+  transition: color 150ms ease-out;
+}
+.fade-gray:hover {
+  color: #777;
+}

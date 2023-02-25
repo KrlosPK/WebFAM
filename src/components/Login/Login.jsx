@@ -1,6 +1,15 @@
 import './Login.css'
-import { Link } from 'react-router-dom'
-import { Button, Button2, Input, validateMail, validatePassword, API_URL } from '../Utils'
+import { Link, useNavigate } from 'react-router-dom'
+import {
+  Button,
+  Button2,
+  Input,
+  validateMail,
+  validatePassword,
+  API_URL,
+  Navbar,
+  ResponsiveNav
+} from '../Utils'
 
 //? Hooks
 import { useState, useRef, useEffect } from 'react'
@@ -17,6 +26,15 @@ import { AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
+  const navigate = useNavigate()
+
+  //! Cambiar título de la página
+  const [title, setTitle] = useState('')
+  useEffect(() => {
+    setTitle('WebFAM Login')
+    document.title = title
+  }, [setTitle])
+
   //* Mostrar contraseña
   const [showContrasena, setShowContrasena] = useState(true)
 
@@ -97,17 +115,20 @@ const Login = () => {
 
       focusInput(contrasenaInputEl)
     } else {
-      toast.success('¡Login en proceso!', {
-        theme: 'colored'
-      })
       await axios
         .get(API_URL('usuarios'), body)
-        .then((res) => console.log(res.data))
+        .then(({ data }) => {
+          console.log(data)
+          navigate('/')
+          toast.success('Usuarios Encontrados', {
+            theme: 'colored'
+          })
+        })
         .catch((e) => {
+          console.log(e)
           toast.error('¡Correo y/o contraseña incorrectos!', {
             theme: 'colored'
           })
-          console.log(e)
         })
     }
     //TODO Axios
@@ -126,12 +147,19 @@ const Login = () => {
   return (
     <div className='login-div'>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <header className='login-header'>
+      <ResponsiveNav elementText={['Inicio']} url={['/']} />
+      <Navbar
+        elementTextLeft={['Inicio']}
+        urlLeft={['/']}
+        elementTextRight={['']}
+        urlRight={['']}
+      />
+      {/* <header className='login-header'>
         <img src='/WebFAM_logo.png' width={120} alt='WebFAM logo' />
         <Link className='go-back' to='/'>
           ← Volver
         </Link>
-      </header>
+      </header> */}
       <hr className='header-line' />
       <section className='login-form'>
         <div className='first-login'>

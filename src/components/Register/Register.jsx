@@ -1,6 +1,6 @@
 import './Register.css'
-import { Link, Route } from 'react-router-dom'
-import { Button, Button2, Input, Select, API_URL } from '../Utils'
+import { Link, useNavigate } from 'react-router-dom'
+import { Button, Button2, Input, Select, API_URL, Navbar, ResponsiveNav } from '../Utils'
 
 //? Hooks
 import { useState, useRef, useEffect } from 'react'
@@ -15,6 +15,8 @@ import { FaEyeSlash } from 'react-icons/fa'
 import axios from 'axios'
 
 const Register = () => {
+  const navigate = useNavigate()
+
   //* Mostrar contraseña
   const [showPassword, setShowPassword] = useState(true)
 
@@ -65,7 +67,6 @@ const Register = () => {
 
       focusInput(nombreInputEl)
     }
-
     // Validación Apellidos
     else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
       e.preventDefault()
@@ -84,7 +85,6 @@ const Register = () => {
 
       focusInput(apellidosInputEl)
     }
-
     // Validación Número de Celular
     else if (numCelular.length === 0) {
       e.preventDefault()
@@ -113,7 +113,6 @@ const Register = () => {
 
       focusInput(tipoDocumentoInputEl)
     }
-
     // Validación Número de Documento
     else if (numDocumento.length === 0) {
       e.preventDefault()
@@ -158,7 +157,6 @@ const Register = () => {
 
       focusInput(correoInputEl)
     }
-
     // Validación Contraseña
     else if (contrasena.length === 0 || /^\s+$/.test(contrasena)) {
       e.preventDefault()
@@ -180,7 +178,10 @@ const Register = () => {
 
       focusInput(contrasenaInputEl)
     } else {
-      a()
+      toast.success('¡Listo para implementar Axios!', {
+        theme: 'colored'
+      })
+      navigate('/')
     }
   }
 
@@ -194,19 +195,19 @@ const Register = () => {
     num_documento: ''
   })
 
-  useEffect(() => {
-    axios
-      .post(API_URL('usuarios'), body)
-      .then((res) => {
-        console.log(res.data)
-      })
-      .catch((err) => {
-        toast.error('¡Error al registrarse!', {
-          theme: 'colored'
-        })
-        console.log(err)
-      })
-  }, [setBody])
+  // useEffect(() => {
+  //   axios
+  //     .post(API_URL('usuarios'), body)
+  //     .then((res) => {
+  //       console.log(res.data)
+  //     })
+  //     .catch((err) => {
+  //       toast.error('¡Error al registrarse!', {
+  //         theme: 'colored'
+  //       })
+  //       console.log(err)
+  //     })
+  // }, [setBody])
 
   const inputChange = ({ target }) => {
     const { name, value } = target
@@ -227,12 +228,13 @@ const Register = () => {
   return (
     <div className='login-div'>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <header className='login-header'>
-        <img src='/WebFAM_logo.png' width={120} alt='WebFAM logo' />
-        <Link className='go-back' to='/'>
-          ← Volver
-        </Link>
-      </header>
+      <ResponsiveNav elementText={['Inicio']} url={['/']} />
+      <Navbar
+        elementTextLeft={['Inicio']}
+        urlLeft={['/']}
+        elementTextRight={['']}
+        urlRight={['']}
+      />
       <hr className='header-line' />
       <section className='login-form'>
         <div className='register-label'>
