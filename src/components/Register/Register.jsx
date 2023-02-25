@@ -214,8 +214,17 @@ const Register = () => {
 
     setBody({ nombre, apellidos, correo, num_celular, contrasena, tipo_documento, num_documento })
 
-    await axios.post(API_URL('usuarios'), body)
-    .then(() => {navigate('/login')})
+    await axios.post(API_URL('signup'), body)
+    .then(() => {
+      // TODO: HACER QUE CUANDO TE REGISTRES TE DE UN TOAST DE QUE LO HICISTE
+      toast.success(
+        '¡Usuario registrado!',
+        {
+          theme: 'colored'
+        }
+      )
+      navigate('/login')
+    })
     .catch(() => {
       toast.error('¡Ocurrió un error al registrarse!', {
         theme: 'colored'

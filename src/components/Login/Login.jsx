@@ -1,15 +1,6 @@
 import './Login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-  Button,
-  Button2,
-  Input,
-  validateMail,
-  validatePassword,
-  API_URL,
-  Navbar,
-  ResponsiveNav
-} from '../Utils'
+import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar, ResponsiveNav } from '../Utils'
 
 //? Hooks
 import { useState, useRef, useEffect } from 'react'
@@ -105,26 +96,24 @@ const Login = () => {
     } else if (!validatePassword(contrasena, regexContrasena)) {
       e.preventDefault()
 
-      toast.error(
-        '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
-        {
-          theme: 'colored'
-        }
-      )
+      toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
+        theme: 'colored'
+      })
 
       focusInput(contrasenaInputEl)
     } else {
+      setBody({ correo, contrasena })
+
       await axios
-        .get(API_URL('usuarios'), body)
+        .post(API_URL('signin'), body)
         .then(({ data }) => {
-          console.log(data)
-          navigate('/')
-          toast.success('Usuarios Encontrados', {
+          const { result } = data
+          if(result) return navigate('/')
+          /* toast.success('Iniciando sesión...', {
             theme: 'colored'
-          })
+          }) */
         })
         .catch((e) => {
-          console.log(e)
           toast.error('¡Correo y/o contraseña incorrectos!', {
             theme: 'colored'
           })
@@ -147,12 +136,7 @@ const Login = () => {
     <div className='login-div'>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav elementText={['Inicio']} url={['/']} />
-      <Navbar
-        elementTextLeft={['Inicio']}
-        urlLeft={['/']}
-        elementTextRight={['']}
-        urlRight={['']}
-      />
+      <Navbar elementTextLeft={['Inicio']} urlLeft={['/']} elementTextRight={['']} urlRight={['']} />
       {/* <header className='login-header'>
         <img src='/WebFAM_logo.png' width={120} alt='WebFAM logo' />
         <Link className='go-back' to='/'>
@@ -180,26 +164,10 @@ const Login = () => {
         </div>
         <form className='second-login' onSubmit={validateLogin}>
           <div className='main-form'>
-            <Input
-              text='Correo electrónico'
-              type='email'
-              nameID='correo'
-              value={body.correo}
-              innerRef={correoInputEl}
-              innerOnChange={inputChange}
-            />
+            <Input text='Correo electrónico' type='email' nameID='correo' value={body.correo} innerRef={correoInputEl} innerOnChange={inputChange} />
             <div className='input-container'>
-              <Input
-                text='Contraseña'
-                type={showContrasena ? 'password' : 'text'}
-                nameID='contrasena'
-                value={body.contrasena}
-                innerRef={contrasenaInputEl}
-                innerOnChange={inputChange}
-              />
-              <div onClick={handleShowContrasenaClick}>
-                {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
-              </div>
+              <Input text='Contraseña' type={showContrasena ? 'password' : 'text'} nameID='contrasena' value={body.contrasena} innerRef={contrasenaInputEl} innerOnChange={inputChange} />
+              <div onClick={handleShowContrasenaClick}>{showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}</div>
             </div>
           </div>
           <div className='forgot-password'>
