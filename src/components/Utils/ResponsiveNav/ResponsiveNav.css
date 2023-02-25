@@ -12,9 +12,8 @@
   overflow: auto;
   padding-block: 3rem 1rem;
   position: fixed;
-  text-transform: uppercase;
   top: 0;
-  transition: translate 500ms ease-in-out;
+  transition: translate 350ms ease-in-out;
   width: 60%;
   z-index: 10;
 }

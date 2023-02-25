@@ -6,7 +6,7 @@ import { Button, Button2 } from '../../Utils'
 //* Hooks
 import { Link } from 'react-router-dom'
 
-const Navbar = ({ elementTextLeft, urlLeft, elementTextRight, urlRight }) => {
+const Navbar = ({ elementTextLeft, urlLeft, elementTextRight, urlRight, renderButton }) => {
   return (
     <>
       <nav>
@@ -24,7 +24,9 @@ const Navbar = ({ elementTextLeft, urlLeft, elementTextRight, urlRight }) => {
           })}
         </ul>
         <ul className='logo'>
-          <img src='/WebFAM_logo.png' width={120} alt='WebFAM logo' />
+          <Link to='/'>
+            <img src='/WebFAM_logo.png' width={120} alt='Logo de Fademet Montajes' />
+          </Link>
         </ul>
         <ul className='right'>
           {elementTextRight.map((el, i) => {
@@ -38,15 +40,21 @@ const Navbar = ({ elementTextLeft, urlLeft, elementTextRight, urlRight }) => {
               </li>
             )
           })}
-          <li className='register-login-buttons'>
-            <Link to='/login'>
-              <Button text='Ingresar' />
-            </Link>
-
-            <Link to='/register'>
-              <Button2 text='Registrarse' />
-            </Link>
-          </li>
+          {renderButton
+            ? renderButton.map((btn, i) => {
+                return (
+                  <li className='register-login-buttons' key={i}>
+                    <Link to='/login'>
+                      <Button text='Ingresar' />
+                    </Link>
+                    {btn}
+                    <Link to='/register'>
+                      <Button2 text='Registrarse' />
+                    </Link>
+                  </li>
+                )
+              })
+            : ''}
         </ul>
       </nav>
       <div className='wrapper'></div>

@@ -23,6 +23,7 @@ export const App = () => {
                 urlLeft={['/', '/', '/', '/']}
                 elementTextRight={['Roles', 'Facturas']}
                 urlRight={['/', '/']}
+                renderButton={['']}
               />
               <Home />
             </>
