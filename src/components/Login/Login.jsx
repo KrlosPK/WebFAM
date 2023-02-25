@@ -1,6 +1,6 @@
 import './Login.css'
 import { Link } from 'react-router-dom'
-import { Button, Button2, Input, validateMail, validatePassword } from '../Utils'
+import { Button, Button2, Input, validateMail, validatePassword, API_URL } from '../Utils'
 
 //? Hooks
 import { useState, useRef, useEffect } from 'react'
@@ -8,7 +8,7 @@ import { useState, useRef, useEffect } from 'react'
 //? Library
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-// import bcrypt from 'bcrypt'
+import axios from 'axios'
 
 //? Icons
 import { FaEye } from 'react-icons/fa'
@@ -31,7 +31,7 @@ const Login = () => {
   const correoInputEl = useRef(null)
   const contrasenaInputEl = useRef(null)
 
-  const validateLogin = (e) => {
+  const validateLogin = async (e) => {
     e.preventDefault()
 
     const correo = e.target[0].value
@@ -94,15 +94,24 @@ const Login = () => {
           theme: 'colored'
         }
       )
+
+      focusInput(contrasenaInputEl)
     } else {
-      toast.success('¡Listo para implementar Axios!', {
+      toast.success('¡Login en proceso!', {
         theme: 'colored'
       })
+      await axios
+        .get(API_URL('usuarios'), body)
+        .then((res) => console.log(res.data))
+        .catch((e) => {
+          toast.error('¡Correo y/o contraseña incorrectos!', {
+            theme: 'colored'
+          })
+          console.log(e)
+        })
     }
-    setBody({ correo, contrasena })
     //TODO Axios
   }
-
   //* guarda correo y contraseña
   const [body, setBody] = useState({ correo: '', contrasena: '' })
 
@@ -150,7 +159,7 @@ const Login = () => {
               nameID='correo'
               value={body.correo}
               innerRef={correoInputEl}
-              onChange={inputChange}
+              innerOnChange={inputChange}
             />
             <div className='input-container'>
               <Input
@@ -159,7 +168,7 @@ const Login = () => {
                 nameID='contrasena'
                 value={body.contrasena}
                 innerRef={contrasenaInputEl}
-                onChange={inputChange}
+                innerOnChange={inputChange}
               />
               <div onClick={handleShowContrasenaClick}>
                 {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}

@@ -1,17 +1,10 @@
 import './Input.css'
 
-export const animation = {
-  backgroundColor: 'white',
-  left: '16px',
-  padding: '0 2px',
-  top: '0',
-  userSelect: 'none'
-}
-
-const Input = ({ text, type = 'text', nameID, max = 30, innerRef }) => {
+const Input = ({ text, type = 'text', nameID, max = 30, innerRef, innerOnChange }) => {
   return (
     <div className='input-container'>
       <input
+        onChange={innerOnChange}
         className='input-login'
         placeholder=' '
         type={type}
