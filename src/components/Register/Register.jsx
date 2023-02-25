@@ -42,14 +42,12 @@ const Register = () => {
   const correoInputEl = useRef(null)
   const contrasenaInputEl = useRef(null)
 
-  const validateRegister = async (e) => {
-    e.preventDefault()
-
+  const createUser = async (e) => {
     const nombre = e.target[0].value
     const apellidos = e.target[1].value
-    const numCelular = e.target[2].value
-    const tipoDocumento = e.target[3].value
-    const numDocumento = e.target[4].value
+    const num_celular = e.target[2].value
+    const tipo_documento = e.target[3].value
+    const num_documento = e.target[4].value
     const correo = e.target[5].value
     const contrasena = e.target[6].value
 
@@ -64,6 +62,8 @@ const Register = () => {
       })
 
       focusInput(nombreInputEl)
+
+      return false
     } else if (nombre.length < 2) {
       e.preventDefault()
 
@@ -72,6 +72,8 @@ const Register = () => {
       })
 
       focusInput(nombreInputEl)
+
+      return false
     }
     // Validación Apellidos
     else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
@@ -82,6 +84,8 @@ const Register = () => {
       })
 
       focusInput(apellidosInputEl)
+
+      return false
     } else if (apellidos.length < 4) {
       e.preventDefault()
 
@@ -90,9 +94,11 @@ const Register = () => {
       })
 
       focusInput(apellidosInputEl)
+
+      return false
     }
     // Validación Número de Celular
-    else if (numCelular.length === 0) {
+    else if (num_celular.length === 0) {
       e.preventDefault()
 
       toast.error('¡El Número de Celular no puede estar vacío!', {
@@ -100,7 +106,9 @@ const Register = () => {
       })
 
       focusInput(numCelularInputEl)
-    } else if (numCelular.length < 9 || numCelular.length >= 12) {
+
+      return false
+    } else if (num_celular.length < 9 || num_celular.length >= 12) {
       e.preventDefault()
 
       toast.error('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
@@ -108,9 +116,11 @@ const Register = () => {
       })
 
       focusInput(numCelularInputEl)
+
+      return false
     }
     // Validación Tipo de Documento
-    else if (!tipoDocumento) {
+    else if (!tipo_documento) {
       e.preventDefault()
 
       toast.error('¡Por favor seleccione su Tipo de Documento!', {
@@ -118,9 +128,11 @@ const Register = () => {
       })
 
       focusInput(tipoDocumentoInputEl)
+
+      return false
     }
     // Validación Número de Documento
-    else if (numDocumento.length === 0) {
+    else if (num_documento.length === 0) {
       e.preventDefault()
 
       toast.error('¡El Número de Documento no puede estar vacío!', {
@@ -128,7 +140,9 @@ const Register = () => {
       })
 
       focusInput(numDocumentoInputEl)
-    } else if (numDocumento.length < 9 || numDocumento.length >= 12) {
+
+      return false
+    } else if (num_documento.length < 9 || num_documento.length >= 12) {
       e.preventDefault()
 
       toast.error('¡El Número de Documento debe tener entre 9 y 11 dígitos!', {
@@ -136,6 +150,8 @@ const Register = () => {
       })
 
       focusInput(numDocumentoInputEl)
+
+      return false
     }
     // Validación Correo Electrónico
     else if (correo.length === 0 || /^\s+$/.test(correo)) {
@@ -146,6 +162,8 @@ const Register = () => {
       })
 
       focusInput(correoInputEl)
+
+      return false
     } else if (!/\S+@\S+/.test(correo)) {
       e.preventDefault()
 
@@ -154,6 +172,8 @@ const Register = () => {
       })
 
       focusInput(correoInputEl)
+
+      return false
     } else if (!/\S+\.\S+/.test(correo)) {
       e.preventDefault()
 
@@ -162,6 +182,8 @@ const Register = () => {
       })
 
       focusInput(correoInputEl)
+
+      return false
     }
     // Validación Contraseña
     else if (contrasena.length === 0 || /^\s+$/.test(contrasena)) {
@@ -172,6 +194,8 @@ const Register = () => {
       })
 
       focusInput(contrasenaInputEl)
+
+      return false
     } else if (!regexContrasena.test(contrasena)) {
       e.preventDefault()
 
@@ -183,12 +207,20 @@ const Register = () => {
       )
 
       focusInput(contrasenaInputEl)
-    } else {
-      toast.success('¡Listo para implementar Axios!', {
+
+      return false
+    }
+    e.preventDefault()
+
+    setBody({ nombre, apellidos, correo, num_celular, contrasena, tipo_documento, num_documento })
+
+    await axios.post(API_URL('usuarios'), body)
+    .then(() => {navigate('/login')})
+    .catch(() => {
+      toast.error('¡Ocurrió un error al registrarse!', {
         theme: 'colored'
       })
-      navigate('/')
-    }
+    })
   }
 
   const [body, setBody] = useState({
@@ -200,20 +232,6 @@ const Register = () => {
     tipo_documento: '',
     num_documento: ''
   })
-
-  // useEffect(() => {
-  //   axios
-  //     .post(API_URL('usuarios'), body)
-  //     .then((res) => {
-  //       console.log(res.data)
-  //     })
-  //     .catch((err) => {
-  //       toast.error('¡Error al registrarse!', {
-  //         theme: 'colored'
-  //       })
-  //       console.log(err)
-  //     })
-  // }, [setBody])
 
   const inputChange = ({ target }) => {
     const { name, value } = target
@@ -246,7 +264,7 @@ const Register = () => {
         <div className='register-label'>
           <p>Regístrate</p>
         </div>
-        <form className='second-login' onSubmit={validateRegister}>
+        <form className='second-login' onSubmit={createUser}>
           <div className='main-form'>
             <Input
               text='Nombre'
