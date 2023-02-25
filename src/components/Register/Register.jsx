@@ -217,12 +217,12 @@ const Register = () => {
     await axios.post(API_URL('signup'), body)
     .then(() => {
       // TODO: HACER QUE CUANDO TE REGISTRES TE DE UN TOAST DE QUE LO HICISTE
-      toast.success(
+      /* toast.success(
         '¡Usuario registrado!',
         {
           theme: 'colored'
         }
-      )
+      ) */
       navigate('/login')
     })
     .catch(() => {
