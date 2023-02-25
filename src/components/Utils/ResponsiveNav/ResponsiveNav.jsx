@@ -15,6 +15,7 @@ const ResponsiveNav = ({ elementText, url }) => {
   navClassName += navIsClicked === 'clicked' ? ' close-menu' : ''
 
   const [buttonIsClicked, setButtonIsClicked] = useState('')
+
   let buttonClassName = 'menu__button'
   buttonClassName += buttonIsClicked === 'clicked' ? ' hover' : ''
 
@@ -24,8 +25,13 @@ const ResponsiveNav = ({ elementText, url }) => {
     buttonIsClicked ? setButtonIsClicked('') : setButtonIsClicked('clicked')
   }
 
+  const hideNav = () => {
+    setNavIsClicked('clicked')
+    setButtonIsClicked('')
+  }
+  
   return (
-    <div className='menu'>
+    <div className='menu' onBlur={hideNav}>
       <div className={navClassName}>
         {elementText.map((el, i) => {
           return (

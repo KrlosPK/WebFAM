@@ -29,9 +29,8 @@ const Login = () => {
   const navigate = useNavigate()
 
   //! Cambiar título de la página
-  const [title, setTitle] = useState('')
+  const [title, setTitle] = useState('WebFAM - Inicio de Sesión')
   useEffect(() => {
-    setTitle('WebFAM Login')
     document.title = title
   }, [setTitle])
 

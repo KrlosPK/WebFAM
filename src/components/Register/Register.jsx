@@ -17,6 +17,12 @@ import axios from 'axios'
 const Register = () => {
   const navigate = useNavigate()
 
+  //! Cambiar título de la página
+  const [title, setTitle] = useState('WebFAM - Registro')
+  useEffect(() => {
+    document.title = title
+  }, [setTitle])
+
   //* Mostrar contraseña
   const [showPassword, setShowPassword] = useState(true)
 
