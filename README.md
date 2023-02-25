@@ -23,7 +23,7 @@ Implementar un aplicativo web que controle los datos personales de los usuarios 
 - Generar la cotización de los pedidos y utilizar servicios externos para que el cliente realice el pago.
 
 ## Resultados
-Será un aplicativo web interactivo e intuitivo con buena experiencia de usuario en el que el usuario tenga fácil accesibilidad al sistema, que se pueda crear, acceder y modificar una cuenta para comprar productos, agendar servicios, generar facturas, enviar el pago de la cotización y comunicarse con servicio al cliente.
+Un aplicativo web interactivo e intuitivo con buena experiencia de usuario en el que el usuario tenga fácil accesibilidad al sistema, que se pueda crear, acceder y modificar una cuenta para comprar productos, agendar servicios, generar facturas, enviar el pago de la cotización y comunicarse con servicio al cliente.
 
 # Vista general
 
