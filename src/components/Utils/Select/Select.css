@@ -4,6 +4,7 @@
   position: relative;
 }
 .select-container__select {
+  background-color: white;
   border: 1px solid gray;
   border-radius: 6px;
   color: rgba(0, 0, 0, 0.7);

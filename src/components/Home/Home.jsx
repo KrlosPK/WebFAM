@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 import { Button, Button2 } from '../Utils'
 import { Services } from './Services/Services'
 import { AboutUs } from './AboutUs/AboutUs'
+import { Team } from './Team/Team'
 
 const Home = () => {
   //! Cambiar título de la página
@@ -32,6 +33,7 @@ const Home = () => {
       </main>
       <Services />
       <AboutUs />
+      <Team />
     </>
   )
 }

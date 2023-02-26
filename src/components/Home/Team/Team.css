@@ -1,51 +1,38 @@
-.about-us-container {
-  display: grid;
-  min-height: 100vh;
-  place-items: center;
-  position: relative;
-  z-index: 1;
-}
-
-.info {
+.team {
   align-items: center;
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding: 1rem;
+  margin-top: 5rem;
 }
-.info__title {
+.team__title {
   font-family: 'Syne', sans-serif;
   font-size: 42px;
   font-weight: 700;
   text-align: center;
 }
-.info__subtitle {
-  font-size: 1rem;
-  font-weight: 400;
+.team__text {
   text-align: center;
   width: 70%;
 }
-.cards {
+.colleagues {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  height: max-content;
   justify-content: center;
 }
+
 @media (max-width: 630px) {
-  .info__subtitle {
+  .team__text {
     width: 90%;
   }
-  .info__title {
+  .team__title {
     font-size: 36px;
-    margin-top: 8rem;
-  }
-  .info {
-    width: 100%;
   }
 }
 @media (max-width: 430px) {
-  .info__title {
+  .team__title {
     font-size: 30px;
   }
 }

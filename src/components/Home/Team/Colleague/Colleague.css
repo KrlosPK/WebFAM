@@ -1,0 +1,20 @@
+.team-colleague {
+  border-radius: 10px;
+  flex-direction: column;
+  gap: 1rem;
+  height: 190px;
+  width: 280px;
+}
+.team-colleague__image {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.team-colleague__name {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+.team-colleague__rol {
+  color: var(--icon-color);
+  font-size: 14px;
+}

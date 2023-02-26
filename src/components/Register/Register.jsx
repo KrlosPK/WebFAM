@@ -226,7 +226,7 @@ const Register = () => {
       navigate('/login')
     })
     .catch(() => {
-      toast.error('¡Ocurrió un error al registrarse!', {
+      toast.error('¡Este usuario ya existe!', {
         theme: 'colored'
       })
     })
@@ -314,21 +314,6 @@ const Register = () => {
               ]}
               text='Tipo de Documento'
             />
-            {/* <div className='select-container'>
-              <select
-                ref={tipoDocumentoInputEl}
-                value={body.tipo_documento}
-                onChange={selectChange}
-                className='select-container__select'
-                name='tipo_documento'
-              >
-                <option value=''>Selecciona una opción</option>
-                <option value='C.C'>Cédula de Ciudadanía</option>
-                <option value='C.E'>Cédula de Extranjería</option>
-                <option value='NIT'>(NIT) Número de Identificación Tributaria</option>
-              </select>
-              <label className='label-select'>Tipo de Documento</label>
-            </div> */}
 
             <Input
               text='Número de Documento'

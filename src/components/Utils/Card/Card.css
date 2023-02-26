@@ -1,10 +1,40 @@
-.Card {
-	border-radius: 10px;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	gap: 0.5em;
-	margin: 1px;
-	padding: 1rem;
-	word-break: break-all;
+.card {
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 1rem;
+}
+.card__image {
+  border-radius: 10px;
+  filter: brightness(80%);
+  object-fit: cover;
+  transition: filter 400ms;
+}
+.card:hover .card__image {
+  filter: none;
+}
+.card__title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  text-align: center;
+  width: 300px;
+}
+.card__text {
+  text-align: center;
+  width: 300px;
+}
+
+@media (max-width: 630px) {
+  .card__title {
+    width: 250px;
+  }
+  .card__text {
+    width: 250px;
+  }
+  .card__image {
+    height: 250px;
+    width: 250px;
+  }
 }
