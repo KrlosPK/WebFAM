@@ -5,7 +5,7 @@ import data from './services.json'
 
 const Services = () => {
   return (
-    <div className='services'>
+    <section className='services'>
       {data.map(({ id, name, url }) => (
         <div className='service' key={id}>
           <div className='service__image'>
@@ -14,7 +14,7 @@ const Services = () => {
           <div className='service__text'>{name}</div>
         </div>
       ))}
-    </div>
+    </section>
   )
 }
 

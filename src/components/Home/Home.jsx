@@ -8,6 +8,7 @@ import { Button, Button2 } from '../Utils'
 import { Services } from './Services/Services'
 import { AboutUs } from './AboutUs/AboutUs'
 import { Team } from './Team/Team'
+import { Provide } from './Provide/Provide'
 
 const Home = () => {
   //! Cambiar título de la página
@@ -28,12 +29,15 @@ const Home = () => {
         </p>
         <div className='buttons'>
           <Button text='Contáctanos »' width={200} />
-          <Button2 text='⚡ ¿Quiénes somos?' width={200} />
+          <a href='#nuestroEquipo'>
+            <Button2 text='⚡ ¿Quiénes somos?' width={200} />
+          </a>
         </div>
       </main>
       <Services />
       <AboutUs />
       <Team />
+      <Provide />
     </>
   )
 }

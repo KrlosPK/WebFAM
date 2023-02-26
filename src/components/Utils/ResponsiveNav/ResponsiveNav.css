@@ -48,7 +48,7 @@
   justify-content: space-around;
   left: 1rem;
   position: fixed;
-  top: 1rem;
+  top: 1.2rem;
   transition: translate 500ms ease-in-out;
   width: 1.3rem;
   z-index: 20;

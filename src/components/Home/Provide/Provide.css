@@ -1,4 +1,4 @@
-.team {
+.provide {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -6,17 +6,17 @@
   margin-top: 2rem;
   padding: 3rem 0 4rem;
 }
-.team__title {
+.provide__title {
   font-family: 'Syne', sans-serif;
   font-size: 42px;
   font-weight: 700;
   text-align: center;
 }
-.team__text {
+.provide__text {
   text-align: center;
   width: 70%;
 }
-.colleagues {
+.provides {
   align-items: center;
   display: flex;
   flex-wrap: wrap;

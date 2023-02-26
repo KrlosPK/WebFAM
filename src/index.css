@@ -28,6 +28,10 @@ body,
   border-radius: 10px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .flex {
   align-items: center;
   display: flex;

@@ -3,7 +3,7 @@ import { Card } from '../../Utils'
 
 const AboutUs = () => {
   return (
-    <main className='about-us-container'>
+    <section className='about-us-container'>
       <div className='info'>
         <h2 className='info__title'>¡Los mejores servicios para nuestros clientes!</h2>
         <p className='info__subtitle'>
@@ -49,7 +49,7 @@ const AboutUs = () => {
           />
         </div>
       </div>
-    </main>
+    </section>
   )
 }
 

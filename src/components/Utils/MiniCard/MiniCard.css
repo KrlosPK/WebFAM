@@ -1,20 +1,19 @@
-.team-colleague {
+.mini-card {
   border-radius: 10px;
   flex-direction: column;
   gap: 1rem;
   height: 190px;
   width: 280px;
 }
-.team-colleague__image {
-  border-radius: 50%;
+.mini-card__image {
   object-fit: cover;
 }
-.team-colleague__name {
+.mini-card__header {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
 }
-.team-colleague__rol {
+.mini-card__text {
   color: var(--icon-color);
   font-size: 14px;
 }
