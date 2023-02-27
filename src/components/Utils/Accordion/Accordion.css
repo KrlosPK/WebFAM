@@ -6,6 +6,9 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  /* min-height: 120px; */
+  height: fit-content;
+  justify-content: center;
   overflow: hidden;
   padding: 1rem;
   padding-right: 2rem;
@@ -24,7 +27,11 @@
 }
 .open-card__text {
   color: var(--text-color);
+  display: none;
   font-size: 14px;
+}
+.open-card__text.show {
+  display: block;
 }
 .open-card__icon {
   color: #d6bcfa;

@@ -45,6 +45,7 @@ const Home = () => {
       <Team />
       <Provide />
       <FrequentQuestions />
+      <Provide />
     </>
   )
 }

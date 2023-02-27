@@ -11,9 +11,10 @@
 }
 .frequent-questions aside {
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
   grid-template-columns: 1fr 1fr;
-  padding: 1rem;
+  min-height: 400px;
+  padding: 2rem;
 }
 .frequent-questions__title {
   font-family: 'Syne', sans-serif;
@@ -25,13 +26,6 @@
   margin: 2rem 0 1rem;
   text-align: center;
   width: 70%;
-}
-.provides {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
 }
 @media (max-width: 860px) {
   .frequent-questions aside {
