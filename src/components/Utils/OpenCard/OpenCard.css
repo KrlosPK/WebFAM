@@ -6,9 +6,11 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow: hidden;
   padding: 1rem;
   padding-right: 2rem;
   position: relative;
+  transition: background 200ms;
 }
 .open-card:hover {
   background-color: #ccc;
