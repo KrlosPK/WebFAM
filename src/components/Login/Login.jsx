@@ -1,4 +1,4 @@
-import './Login.css'
+import './login.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar, ResponsiveNav } from '../Utils'
 
