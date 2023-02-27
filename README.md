@@ -27,6 +27,6 @@ Un aplicativo web interactivo e intuitivo con buena experiencia de usuario en el
 
 # Vista general
 
-![imagen](https://user-images.githubusercontent.com/80909795/221383596-a7ee613d-02d8-4453-a43f-751d8c164751.png)
+![vistaPreviaWebFAM](https://user-images.githubusercontent.com/80909795/221668866-92f9dfd0-52ab-4be8-a683-7c51435e724b.png)
 
 > Hecho en React 18, CSS3, MySQL8
