@@ -9,6 +9,7 @@ import { Services } from './Services/Services'
 import { AboutUs } from './AboutUs/AboutUs'
 import { Team } from './Team/Team'
 import { Provide } from './Provide/Provide'
+import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
 
 const Home = () => {
   //! Cambiar título de la página
@@ -28,7 +29,12 @@ const Home = () => {
           superficies con soluciones asfálticas.
         </p>
         <div className='buttons'>
-          <Button text='Contáctanos »' width={200} />
+          <a
+            href='https://api.whatsapp.com/send/?phone=573147561960&text&type=phone_number&app_absent=0'
+            target={'_blank'}
+          >
+            <Button text='Contáctanos »' width={200} />
+          </a>
           <a href='#nuestroEquipo'>
             <Button2 text='⚡ ¿Quiénes somos?' width={200} />
           </a>
@@ -38,6 +44,7 @@ const Home = () => {
       <AboutUs />
       <Team />
       <Provide />
+      <FrequentQuestions />
     </>
   )
 }

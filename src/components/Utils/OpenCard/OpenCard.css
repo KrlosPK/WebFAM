@@ -1,0 +1,32 @@
+.open-card {
+  border: 2px solid #d6bcfa;
+  border-radius: 15px;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+  padding-right: 2rem;
+  position: relative;
+}
+.open-card:hover {
+  background-color: #ccc;
+}
+.open-card:focus {
+  outline: none;
+}
+.open-card__header {
+  color: #000;
+  font-weight: 400;
+}
+.open-card__text {
+  color: var(--text-color);
+  font-size: 14px;
+}
+.open-card__icon {
+  color: #d6bcfa;
+  position: absolute;
+  right: 14px;
+  top: 20%;
+}

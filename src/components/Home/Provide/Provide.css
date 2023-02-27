@@ -25,15 +25,15 @@
 }
 
 @media (max-width: 630px) {
-  .team__text {
+  .provide__text {
     width: 90%;
   }
-  .team__title {
+  .provide__title {
     font-size: 36px;
   }
 }
 @media (max-width: 430px) {
-  .team__title {
+  .provide__title {
     font-size: 30px;
   }
 }
