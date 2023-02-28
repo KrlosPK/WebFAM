@@ -20,7 +20,6 @@ const Navbar = ({ elementText, url, renderButtons = false }) => {
               src='/logotype-small.png'
               loading='lazy'
               width={45}
-              effect='blur'
               alt='Logo de Fademet Montajes'
             />
           </Link>
