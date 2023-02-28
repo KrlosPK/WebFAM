@@ -8,6 +8,7 @@
 }
 .frequent-questions section {
   flex-direction: column;
+  padding-top: 2rem;
 }
 .frequent-questions aside {
   display: grid;
