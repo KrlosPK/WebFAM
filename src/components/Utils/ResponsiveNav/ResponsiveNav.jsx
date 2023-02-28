@@ -7,7 +7,7 @@ import { Button, Button2 } from '../'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const ResponsiveNav = ({ elementText, url }) => {
+const ResponsiveNav = ({ elementText, url, renderButtons = false }) => {
   const [navIsClicked, setNavIsClicked] = useState('clicked')
 
   let navClassName = 'navigation'
@@ -29,7 +29,7 @@ const ResponsiveNav = ({ elementText, url }) => {
     setNavIsClicked('clicked')
     setButtonIsClicked('')
   }
-  
+
   return (
     <div className='menu' onBlur={hideNav}>
       <div className={navClassName}>
@@ -40,12 +40,18 @@ const ResponsiveNav = ({ elementText, url }) => {
             </Link>
           )
         })}
-        <Link className='flex gap' to='/login'>
-          <Button text='Ingresar' width={120} />
-        </Link>
-        <Link className='flex gap' to='/register'>
-          <Button2 text='Registrarse' width={120} />
-        </Link>
+        {renderButtons ? (
+          <>
+            <Link className='flex gap' to='/login'>
+              <Button text='Ingresar' width={120} />
+            </Link>
+            <Link className='flex gap' to='/register'>
+              <Button2 text='Registrarse' width={120} />
+            </Link>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
       <button className={buttonClassName} onClick={handleClick}>
         <div></div>

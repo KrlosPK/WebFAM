@@ -17,13 +17,14 @@ export const App = () => {
               <ResponsiveNav
                 elementText={['Inicio', 'Productos', 'Servicios', 'Usuarios']}
                 url={['/', '/', '/', '/']}
+                renderButtons={true}
               />
               <Navbar
                 elementTextLeft={['Inicio', 'Productos', 'Servicios', 'Usuarios']}
                 urlLeft={['/', '/', '/', '/']}
                 elementTextRight={['Roles', 'Facturas']}
                 urlRight={['/', '/']}
-                renderButton={['']}
+                renderButtons={true}
               />
               <Home />
             </>

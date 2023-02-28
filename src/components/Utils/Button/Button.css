@@ -15,3 +15,20 @@
 .Button:hover {
   background-position: 50%;
 }
+.Button.disabled {
+  filter: brightness(65%);
+  gap: 8px;
+  pointer-events: none;
+}
+.Button.disabled svg {
+  stroke-width: 70px;
+  animation: rotate 1.2s infinite linear;
+}
+@keyframes rotate {
+  from {
+    rotate: 0;
+  }
+  to {
+    rotate: 360deg;
+  }
+}

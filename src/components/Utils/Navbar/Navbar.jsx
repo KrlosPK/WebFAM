@@ -6,7 +6,13 @@ import { Button, Button2 } from '../../Utils'
 //* Hooks
 import { Link } from 'react-router-dom'
 
-const Navbar = ({ elementTextLeft, urlLeft, elementTextRight, urlRight, renderButton }) => {
+const Navbar = ({
+  elementTextLeft,
+  urlLeft,
+  elementTextRight,
+  urlRight,
+  renderButtons = false
+}) => {
   return (
     <>
       <nav>
@@ -40,21 +46,18 @@ const Navbar = ({ elementTextLeft, urlLeft, elementTextRight, urlRight, renderBu
               </li>
             )
           })}
-          {renderButton
-            ? renderButton.map((btn, i) => {
-                return (
-                  <li className='register-login-buttons' key={i}>
-                    <Link to='/login'>
-                      <Button text='Ingresar' />
-                    </Link>
-                    {btn}
-                    <Link to='/register'>
-                      <Button2 text='Registrarse' />
-                    </Link>
-                  </li>
-                )
-              })
-            : ''}
+          {renderButtons ? (
+            <li className='register-login-buttons'>
+              <Link className='flex gap' to='/login'>
+                <Button text='Ingresar' width={120} />
+              </Link>
+              <Link className='flex gap' to='/register'>
+                <Button2 text='Registrarse' width={120} />
+              </Link>
+            </li>
+          ) : (
+            <></>
+          )}
         </ul>
       </nav>
       <div className='wrapper'></div>
