@@ -16,13 +16,7 @@ const Navbar = ({ elementText, url, renderButtons = false }) => {
       <nav>
         <ul className='logo'>
           <Link to='/'>
-            <LazyLoadImage
-              src='/logotype-small.png'
-              loading='lazy'
-              width={45}
-              effect='blur'
-              alt='Logo de Fademet Montajes'
-            />
+            <LazyLoadImage src='/logotype-small.png' loading='lazy' width={45} effect='blur' alt='Logo de Fademet Montajes' />
           </Link>
           <div className='left'>
             {elementText
@@ -30,9 +24,9 @@ const Navbar = ({ elementText, url, renderButtons = false }) => {
                   return (
                     <li key={i}>
                       <Link id='RouterNavLink' to={url[i]}>
-                        <span href='' className='flex gap fade-gray'>
+                        <p href='' className='flex gap fade-gray'>
                           {el}
-                        </span>
+                        </p>
                       </Link>
                     </li>
                   )

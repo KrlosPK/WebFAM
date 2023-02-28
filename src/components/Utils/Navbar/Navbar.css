@@ -6,10 +6,10 @@ nav {
   padding: 0 1rem;
 }
 .wrapper {
-  background: linear-gradient(#222, #222), var(--orange-gradient);
+  background: var(--orange-gradient);
   background-origin: padding-box, border-box;
   background-repeat: no-repeat;
-  height: 0.1px;
+  height: 0.3vh;
 }
 ul {
   align-items: center;
@@ -35,6 +35,25 @@ a {
   color: #333;
 }
 
+nav p {
+  position: relative;
+}
+
+nav p::before {
+  background: var(--orange-gradient);
+  bottom: -2px;
+  content: '';
+  height: 1.3px;
+  left: 0;
+  position: absolute;
+  transition: width 250ms ease-out;
+  width: 0;
+}
+
+nav p:hover::before {
+  width: 100%;
+}
+
 .register-login-buttons {
   display: flex;
   gap: 8px;
@@ -44,10 +63,10 @@ a {
   transition: color 150ms ease-out;
 }
 .fade-gray:hover {
-  color: #777;
+  color: #555;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
   .left,
   .right {
     display: none;
