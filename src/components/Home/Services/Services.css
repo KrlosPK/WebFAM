@@ -1,32 +1,44 @@
 .services {
-	align-content: center;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 2rem;
-	height: 35vh;
-	justify-content: center;
-	margin: 0 auto;
-	width: 70%;
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  height: 35vh;
+  justify-content: center;
+  margin: 0 auto;
+  width: 70%;
 }
 .service {
-	align-items: center;
-	display: flex;
-	gap: 17px;
+  align-items: center;
+  display: flex;
+  gap: 17px;
 }
 .service__image {
-	display: flex;
+  display: flex;
 }
 .service__image img {
-	aspect-ratio: 1;
-	width: 35px;
+  aspect-ratio: 1;
+  width: 35px;
 }
 .service__text {
-	align-items: center;
-	color: var(--text-color);
-	display: flex;
+  align-items: center;
+  color: var(--text-color);
+  display: flex;
 }
 @media (max-width: 390px) {
-	.services {
-		margin-top: 3.5rem;
-	}
+  .services {
+    margin-top: 3.5rem;
+  }
+}
+@media (max-height: 630px) {
+  .services {
+    margin-bottom: 3rem;
+    margin-top: 5rem;
+  }
+}
+@media (max-height: 480px) {
+  .services {
+    margin-bottom: 4rem;
+    margin-top: 11.5rem;
+  }
 }

@@ -15,15 +15,16 @@ export const App = () => {
           element={
             <>
               <ResponsiveNav
-                elementText={['Inicio', 'Productos', 'Servicios', 'Usuarios']}
+                elementText={['Inicio', 'Productos', 'Servicios', 'Preguntas Frecuentes']}
                 url={['/', '/', '/', '/']}
+                renderButtons={true}
               />
               <Navbar
-                elementTextLeft={['Inicio', 'Productos', 'Servicios', 'Usuarios']}
-                urlLeft={['/', '/', '/', '/']}
-                elementTextRight={['Roles', 'Facturas']}
-                urlRight={['/', '/']}
-                renderButton={['']}
+                elementTextLeft={['Inicio', 'Productos', 'Servicios']}
+                urlLeft={['/', '/', '/']}
+                elementTextRight={['Preguntas Frecuentes']}
+                urlRight={['/']}
+                renderButtons={true}
               />
               <Home />
             </>

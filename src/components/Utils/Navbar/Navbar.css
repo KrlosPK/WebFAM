@@ -20,22 +20,17 @@ ul {
   margin: 0.5rem;
   width: 100%;
 }
+.left li,
+.right li {
+  width: max-content;
+}
 a {
   color: #333;
 }
 
-
-
 .register-login-buttons {
   display: flex;
   gap: 8px;
-}
-
-@media (max-width: 1000px) {
-  .left,
-  .right {
-    display: none;
-  }
 }
 
 .fade-gray {
@@ -43,4 +38,11 @@ a {
 }
 .fade-gray:hover {
   color: #777;
+}
+
+@media (max-width: 1000px) {
+  .left,
+  .right {
+    display: none;
+  }
 }

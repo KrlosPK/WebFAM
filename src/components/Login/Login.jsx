@@ -1,6 +1,15 @@
 import './login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar, ResponsiveNav } from '../Utils'
+import {
+  Button,
+  Button2,
+  Input,
+  validateMail,
+  validatePassword,
+  API_URL,
+  Navbar,
+  ResponsiveNav
+} from '../Utils'
 
 //? Hooks
 import { useState, useRef, useEffect } from 'react'
@@ -18,6 +27,9 @@ import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
   const navigate = useNavigate()
+
+  //? Deshabilitar botón mientras carga
+  const [disabled, setDisabled] = useState(false)
 
   //! Cambiar título de la página
   const [title, setTitle] = useState('WebFAM - Inicio de Sesión')
@@ -41,6 +53,8 @@ const Login = () => {
 
   const validateLogin = async (e) => {
     e.preventDefault()
+
+    setDisabled(true)
 
     const correo = e.target[0].value
     const contrasena = e.target[1].value
@@ -95,10 +109,12 @@ const Login = () => {
       focusInput(contrasenaInputEl)
     } else if (!validatePassword(contrasena, regexContrasena)) {
       e.preventDefault()
-
-      toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
-        theme: 'colored'
-      })
+      toast.error(
+        '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
+        {
+          theme: 'colored'
+        }
+      )
 
       focusInput(contrasenaInputEl)
     } else {
@@ -108,7 +124,7 @@ const Login = () => {
         .post(API_URL('signin'), body)
         .then(({ data }) => {
           const { result } = data
-          if(result) return navigate('/')
+          if (result) return navigate('/')
           /* toast.success('Iniciando sesión...', {
             theme: 'colored'
           }) */
@@ -117,6 +133,7 @@ const Login = () => {
           toast.error('¡Correo y/o contraseña incorrectos!', {
             theme: 'colored'
           })
+          setDisabled(false)
         })
     }
     //TODO Axios
@@ -136,13 +153,12 @@ const Login = () => {
     <div className='login-div'>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav elementText={['Inicio']} url={['/']} />
-      <Navbar elementTextLeft={['Inicio']} urlLeft={['/']} elementTextRight={['']} urlRight={['']} />
-      {/* <header className='login-header'>
-        <img src='/WebFAM_logo.png' width={120} alt='WebFAM logo' />
-        <Link className='go-back' to='/'>
-          ← Volver
-        </Link>
-      </header> */}
+      <Navbar
+        elementTextLeft={['Inicio']}
+        urlLeft={['/']}
+        elementTextRight={['']}
+        urlRight={['']}
+      />
       <hr className='header-line' />
       <section className='login-form'>
         <div className='first-login'>
@@ -164,10 +180,26 @@ const Login = () => {
         </div>
         <form className='second-login' onSubmit={validateLogin}>
           <div className='main-form'>
-            <Input text='Correo electrónico' type='email' nameID='correo' value={body.correo} innerRef={correoInputEl} innerOnChange={inputChange} />
+            <Input
+              text='Correo electrónico'
+              type='email'
+              nameID='correo'
+              value={body.correo}
+              innerRef={correoInputEl}
+              innerOnChange={inputChange}
+            />
             <div className='input-container'>
-              <Input text='Contraseña' type={showContrasena ? 'password' : 'text'} nameID='contrasena' value={body.contrasena} innerRef={contrasenaInputEl} innerOnChange={inputChange} />
-              <div onClick={handleShowContrasenaClick}>{showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}</div>
+              <Input
+                text='Contraseña'
+                type={showContrasena ? 'password' : 'text'}
+                nameID='contrasena'
+                value={body.contrasena}
+                innerRef={contrasenaInputEl}
+                innerOnChange={inputChange}
+              />
+              <div onClick={handleShowContrasenaClick}>
+                {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
+              </div>
             </div>
           </div>
           <div className='forgot-password'>
@@ -176,7 +208,7 @@ const Login = () => {
           <div className='remind-me'>
             <input type='checkbox' name='check' id='check' />
             <label htmlFor='check'></label>
-            <Button text={'Ingresar'} />
+            <Button text={'Ingresar'} textDisabled={'Cargando'} disable={disabled} />
           </div>
         </form>
       </section>

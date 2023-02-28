@@ -17,6 +17,9 @@ import axios from 'axios'
 const Register = () => {
   const navigate = useNavigate()
 
+  //? Deshabilitar botón mientras carga
+  const [disabled, setDisabled] = useState(false)
+
   //! Cambiar título de la página
   const [title, setTitle] = useState('WebFAM - Registro')
   useEffect(() => {
@@ -43,6 +46,8 @@ const Register = () => {
   const contrasenaInputEl = useRef(null)
 
   const createUser = async (e) => {
+    setDisabled(true)
+
     const nombre = e.target[0].value
     const apellidos = e.target[1].value
     const num_celular = e.target[2].value
@@ -214,22 +219,24 @@ const Register = () => {
 
     setBody({ nombre, apellidos, correo, num_celular, contrasena, tipo_documento, num_documento })
 
-    await axios.post(API_URL('signup'), body)
-    .then(() => {
-      // TODO: HACER QUE CUANDO TE REGISTRES TE DE UN TOAST DE QUE LO HICISTE
-      /* toast.success(
+    await axios
+      .post(API_URL('signup'), body)
+      .then(() => {
+        // TODO: HACER QUE CUANDO TE REGISTRES TE DE UN TOAST DE QUE LO HICISTE
+        /* toast.success(
         '¡Usuario registrado!',
         {
           theme: 'colored'
         }
       ) */
-      navigate('/login')
-    })
-    .catch(() => {
-      toast.error('¡Este usuario ya existe!', {
-        theme: 'colored'
+        navigate('/login')
       })
-    })
+      .catch(() => {
+        toast.error('¡Este usuario ya existe!', {
+          theme: 'colored'
+        })
+        setDisabled(false)
+      })
   }
 
   const [body, setBody] = useState({
@@ -348,7 +355,7 @@ const Register = () => {
             </div>
           </div>
           <div className='register'>
-            <Button text={'Registrarse'} />
+            <Button text={'Registrarse'} textDisabled='Cargando' disable={disabled} />
           </div>
         </form>
       </section>
