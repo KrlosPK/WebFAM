@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* min-height: 120px; */
+  min-height: 110px;
   height: fit-content;
   justify-content: center;
   overflow: hidden;

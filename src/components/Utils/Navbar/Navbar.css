@@ -13,7 +13,7 @@ nav {
 ul {
   align-items: center;
   display: flex;
-  font-size: 14px;
+  font-size: 1.1rem;
   gap: 2.5rem;
   justify-content: center;
   list-style: none;

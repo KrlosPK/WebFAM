@@ -54,8 +54,6 @@ const Login = () => {
   const validateLogin = async (e) => {
     e.preventDefault()
 
-    setDisabled(true)
-
     const correo = e.target[0].value
     const contrasena = e.target[1].value
 
@@ -119,6 +117,8 @@ const Login = () => {
       focusInput(contrasenaInputEl)
     } else {
       setBody({ correo, contrasena })
+
+      setDisabled(true)
 
       await axios
         .post(API_URL('signin'), body)
