@@ -9,7 +9,7 @@ const Services = () => {
       {data.map(({ id, name, url }) => (
         <div className='service' key={id}>
           <div className='service__image'>
-            <img src={url} alt={name} />
+            <img src={url} loading='lazy' alt={name} />
           </div>
           <div className='service__text'>{name}</div>
         </div>

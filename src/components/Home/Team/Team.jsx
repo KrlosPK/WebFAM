@@ -15,7 +15,7 @@ const Team = ({ src, alt, header, text, textColor, animation, borderRadius }) =>
       <div className='colleagues'>
         {text.map((teammate, i) => (
           <MiniCard
-            key={teammate}
+            key={i}
             src={src[i]}
             alt={alt[i]}
             header={header[i]}

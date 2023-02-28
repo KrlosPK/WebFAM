@@ -21,7 +21,7 @@ const Card = ({
       data-aos='fade-right'
     >
       <picture>
-        <img className='card__image' width={300} height={300} src={src} alt={alt} />
+        <img className='card__image' width={300} height={300} src={src} loading='lazy' alt={alt} />
       </picture>
       <h2 className='card__title' style={{ color: titleColor }}>
         {title}

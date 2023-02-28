@@ -12,7 +12,12 @@ const Navbar = ({ elementText, url, renderButtons = false }) => {
       <nav>
         <ul className='logo'>
           <Link to='/'>
-            <img src='/logotype-small.png' width={45} alt='Logo de Fademet Montajes' />
+            <img
+              src='/logotype-small.png'
+              loading='lazy'
+              width={45}
+              alt='Logo de Fademet Montajes'
+            />
           </Link>
           <div className='left'>
             {elementText

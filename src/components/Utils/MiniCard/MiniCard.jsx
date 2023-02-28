@@ -22,9 +22,10 @@ const MiniCard = ({
         width={64}
         height={64}
         src={src}
+        loading='lazy'
         alt={alt}
         style={{ borderRadius: borderRadius }}
-      ></img>
+      />
       <div className='mini-card__header'>{header}</div>
       <div className='mini-card__text' style={{ color: textColor }}>
         {text}
