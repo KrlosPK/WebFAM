@@ -6,11 +6,12 @@
   color: #ff2525;
   cursor: pointer;
   font-family: 'Syne', sans-serif;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: 1px;
+  min-width: max-content;
   padding: 10px 1rem;
   transition: border-color 300ms ease-in-out, color 300ms ease-in-out;
-  user-select: none;
 }
 .Button-2:hover {
   border-color: #f39a25;

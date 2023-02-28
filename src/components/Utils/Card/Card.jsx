@@ -3,25 +3,24 @@ import './Card.css'
 //? Libraries
 import 'aos/dist/aos.css'
 import AOS from 'aos'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 
-const Card = ({
-  title,
-  description,
-  titleColor,
-  descriptionColor,
-  size = '100%',
-  src,
-  alt
-}) => {
+const Card = ({ title, description, titleColor, descriptionColor, size = '100%', src, alt }) => {
   AOS.init({ duration: 700 })
 
   return (
-    <div
-      className='card'
-      data-aos='fade-right'
-    >
+    <div className='card' data-aos='fade-right'>
       <picture>
-        <img className='card__image' width={300} height={300} src={src} alt={alt} />
+        <LazyLoadImage
+          className='card__image'
+          width={300}
+          height={300}
+          effect='blur'
+          src={src}
+          loading='lazy'
+          alt={alt}
+        />
       </picture>
       <h2 className='card__title' style={{ color: titleColor }}>
         {title}

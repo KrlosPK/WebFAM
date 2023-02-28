@@ -21,7 +21,7 @@ const Register = () => {
   const [disabled, setDisabled] = useState(false)
 
   //! Cambiar título de la página
-  const [title, setTitle] = useState('WebFAM - Registro')
+  const [title, setTitle] = useState('FADEMET Montajes - Registro')
   useEffect(() => {
     document.title = title
   }, [setTitle])

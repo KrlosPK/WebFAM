@@ -20,10 +20,8 @@ export const App = () => {
                 renderButtons={true}
               />
               <Navbar
-                elementTextLeft={['Inicio', 'Productos', 'Servicios']}
-                urlLeft={['/', '/', '/']}
-                elementTextRight={['Preguntas Frecuentes']}
-                urlRight={['/']}
+                elementText={['Inicio', 'Productos', 'Servicios', 'Preguntas Frecuentes']}
+                url={['/', '/', '/', '/']}
                 renderButtons={true}
               />
               <Home />

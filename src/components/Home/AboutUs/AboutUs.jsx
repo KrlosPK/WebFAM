@@ -1,7 +1,7 @@
 import './AboutUs.css'
 import { Card } from '../../Utils'
 
-const AboutUs = () => {
+const AboutUs = ({ src, alt, title, description }) => {
   return (
     <section className='about-us-container'>
       <div className='info'>
@@ -11,42 +11,15 @@ const AboutUs = () => {
           que nuestros servicios sean los mejor para ti.
         </p>
         <div className='cards'>
-          <Card
-            src='/asesoría.jpg'
-            alt='Empleado de FADEMET Soldando una Escalera de Metal'
-            title={'Asesoría'}
-            description={'Te asesoramos y recomendamos lo mejor para ti'}
-          />
-          <Card
-            src='/diseño.jpg'
-            alt='Puerta de Madera desplegable diseñada por FADEMET'
-            title={'Diseño'}
-            description={'Llevamos tus ideas a la realidad'}
-          />
-          <Card
-            src='/fabricación.jpg'
-            alt='Estructura planificada y ensamblada por FADEMET'
-            title={'Fabricación'}
-            description={'Elaboramos con amor y dedicación'}
-          />
-          <Card
-            src='/ingeniería.jpg'
-            alt='Empleado de FADEMET Soldando una Escalera de Metal'
-            title={'Ingeniería'}
-            description={'Planeamos y estructuramos con base en tus necesidades'}
-          />
-          <Card
-            src='/reparación.jpg'
-            alt='Empleado de FADEMET Soldando una Escalera de Metal'
-            title={'Reparación'}
-            description={'Puerta hecha Madera'}
-          />
-          <Card
-            src='/trabajo_en_equipo.jpg'
-            alt='Empleado de FADEMET Soldando una Escalera de Metal'
-            title={'Trabajo en Equipo'}
-            description={'En FADEMET, priorizamos el trabajo en equipo'}
-          />
+          {title.map((product, i) => (
+            <Card
+              key={product}
+              src={src[i]}
+              alt={alt[i]}
+              title={product}
+              description={description[i]}
+            />
+          ))}
         </div>
       </div>
     </section>
