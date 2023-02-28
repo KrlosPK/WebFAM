@@ -6,46 +6,31 @@ import { Button, Button2 } from '../../Utils'
 //* Hooks
 import { Link } from 'react-router-dom'
 
-const Navbar = ({
-  elementTextLeft,
-  urlLeft,
-  elementTextRight,
-  urlRight,
-  renderButtons = false
-}) => {
+const Navbar = ({ elementText, url, renderButtons = false }) => {
   return (
     <>
       <nav>
-        <ul className='left'>
-          {elementTextLeft.map((el, i) => {
-            return (
-              <li key={i}>
-                <Link id='RouterNavLink' to={urlLeft[i]}>
-                  <span href='' className='flex gap fade-gray'>
-                    {el}
-                  </span>
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
         <ul className='logo'>
           <Link to='/'>
-            <img src='/WebFAM_logo.png' width={120} alt='Logo de Fademet Montajes' />
+            <img src='/logotype-small.png' width={45} alt='Logo de Fademet Montajes' />
           </Link>
+          <div className='left'>
+            {elementText
+              ? elementText.map((el, i) => {
+                  return (
+                    <li key={i}>
+                      <Link id='RouterNavLink' to={url[i]}>
+                        <span href='' className='flex gap fade-gray'>
+                          {el}
+                        </span>
+                      </Link>
+                    </li>
+                  )
+                })
+              : ''}
+          </div>
         </ul>
         <ul className='right'>
-          {elementTextRight.map((el, i) => {
-            return (
-              <li key={i}>
-                <Link id='RouterNavLink' to={urlRight[i]}>
-                  <span href='' className='flex gap fade-gray'>
-                    {el}
-                  </span>
-                </Link>
-              </li>
-            )
-          })}
           {renderButtons ? (
             <li className='register-login-buttons'>
               <Link className='flex gap' to='/login'>

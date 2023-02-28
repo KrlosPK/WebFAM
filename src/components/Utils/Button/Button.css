@@ -6,11 +6,12 @@
   color: white;
   cursor: pointer;
   font-family: 'Syne', sans-serif;
+  font-size: 1rem;
   height: 40px;
   letter-spacing: 1px;
+  min-width: max-content;
   padding: 10px 1rem;
   transition: background-position 600ms;
-  user-select: none;
 }
 .Button:hover {
   background-position: 50%;
@@ -21,8 +22,8 @@
   pointer-events: none;
 }
 .Button.disabled svg {
-  stroke-width: 70px;
   animation: rotate 1.2s infinite linear;
+  stroke-width: 70px;
 }
 @keyframes rotate {
   from {

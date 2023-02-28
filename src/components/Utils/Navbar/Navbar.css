@@ -1,8 +1,9 @@
 nav {
   background-color: var(--white-color);
   display: flex;
+  justify-content: space-between;
   min-height: 3rem;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
 }
 .wrapper {
   background: linear-gradient(#222, #222), var(--orange-gradient);
@@ -13,15 +14,21 @@ nav {
 ul {
   align-items: center;
   display: flex;
-  font-size: 1.1rem;
+  font-size: 1rem;
   gap: 2.5rem;
   justify-content: center;
   list-style: none;
   margin: 0.5rem;
-  width: 100%;
 }
-.left li,
-.right li {
+.logo a {
+  align-items: center;
+  display: flex;
+}
+.left {
+  display: flex;
+  gap: 2rem;
+}
+.left li {
   width: max-content;
 }
 a {
@@ -44,5 +51,8 @@ a {
   .left,
   .right {
     display: none;
+  }
+  nav {
+    justify-content: center;
   }
 }

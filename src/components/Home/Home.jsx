@@ -30,13 +30,13 @@ const Home = () => {
         </p>
         <div className='buttons'>
           <a
-            href='https://api.whatsapp.com/send/?phone=573147561960&text&type=phone_number&app_absent=0'
+            href='https://api.whatsapp.com/send/?phone=573147561960&text=¡Hola!%20Quisiera%20saber%20más%20sobre%20sus%20servicios.&type=phone_number&app_absent=0'
             target={'_blank'}
           >
-            <Button text='Contáctanos »' width={200} />
+            <Button text='Contáctanos »' width={220} />
           </a>
           <a href='#nuestroEquipo'>
-            <Button2 text='⚡ ¿Quiénes somos?' width={200} />
+            <Button2 text='⚡ ¿Quiénes somos?' width={220} />
           </a>
         </div>
       </main>
