@@ -8,13 +8,13 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const ResponsiveNav = ({ elementText, url, renderButtons = false }) => {
-  const [navIsClicked, setNavIsClicked] = useState('clicked')
+  const [navIsClicked, setNavIsClicked] = useState('')
 
   let navClassName = 'navigation'
 
   navClassName += navIsClicked === 'clicked' ? ' close-menu' : ''
 
-  const [buttonIsClicked, setButtonIsClicked] = useState('')
+  const [buttonIsClicked, setButtonIsClicked] = useState('clicked')
 
   let buttonClassName = 'menu__button'
   buttonClassName += buttonIsClicked === 'clicked' ? ' hover' : ''
@@ -35,17 +35,17 @@ const ResponsiveNav = ({ elementText, url, renderButtons = false }) => {
       <div className={navClassName}>
         {elementText.map((el, i) => {
           return (
-            <Link className='flex gap' to={url[i]} key={i}>
+            <Link className='flex' to={url[i]} key={i}>
               <span>{el}</span>
             </Link>
           )
         })}
         {renderButtons ? (
           <>
-            <Link className='flex gap' to='/login'>
+            <Link className='flex' to='/login'>
               <Button text='Ingresar' width={120} />
             </Link>
-            <Link className='flex gap' to='/register'>
+            <Link className='flex' to='/register'>
               <Button2 text='Registrarse' width={120} />
             </Link>
           </>
