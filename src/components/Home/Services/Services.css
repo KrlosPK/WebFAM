@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   gap: 2rem;
   height: 35vh;
+  padding-bottom: 10rem;
   justify-content: center;
   margin: 0 auto;
   width: 70%;
@@ -39,7 +40,13 @@
 @media (max-height: 630px) {
   .services {
     margin-bottom: 3rem;
-    margin-top: 9rem;
+    margin-top: 6rem;
+  }
+}
+@media (max-height: 580px) {
+  .services {
+    margin-bottom: 3rem;
+    margin-top: 10rem;
   }
 }
 @media (max-height: 500px) {

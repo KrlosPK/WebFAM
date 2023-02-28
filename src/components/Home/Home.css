@@ -8,12 +8,7 @@
   position: relative;
 }
 .home-container::before {
-  background: radial-gradient(
-    50% 50% at 50% 50%,
-    #f76b1c 0%,
-    rgba(251, 172, 127, 0.5625) 43.75%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: radial-gradient(50% 50% at 50% 50%, #f76b1c 0%, rgba(251, 172, 127, 0.5625) 43.75%, rgba(255, 255, 255, 0) 100%);
   content: '';
   filter: blur(69.6px);
   height: 100%;
@@ -47,11 +42,6 @@
   display: flex;
   gap: 0.8rem;
   margin-top: 2.5rem;
-}
-@media (min-width: 857px) {
-  .home-container {
-    padding-top: 5rem;
-  }
 }
 @media (max-width: 857px) {
   .home-container h1 {
