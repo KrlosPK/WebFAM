@@ -30,15 +30,21 @@
     margin-top: 3.5rem;
   }
 }
-@media (max-height: 630px) {
+
+@media (min-height: 630px) AND (max-height: 750px) {
   .services {
-    margin-bottom: 3rem;
     margin-top: 5rem;
   }
 }
-@media (max-height: 480px) {
+@media (max-height: 630px) {
+  .services {
+    margin-bottom: 3rem;
+    margin-top: 9rem;
+  }
+}
+@media (max-height: 500px) {
   .services {
     margin-bottom: 4rem;
-    margin-top: 11.5rem;
+    margin-top: 19rem;
   }
 }

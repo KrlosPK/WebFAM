@@ -17,13 +17,21 @@
   width: 70%;
 }
 .colleagues {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 2rem;
-  justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
 }
 
+@media (max-width: 1180px) {
+  .colleagues {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 750px) {
+  .colleagues {
+    grid-template-columns: 1fr;
+  }
+}
 @media (max-width: 630px) {
   .team__text {
     width: 90%;

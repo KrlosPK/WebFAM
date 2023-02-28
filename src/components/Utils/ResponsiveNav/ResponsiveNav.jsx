@@ -8,13 +8,13 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const ResponsiveNav = ({ elementText, url, renderButtons = false }) => {
-  const [navIsClicked, setNavIsClicked] = useState('')
+  const [navIsClicked, setNavIsClicked] = useState('clicked')
 
   let navClassName = 'navigation'
 
   navClassName += navIsClicked === 'clicked' ? ' close-menu' : ''
 
-  const [buttonIsClicked, setButtonIsClicked] = useState('clicked')
+  const [buttonIsClicked, setButtonIsClicked] = useState('')
 
   let buttonClassName = 'menu__button'
   buttonClassName += buttonIsClicked === 'clicked' ? ' hover' : ''
