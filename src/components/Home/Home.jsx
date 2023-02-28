@@ -13,7 +13,7 @@ import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
 
 const Home = () => {
   //! Cambiar título de la página
-  const [title, setTitle] = useState('WebFAM - Inicio')
+  const [title, setTitle] = useState('FADEMET Montajes | Inicio')
   useEffect(() => {
     document.title = title
   }, [setTitle])
@@ -41,9 +41,9 @@ const Home = () => {
         </div>
       </main>
       <Services />
-      <AboutUs />
-      <Team />
-      <Provide />
+      <AboutUs /> {/* Mapear */}
+      <Provide /> {/* Mapear */}
+      <Team /> {/* Mapear */}
       <FrequentQuestions />
     </>
   )

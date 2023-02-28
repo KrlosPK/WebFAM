@@ -32,7 +32,7 @@ const Login = () => {
   const [disabled, setDisabled] = useState(false)
 
   //! Cambiar título de la página
-  const [title, setTitle] = useState('WebFAM - Inicio de Sesión')
+  const [title, setTitle] = useState('FADEMET Montajes | Inicio de Sesión')
   useEffect(() => {
     document.title = title
   }, [setTitle])
