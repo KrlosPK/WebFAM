@@ -46,8 +46,6 @@ const Register = () => {
   const contrasenaInputEl = useRef(null)
 
   const createUser = async (e) => {
-    setDisabled(true)
-
     const nombre = e.target[0].value
     const apellidos = e.target[1].value
     const num_celular = e.target[2].value
@@ -203,6 +201,8 @@ const Register = () => {
       return false
     } else if (!regexContrasena.test(contrasena)) {
       e.preventDefault()
+
+      setDisabled(true)
 
       toast.error(
         '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',

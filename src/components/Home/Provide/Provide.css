@@ -17,13 +17,21 @@
   width: 70%;
 }
 .provides {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 2rem;
-  justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
 }
 
+@media (max-width: 1300px) {
+  .provides {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 750px) {
+  .provides {
+    grid-template-columns: 1fr;
+  }
+}
 @media (max-width: 630px) {
   .provide__text {
     width: 90%;
