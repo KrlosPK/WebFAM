@@ -3,6 +3,8 @@ import './MiniCard.css'
 //? Libraries
 import 'aos/dist/aos.css'
 import AOS from 'aos'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
 
 const MiniCard = ({
   src,
@@ -17,11 +19,12 @@ const MiniCard = ({
 
   return (
     <div className='mini-card flex' data-aos={animation}>
-      <img
+      <LazyLoadImage
         className='mini-card__image'
         width={64}
         height={64}
         src={src}
+        effect="blur"
         loading='lazy'
         alt={alt}
         style={{ borderRadius: borderRadius }}

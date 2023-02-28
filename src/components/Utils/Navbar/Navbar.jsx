@@ -3,6 +3,10 @@ import './Navbar.css'
 //? Components
 import { Button, Button2 } from '../../Utils'
 
+//* Libraries
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
+
 //* Hooks
 import { Link } from 'react-router-dom'
 
@@ -12,10 +16,11 @@ const Navbar = ({ elementText, url, renderButtons = false }) => {
       <nav>
         <ul className='logo'>
           <Link to='/'>
-            <img
+            <LazyLoadImage
               src='/logotype-small.png'
               loading='lazy'
               width={45}
+              effect='blur'
               alt='Logo de Fademet Montajes'
             />
           </Link>
