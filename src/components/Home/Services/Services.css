@@ -43,7 +43,7 @@
     margin-top: 6rem;
   }
 }
-@media (max-height: 580px) {
+@media (max-height: 610px) {
   .services {
     margin-bottom: 3rem;
     margin-top: 10rem;
