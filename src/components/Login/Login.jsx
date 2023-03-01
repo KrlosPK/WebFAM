@@ -13,7 +13,8 @@ import {
 
 //? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
-import { UserContext } from '../../context/UserContext'
+import { SessionContext } from '../../context/SessionContext'
+import { ToastifyContext } from '../../context/ToastifyContext'
 
 //? Library
 import { ToastContainer, toast, Zoom } from 'react-toastify'
@@ -28,8 +29,21 @@ import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
   //? Context
-  const { session, setSession } = useContext(UserContext)
-  console.log({ session })
+  const { setSession } = useContext(SessionContext)
+
+  const { toastify } = useContext(ToastifyContext)
+
+  console.log(toastify)
+
+  useEffect(() => {
+    if (toastify === true) {
+      toast.success('¡Usuario creado con éxito!', {
+        theme: 'colored'
+      })
+    }
+  }, [toastify])
+
+
 
   const navigate = useNavigate()
 
@@ -133,11 +147,8 @@ const Login = () => {
           setSession(true)
 
           if (result) return navigate('/')
-          /* toast.success('Iniciando sesión...', {
-            theme: 'colored'
-          }) */
         })
-        .catch((e) => {
+        .catch(() => {
           toast.error('¡Correo y/o contraseña incorrectos!', {
             theme: 'colored'
           })
