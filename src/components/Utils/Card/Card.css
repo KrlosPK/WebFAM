@@ -6,11 +6,15 @@
   gap: 0.5em;
   padding: 1rem;
 }
-.card__image {
+picture {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   border-radius: 10px;
+  padding: 0 0 0.2rem 0.5rem;
+}
+.card__image {
+  border-radius: 1px 10px 1px 10px;
   filter: brightness(80%);
   object-fit: cover;
-  transition: filter 400ms;
 }
 .card:hover .card__image {
   filter: none;
@@ -27,6 +31,10 @@
 }
 
 @media (max-width: 630px) {
+  picture {
+    height: 258px;
+    width: 258px;
+  }
   .card__title {
     width: 250px;
   }

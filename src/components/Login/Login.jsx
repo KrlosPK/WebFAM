@@ -12,7 +12,8 @@ import {
 } from '../Utils'
 
 //? Hooks
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
+import { UserContext } from '../../context/UserContext'
 
 //? Library
 import { ToastContainer, toast, Zoom } from 'react-toastify'
@@ -26,6 +27,10 @@ import { AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
+  //? Context
+  const { session, setSession } = useContext(UserContext)
+  console.log({ session })
+
   const navigate = useNavigate()
 
   //? Deshabilitar botón mientras carga
@@ -124,6 +129,9 @@ const Login = () => {
         .post(API_URL('signin'), body)
         .then(({ data }) => {
           const { result } = data
+
+          setSession(true)
+
           if (result) return navigate('/')
           /* toast.success('Iniciando sesión...', {
             theme: 'colored'
@@ -158,6 +166,7 @@ const Login = () => {
         urlLeft={['/']}
         elementTextRight={['']}
         urlRight={['']}
+        renderButtons={3}
       />
       <hr className='header-line' />
       <section className='login-form'>
