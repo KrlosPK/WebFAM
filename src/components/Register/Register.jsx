@@ -274,6 +274,7 @@ const Register = () => {
         urlLeft={['/']}
         elementTextRight={['']}
         urlRight={['']}
+        renderButtons={3}
       />
       <hr className='header-line' />
       <section className='login-form'>
