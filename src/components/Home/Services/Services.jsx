@@ -1,7 +1,7 @@
 import './Services.css'
 
 //? JSON
-import data from './services.json'
+import data from '../../../json/services.json'
 
 //* Libraries
 import { LazyLoadImage } from 'react-lazy-load-image-component'

@@ -1,7 +1,10 @@
 import './AboutUs.css'
 import { Card } from '../../Utils'
 
-const AboutUs = ({ src, alt, title, description }) => {
+//! Jsons
+import aboutUsData from '../../../json/aboutUs.json'
+
+const AboutUs = () => {
   return (
     <section className='about-us-container'>
       <div className='info'>
@@ -11,13 +14,13 @@ const AboutUs = ({ src, alt, title, description }) => {
           que nuestros servicios sean los mejor para ti.
         </p>
         <div className='cards'>
-          {title.map((product, i) => (
+          {aboutUsData.map(({id, src, alt, title, description}) => (
             <Card
-              key={product}
-              src={src[i]}
-              alt={alt[i]}
-              title={product}
-              description={description[i]}
+              key={id}
+              src={src}
+              alt={alt}
+              title={title}
+              description={description}
             />
           ))}
         </div>
