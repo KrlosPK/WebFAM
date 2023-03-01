@@ -72,7 +72,7 @@ const Login = () => {
 2
 			? Con \S no permite espacios en blanco.
 		*/
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!\s)[a-zA-Z\d]{8,16}$/
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
 
     // ? Validación Correo
     if (validateMail(correo, /^\s+$/)) {

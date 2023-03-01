@@ -54,7 +54,7 @@ const Register = () => {
     const correo = e.target[5].value
     const contrasena = e.target[6].value
 
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!\s)[a-zA-Z\d]{8,16}$/
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
 
     // Validación Nombre
     if (nombre.length === 0 || /^\s+$/.test(nombre)) {
