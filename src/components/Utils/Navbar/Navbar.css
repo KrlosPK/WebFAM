@@ -66,6 +66,56 @@ nav p:hover::before {
   color: #555;
 }
 
+.user {
+  border-radius: 15px;
+  color: #444;
+  cursor: pointer;
+  padding: 4px 1rem 4px 4px;
+  position: relative;
+  transition: background 200ms;
+  width: 100px;
+}
+.user:hover {
+  background-color: #ccc;
+}
+.user:focus {
+  outline: none;
+}
+.user__image img {
+  width: 40px;
+}
+.user__options {
+  color: var(--text-color);
+  cursor: pointer;
+  display: none;
+  font-size: 14px;
+}
+.user__options.show {
+  bottom: -2.8rem;
+  display: block;
+  position: absolute;
+}
+.user__icon {
+  color: #6012cd;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.logout {
+  text-align: center;
+  top: 100%;
+  transition: color 150ms ease-out;
+  width: 100%;
+}
+.logout a {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
 @media (max-width: 1100px) {
   .left,
   .right {
