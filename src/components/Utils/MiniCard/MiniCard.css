@@ -15,6 +15,5 @@
   text-align: center;
 }
 .mini-card__text {
-  color: var(--icon-color);
   font-size: 14px;
 }
