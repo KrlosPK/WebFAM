@@ -3,7 +3,10 @@ import './Team.css'
 //* Components
 import { MiniCard } from '../../Utils/MiniCard/MiniCard'
 
-const Team = ({ src, alt, header, text, textColor, animation, borderRadius }) => {
+//! Jsons
+import teamData from '../../../json/team.json'
+
+const Team = () => {
   return (
     <section className='team' id='nuestroEquipo'>
       <h2 className='team__title'>Nuestro equipo</h2>
@@ -13,16 +16,16 @@ const Team = ({ src, alt, header, text, textColor, animation, borderRadius }) =>
         metálicas para el sector industrial y doméstico.
       </p>
       <div className='colleagues'>
-        {text.map((teammate, i) => (
+        {teamData.map(({ id, src, alt, header, text, textColor, animation, borderRadius }) => (
           <MiniCard
-            key={i}
-            src={src[i]}
-            alt={alt[i]}
-            header={header[i]}
-            text={teammate}
-            textColor={textColor[i]}
-            animation={animation[i]}
-            borderRadius={borderRadius[i]}
+            key={id}
+            src={src}
+            alt={alt}
+            header={header}
+            text={text}
+            textColor={textColor}
+            animation={animation}
+            borderRadius={borderRadius}
           />
         ))}
       </div>

@@ -21,20 +21,7 @@ const FrequentQuestions = () => {
         </a>
       </section>
       <aside>
-        <Accordion
-          header={[
-            '¿Dónde se encuentran ubicados?',
-            '¿Cuánto tiempo tardan las instalaciones?',
-            '¿El envío tiene costo extra?',
-            '¿Puedo personalizar mi producto?'
-          ]}
-          text={[
-            'Calle 83E # 57A - 14 Medellín, Colombia.',
-            'Dependiendo de nuestra agenda, pero por lo general entre 2 y 5 días hábiles.',
-            'El envío lo gestionamos en el proceso de cotización y se aplica en la factura del cliente.',
-            '¡Claro que sí! Nosotros nos encargamos de plasmar tus ideas a la realidad.'
-          ]}
-        />
+        <Accordion />
       </aside>
     </article>
   )

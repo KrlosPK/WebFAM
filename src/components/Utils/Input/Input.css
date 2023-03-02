@@ -26,10 +26,11 @@
   transition: 250ms;
 }
 .input-login[type='number']::-webkit-inner-spin-button,
+.input-login::-webkit-inner-spin-button,
 .input-login[type='number']::-webkit-outer-spin-button,
 .input-login[type='number'] {
   appearance: none;
   -webkit-appearance: none;
-  -moz-appearance: none;
+  -moz-appearance: textfield;
   margin: 0;
 }
