@@ -1,15 +1,6 @@
 import './login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-  Button,
-  Button2,
-  Input,
-  validateMail,
-  validatePassword,
-  API_URL,
-  Navbar,
-  ResponsiveNav
-} from '../Utils'
+import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar, ResponsiveNav } from '../Utils'
 
 //? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
@@ -23,13 +14,12 @@ import axios from 'axios'
 //? Icons
 import { FaEye } from 'react-icons/fa'
 import { FaEyeSlash } from 'react-icons/fa'
-import { AiFillFacebook } from 'react-icons/ai'
+import { AiFillBackward, AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
   //? Context
   const { session, setSession } = useContext(UserContext)
-  console.log({ session })
 
   const navigate = useNavigate()
 
@@ -112,12 +102,9 @@ const Login = () => {
       focusInput(contrasenaInputEl)
     } else if (!validatePassword(contrasena, regexContrasena)) {
       e.preventDefault()
-      toast.error(
-        '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
-        {
-          theme: 'colored'
-        }
-      )
+      toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
+        theme: 'colored'
+      })
 
       focusInput(contrasenaInputEl)
     } else {
@@ -157,17 +144,39 @@ const Login = () => {
     })
   }
 
+  // * Set cookie for remember me
+  const setCookie = (days = 30) => {
+    if (document.querySelector('#check').checked) {
+      if (document.querySelector('#correo').value === '' || document.querySelector('#contraseña').value === '') {
+        toast.error('Debes tener tus datos correctos para recordar, vuelve a intentarlo', {
+          theme: 'colored'
+        })
+        return (document.querySelector('#check').checked = false)
+      }
+      const correo = document.querySelector('#correo').value
+      const contrasena = document.querySelector('#contraseña').value
+      if (validateMail(correo, /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) || validatePassword(contrasena, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!\s)[a-zA-Z\d]{8,16}$/)) {
+        document.cookie = `username=${correo}; expires=${days}; path=http://localhost:3000/login/; SameSite=None; Secure`
+        document.cookie = `password=${contrasena}; expires=${days}; path=http://localhost:3000/login/; SameSite=None; Secure`
+      }
+    }
+  }
+
+  const getCookieData = () => {
+    const cookies = document.cookie.split(';')
+    const correo = cookies[0].split('=')[1]
+    const contrasena = cookies[1].split('=')[1]
+    if (correo !== '' || contrasena !== '') {
+      document.querySelector('#correo').value = correo
+      document.querySelector('#contraseña').value = contrasena
+    }
+  }
+
   return (
-    <div className='login-div'>
+    <div className='login-div' onLoad={getCookieData}>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav elementText={['Inicio']} url={['/']} />
-      <Navbar
-        elementTextLeft={['Inicio']}
-        urlLeft={['/']}
-        elementTextRight={['']}
-        urlRight={['']}
-        renderButtons={3}
-      />
+      <Navbar elementTextLeft={['Inicio']} urlLeft={['/']} elementTextRight={['']} urlRight={['']} renderButtons={3} />
       <hr className='header-line' />
       <section className='login-form'>
         <div className='first-login'>
@@ -189,33 +198,17 @@ const Login = () => {
         </div>
         <form className='second-login' onSubmit={validateLogin}>
           <div className='main-form'>
-            <Input
-              text='Correo electrónico'
-              type='email'
-              nameID='correo'
-              value={body.correo}
-              innerRef={correoInputEl}
-              innerOnChange={inputChange}
-            />
+            <Input text='Correo electrónico' innerId='correo' type='email' nameID='correo' value={body.correo} innerRef={correoInputEl} innerOnChange={inputChange} />
             <div className='input-container'>
-              <Input
-                text='Contraseña'
-                type={showContrasena ? 'password' : 'text'}
-                nameID='contrasena'
-                value={body.contrasena}
-                innerRef={contrasenaInputEl}
-                innerOnChange={inputChange}
-              />
-              <div onClick={handleShowContrasenaClick}>
-                {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
-              </div>
+              <Input text='Contraseña' innerId='contraseña' type={showContrasena ? 'password' : 'text'} nameID='contrasena' value={body.contrasena} innerRef={contrasenaInputEl} innerOnChange={inputChange} />
+              <div onClick={handleShowContrasenaClick}>{showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}</div>
             </div>
           </div>
           <div className='forgot-password'>
             <Link to={'/'}>¿Olvidaste tú contraseña?</Link>
           </div>
           <div className='remind-me'>
-            <input type='checkbox' name='check' id='check' />
+            <input type='checkbox' name='check' id='check' onClick={setCookie} />
             <label htmlFor='check'></label>
             <Button text={'Ingresar'} textDisabled={'Cargando'} disable={disabled} />
           </div>
