@@ -4,10 +4,9 @@ import './ResponsiveNav.css'
 import { Button, Button2 } from '../'
 
 //* Hooks
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { UserContext } from '../../../context/UserContext'
-import { useContext } from 'react'
+import { SessionContext } from '../../../context/SessionContext'
 
 //? Icons
 import { BiLogOut } from 'react-icons/bi'
@@ -35,8 +34,9 @@ const ResponsiveNav = ({ elementText, url, renderButtons }) => {
     setButtonIsClicked('')
   }
 
+  const { setSession } = useContext(SessionContext)
+  
   const logout = () => {
-    const { setSession } = useContext(UserContext)
     setSession(false)
   }
 
