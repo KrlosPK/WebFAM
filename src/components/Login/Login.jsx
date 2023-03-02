@@ -109,6 +109,7 @@ const Login = () => {
       focusInput(contrasenaInputEl)
     } else {
       setBody({ correo, contrasena })
+      setCookie()
 
       setDisabled(true)
 
@@ -145,7 +146,7 @@ const Login = () => {
   }
 
   // * Set cookie for remember me
-  const setCookie = (days = 30) => {
+  const setCookie = () => {
     if (document.querySelector('#check').checked) {
       if (document.querySelector('#correo').value === '' || document.querySelector('#contraseña').value === '') {
         toast.error('Debes tener tus datos correctos para recordar, vuelve a intentarlo', {
@@ -156,19 +157,31 @@ const Login = () => {
       const correo = document.querySelector('#correo').value
       const contrasena = document.querySelector('#contraseña').value
       if (validateMail(correo, /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) || validatePassword(contrasena, /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!\s)[a-zA-Z\d]{8,16}$/)) {
-        document.cookie = `username=${correo}; expires=${days}; path=http://localhost:3000/login/; SameSite=None; Secure`
-        document.cookie = `password=${contrasena}; expires=${days}; path=http://localhost:3000/login/; SameSite=None; Secure`
+        const date = new Date()
+        date.setTime(date.getTime() + 60 * 60 * 24 * 1000)
+        document.cookie = `correo=${correo}; expires=${date.toUTCString()}; path=http://localhost:3001/login/; Secure`
+        document.cookie = `contrasena=${contrasena}; expires=${date.toUTCString()}; path=http://localhost:3001/login/; Secure`
       }
+    } else {
+      //clear cookies
+      const correo = document.querySelector('#correo').value
+      const contrasena = document.querySelector('#contraseña').value
+      document.cookie = `correo=${correo}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=http://localhost:3001/login; Secure`
+      document.cookie = `contrasena=${contrasena}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=http://localhost:3001/login; Secure`
     }
   }
 
   const getCookieData = () => {
-    const cookies = document.cookie.split(';')
-    const correo = cookies[0].split('=')[1]
-    const contrasena = cookies[1].split('=')[1]
-    if (correo !== '' || contrasena !== '') {
-      document.querySelector('#correo').value = correo
-      document.querySelector('#contraseña').value = contrasena
+    if (document.cookie.length !== 0) {
+      const cookies = document.cookie.split(';')
+      const correo = cookies[0].split('=')[1]
+      const contrasena = cookies[1].split('=')[1]
+      if (correo !== '' || contrasena !== '') {
+        document.querySelector('#check').checked = true
+        document.querySelector('#correo').value = correo
+        document.querySelector('#contraseña').value = contrasena
+        setBody({ correo, contrasena })
+      }
     }
   }
 
@@ -208,7 +221,7 @@ const Login = () => {
             <Link to={'/'}>¿Olvidaste tú contraseña?</Link>
           </div>
           <div className='remind-me'>
-            <input type='checkbox' name='check' id='check' onClick={setCookie} />
+            <input type='checkbox' name='check' id='check' />
             <label htmlFor='check'></label>
             <Button text={'Ingresar'} textDisabled={'Cargando'} disable={disabled} />
           </div>
