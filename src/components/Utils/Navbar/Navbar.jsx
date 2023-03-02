@@ -9,7 +9,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 
 //* Hooks
 import { Link } from 'react-router-dom'
-import { UserContext } from '../../../context/UserContext'
+import { SessionContext } from '../../../context/SessionContext'
 import { useContext, useState } from 'react'
 import { SessionContext } from '../../../context/SessionContext'
 
