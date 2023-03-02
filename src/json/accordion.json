@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "header": "¿Dónde se encuentran ubicados?",
+    "text": "Calle 83E # 57A - 14 Medellín, Colombia."
+  },
+  {
+    "id": 2,
+    "header": "¿Cuánto tiempo tardan las instalaciones?",
+    "text": "Dependiendo de nuestra agenda, pero por lo general entre 2 y 5 días hábiles."
+  },
+  {
+    "id": 3,
+    "header": "¿El envío tiene costo extra?",
+    "text": "El envío lo gestionamos en el proceso de cotización y se aplica en la factura del cliente."
+  },
+  {
+    "id": 4,
+    "header": "¿Puedo personalizar mi producto?",
+    "text": "¡Claro que sí! Nosotros nos encargamos de plasmar tus ideas a la realidad."
+  }
+]

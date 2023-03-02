@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "src": "/provideDesign.png",
+    "alt": "Servicio que Provee la empresa FADEMET",
+    "header": "Diseño",
+    "text": "Llevamos tus ideas a la realidad",
+    "animation": "flip-left"
+  },
+  {
+    "id": 2,
+    "src": "/provideFabrication.png",
+    "alt": "Servicio que Provee la empresa FADEMET",
+    "header": "Fabricación",
+    "text": "Elaboramos con amor y dedicación",
+    "animation": "flip-left"
+  },
+  {
+    "id": 3,
+    "src": "/provideAdvisory.png",
+    "alt": "Servicio que Provee la empresa FADEMET",
+    "header": "Asesoría",
+    "text": "Te orientamos para que tengas tu hogar de ensueño",
+    "animation": "flip-left"
+  },
+  {
+    "id": 4,
+    "src": "/provideRepair.png",
+    "alt": "Servicio que Provee la empresa FADEMET",
+    "header": "Reparación",
+    "text": "Restauramos tus estructuras metálicas",
+    "animation": "flip-left"
+  }
+]

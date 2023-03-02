@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "src": "/asesoría.jpg",
+    "alt": "Estructura metálica realizada por FADEMET",
+    "title": "Asesoría",
+    "description": "Te asesoramos y recomendamos lo mejor para ti"
+  },
+  {
+    "id": 2,
+    "src": "/diseño.jpg",
+    "alt": "Puerta de Madera deslizable diseñada por FADEMET",
+    "title": "Diseño",
+    "description": "Llevamos tus ideas a la realidad"
+  },
+  {
+    "id": 3,
+    "src": "/fabricación.jpg",
+    "alt": "Soldador de FADEMET soldando vigas de metal",
+    "title": "Fabricación",
+    "description": "Elaboramos con amor y dedicación"
+  },
+  {
+    "id": 4,
+    "src": "/ingeniería.jpg",
+    "alt": "Techo de vigas de metal estructurado y fabricado por FADEMET",
+    "title": "Ingeniería",
+    "description": "Planeamos y estructuramos con base en tus necesidades"
+  },
+  {
+    "id": 5,
+    "src": "/reparación.jpg",
+    "alt": "Cárcamo metálico para tráfico pesado de montacargas reparado por FADEMET",
+    "title": "Reparación",
+    "description": "Reparamos para tu seguridad"
+  },
+  {
+    "id": 6,
+    "src": "/trabajo_en_equipo.jpg",
+    "alt": "Empleados de FADEMET trabajando en equipo para realizar un proyecto",
+    "title": "Trabajo en Equipo",
+    "description": "En FADEMET, priorizamos el trabajo en equipo"
+  }
+]

@@ -1,9 +1,12 @@
 import './Provide.css'
 
+//! Jsons
+import provideData from '../../../json/provide.json'
+
 //* Components
 import { MiniCard } from '../../Utils/MiniCard/MiniCard'
 
-const Provide = ({ src, alt, header, text, animation }) => {
+const Provide = () => {
   return (
     <section className='provide'>
       <h2 className='provide__title'>Proveemos de</h2>
@@ -11,14 +14,14 @@ const Provide = ({ src, alt, header, text, animation }) => {
         Soluciones metalmecánicas adaptadas a todo tipo de proyecto o necesidad del cliente.
       </p>
       <div className='provides'>
-        {header.map((provide, i) => (
+        {provideData.map(({ id, src, alt, header, text, animation }) => (
           <MiniCard
-            key={provide}
-            src={src[i]}
-            alt={alt[i]}
-            header={provide}
-            text={text[i]}
-            animation={animation[i]}
+            key={id}
+            src={src}
+            alt={alt}
+            header={header}
+            text={text}
+            animation={animation}
           />
         ))}
       </div>

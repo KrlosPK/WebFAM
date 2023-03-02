@@ -13,8 +13,8 @@ import { useContext } from 'react'
 import { SessionContext } from '../../../context/SessionContext'
 
 const Navbar = ({ elementText, url, renderButtons }) => {
+  const { setSession } = useContext(SessionContext)
   const logout = () => {
-    const { setSession } = useContext(SessionContext)
     setSession(false)
   }
   return (
@@ -22,12 +22,7 @@ const Navbar = ({ elementText, url, renderButtons }) => {
       <nav>
         <ul className='logo'>
           <Link to='/'>
-            <LazyLoadImage
-              src='/logotype-small.png'
-              loading='lazy'
-              width={45}
-              alt='Logo de Fademet Montajes'
-            />
+            <LazyLoadImage src='/logotype-small.png' loading='lazy' width={45} alt='Logo de Fademet Montajes' />
           </Link>
           <div className='left'>
             {elementText
