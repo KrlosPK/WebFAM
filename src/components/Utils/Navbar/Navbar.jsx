@@ -11,7 +11,6 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 import { Link } from 'react-router-dom'
 import { SessionContext } from '../../../context/SessionContext'
 import { useContext, useState } from 'react'
-import { SessionContext } from '../../../context/SessionContext'
 
 //? Icons
 import { BiLogOut } from 'react-icons/bi'
