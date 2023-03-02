@@ -1,6 +1,5 @@
 .about-us-container {
   display: grid;
-  min-height: 100vh;
   place-items: center;
   position: relative;
   z-index: 1;
@@ -11,7 +10,6 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding: 1rem;
 }
 .info__title {
   font-family: 'Syne', sans-serif;
@@ -22,8 +20,8 @@
 .info__subtitle {
   font-size: 1rem;
   font-weight: 400;
+  max-width: 65ch;
   text-align: center;
-  width: 70%;
 }
 .cards {
   display: grid;

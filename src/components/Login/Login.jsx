@@ -4,7 +4,8 @@ import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar
 
 //? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
-import { UserContext } from '../../context/UserContext'
+import { SessionContext } from '../../context/SessionContext'
+import { ToastifyContext } from '../../context/ToastifyContext'
 
 //? Library
 import { ToastContainer, toast, Zoom } from 'react-toastify'
@@ -19,7 +20,7 @@ import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
   //? Context
-  const { session, setSession } = useContext(UserContext)
+  const { setSession } = useContext(SessionContext)
 
   const navigate = useNavigate()
 
@@ -62,7 +63,7 @@ const Login = () => {
 2
 			? Con \S no permite espacios en blanco.
 		*/
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!\s)[a-zA-Z\d]{8,16}$/
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
 
     // ? Validación Correo
     if (validateMail(correo, /^\s+$/)) {
@@ -121,11 +122,8 @@ const Login = () => {
           setSession(true)
 
           if (result) return navigate('/')
-          /* toast.success('Iniciando sesión...', {
-            theme: 'colored'
-          }) */
         })
-        .catch((e) => {
+        .catch(() => {
           toast.error('¡Correo y/o contraseña incorrectos!', {
             theme: 'colored'
           })

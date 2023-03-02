@@ -1,7 +1,7 @@
 //? Hooks
 import { Route, Routes } from 'react-router-dom'
 import { useContext } from 'react'
-import { UserContext } from './context/UserContext'
+import { SessionContext } from './context/SessionContext'
 
 import { Navbar } from './components/Utils'
 import { Home } from './components/Home/Home'
@@ -11,7 +11,7 @@ import { NotFound } from './components/Not-found/NotFound'
 import { ResponsiveNav } from './components/Utils'
 
 export const App = () => {
-  const { session } = useContext(UserContext)
+  const { session } = useContext(SessionContext)
 
   return (
     <Routes>

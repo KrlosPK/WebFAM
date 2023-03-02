@@ -9,11 +9,11 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 
 //* Hooks
 import { Link } from 'react-router-dom'
-import { UserContext } from '../../../context/UserContext'
 import { useContext } from 'react'
+import { SessionContext } from '../../../context/SessionContext'
 
 const Navbar = ({ elementText, url, renderButtons }) => {
-  const { setSession } = useContext(UserContext)
+  const { setSession } = useContext(SessionContext)
   const logout = () => {
     setSession(false)
   }

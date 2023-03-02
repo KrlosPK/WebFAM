@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Button, Button2, Input, Select, API_URL, Navbar, ResponsiveNav } from '../Utils'
 
 //? Hooks
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
+import { ToastifyContext } from '../../context/ToastifyContext'
 
 //? Library
 import { ToastContainer, toast, Zoom } from 'react-toastify'
@@ -15,6 +16,9 @@ import { FaEyeSlash } from 'react-icons/fa'
 import axios from 'axios'
 
 const Register = () => {
+  //? Context
+  const { setToastify } = useContext(ToastifyContext)
+
   const navigate = useNavigate()
 
   //? Deshabilitar botón mientras carga
@@ -45,6 +49,13 @@ const Register = () => {
   const correoInputEl = useRef(null)
   const contrasenaInputEl = useRef(null)
 
+  //! Evitar que se envie otro formulario de registro cuando ya lo hizo previamente
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+    }
+  }
+
   const createUser = async (e) => {
     const nombre = e.target[0].value
     const apellidos = e.target[1].value
@@ -54,7 +65,7 @@ const Register = () => {
     const correo = e.target[5].value
     const contrasena = e.target[6].value
 
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!\s)[a-zA-Z\d]{8,16}$/
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
 
     // Validación Nombre
     if (nombre.length === 0 || /^\s+$/.test(nombre)) {
@@ -202,8 +213,6 @@ const Register = () => {
     } else if (!regexContrasena.test(contrasena)) {
       e.preventDefault()
 
-      setDisabled(true)
-
       toast.error(
         '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
         {
@@ -222,13 +231,8 @@ const Register = () => {
     await axios
       .post(API_URL('signup'), body)
       .then(() => {
-        // TODO: HACER QUE CUANDO TE REGISTRES TE DE UN TOAST DE QUE LO HICISTE
-        /* toast.success(
-        '¡Usuario registrado!',
-        {
-          theme: 'colored'
-        }
-      ) */
+        setToastify(true)
+
         navigate('/login')
       })
       .catch(() => {
@@ -281,7 +285,7 @@ const Register = () => {
         <div className='register-label'>
           <p>Regístrate</p>
         </div>
-        <form className='second-login' onSubmit={createUser}>
+        <form className='second-login' onSubmit={createUser} onKeyDown={handleKeyDown}>
           <div className='main-form'>
             <Input
               text='Nombre'
