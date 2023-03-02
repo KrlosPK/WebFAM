@@ -46,6 +46,8 @@ const Register = () => {
   const contrasenaInputEl = useRef(null)
 
   const createUser = async (e) => {
+    e.preventDefault()
+
     const nombre = e.target[0].value
     const apellidos = e.target[1].value
     const num_celular = e.target[2].value
@@ -202,8 +204,6 @@ const Register = () => {
     } else if (!regexContrasena.test(contrasena)) {
       e.preventDefault()
 
-      setDisabled(true)
-
       toast.error(
         '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
         {
@@ -214,29 +214,30 @@ const Register = () => {
       focusInput(contrasenaInputEl)
 
       return false
-    }
-    e.preventDefault()
+    } else {
+      setBody({ nombre, apellidos, correo, num_celular, contrasena, tipo_documento, num_documento })
 
-    setBody({ nombre, apellidos, correo, num_celular, contrasena, tipo_documento, num_documento })
+      setDisabled(true)
 
-    await axios
-      .post(API_URL('signup'), body)
-      .then(() => {
-        // TODO: HACER QUE CUANDO TE REGISTRES TE DE UN TOAST DE QUE LO HICISTE
-        /* toast.success(
-        '¡Usuario registrado!',
-        {
-          theme: 'colored'
-        }
-      ) */
-        navigate('/login')
-      })
-      .catch(() => {
-        toast.error('¡Este usuario ya existe!', {
-          theme: 'colored'
+      await axios
+        .post(API_URL('signup'), body)
+        .then(() => {
+          // TODO: HACER QUE CUANDO TE REGISTRES TE DE UN TOAST DE QUE LO HICISTE
+          /* toast.success(
+          '¡Usuario registrado!',
+          {
+            theme: 'colored'
+          }
+          ) */
+          navigate('/login')
         })
-        setDisabled(false)
-      })
+        .catch(() => {
+          toast.error('¡Este usuario ya existe!', {
+            theme: 'colored'
+          })
+          setDisabled(false)
+        })
+    }
   }
 
   const [body, setBody] = useState({
