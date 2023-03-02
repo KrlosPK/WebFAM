@@ -1,10 +1,11 @@
 .team {
   align-items: center;
+  background: linear-gradient(to top, #232526, #414345);
+  color: white;
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  margin-top: 2rem;
-  padding: 3rem 0 4rem;
+  padding: 3rem 0;
 }
 .team__title {
   font-family: 'Syne', sans-serif;
@@ -13,8 +14,8 @@
   text-align: center;
 }
 .team__text {
+  max-width: 65ch;
   text-align: center;
-  width: 70%;
 }
 .colleagues {
   display: grid;

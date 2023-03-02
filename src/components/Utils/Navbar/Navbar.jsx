@@ -11,6 +11,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContext'
 import { useContext, useState } from 'react'
+import { SessionContext } from '../../../context/SessionContext'
 
 //? Icons
 import { BiLogOut } from 'react-icons/bi'
@@ -23,7 +24,8 @@ const Navbar = ({ elementText, url, renderButtons }) => {
     setExpanded(!expanded)
   }
 
-  const { setSession } = useContext(UserContext)
+  const { setSession } = useContext(SessionContext)
+  
   const logout = () => {
     setSession(false)
   }
@@ -32,12 +34,7 @@ const Navbar = ({ elementText, url, renderButtons }) => {
       <nav>
         <ul className='logo'>
           <Link to='/'>
-            <LazyLoadImage
-              src='/logotype-small.png'
-              loading='lazy'
-              width={45}
-              alt='Logo de Fademet Montajes'
-            />
+            <LazyLoadImage src='/logotype-small.png' loading='lazy' width={45} alt='Logo de Fademet Montajes' />
           </Link>
           <div className='left'>
             {elementText

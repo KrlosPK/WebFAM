@@ -39,8 +39,8 @@
   top: -3px;
 }
 .home-container p {
+  max-width: 65ch;
   text-align: center;
-  width: 54vw;
 }
 
 .home-container .buttons {
