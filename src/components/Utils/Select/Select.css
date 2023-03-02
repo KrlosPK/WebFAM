@@ -8,8 +8,9 @@
   border: 1px solid gray;
   border-radius: 6px;
   color: rgba(0, 0, 0, 0.7);
+  font-size: 1rem;
   height: 40px;
-  padding-inline: 0.8em;
+  padding-inline: 1rem;
 }
 .select-container__select:focus {
   border: 1.7px solid var(--icon-color);
