@@ -6,8 +6,13 @@ import { Button, Button2 } from '../'
 //* Hooks
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../../../context/UserContext'
+import { useContext } from 'react'
 
-const ResponsiveNav = ({ elementText, url, renderButtons = false }) => {
+//? Icons
+import { BiLogOut } from 'react-icons/bi'
+
+const ResponsiveNav = ({ elementText, url, renderButtons }) => {
   const [navIsClicked, setNavIsClicked] = useState('clicked')
 
   let navClassName = 'navigation'
@@ -30,6 +35,11 @@ const ResponsiveNav = ({ elementText, url, renderButtons = false }) => {
     setButtonIsClicked('')
   }
 
+  const logout = () => {
+    const { setSession } = useContext(UserContext)
+    setSession(false)
+  }
+
   return (
     <div className='menu' onBlur={hideNav}>
       <div className={navClassName}>
@@ -40,7 +50,7 @@ const ResponsiveNav = ({ elementText, url, renderButtons = false }) => {
             </Link>
           )
         })}
-        {renderButtons ? (
+        {renderButtons === 1 ? (
           <>
             <Link className='flex' to='/login'>
               <Button text='Ingresar' width={120} />
@@ -49,8 +59,14 @@ const ResponsiveNav = ({ elementText, url, renderButtons = false }) => {
               <Button2 text='Registrarse' width={120} />
             </Link>
           </>
+        ) : renderButtons === 2 ? (
+          <div className='logout'>
+            <Link onClick={logout}>
+              Cerrar sesión <BiLogOut />
+            </Link>
+          </div>
         ) : (
-          <></>
+          ''
         )}
       </div>
       <button className={buttonClassName} onClick={handleClick}>

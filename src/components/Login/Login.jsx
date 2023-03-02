@@ -28,8 +28,7 @@ import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
   //? Context
-  const { session, setSession } = useContext(UserContext)
-  console.log({ session })
+  const { setSession } = useContext(UserContext)
 
   const navigate = useNavigate()
 

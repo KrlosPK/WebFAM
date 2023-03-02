@@ -10,11 +10,21 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 //* Hooks
 import { Link } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContext'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+
+//? Icons
+import { BiLogOut } from 'react-icons/bi'
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa'
 
 const Navbar = ({ elementText, url, renderButtons }) => {
+  const [expanded, setExpanded] = useState(false)
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded)
+  }
+
+  const { setSession } = useContext(UserContext)
   const logout = () => {
-    const { setSession } = useContext(UserContext)
     setSession(false)
   }
   return (
@@ -56,9 +66,28 @@ const Navbar = ({ elementText, url, renderButtons }) => {
               </Link>
             </li>
           ) : renderButtons === 2 ? (
-            <Link className='logout' onClick={logout}>
-              Cerrar sesión
-            </Link>
+            // <div className='user' onClick={() => handleExpandClick()}>
+            //   <h3 className='user__image'>
+            //     <img src='/avatar1.png' alt='Imagen de perfil del usuario' />
+            //   </h3>
+            //   <div className={expanded ? `user__options show` : 'user__options'}>
+            //     <div className='logout' onClick={logout}>
+            //       <Link onClick={logout}>
+            //         Cerrar sesión <BiLogOut />
+            //       </Link>
+            //     </div>
+            //   </div>
+            //   {expanded ? (
+            //     <FaAngleUp className='user__icon' />
+            //   ) : (
+            //     <FaAngleDown className='user__icon' />
+            //   )}
+            // </div>
+            <div className='logout'>
+              <Link onClick={logout}>
+                Cerrar sesión <BiLogOut />
+              </Link>
+            </div>
           ) : (
             ''
           )}
