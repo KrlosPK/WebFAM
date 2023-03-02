@@ -28,6 +28,9 @@ import { AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
+  //? Context
+  const { setSession } = useContext(SessionContext)
+
   const navigate = useNavigate()
 
   //? Deshabilitar botón mientras carga

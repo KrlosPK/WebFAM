@@ -14,6 +14,7 @@ import { SessionContext } from '../../../context/SessionContext'
 
 const Navbar = ({ elementText, url, renderButtons }) => {
   const logout = () => {
+    const { setSession } = useContext(SessionContext)
     setSession(false)
   }
   return (
