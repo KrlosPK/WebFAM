@@ -8,7 +8,12 @@
   position: relative;
 }
 .home-container::before {
-  background: radial-gradient(50% 50% at 50% 50%, #f76b1c 0%, rgba(251, 172, 127, 0.5625) 43.75%, rgba(255, 255, 255, 0) 100%);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #f76b1c 0%,
+    rgba(251, 172, 127, 0.5625) 43.75%,
+    rgba(255, 255, 255, 0) 100%
+  );
   content: '';
   filter: blur(69.6px);
   height: 100%;
@@ -34,8 +39,8 @@
   top: -3px;
 }
 .home-container p {
+  max-width: 65ch;
   text-align: center;
-  width: 54vw;
 }
 
 .home-container .buttons {

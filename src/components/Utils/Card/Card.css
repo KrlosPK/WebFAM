@@ -1,23 +1,23 @@
 .card {
   border-radius: 10px;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
   padding: 1rem;
 }
+.card:hover .card__image {
+  scale: 1.025;
+}
 picture {
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   border-radius: 10px;
+  overflow: hidden;
   padding: 0 0 0.2rem 0.5rem;
 }
 .card__image {
   border-radius: 1px 10px 1px 10px;
-  filter: brightness(80%);
   object-fit: cover;
-}
-.card:hover .card__image {
-  filter: none;
+  transition: scale 200ms ease-in-out !important;
 }
 .card__title {
   font-family: 'Syne', sans-serif;
