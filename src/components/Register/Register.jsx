@@ -19,6 +19,10 @@ const Register = () => {
   //? Context
   const { setToastify } = useContext(ToastifyContext)
 
+  useEffect(() => {
+    setToastify(false)
+  }, [setToastify])
+
   const navigate = useNavigate()
 
   //? Deshabilitar botón mientras carga

@@ -31,6 +31,16 @@ const Login = () => {
   //? Context
   const { setSession } = useContext(SessionContext)
 
+  const { toastify } = useContext(ToastifyContext)
+
+  useEffect(() => {
+    if (toastify === true) {
+      toast.success('¡Usuario creado con éxito!', {
+        theme: 'colored'
+      })
+    }
+  }, [toastify])
+
   const navigate = useNavigate()
 
   //? Deshabilitar botón mientras carga

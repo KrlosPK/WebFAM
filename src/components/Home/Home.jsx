@@ -1,7 +1,8 @@
 import './Home.css'
 
 //? Hooks
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { ToastifyContext } from '../../context/ToastifyContext'
 
 //* Components
 import { Button, Button2 } from '../Utils'
@@ -12,11 +13,19 @@ import { Provide } from './Provide/Provide'
 import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
 
 const Home = () => {
+  //? Context
+  const { setToastify } = useContext(ToastifyContext)
+
+  useEffect(() => {
+    setToastify(false)
+  }, [setToastify])
+
   //! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes | Inicio')
   useEffect(() => {
     document.title = title
   }, [setTitle])
+
   return (
     <>
       <main className='home-container'>
