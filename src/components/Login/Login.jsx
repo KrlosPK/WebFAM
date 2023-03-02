@@ -28,23 +28,6 @@ import { AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
-  //? Context
-  const { setSession } = useContext(SessionContext)
-
-  const { toastify } = useContext(ToastifyContext)
-
-  console.log(toastify)
-
-  useEffect(() => {
-    if (toastify === true) {
-      toast.success('¡Usuario creado con éxito!', {
-        theme: 'colored'
-      })
-    }
-  }, [toastify])
-
-
-
   const navigate = useNavigate()
 
   //? Deshabilitar botón mientras carga
