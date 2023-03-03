@@ -35,7 +35,7 @@ const Navbar = ({ elementText, url, renderButtons }) => {
           <Link to='/'>
             <LazyLoadImage src='/logotype-small.png' loading='lazy' width={45} alt='Logo de Fademet Montajes' />
           </Link>
-          <div className='left'>
+          <li className='left'>
             {elementText
               ? elementText.map((el, i) => {
                   return (
@@ -49,7 +49,7 @@ const Navbar = ({ elementText, url, renderButtons }) => {
                   )
                 })
               : ''}
-          </div>
+          </li>
         </ul>
         <ul className='right'>
           {renderButtons === 1 ? (
@@ -79,11 +79,11 @@ const Navbar = ({ elementText, url, renderButtons }) => {
             //     <FaAngleDown className='user__icon' />
             //   )}
             // </div>
-            <div className='logout'>
+            <li className='logout'>
               <Link onClick={logout}>
                 Cerrar sesión <BiLogOut />
               </Link>
-            </div>
+            </li>
           ) : (
             ''
           )}
