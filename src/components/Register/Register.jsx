@@ -162,10 +162,10 @@ const Register = () => {
       focusInput(numDocumentoInputEl)
 
       return false
-    } else if (num_documento.length < 9 || num_documento.length >= 12) {
+    } else if (num_documento.length < 10 || num_documento.length >= 12) {
       e.preventDefault()
 
-      toast.error('¡El Número de Documento debe tener entre 9 y 11 dígitos!', {
+      toast.error('¡El Número de Documento debe tener entre 10 y 12 dígitos!', {
         theme: 'colored'
       })
 
@@ -287,7 +287,6 @@ const Register = () => {
         urlRight={['']}
         renderButtons={3}
       />
-      <hr className='header-line' />
       <section className='login-form'>
         <div className='register-label'>
           <p>Regístrate</p>

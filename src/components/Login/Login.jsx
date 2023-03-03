@@ -228,7 +228,6 @@ const Login = () => {
         urlRight={['']}
         renderButtons={3}
       />
-      <hr className='header-line' />
       <section className='login-form'>
         <div className='first-login'>
           <p>Para continuar, inicie sesión</p>
@@ -274,7 +273,7 @@ const Login = () => {
             </div>
           </div>
           <div className='forgot-password'>
-            <Link to={'/'}>¿Olvidaste tú contraseña?</Link>
+            <Link to={'/login/recover-password'}>¿Olvidaste tú contraseña?</Link>
           </div>
           <div className='remind-me'>
             <input type='checkbox' name='check' id='check' onClick={setCookie} />
