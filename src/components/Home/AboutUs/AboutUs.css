@@ -21,6 +21,7 @@
   font-size: 1rem;
   font-weight: 400;
   max-width: 65ch;
+  padding: 0 1rem;
   text-align: center;
 }
 .cards {
@@ -45,7 +46,7 @@
   }
   .info__title {
     font-size: 36px;
-    margin-top: 8rem;
+    margin-top: 4rem;
   }
   .info {
     width: 100%;
