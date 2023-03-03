@@ -3,8 +3,10 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  height: 60vh;
   justify-content: center;
+  margin-top: 4rem;
+  min-height: 40vh;
+  padding: 0 2rem;
   position: relative;
 }
 .home-container::before {
@@ -42,12 +44,62 @@
   max-width: 65ch;
   text-align: center;
 }
-
 .home-container .buttons {
   display: flex;
   gap: 0.8rem;
-  margin-top: 2.5rem;
+  margin-top: 2rem;
 }
+
+/*? Services section */
+.services {
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin: 2rem auto;
+  min-height: 35vh;
+  width: 70%;
+}
+.service {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+.service__image img {
+  aspect-ratio: 1;
+  width: 35px;
+}
+.service__text {
+  align-items: center;
+  color: var(--text-color);
+  display: flex;
+}
+
+/* @media (min-height: 630px) AND (max-height: 750px) {
+  .services {
+    margin-top: 5rem;
+  }
+}
+@media (max-height: 630px) {
+  .services {
+    margin-bottom: 3rem;
+    margin-top: 6rem;
+  }
+}
+@media (max-height: 610px) {
+  .services {
+    margin-bottom: 3rem;
+    margin-top: 10rem;
+  }
+}
+@media (max-height: 500px) {
+  .services {
+    margin-bottom: 4rem;
+    margin-top: 19rem;
+  }
+} */
+
 @media (max-width: 857px) {
   .home-container h1 {
     font-size: calc(3em + 1vmin);
@@ -56,17 +108,7 @@
 }
 @media (max-width: 630px) {
   .home-container h1 {
-    font-size: calc(2em + 1vmin);
+    font-size: calc(2.3em + 1vmin);
     width: 320px;
-  }
-}
-@media (max-height: 700px) {
-  .home-container h1 {
-    margin-top: 7rem;
-  }
-}
-@media (max-height: 500px) {
-  .home-container h1 {
-    margin-top: 14rem;
   }
 }

@@ -4,9 +4,15 @@ import './Home.css'
 import { useState, useEffect, useContext } from 'react'
 import { ToastifyContext } from '../../context/ToastifyContext'
 
+//? JSON
+import serviceData from '../../json/services.json'
+
+//* Libraries
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
+
 //* Components
 import { Button, Button2 } from '../Utils'
-import { Services } from './Services/Services'
 import { AboutUs } from './AboutUs/AboutUs'
 import { Team } from './Team/Team'
 import { Provide } from './Provide/Provide'
@@ -49,7 +55,16 @@ const Home = () => {
           </a>
         </div>
       </main>
-      <Services />
+      <section className='services'>
+        {serviceData.map(({ id, name, url }) => (
+          <div className='service' key={id}>
+            <div className='service__image'>
+              <LazyLoadImage src={url} effect='blur' loading='lazy' alt={name} />
+            </div>
+            <div className='service__text'>{name}</div>
+          </div>
+        ))}
+      </section>
       <AboutUs />
       <Provide />
       <Team />
