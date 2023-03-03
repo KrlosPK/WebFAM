@@ -35,7 +35,7 @@ const Navbar = ({ elementText, url, renderButtons }) => {
           <Link to='/'>
             <LazyLoadImage src='/logotype-small.png' loading='lazy' width={45} alt='Logo de Fademet Montajes' />
           </Link>
-          <li className='left'>
+          <div className='left'>
             {elementText
               ? elementText.map((el, i) => {
                   return (
@@ -49,7 +49,7 @@ const Navbar = ({ elementText, url, renderButtons }) => {
                   )
                 })
               : ''}
-          </li>
+          </div>
         </ul>
         <ul className='right'>
           {renderButtons === 1 ? (

@@ -44,6 +44,12 @@ footer a {
 }
 .footer__logo img {
   margin-bottom: 1rem;
+  transition: all 400ms ease;
+  width: 80px;
+}
+.footer__logo img:hover {
+  scale: 1.15;
+  rotate: 15deg;
 }
 .footer__logo p {
   font-size: 13px;
@@ -66,7 +72,7 @@ footer a {
   width: 1px;
 }
 .footer__copyright a:nth-child(3) {
-  padding: 0 2rem;
+  padding: 0 2rem 0 0;
 }
 
 @media (max-width: 768px) {
@@ -85,7 +91,7 @@ footer a {
   .footer__copyright a:nth-child(2)::after {
     display: block;
     height: 1px;
-    width: 100%;
     margin: 1rem auto;
+    width: 100%;
   }
 }
