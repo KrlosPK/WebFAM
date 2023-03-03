@@ -17,6 +17,8 @@ import { AboutUs } from './AboutUs/AboutUs'
 import { Team } from './Team/Team'
 import { Provide } from './Provide/Provide'
 import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
+import { Services } from './Services/Services'
+import { Footer } from './Footer/Footer'
 
 const Home = () => {
   //? Context
@@ -69,6 +71,8 @@ const Home = () => {
       <Provide />
       <Team />
       <FrequentQuestions />
+      <Services />
+      <Footer />
     </>
   )
 }
