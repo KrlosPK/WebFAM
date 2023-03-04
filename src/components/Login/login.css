@@ -8,18 +8,6 @@
   border: 1pt solid rgba(226, 226, 226, 0.4);
   margin: 1rem;
 }
-.go-back {
-  color: var(--background-color);
-  font-size: 14px;
-  left: 20px;
-  position: absolute;
-  top: 1rem;
-  transition: 200ms color ease-in-out;
-  user-select: none;
-}
-.go-back:hover {
-  color: var(--icon-color);
-}
 
 /* first login form */
 .login-form {
@@ -236,9 +224,6 @@
   }
 }
 @media (max-width: 450px) {
-  /* .second-login {
-		width: 100%;
-	} */
   .line-breaker {
     width: 100%;
   }

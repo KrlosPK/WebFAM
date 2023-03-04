@@ -1,15 +1,6 @@
 import './login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-  Button,
-  Button2,
-  Input,
-  validateMail,
-  validatePassword,
-  API_URL,
-  Navbar,
-  ResponsiveNav
-} from '../Utils'
+import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar } from '../Utils'
 
 //? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
@@ -22,9 +13,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 
 //? Icons
-import { FaEye } from 'react-icons/fa'
-import { FaEyeSlash } from 'react-icons/fa'
-import { AiFillBackward, AiFillFacebook } from 'react-icons/ai'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
+import { AiFillFacebook } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
@@ -152,7 +142,6 @@ const Login = () => {
           setDisabled(false)
         })
     }
-    //TODO Axios
   }
   //* guarda correo y contraseña
   const [body, setBody] = useState({ correo: '', contrasena: '' })
@@ -220,7 +209,6 @@ const Login = () => {
   return (
     <div className='login-div' onLoad={getCookieData}>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <ResponsiveNav elementText={['Inicio']} url={['/']} />
       <Navbar
         elementTextLeft={['Inicio']}
         urlLeft={['/']}
@@ -228,7 +216,6 @@ const Login = () => {
         urlRight={['']}
         renderButtons={3}
       />
-      <hr className='header-line' />
       <section className='login-form'>
         <div className='first-login'>
           <p>Para continuar, inicie sesión</p>
@@ -274,7 +261,7 @@ const Login = () => {
             </div>
           </div>
           <div className='forgot-password'>
-            <Link to={'/'}>¿Olvidaste tú contraseña?</Link>
+            <Link to={'/recover-password'}>¿Olvidaste tú contraseña?</Link>
           </div>
           <div className='remind-me'>
             <input type='checkbox' name='check' id='check' onClick={setCookie} />
