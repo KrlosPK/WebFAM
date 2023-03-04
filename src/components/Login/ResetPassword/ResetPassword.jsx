@@ -147,9 +147,7 @@ const ResetPassword = () => {
                   {showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
                 </div>
               </div>
-
-              <Button text={'Verificar'} textDisabled={'Cargando'} />
-              {/* disable={disabled}  */}
+              <Button text={'Verificar'} textDisabled={'Cargando'} disable={disabled} />
             </div>
           </form>
         </div>

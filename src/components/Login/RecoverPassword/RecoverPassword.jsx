@@ -67,7 +67,7 @@ const RecoverPassword = () => {
       
       setDisabled(true)
 
-      navigate('/reset-password')
+      navigate('/login')
 
       // TODO axios
       // await axios
