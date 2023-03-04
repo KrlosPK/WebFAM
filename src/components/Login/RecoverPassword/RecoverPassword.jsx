@@ -67,15 +67,17 @@ const RecoverPassword = () => {
       
       setDisabled(true)
 
+      navigate('/reset-password')
+
       // TODO axios
       // await axios
-      //   .post(API_URL('usuarios'), body)
+      //   .post(API_URL('recoverpassword'), body)
       //   .then(({ data }) => {
       //     const { result } = data
 
       //     setSession(true)
 
-      //     // if (result) return navigate('/')
+      //     if (result) return navigate('/verify-password')
       //   })
       //   .catch(() => {
       //     toast.error('¡Correo y/o contraseña incorrectos!', {

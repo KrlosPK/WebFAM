@@ -10,6 +10,7 @@ import { Register } from './components/Register/Register'
 import { NotFound } from './components/Not-found/NotFound'
 import { ResponsiveNav } from './components/Utils'
 import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
+import { ResetPassword } from './components/Login/ResetPassword/ResetPassword'
 
 export const App = () => {
   const { session } = useContext(SessionContext)
@@ -53,6 +54,7 @@ export const App = () => {
       />
       <Route path='/login' element={<Login />} />
       <Route path='/recover-password' element={<RecoverPassword />} />
+      <Route path='/reset-password' element={<ResetPassword />} />
       <Route path='/register' element={<Register />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
