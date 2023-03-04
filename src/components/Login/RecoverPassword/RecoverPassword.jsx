@@ -10,7 +10,6 @@ import { useEffect, useRef, useState } from 'react'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import Swal from 'sweetalert2'
 
 //? Icons
 import { AiFillBackward } from 'react-icons/ai'
