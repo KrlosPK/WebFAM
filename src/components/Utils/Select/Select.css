@@ -8,13 +8,17 @@
   border: 1px solid gray;
   border-radius: 6px;
   color: rgba(0, 0, 0, 0.7);
-  font-size: 1rem;
+  font-size: 14px;
   height: 40px;
-  padding-inline: 1rem;
+  padding-inline: 10px;
 }
 .select-container__select:focus {
   border: 1.7px solid var(--icon-color);
   outline: none;
+}
+.select-container__select:focus ~ label,
+.select-container__select:not(:placeholder-shown) ~ label {
+  font-size: 13px;
 }
 .label-select {
   background-color: white;

@@ -223,7 +223,6 @@ const Login = () => {
                 const { credential } = credentialResponse
                 try {
                   let decoded = jwt_decode(credential)
-                  console.log(decoded)
                   setSession(true)
                   navigate('/')
                 } catch (err) {
