@@ -55,10 +55,10 @@ const Navbar = ({ elementText, url, renderButtons }) => {
           {renderButtons === 1 ? (
             <li className='register-login-buttons'>
               <Link className='flex gap' to='/login'>
-                <Button text='Ingresar' width={120} />
+                <Button text='Ingresar' width={140} />
               </Link>
               <Link className='flex gap' to='/register'>
-                <Button2 text='Registrarse' width={120} />
+                <Button2 text='Registrarse' width={140} />
               </Link>
             </li>
           ) : renderButtons === 2 ? (

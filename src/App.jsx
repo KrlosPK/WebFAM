@@ -51,9 +51,8 @@ export const App = () => {
           </>
         }
       />
-      <Route path='/login' element={<Login />}>
-        <Route path='recover-password' element={<RecoverPassword />} />
-      </Route>
+      <Route path='/login' element={<Login />} />
+      <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='/register' element={<Register />} />
       <Route path='*' element={<NotFound />} />
     </Routes>

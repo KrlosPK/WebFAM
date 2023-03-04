@@ -1,6 +1,6 @@
 import './Register.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Button2, Input, Select, API_URL, Navbar, ResponsiveNav } from '../Utils'
+import { Button, Button2, Input, Select, API_URL, Navbar } from '../Utils'
 
 //? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
@@ -279,7 +279,6 @@ const Register = () => {
   return (
     <div className='login-div'>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <ResponsiveNav elementText={['Inicio']} url={['/']} />
       <Navbar
         elementTextLeft={['Inicio']}
         urlLeft={['/']}
