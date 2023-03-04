@@ -36,6 +36,8 @@ a {
 }
 
 nav p {
+  align-items: center;
+  display: flex;
   position: relative;
 }
 

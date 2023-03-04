@@ -11,7 +11,7 @@ import { SessionContext } from '../../../context/SessionContext'
 //? Icons
 import { BiLogOut } from 'react-icons/bi'
 
-const ResponsiveNav = ({ elementText, url, renderButtons }) => {
+const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [navIsClicked, setNavIsClicked] = useState('clicked')
 
   let navClassName = 'navigation'
@@ -43,11 +43,18 @@ const ResponsiveNav = ({ elementText, url, renderButtons }) => {
   return (
     <div className='menu' onBlur={hideNav}>
       <div className={navClassName}>
-        {elementText.map((el, i) => {
+        {linkText.map((el, i) => {
           return (
-            <Link className='flex' to={url[i]} key={i}>
+            <Link className='flex' to={linkUrl[i]} key={i}>
               <span>{el}</span>
             </Link>
+          )
+        })}
+        {anchordText.map((el, i) => {
+          return (
+            <a className='flex' href={anchordUrl[i]} key={i}>
+              <span>{el}</span>
+            </a>
           )
         })}
         {renderButtons === 1 ? (

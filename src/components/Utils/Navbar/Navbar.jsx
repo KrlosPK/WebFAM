@@ -16,7 +16,7 @@ import { useContext, useState } from 'react'
 import { BiLogOut } from 'react-icons/bi'
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa'
 
-const Navbar = ({ elementText, url, renderButtons }) => {
+const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [expanded, setExpanded] = useState(false)
 
   const handleExpandClick = () => {
@@ -24,7 +24,7 @@ const Navbar = ({ elementText, url, renderButtons }) => {
   }
 
   const { setSession } = useContext(SessionContext)
-  
+
   const logout = () => {
     setSession(false)
   }
@@ -33,23 +33,37 @@ const Navbar = ({ elementText, url, renderButtons }) => {
       <nav>
         <ul className='logo'>
           <Link to='/'>
-            <LazyLoadImage src='/logotype-small.png' loading='lazy' width={45} alt='Logo de Fademet Montajes' />
+            <LazyLoadImage
+              src='/logotype-small.png'
+              loading='lazy'
+              width={45}
+              alt='Logo de Fademet Montajes'
+            />
           </Link>
-          <div className='left'>
-            {elementText
-              ? elementText.map((el, i) => {
+          <ul className='left'>
+            {linkText
+              ? linkText.map((el, i) => {
                   return (
                     <li key={i}>
-                      <Link id='RouterNavLink' to={url[i]}>
-                        <p href='' className='flex gap fade-gray'>
-                          {el}
-                        </p>
+                      <Link id='RouterNavLink' to={linkUrl[i]}>
+                        <p className='flex gap fade-gray'>{el}</p>
                       </Link>
                     </li>
                   )
                 })
               : ''}
-          </div>
+            {anchordText
+              ? anchordText.map((el, i) => {
+                  return (
+                    <li key={i}>
+                      <a id='RouterNavLink' href={anchordUrl[i]}>
+                        <p className='flex gap fade-gray'>{el}</p>
+                      </a>
+                    </li>
+                  )
+                })
+              : ''}
+          </ul>
         </ul>
         <ul className='right'>
           {renderButtons === 1 ? (
@@ -81,7 +95,9 @@ const Navbar = ({ elementText, url, renderButtons }) => {
             // </div>
             <li className='logout'>
               <Link onClick={logout}>
-                Cerrar sesión <BiLogOut />
+                <p>
+                  Cerrar sesión <BiLogOut />
+                </p>
               </Link>
             </li>
           ) : (

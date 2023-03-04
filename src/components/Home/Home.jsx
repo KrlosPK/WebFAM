@@ -36,35 +36,28 @@ const Home = () => {
     document.title = title
   }, [setTitle])
 
+  const [button, setButton] = useState(null)
+
+  useEffect(() => {
+    !session ? setButton(1) : setButton(2)
+  }, [session])
+
   return (
     <>
-      {session === false ? (
-        <>
-          <ResponsiveNav
-            elementText={['Inicio', 'Productos', 'Servicios', 'Preguntas Frecuentes']}
-            url={['/', '/', '/', '/#preguntasFrecuentes']}
-            renderButtons={1}
-          />
-          <Navbar
-            elementText={['Inicio', 'Productos', 'Servicios', 'Preguntas Frecuentes']}
-            url={['/', '/', '/', '/#preguntasFrecuentes']}
-            renderButtons={1}
-          />
-        </>
-      ) : (
-        <>
-          <ResponsiveNav
-            elementText={['Inicio', 'Productos', 'Servicios', 'Preguntas Frecuentes']}
-            url={['/', '/', '/', '/#preguntasFrecuentes']}
-            renderButtons={2}
-          />
-          <Navbar
-            elementText={['Inicio', 'Productos', 'Servicios', 'Preguntas Frecuentes']}
-            url={['/', '/', '/', '/#preguntasFrecuentes']}
-            renderButtons={2}
-          />
-        </>
-      )}
+      <ResponsiveNav
+        linkText={['Inicio', 'Productos', 'Servicios']}
+        linkUrl={['/', '/', '/']}
+        anchordText={['Preguntas Frecuentes']}
+        anchordUrl={['#preguntasFrecuentes']}
+        renderButtons={button}
+      />
+      <Navbar
+        linkText={['Inicio', 'Productos', 'Servicios']}
+        linkUrl={['/', '/', '/']}
+        anchordText={['Preguntas Frecuentes']}
+        anchordUrl={['#preguntasFrecuentes']}
+        renderButtons={button}
+      />
       <main className='home-container'>
         <h1>
           SOLDANDO SUEÑOS
