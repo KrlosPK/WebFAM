@@ -1,26 +1,17 @@
 //? Hooks
 import { Route, Routes } from 'react-router-dom'
 
-import {
-  Home,
-  Login,
-  Register,
-  NotFound,
-  RecoverPassword,
-  ResetPassword
-} from './components/Home/Home'
+import { Home } from './components/Home/Home'
+import { Login } from './components/Login/Login'
+import { Register } from './components/Register/Register'
+import { NotFound } from './components/Not-found/NotFound'
+import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
+import { ResetPassword } from './components/Login/ResetPassword/ResetPassword'
 
 export const App = () => {
   return (
     <Routes>
-      <Route
-        path='/'
-        element={
-          <>
-            <Home />
-          </>
-        }
-      />
+      <Route path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='/reset-password' element={<ResetPassword />} />
