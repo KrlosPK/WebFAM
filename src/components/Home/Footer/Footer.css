@@ -71,9 +71,6 @@ footer a {
   margin-left: 3rem;
   width: 1px;
 }
-.footer__copyright a:nth-child(3) {
-  padding: 0 2rem 0 0;
-}
 
 @media (max-width: 768px) {
   .footer__copyright {

@@ -3,7 +3,7 @@ import './Button.css'
 //? Icons
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
-const Button = ({ text, textDisabled = '', width, disable = false }) => {
+const Button = ({ text, textDisabled = '', width, disable = false, animation = true }) => {
   return (
     <>
       {!disable ? (
@@ -12,7 +12,7 @@ const Button = ({ text, textDisabled = '', width, disable = false }) => {
         </button>
       ) : (
         <button className='Button disabled flex' style={{ width: width }}>
-          {textDisabled} <AiOutlineLoading3Quarters />
+          {textDisabled} {animation ? <AiOutlineLoading3Quarters /> : null}
         </button>
       )}
     </>

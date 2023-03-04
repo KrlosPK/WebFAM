@@ -6,7 +6,7 @@ import { Accordion } from '../../Utils/Accordion/Accordion'
 
 const FrequentQuestions = () => {
   return (
-    <article className='frequent-questions'>
+    <article className='frequent-questions' id='preguntasFrecuentes'>
       <section className='flex'>
         <h2 className='frequent-questions__title'>Preguntas Frecuentes</h2>
         <p className='frequent-questions__text'>

@@ -1,7 +1,7 @@
 import './RecoverPassword.css'
 
 //? Components
-import { Input, Button, Navbar, API_URL, validateMail } from '../../Utils'
+import { Input, Button, Button2, Navbar, API_URL, validateMail } from '../../Utils'
 
 //* Hooks
 import { useEffect, useRef, useState } from 'react'
@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 //? Icons
 import { AiFillBackward } from 'react-icons/ai'
@@ -64,10 +65,15 @@ const RecoverPassword = () => {
       focusInput(correoInputEl)
     } else {
       setBody({ correo })
-      
+
       setDisabled(true)
 
-      navigate('/login')
+      Swal.fire({
+        icon: 'success',
+        title: '¡Hemos enviado un correo a tu cuenta!',
+        text: 'Entra al enlace que te hemos enviado al correo para que reestablezcas tu contraseña.',
+        footer: '<a href="/">Volver al inicio</a>'
+      })
 
       // TODO axios
       // await axios
@@ -132,7 +138,7 @@ const RecoverPassword = () => {
                 innerRef={correoInputEl}
                 innerOnChange={inputChange}
               />
-              <Button text={'Recuperar contraseña'} textDisabled={'Cargando'} disable={disabled} />
+              <Button text={'Recuperar contraseña'} textDisabled={'Enviado'} disable={disabled} animation={false} />
             </div>
           </form>
         </div>

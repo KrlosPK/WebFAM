@@ -12,16 +12,18 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
 //* Components
-import { Button, Button2 } from '../Utils'
+import { Button, Button2, ResponsiveNav, Navbar } from '../Utils'
 import { AboutUs } from './AboutUs/AboutUs'
 import { Team } from './Team/Team'
 import { Provide } from './Provide/Provide'
 import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
 import { Services } from './Services/Services'
 import { Footer } from './Footer/Footer'
+import { SessionContext } from '../../context/SessionContext'
 
 const Home = () => {
   //? Context
+  const { session } = useContext(SessionContext)
   const { setToastify } = useContext(ToastifyContext)
 
   useEffect(() => {
@@ -36,6 +38,33 @@ const Home = () => {
 
   return (
     <>
+      {session === false ? (
+        <>
+          <ResponsiveNav
+            elementText={['Inicio', 'Productos', 'Servicios', 'Preguntas Frecuentes']}
+            url={['/', '/', '/', '/#preguntasFrecuentes']}
+            renderButtons={1}
+          />
+          <Navbar
+            elementText={['Inicio', 'Productos', 'Servicios', 'Preguntas Frecuentes']}
+            url={['/', '/', '/', '/#preguntasFrecuentes']}
+            renderButtons={1}
+          />
+        </>
+      ) : (
+        <>
+          <ResponsiveNav
+            elementText={['Inicio', 'Productos', 'Servicios', 'Preguntas Frecuentes']}
+            url={['/', '/', '/', '/#preguntasFrecuentes']}
+            renderButtons={2}
+          />
+          <Navbar
+            elementText={['Inicio', 'Productos', 'Servicios', 'Preguntas Frecuentes']}
+            url={['/', '/', '/', '/#preguntasFrecuentes']}
+            renderButtons={2}
+          />
+        </>
+      )}
       <main className='home-container'>
         <h1>
           SOLDANDO SUEÑOS
