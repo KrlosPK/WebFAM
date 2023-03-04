@@ -1,15 +1,6 @@
 import './login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-  Button,
-  Button2,
-  Input,
-  validateMail,
-  validatePassword,
-  API_URL,
-  Navbar,
-  ResponsiveNav
-} from '../Utils'
+import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar, ResponsiveNav } from '../Utils'
 
 //? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
@@ -20,6 +11,8 @@ import { ToastifyContext } from '../../context/ToastifyContext'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
+import { GoogleLogin } from '@react-oauth/google'
+import jwt_decode from 'jwt-decode'
 
 //? Icons
 import { FaEye } from 'react-icons/fa'
@@ -122,12 +115,9 @@ const Login = () => {
       focusInput(contrasenaInputEl)
     } else if (!validatePassword(contrasena, regexContrasena)) {
       e.preventDefault()
-      toast.error(
-        '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
-        {
-          theme: 'colored'
-        }
-      )
+      toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
+        theme: 'colored'
+      })
 
       focusInput(contrasenaInputEl)
     } else {
@@ -168,10 +158,7 @@ const Login = () => {
   // * Set cookie for remember me
   const setCookie = () => {
     if (document.querySelector('#check').checked) {
-      if (
-        document.querySelector('#correo').value === '' ||
-        document.querySelector('#contrasena').value === ''
-      ) {
+      if (document.querySelector('#correo').value === '' || document.querySelector('#contrasena').value === '') {
         toast.error('¡Debes tener tus datos correctos para recordar! Vuelve a intentarlo...', {
           theme: 'colored'
         })
@@ -182,15 +169,14 @@ const Login = () => {
       const correo = document.querySelector('#correo').value
       const contrasena = document.querySelector('#contrasena').value
       const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-      const contrasenaRegex =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
+      const contrasenaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
 
       if (validateMail(correo, correoRegex) || validatePassword(contrasena, contrasenaRegex)) {
         const date = new Date()
         date.setTime(date.getTime() + 60 * 60 * 75 * 10000)
 
-        document.cookie = `correo=${correo}; expires=${date.toUTCString()}; path=http://localhost:3000/login/; Secure`
-        document.cookie = `contrasena=${contrasena}; expires=${date.toUTCString()}; path=http://localhost:3000/login/; Secure`
+        document.cookie = `correo=${correo}; expires=${date.toUTCString()}; path=https://fademetmontajes.netlify.app/login; secure; SameSite=Lax`
+        document.cookie = `contrasena=${contrasena}; expires=${date.toUTCString()}; path=https://fademetmontajes.netlify.app/login; secure; SameSite=Lax`
       }
     } else {
       //clear cookies
@@ -221,13 +207,7 @@ const Login = () => {
     <div className='login-div' onLoad={getCookieData}>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav elementText={['Inicio']} url={['/']} />
-      <Navbar
-        elementTextLeft={['Inicio']}
-        urlLeft={['/']}
-        elementTextRight={['']}
-        urlRight={['']}
-        renderButtons={3}
-      />
+      <Navbar elementTextLeft={['Inicio']} urlLeft={['/']} elementTextRight={['']} urlRight={['']} renderButtons={3} />
       <hr className='header-line' />
       <section className='login-form'>
         <div className='first-login'>
@@ -236,10 +216,26 @@ const Login = () => {
             <button className='Login-button button_fb'>
               <AiFillFacebook /> Continúa con Facebook
             </button>
-            <button className='Login-button button_gg'>
-              <FcGoogle /> Continúa con
-              <div className='google_gradient'>Google</div>
-            </button>
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                const { credential } = credentialResponse
+                try {
+                  let decoded = jwt_decode(credential)
+                  console.log(decoded)
+                  setSession(true)
+                  navigate('/')
+                } catch (err) {
+                  console.log(err)
+                }
+              }}
+              onError={() => {
+                console.log('Login Failed')
+              }}
+              size='medium'
+              shape='circle'
+              width='300'
+              useOneTap
+            />
           </div>
           <div className='between-session'>
             <div className='line-breaker' />
@@ -249,28 +245,10 @@ const Login = () => {
         </div>
         <form className='second-login' onSubmit={validateLogin}>
           <div className='main-form'>
-            <Input
-              text='Correo electrónico'
-              innerId='correo'
-              type='email'
-              nameID='correo'
-              value={body.correo}
-              innerRef={correoInputEl}
-              innerOnChange={inputChange}
-            />
+            <Input text='Correo electrónico' innerId='correo' type='email' nameID='correo' value={body.correo} innerRef={correoInputEl} innerOnChange={inputChange} />
             <div className='input-container'>
-              <Input
-                text='Contraseña'
-                innerId='contrasena'
-                type={showContrasena ? 'password' : 'text'}
-                nameID='contrasena'
-                value={body.contrasena}
-                innerRef={contrasenaInputEl}
-                innerOnChange={inputChange}
-              />
-              <div onClick={handleShowContrasenaClick}>
-                {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
-              </div>
+              <Input text='Contraseña' innerId='contrasena' type={showContrasena ? 'password' : 'text'} nameID='contrasena' value={body.contrasena} innerRef={contrasenaInputEl} innerOnChange={inputChange} />
+              <div onClick={handleShowContrasenaClick}>{showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}</div>
             </div>
           </div>
           <div className='forgot-password'>
