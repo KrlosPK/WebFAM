@@ -14,13 +14,20 @@ import { useContext, useState } from 'react'
 
 //? Icons
 import { BiLogOut } from 'react-icons/bi'
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa'
+import { AiOutlineSetting } from 'react-icons/ai'
+import { FaAngleDown } from 'react-icons/fa'
 
 const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [expanded, setExpanded] = useState(false)
 
   const handleExpandClick = () => {
+    console.log('clicked')
     setExpanded(!expanded)
+  }
+
+  const hideUser = () => {
+    console.log('holas')
+    setExpanded(false)
   }
 
   const { setSession } = useContext(SessionContext)
@@ -30,13 +37,14 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   }
   return (
     <>
-      <nav>
+      <nav className='navbar'>
         <ul className='logo'>
           <Link to='/'>
             <LazyLoadImage
               src='/logotype-small.png'
               loading='lazy'
               width={45}
+              height={45}
               alt='Logo de Fademet Montajes'
             />
           </Link>
@@ -65,8 +73,8 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
               : ''}
           </ul>
         </ul>
-        <ul className='right'>
-          {renderButtons === 1 ? (
+        <ul className='right' onBlur={hideUser}>
+          {renderButtons === 1 && (
             <li className='register-login-buttons'>
               <Link className='flex gap' to='/login'>
                 <Button text='Ingresar' width={140} />
@@ -75,33 +83,34 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                 <Button2 text='Registrarse' width={140} />
               </Link>
             </li>
-          ) : renderButtons === 2 ? (
-            // <div className='user' onClick={() => handleExpandClick()}>
-            //   <h3 className='user__image'>
-            //     <img src='/avatar1.png' alt='Imagen de perfil del usuario' />
-            //   </h3>
-            //   <div className={expanded ? `user__options show` : 'user__options'}>
-            //     <div className='logout' onClick={logout}>
-            //       <Link onClick={logout}>
-            //         Cerrar sesión <BiLogOut />
-            //       </Link>
-            //     </div>
-            //   </div>
-            //   {expanded ? (
-            //     <FaAngleUp className='user__icon' />
-            //   ) : (
-            //     <FaAngleDown className='user__icon' />
-            //   )}
-            // </div>
-            <li className='logout'>
-              <Link onClick={logout}>
-                <p>
-                  Cerrar sesión <BiLogOut />
-                </p>
-              </Link>
-            </li>
-          ) : (
-            ''
+          )}
+          {renderButtons === 2 && (
+            <>
+              <ul onClick={handleExpandClick} className={expanded ? `user show` : 'user'}>
+                <LazyLoadImage
+                  loading='lazy'
+                  src='/avatar1.png'
+                  width={40}
+                  height={40}
+                  effect='blur'
+                  className='user__image'
+                  alt='Imagen de perfil del usuario'
+                />
+                <FaAngleDown className='user__icon' />
+                {expanded && (
+                  <>
+                    <ul className='user__options'>
+                      <li className='options__option'>
+                        Editar perfil <AiOutlineSetting />
+                      </li>
+                      <li className='options__option' onClick={logout}>
+                        Cerrar sesión <BiLogOut />
+                      </li>
+                    </ul>
+                  </>
+                )}
+              </ul>
+            </>
           )}
         </ul>
       </nav>

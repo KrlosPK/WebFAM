@@ -57,7 +57,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
             </a>
           )
         })}
-        {renderButtons === 1 ? (
+        {renderButtons === 1 && (
           <>
             <Link className='flex' to='/login'>
               <Button text='Ingresar' width={140} />
@@ -66,14 +66,13 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
               <Button2 text='Registrarse' width={140} />
             </Link>
           </>
-        ) : renderButtons === 2 ? (
+        )}
+        {renderButtons === 2 && (
           <div className='logout'>
             <Link onClick={logout}>
               Cerrar sesión <BiLogOut />
             </Link>
           </div>
-        ) : (
-          ''
         )}
       </div>
       <button className={buttonClassName} onClick={handleClick}>

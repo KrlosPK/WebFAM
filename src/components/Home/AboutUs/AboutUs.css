@@ -1,5 +1,6 @@
 .about-us-container {
   display: grid;
+  padding: 4rem 0;
   place-items: center;
   position: relative;
   z-index: 1;
@@ -46,7 +47,6 @@
   }
   .info__title {
     font-size: 36px;
-    margin-top: 4rem;
   }
   .info {
     width: 100%;
