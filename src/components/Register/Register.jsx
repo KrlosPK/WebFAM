@@ -1,6 +1,6 @@
 import './Register.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Button2, Input, Select, API_URL, Navbar, ResponsiveNav } from '../Utils'
+import { Button, Button2, Input, Select, API_URL, Navbar } from '../Utils'
 
 //? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
@@ -162,10 +162,10 @@ const Register = () => {
       focusInput(numDocumentoInputEl)
 
       return false
-    } else if (num_documento.length < 9 || num_documento.length >= 12) {
+    } else if (num_documento.length < 10 || num_documento.length >= 12) {
       e.preventDefault()
 
-      toast.error('¡El Número de Documento debe tener entre 9 y 11 dígitos!', {
+      toast.error('¡El Número de Documento debe tener entre 10 y 12 dígitos!', {
         theme: 'colored'
       })
 
@@ -279,7 +279,6 @@ const Register = () => {
   return (
     <div className='login-div'>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <ResponsiveNav elementText={['Inicio']} url={['/']} />
       <Navbar
         elementTextLeft={['Inicio']}
         urlLeft={['/']}
@@ -287,7 +286,6 @@ const Register = () => {
         urlRight={['']}
         renderButtons={3}
       />
-      <hr className='header-line' />
       <section className='login-form'>
         <div className='register-label'>
           <p>Regístrate</p>

@@ -35,7 +35,7 @@ const ResponsiveNav = ({ elementText, url, renderButtons }) => {
   }
 
   const { setSession } = useContext(SessionContext)
-  
+
   const logout = () => {
     setSession(false)
   }
@@ -53,10 +53,10 @@ const ResponsiveNav = ({ elementText, url, renderButtons }) => {
         {renderButtons === 1 ? (
           <>
             <Link className='flex' to='/login'>
-              <Button text='Ingresar' width={120} />
+              <Button text='Ingresar' width={140} />
             </Link>
             <Link className='flex' to='/register'>
-              <Button2 text='Registrarse' width={120} />
+              <Button2 text='Registrarse' width={140} />
             </Link>
           </>
         ) : renderButtons === 2 ? (
