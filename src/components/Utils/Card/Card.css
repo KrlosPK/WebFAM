@@ -5,9 +5,6 @@
   gap: 0.5em;
   padding: 1rem;
 }
-.card:hover .card__image {
-  scale: 1.025;
-}
 picture {
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   border-radius: 10px;
@@ -17,7 +14,6 @@ picture {
 .card__image {
   border-radius: 1px 10px 1px 10px;
   object-fit: cover;
-  transition: scale 200ms ease-in-out !important;
 }
 .card__title {
   font-family: 'Syne', sans-serif;

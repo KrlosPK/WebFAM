@@ -83,9 +83,6 @@ a {
   position: relative;
   transition: border-color 300ms ease-in-out;
 }
-.user:hover {
-  border-color: #f39a25;
-}
 .user__image {
   background: linear-gradient(to top, #232526, #414345);
   border-radius: 50%;
@@ -116,8 +113,7 @@ a {
   z-index: 1;
 }
 .options__option:hover {
-  background-color: #1f6feb;
-  color: white;
+  background-color: #d750082d;
 }
 .logout a {
   align-items: center;

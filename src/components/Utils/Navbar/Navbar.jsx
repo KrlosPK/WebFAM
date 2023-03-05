@@ -10,7 +10,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 //* Hooks
 import { Link } from 'react-router-dom'
 import { SessionContext } from '../../../context/SessionContext'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 
 //? Icons
 import { BiLogOut } from 'react-icons/bi'
@@ -19,16 +19,24 @@ import { FaAngleDown } from 'react-icons/fa'
 
 const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [expanded, setExpanded] = useState(false)
+  const dropdownRef = useRef(null)
 
   const handleExpandClick = () => {
-    console.log('clicked')
     setExpanded(!expanded)
   }
 
-  const hideUser = () => {
-    console.log('holas')
-    setExpanded(false)
-  }
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setExpanded(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [dropdownRef])
 
   const { setSession } = useContext(SessionContext)
 
@@ -37,7 +45,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   }
   return (
     <>
-      <nav className='navbar'>
+      <nav className='navbar' ref={dropdownRef}>
         <ul className='logo'>
           <Link to='/'>
             <LazyLoadImage
@@ -73,7 +81,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
               : ''}
           </ul>
         </ul>
-        <ul className='right' onBlur={hideUser}>
+        <ul className='right'>
           {renderButtons === 1 && (
             <li className='register-login-buttons'>
               <Link className='flex gap' to='/login'>
