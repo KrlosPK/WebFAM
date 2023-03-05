@@ -133,6 +133,8 @@ const Login = () => {
         .then(({ data }) => {
           const { result } = data
 
+          localStorage.setItem('session', 'true')
+
           setSession(true)
 
           if (result) return navigate('/')
