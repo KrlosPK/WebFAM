@@ -11,7 +11,10 @@ import { ToastifyContext } from '../../context/ToastifyContext'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import { GoogleLogin } from '@react-oauth/google'
+import { LoginSocialFacebook } from 'reactjs-social-login'
+import { FacebookLoginButton } from 'react-social-login-buttons'
 import jwt_decode from 'jwt-decode'
 
 //? Icons
@@ -204,39 +207,51 @@ const Login = () => {
   return (
     <div className='login-div' onLoad={getCookieData}>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <Navbar
-        elementTextLeft={['Inicio']}
-        urlLeft={['/']}
-        elementTextRight={['']}
-        urlRight={['']}
-        renderButtons={3}
-      />
+      <Navbar elementTextLeft={['Inicio']} urlLeft={['/']} elementTextRight={['']} urlRight={['']} renderButtons={3} />
       <section className='login-form'>
         <div className='first-login'>
           <p>Para continuar, inicie sesión</p>
           <div className='buttons'>
-            <button className='Login-button button_fb'>
+            {/* <button className='Login-button button_fb'>
               <AiFillFacebook /> Continúa con Facebook
-            </button>
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                const { credential } = credentialResponse
-                try {
-                  let decoded = jwt_decode(credential)
-                  setSession(true)
-                  navigate('/')
-                } catch (err) {
-                  console.log(err)
-                }
+            </button> */}
+            <LoginSocialFacebook
+              appId='1329020180997223'
+              onResolve={(credentialResponse) => {
+                // Contiene los datos del cliente en facebook
+                const { accessToken, userID } = credentialResponse
+                setSession(true)
+                navigate('/')
               }}
-              onError={() => {
-                console.log('Login Failed')
+              onReject={(error) => {
+                console.log(error)
               }}
-              size='medium'
-              shape='circle'
-              width='300'
-              useOneTap
-            />
+            >
+              <FacebookLoginButton text='Acceder con Facebook' style={{ width: '300px', height: '34px', fontSize: '14px', borderRadius: '100px' }} iconSize={'14px'} align={'center'} />
+            </LoginSocialFacebook>
+            <GoogleOAuthProvider clientId='294667816272-supt23ie3grtgl1ed50n6e1et58st5f1.apps.googleusercontent.com'>
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  const { credential } = credentialResponse
+                  try {
+                    // Contiene los datos del cliente en google
+                    let decoded = jwt_decode(credential)
+                    setSession(true)
+                    navigate('/')
+                  } catch (err) {
+                    console.log(err)
+                  }
+                }}
+                onError={() => {
+                  console.log('Login Failed')
+                }}
+                size='medium'
+                shape='circle'
+                width='300'
+                useOneTap
+                ux_mode='popup'
+              />
+            </GoogleOAuthProvider>
           </div>
           <div className='between-session'>
             <div className='line-breaker' />
