@@ -219,26 +219,27 @@ const Register = () => {
     } else if (!regexContrasena.test(contrasena)) {
       e.preventDefault()
 
-      toast.error(
-        '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
-        {
-          theme: 'colored'
-        }
-      )
+      toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
+        theme: 'colored'
+      })
 
       focusInput(contrasenaInputEl)
 
       return false
     } else {
-      setBody({ nombre, apellidos, correo, num_celular, contrasena, tipo_documento, num_documento })
+      const nombreTrim = nombre.trim()
+      console.log(nombreTrim)
+      const apellidosTrim = apellidos.trim()
+      console.log(apellidosTrim)
+      setBody({ nombreTrim, apellidosTrim, correo, num_celular, contrasena, tipo_documento, num_documento })
 
       setDisabled(true)
-
+      // ! No funca el trim :(
       await axios
         .post(API_URL('signup'), body)
         .then(() => {
           setToastify(true)
-
+          console.log(body)
           navigate('/login')
         })
         .catch(() => {
@@ -251,8 +252,8 @@ const Register = () => {
   }
 
   const [body, setBody] = useState({
-    nombre: '',
-    apellidos: '',
+    nombre: ''.trim(),
+    apellidos: ''.trim(),
     correo: '',
     num_celular: '',
     contrasena: '',
@@ -279,89 +280,28 @@ const Register = () => {
   return (
     <div className='login-div'>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <Navbar
-        elementTextLeft={['Inicio']}
-        urlLeft={['/']}
-        elementTextRight={['']}
-        urlRight={['']}
-        renderButtons={3}
-      />
+      <Navbar elementTextLeft={['Inicio']} urlLeft={['/']} elementTextRight={['']} urlRight={['']} renderButtons={3} />
       <section className='login-form'>
         <div className='register-label'>
           <p>Regístrate</p>
         </div>
         <form className='second-login' onSubmit={createUser} onKeyDown={handleKeyDown}>
           <div className='main-form'>
-            <Input
-              text='Nombre'
-              nameID='nombre'
-              value={body.nombre}
-              innerRef={nombreInputEl}
-              innerOnChange={inputChange}
-            />
+            <Input text='Nombre' nameID='nombre' value={body.nombre} innerRef={nombreInputEl} innerOnChange={inputChange} />
 
-            <Input
-              text='Apellidos'
-              nameID='apellidos'
-              value={body.apellidos}
-              innerRef={apellidosInputEl}
-              innerOnChange={inputChange}
-            />
+            <Input text='Apellidos' nameID='apellidos' value={body.apellidos} innerRef={apellidosInputEl} innerOnChange={inputChange} />
 
-            <Input
-              text='Número de celular'
-              type='number'
-              nameID='num_celular'
-              value={body.num_celular}
-              innerRef={numCelularInputEl}
-              innerOnChange={inputChange}
-            />
+            <Input text='Número de celular' type='number' nameID='num_celular' value={body.num_celular} innerRef={numCelularInputEl} innerOnChange={inputChange} />
 
-            <Select
-              innerRef={tipoDocumentoInputEl}
-              innerValue={body.tipo_documento}
-              innerOnChange={selectChange}
-              innerName='tipo_documento'
-              value={['', 'C.C', 'C.E', 'NIT']}
-              option={[
-                'Selecciona una opción',
-                'Cédula de Ciudadanía',
-                'Cédula de Extranjería',
-                '(NIT) Número de Identificación Tributaria'
-              ]}
-              text='Tipo de Documento'
-            />
+            <Select innerRef={tipoDocumentoInputEl} innerValue={body.tipo_documento} innerOnChange={selectChange} innerName='tipo_documento' value={['', 'C.C', 'C.E', 'NIT']} option={['Selecciona una opción', 'Cédula de Ciudadanía', 'Cédula de Extranjería', '(NIT) Número de Identificación Tributaria']} text='Tipo de Documento' />
 
-            <Input
-              text='Número de Documento'
-              type='number'
-              nameID='num_documento'
-              value={body.num_documento}
-              innerRef={numDocumentoInputEl}
-              innerOnChange={inputChange}
-            />
+            <Input text='Número de Documento' type='number' nameID='num_documento' value={body.num_documento} innerRef={numDocumentoInputEl} innerOnChange={inputChange} />
 
-            <Input
-              text='Correo'
-              type='email'
-              nameID='correo'
-              value={body.correo}
-              innerRef={correoInputEl}
-              innerOnChange={inputChange}
-            />
+            <Input text='Correo' type='email' nameID='correo' value={body.correo} innerRef={correoInputEl} innerOnChange={inputChange} />
 
             <div className='input-container'>
-              <Input
-                text='Contraseña'
-                nameID='contrasena'
-                type={showPassword ? 'password' : 'text'}
-                value={body.contrasena}
-                innerRef={contrasenaInputEl}
-                innerOnChange={inputChange}
-              />
-              <div onClick={handleShowPasswordClick}>
-                {showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
-              </div>
+              <Input text='Contraseña' nameID='contrasena' type={showPassword ? 'password' : 'text'} value={body.contrasena} innerRef={contrasenaInputEl} innerOnChange={inputChange} />
+              <div onClick={handleShowPasswordClick}>{showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}</div>
             </div>
           </div>
           <div className='register'>
