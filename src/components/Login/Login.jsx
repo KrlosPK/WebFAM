@@ -13,14 +13,12 @@ import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { GoogleLogin } from '@react-oauth/google'
-import { LoginSocialFacebook } from 'reactjs-social-login'
-import { FacebookLoginButton } from 'react-social-login-buttons'
+// import { LoginSocialFacebook } from 'reactjs-social-login'
+// import { FacebookLoginButton } from 'react-social-login-buttons'
 import jwt_decode from 'jwt-decode'
 
 //? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
-import { AiFillFacebook } from 'react-icons/ai'
-import { FcGoogle } from 'react-icons/fc'
 
 const Login = () => {
   //? Context
@@ -214,10 +212,7 @@ const Login = () => {
         <div className='first-login'>
           <p>Para continuar, inicie sesión</p>
           <div className='buttons'>
-            {/* <button className='Login-button button_fb'>
-              <AiFillFacebook /> Continúa con Facebook
-            </button> */}
-            <LoginSocialFacebook
+            {/* <LoginSocialFacebook
               appId='1329020180997223'
               onResolve={(credentialResponse) => {
                 // Contiene los datos del cliente en facebook
@@ -230,7 +225,7 @@ const Login = () => {
               }}
             >
               <FacebookLoginButton text='Acceder con Facebook' style={{ width: '300px', height: '34px', fontSize: '14px', borderRadius: '100px' }} iconSize={'14px'} align={'center'} />
-            </LoginSocialFacebook>
+            </LoginSocialFacebook> */}
             <GoogleOAuthProvider clientId='294667816272-supt23ie3grtgl1ed50n6e1et58st5f1.apps.googleusercontent.com'>
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
@@ -238,6 +233,7 @@ const Login = () => {
                   try {
                     // Contiene los datos del cliente en google
                     let decoded = jwt_decode(credential)
+                    localStorage.setItem('session', 'true')
                     setSession(true)
                     navigate('/')
                   } catch (err) {

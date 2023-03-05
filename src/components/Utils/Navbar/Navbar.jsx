@@ -42,7 +42,6 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
 
   const logout = () => {
     localStorage.setItem('session', '')
-
     setSession(false)
   }
   return (
