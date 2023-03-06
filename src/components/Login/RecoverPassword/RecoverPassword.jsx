@@ -1,7 +1,7 @@
 import './RecoverPassword.css'
 
 //? Components
-import { Input, Button, Button2, Navbar, API_URL, validateMail } from '../../Utils'
+import { Input, Button, Navbar, API_URL, validateMail } from '../../Utils'
 
 //* Hooks
 import { useEffect, useRef, useState } from 'react'
@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import emailjs from '@emailjs/browser'
 
 //? Icons
 import { AiFillBackward } from 'react-icons/ai'
@@ -31,6 +32,33 @@ const RecoverPassword = () => {
 
   //* Variables para hacer la validación
   const correoInputEl = useRef(null)
+
+  //? Desactivar tecla de enter
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      event.preventDefault()
+    }
+  }
+
+  //TODO
+  const [toEmail, setToEmail] = useState('fademetmontajes@gmail.com')
+
+  const form = useRef(null)
+
+  const sendEmail = (e) => {
+    e.preventDefault()
+
+    emailjs
+      .sendForm('service_nl11uxr', 'template_wa8h19ra', form.current, '-cZX9PkvRspHkBQSX')
+      .then(
+        (result) => {
+          console.log(result.text)
+        },
+        (error) => {
+          console.log(error.text)
+        }
+      )
+  }
 
   const verifyEmail = async (e) => {
     e.preventDefault()
@@ -65,23 +93,23 @@ const RecoverPassword = () => {
     } else {
       setBody({ correo })
 
+      sendEmail(e)
+
       setDisabled(true)
 
       // TODO axios
       await axios
-        .post(API_URL('checkEmail'), body)
+        .post(API_URL('comprobarCorreo'), body)
         .then(() => {
-          console.log(body)
           Swal.fire({
             icon: 'success',
             title: '¡Hemos enviado un correo a tu cuenta!',
-            text: 'Entra al enlace que te hemos enviado al correo para que reestablezcas tu contraseña.',
+            text: 'Entra al enlace que te hemos enviado al correo para que restablezcas tu contraseña.',
             footer: '<a href="/">Volver al inicio</a>'
           })
         })
-        .catch(() => {
-          console.log(body)
-          console.log('Error')
+        .catch((err) => {
+          console.log(err)
           toast.error('¡Este correo no está asociado a ninguna de nuestras cuentas!', {
             theme: 'colored'
           })
@@ -123,7 +151,7 @@ const RecoverPassword = () => {
           <div className='container__text'>
             <p>¡No te preocupes! Nos sucede a todos. Ingresa tu Email y te ayudaremos.</p>
           </div>
-          <form className='container__form' onSubmit={verifyEmail}>
+          <form className='container__form' ref={form} onSubmit={verifyEmail}>
             <div className='main-form'>
               <Input
                 text='Correo electrónico'
@@ -133,6 +161,31 @@ const RecoverPassword = () => {
                 value={body.correo}
                 innerRef={correoInputEl}
                 innerOnChange={inputChange}
+                innerOnKeyDown={handleKeyDown}
+              />
+              <input
+                style={{ display: 'none' }}
+                readOnly
+                type='text'
+                id='recoverLink'
+                name='recoverLink'
+                value='https://fademetmontajes.netlify.app/reset-password'
+              />
+              <input
+                style={{ display: 'none' }}
+                readOnly
+                type='text'
+                id='fromName'
+                name='fromName'
+                value='FADEMET Montajes'
+              />
+              <input
+                style={{ display: 'none' }}
+                readOnly
+                type='text'
+                id='toEmail'
+                name='toEmail'
+                value={toEmail}
               />
               <Button
                 text={'Recuperar contraseña'}

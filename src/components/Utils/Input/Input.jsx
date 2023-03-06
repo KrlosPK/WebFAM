@@ -1,6 +1,6 @@
 import './Input.css'
 
-const Input = ({ text, type = 'text', nameID, max = 30, innerRef, innerOnChange, innerId }) => {
+const Input = ({ text, type = 'text', nameID, max = 30, innerRef, innerOnChange, innerId, innerOnKeyDown }) => {
   return (
     <div className='input-container'>
       <input
@@ -12,6 +12,7 @@ const Input = ({ text, type = 'text', nameID, max = 30, innerRef, innerOnChange,
         name={nameID}
         ref={innerRef}
         id={innerId}
+        onKeyDown={innerOnKeyDown}
       />
       <label className='label-login'>{text}</label>
     </div>

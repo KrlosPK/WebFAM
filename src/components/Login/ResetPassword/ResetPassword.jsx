@@ -13,7 +13,7 @@ const ResetPassword = () => {
   const navigate = useNavigate()
 
   //! Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes - Cambiar contraseña')
+  const [title, setTitle] = useState('FADEMET Montajes - Restablecer contraseña')
   useEffect(() => {
     document.title = title
   }, [setTitle])
@@ -113,7 +113,7 @@ const ResetPassword = () => {
             <img src='/recover-password-reset.png' alt='Correo para recuperar la contraseña' />
           </div>
           <div className='container__title'>
-            <h1>¡Reestable tu contraseña!</h1>
+            <h1>¡Restablece tu contraseña!</h1>
           </div>
           <div className='container__text'>
             <p>¡Es hora de renovarse! crea una nueva clave secreta.</p>
@@ -147,7 +147,7 @@ const ResetPassword = () => {
                   {showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
                 </div>
               </div>
-              <Button text={'Verificar'} textDisabled={'Cargando'} disable={disabled} />
+              <Button text={'Restablecer'} textDisabled={'Cargando'} disable={disabled} />
             </div>
           </form>
         </div>
