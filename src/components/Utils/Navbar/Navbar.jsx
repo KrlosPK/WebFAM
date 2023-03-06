@@ -1,7 +1,7 @@
 import './Navbar.css'
 
 //? Components
-import { Button, Button2 } from '../../Utils'
+import { API_URL, Button, Button2 } from '../../Utils'
 
 //* Libraries
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -16,6 +16,7 @@ import { useContext, useState, useEffect, useRef } from 'react'
 import { BiLogOut } from 'react-icons/bi'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { FaAngleDown } from 'react-icons/fa'
+import axios from 'axios'
 
 const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [expanded, setExpanded] = useState(false)
@@ -25,7 +26,15 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
     setExpanded(!expanded)
   }
 
+  const [username, setUsername] = useState(null)
+
   useEffect(() => {
+    // Get User name from API
+    axios.get(API_URL(`usuarios/${1}`)).then(({ data }) => {
+      const { nombre } = data.user[0]
+      setUsername(nombre)
+    })
+
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setExpanded(false)
@@ -95,25 +104,41 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
           )}
           {renderButtons === 2 && (
             <>
-              <ul onClick={handleExpandClick} className={expanded ? `user show` : 'user'}>
-                <LazyLoadImage
-                  loading='lazy'
-                  src='/avatar1.png'
-                  width={40}
-                  height={40}
-                  effect='blur'
-                  className='user__image'
-                  alt='Imagen de perfil del usuario'
-                />
-                <FaAngleDown className='user__icon' />
+              <ul className={expanded ? `user show` : 'user'}>
+                <li className='user' onClick={handleExpandClick}>
+                  <LazyLoadImage
+                    loading='lazy'
+                    src='/avatar1.png'
+                    width={35}
+                    height={35}
+                    effect='blur'
+                    className='user__image'
+                    alt='Imagen de perfil del usuario'
+                  />
+                  <FaAngleDown className='user__icon' />
+                </li>
                 {expanded && (
                   <>
                     <ul className='user__options'>
                       <li className='options__option'>
-                        Editar perfil <AiOutlineSetting />
+                        <LazyLoadImage
+                          loading='lazy'
+                          src='/avatar1.png'
+                          width={45}
+                          height={45}
+                          effect='blur'
+                          className='user__image'
+                          alt='Imagen de perfil del usuario'
+                        />
+                        <strong className='user__name'>{username}</strong>
                       </li>
+                      <li className='options__option'>
+                        <AiOutlineSetting /> Configuración
+                      </li>
+                      {/* //TODO Dark Mode */}
                       <li className='options__option' onClick={logout}>
-                        Cerrar sesión <BiLogOut />
+                        <BiLogOut />
+                        Cerrar sesión
                       </li>
                     </ul>
                   </>

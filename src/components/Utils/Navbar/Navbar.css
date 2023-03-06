@@ -91,10 +91,9 @@ a {
   border-radius: 50%;
   object-fit: cover;
 }
-
 .user__options {
   background-color: var(--white-color);
-  border: 2px solid #000;
+  border: 2px solid gray;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -114,6 +113,34 @@ a {
 }
 .options__option:hover {
   background-color: #d750082d;
+}
+.options__option:nth-child(1) {
+  cursor: default;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: start;
+  max-width: 200px;
+  white-space: nowrap;
+}
+.options__option:nth-child(1):hover {
+  background-color: transparent;
+}
+.user__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: text;
+}
+.options__option:nth-child(3) {
+  margin-top: 1rem;
+  position: relative;
+}
+.options__option:nth-child(3)::before {
+  background-color: gray;
+  content: '';
+  height: 1px;
+  position: absolute;
+  top: -0.5rem;
+  width: 100%;
 }
 .logout a {
   align-items: center;
