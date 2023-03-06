@@ -7,6 +7,7 @@
   display: grid;
   grid-template-columns: 20% 1fr 20%;
   margin: 0 auto 7rem;
+  max-width: 1200px;
   min-height: 400px;
   padding: 2rem;
   transition: all 200ms;

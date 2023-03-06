@@ -69,7 +69,7 @@ const RecoverPassword = () => {
 
       // TODO axios
       await axios
-        .post(API_URL('recoverPassword'), body)
+        .post(API_URL('checkEmail'), body)
         .then(() => {
           console.log(body)
           Swal.fire({
@@ -90,7 +90,7 @@ const RecoverPassword = () => {
     }
   }
 
-  //* guarda correo y contraseña
+  //* guarda correo
   const [body, setBody] = useState({ correo: '' })
 
   const inputChange = ({ target }) => {

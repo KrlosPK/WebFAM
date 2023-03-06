@@ -29,7 +29,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   const [username, setUsername] = useState(null)
 
   useEffect(() => {
-    // Get User name from API
+    //* Get User name from API
     axios.get(API_URL(`usuarios/${1}`)).then(({ data }) => {
       const { nombre } = data.user[0]
       setUsername(nombre)
@@ -105,7 +105,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
           {renderButtons === 2 && (
             <>
               <ul className={expanded ? `user show` : 'user'}>
-                <li className='user' onClick={handleExpandClick}>
+                <li className='user user__container' onClick={handleExpandClick}>
                   <LazyLoadImage
                     loading='lazy'
                     src='/avatar1.png'
@@ -115,7 +115,10 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                     className='user__image'
                     alt='Imagen de perfil del usuario'
                   />
-                  <FaAngleDown className='user__icon' />
+                  <span className='flex gap user__text'>
+                    Perfil
+                    <FaAngleDown className='user__icon' />
+                  </span>
                 </li>
                 {expanded && (
                   <>
@@ -126,7 +129,6 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                           src='/avatar1.png'
                           width={45}
                           height={45}
-                          effect='blur'
                           className='user__image'
                           alt='Imagen de perfil del usuario'
                         />
@@ -135,7 +137,6 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                       <li className='options__option'>
                         <AiOutlineSetting /> Configuración
                       </li>
-                      {/* //TODO Dark Mode */}
                       <li className='options__option' onClick={logout}>
                         <BiLogOut />
                         Cerrar sesión

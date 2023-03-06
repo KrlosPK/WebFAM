@@ -83,6 +83,12 @@ a {
   position: relative;
   transition: border-color 300ms ease-in-out;
 }
+.user__text {
+  transition: color 300ms ease;
+}
+.user__container:hover .user__text {
+  color: #555;
+}
 .user__image {
   background: linear-gradient(to top, #232526, #414345);
   border-radius: 50%;
@@ -109,10 +115,12 @@ a {
   gap: 6px;
   justify-content: center;
   padding: 1rem;
+  transition: background 300ms ease;
   z-index: 1;
 }
 .options__option:hover {
-  background-color: #d750082d;
+  background: #ccc;
+  color: #000;
 }
 .options__option:nth-child(1) {
   cursor: default;
@@ -123,7 +131,7 @@ a {
   white-space: nowrap;
 }
 .options__option:nth-child(1):hover {
-  background-color: transparent;
+  background: transparent;
 }
 .user__name {
   overflow: hidden;
