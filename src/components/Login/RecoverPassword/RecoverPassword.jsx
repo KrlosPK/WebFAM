@@ -67,29 +67,26 @@ const RecoverPassword = () => {
 
       setDisabled(true)
 
-      Swal.fire({
-        icon: 'success',
-        title: '¡Hemos enviado un correo a tu cuenta!',
-        text: 'Entra al enlace que te hemos enviado al correo para que reestablezcas tu contraseña.',
-        footer: '<a href="/">Volver al inicio</a>'
-      })
-
       // TODO axios
-      // await axios
-      //   .post(API_URL('recoverpassword'), body)
-      //   .then(({ data }) => {
-      //     const { result } = data
-
-      //     setSession(true)
-
-      //     if (result) return navigate('/verify-password')
-      //   })
-      //   .catch(() => {
-      //     toast.error('¡Correo y/o contraseña incorrectos!', {
-      //       theme: 'colored'
-      //     })
-      //     setDisabled(false)
-      //   })
+      await axios
+        .post(API_URL('recoverPassword'), body)
+        .then(() => {
+          console.log(body)
+          Swal.fire({
+            icon: 'success',
+            title: '¡Hemos enviado un correo a tu cuenta!',
+            text: 'Entra al enlace que te hemos enviado al correo para que reestablezcas tu contraseña.',
+            footer: '<a href="/">Volver al inicio</a>'
+          })
+        })
+        .catch(() => {
+          console.log(body)
+          console.log('Error')
+          toast.error('¡Este correo no está asociado a ninguna de nuestras cuentas!', {
+            theme: 'colored'
+          })
+          setDisabled(false)
+        })
     }
   }
 
@@ -137,7 +134,12 @@ const RecoverPassword = () => {
                 innerRef={correoInputEl}
                 innerOnChange={inputChange}
               />
-              <Button text={'Recuperar contraseña'} textDisabled={'Enviado'} disable={disabled} animation={false} />
+              <Button
+                text={'Recuperar contraseña'}
+                textDisabled={'Enviado'}
+                disable={disabled}
+                animation={false}
+              />
             </div>
           </form>
         </div>

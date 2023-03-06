@@ -280,7 +280,7 @@ const Register = () => {
   return (
     <div className='login-div'>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <Navbar elementTextLeft={['Inicio']} urlLeft={['/']} elementTextRight={['']} urlRight={['']} renderButtons={3} />
+      <Navbar renderButtons={3} />
       <section className='login-form'>
         <div className='register-label'>
           <p>Regístrate</p>
