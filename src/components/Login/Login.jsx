@@ -24,6 +24,8 @@ const Login = () => {
 
   const { toastify } = useContext(ToastifyContext)
 
+  const [token, setToken] = useState(null)
+
   useEffect(() => {
     if (toastify === true) {
       toast.success('¡Usuario creado con éxito!', {
@@ -120,20 +122,20 @@ const Login = () => {
       focusInput(contrasenaInputEl)
     } else {
       setBody({ correo, contrasena })
-      setCookie()
+      // setCookie()
 
       setDisabled(true)
 
       await axios
         .post(API_URL('signin'), body)
         .then(({ data }) => {
-          const { result } = data
-
+          const { Authorization } = data.Headers
           localStorage.setItem('session', 'true')
 
+          setTokenData(Authorization)
           setSession(true)
 
-          if (result) return navigate('/')
+          if (Authorization) return navigate('/')
         })
         .catch(() => {
           toast.error('¡Correo y/o contraseña incorrectos!', {
@@ -142,6 +144,14 @@ const Login = () => {
           setDisabled(false)
         })
     }
+  }
+
+  const setTokenData = (token) => {
+    setToken(token)
+
+    const date = new Date()
+    date.setTime(date.getTime() + 60 * 60 * 75 * 10000)
+    document.cookie = `token=${token}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
   }
   //* guarda correo y contraseña
   const [body, setBody] = useState({ correo: '', contrasena: '' })
@@ -155,7 +165,7 @@ const Login = () => {
   }
 
   // * Set cookie for remember me
-  const setCookie = () => {
+  /*   const setCookie = () => {
     if (document.querySelector('#check').checked) {
       if (document.querySelector('#correo').value === '' || document.querySelector('#contrasena').value === '') {
         toast.error('¡Debes tener tus datos correctos para recordar! Vuelve a intentarlo...', {
@@ -185,25 +195,25 @@ const Login = () => {
       document.cookie = `correo=${correo}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=http://localhost:3000/login; Secure`
       document.cookie = `contrasena=${contrasena}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=http://localhost:3000/login; Secure`
     }
-  }
+  } */
 
-  const getCookieData = () => {
-    if (document.cookie.length !== 0) {
-      const cookies = document.cookie.split(';')
-      const correo = cookies[0].split('=')[1]
-      const contrasena = cookies[1].split('=')[1]
+  // const getCookieData = () => {
+  //   if (document.cookie.length !== 0) {
+  //     const cookies = document.cookie.split(';')
+  //     const correo = cookies[0].split('=')[1]
+  //     const contrasena = cookies[1].split('=')[1]
 
-      if (correo !== '' || contrasena !== '') {
-        document.querySelector('#check').checked = true
-        document.querySelector('#correo').value = correo
-        document.querySelector('#contrasena').value = contrasena
-        setBody({ correo, contrasena })
-      }
-    }
-  }
+  //     if (correo !== '' || contrasena !== '') {
+  //       document.querySelector('#check').checked = true
+  //       document.querySelector('#correo').value = correo
+  //       document.querySelector('#contrasena').value = contrasena
+  //       setBody({ correo, contrasena })
+  //     }
+  //   }
+  // }
 
   return (
-    <div className='login-div' onLoad={getCookieData}>
+    <div className='login-div'>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <Navbar renderButtons={3} />
       <section className='login-form'>
@@ -253,7 +263,7 @@ const Login = () => {
             <Link to={'/recover-password'}>¿Olvidaste tú contraseña?</Link>
           </div>
           <div className='remind-me'>
-            <input type='checkbox' name='check' id='check' onClick={setCookie} />
+            <input type='checkbox' name='check' id='check' />
             <label htmlFor='check'></label>
             <Button text={'Ingresar'} textDisabled={'Cargando'} disable={disabled} />
           </div>

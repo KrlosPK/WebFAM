@@ -17,6 +17,7 @@ import { BiLogOut } from 'react-icons/bi'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { FaAngleDown } from 'react-icons/fa'
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 
 const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [expanded, setExpanded] = useState(false)
@@ -28,12 +29,25 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
 
   const [username, setUsername] = useState(null)
 
+  const getUserId = () => {
+    const cookies = document.cookie
+    const tokenCookie = cookies.split('; ').find((cookie) => cookie.startsWith('token='))
+    let token = null
+    if (tokenCookie) {
+      token = tokenCookie.split('=')[1]
+    }
+
+    const decoded = jwtDecode(token)
+
+    const { data } = decoded
+
+    setUsername(data[0].nombre)
+  }
+
   useEffect(() => {
+    getUserId()
+
     //* Get User name from API
-    axios.get(API_URL(`usuarios/${1}`)).then(({ data }) => {
-      const { nombre } = data.user[0]
-      setUsername(nombre)
-    })
 
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -58,13 +72,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
       <nav className='navbar' ref={dropdownRef}>
         <ul className='logo'>
           <Link to='/'>
-            <LazyLoadImage
-              src='/logotype-small.png'
-              loading='lazy'
-              width={45}
-              height={45}
-              alt='Logo de Fademet Montajes'
-            />
+            <LazyLoadImage src='/logotype-small.png' loading='lazy' width={45} height={45} alt='Logo de Fademet Montajes' />
           </Link>
           <ul className='left'>
             {linkText
@@ -106,15 +114,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
             <>
               <ul className={expanded ? `user show` : 'user'}>
                 <li className='user user__container' onClick={handleExpandClick}>
-                  <LazyLoadImage
-                    loading='lazy'
-                    src='/avatar1.png'
-                    width={35}
-                    height={35}
-                    effect='blur'
-                    className='user__image'
-                    alt='Imagen de perfil del usuario'
-                  />
+                  <LazyLoadImage loading='lazy' src='/avatar1.png' width={35} height={35} effect='blur' className='user__image' alt='Imagen de perfil del usuario' />
                   <span className='flex gap user__text'>
                     Perfil
                     <FaAngleDown className='user__icon' />
@@ -124,14 +124,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                   <>
                     <ul className='user__options'>
                       <li className='options__option'>
-                        <LazyLoadImage
-                          loading='lazy'
-                          src='/avatar1.png'
-                          width={45}
-                          height={45}
-                          className='user__image'
-                          alt='Imagen de perfil del usuario'
-                        />
+                        <LazyLoadImage loading='lazy' src='/avatar1.png' width={45} height={45} className='user__image' alt='Imagen de perfil del usuario' />
                         <strong className='user__name'>{username}</strong>
                       </li>
                       <li className='options__option'>
