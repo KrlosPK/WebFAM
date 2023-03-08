@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { GoogleLogin } from '@react-oauth/google'
-import jwt_decode from 'jwt-decode'
 
 //? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
@@ -122,7 +121,7 @@ const Login = () => {
       focusInput(contrasenaInputEl)
     } else {
       setBody({ correo, contrasena })
-      // setCookie()
+      rememberSession()
 
       setDisabled(true)
 
@@ -130,7 +129,6 @@ const Login = () => {
         .post(API_URL('signin'), body)
         .then(({ data }) => {
           const { Authorization } = data.Headers
-          localStorage.setItem('session', 'true')
 
           setTokenData(Authorization)
           setSession(true)
@@ -148,9 +146,6 @@ const Login = () => {
 
   const setTokenData = (token) => {
     setToken(token)
-
-    const date = new Date()
-    date.setTime(date.getTime() + 60 * 60 * 75 * 10000)
     document.cookie = `token=${token}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
   }
   //* guarda correo y contraseña
@@ -164,53 +159,30 @@ const Login = () => {
     })
   }
 
-  // * Set cookie for remember me
-  /*   const setCookie = () => {
+  const rememberSession = () => {
+    const rememberMe = document.querySelector('#check').checked
+    if (rememberMe) {
+      localStorage.setItem('session', 'true')
+    } else {
+      localStorage.removeItem('session')
+    }
+  }
+
+  const checkRememberMe = () => {
     if (document.querySelector('#check').checked) {
-      if (document.querySelector('#correo').value === '' || document.querySelector('#contrasena').value === '') {
-        toast.error('¡Debes tener tus datos correctos para recordar! Vuelve a intentarlo...', {
-          theme: 'colored'
-        })
-
-        return (document.querySelector('#check').checked = false)
-      }
-
       const correo = document.querySelector('#correo').value
       const contrasena = document.querySelector('#contrasena').value
       const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
       const contrasenaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
 
-      if (validateMail(correo, correoRegex) || validatePassword(contrasena, contrasenaRegex)) {
-        const date = new Date()
-        date.setTime(date.getTime() + 60 * 60 * 75 * 10000)
-
-        document.cookie = `correo=${correo}; expires=${date.toUTCString()}; path=https://fademetmontajes.netlify.app/login; secure; SameSite=Lax`
-        document.cookie = `contrasena=${contrasena}; expires=${date.toUTCString()}; path=https://fademetmontajes.netlify.app/login; secure; SameSite=Lax`
+      if (!validateMail(correo, correoRegex) || !validatePassword(contrasena, contrasenaRegex)) {
+        toast.error('¡Debes tener tus datos correctos para recordar! Vuelve a intentarlo...', {
+          theme: 'colored'
+        })
+        return (document.querySelector('#check').checked = false)
       }
-    } else {
-      //clear cookies
-      const correo = document.querySelector('#correo').value
-      const contrasena = document.querySelector('#contrasena').value
-
-      document.cookie = `correo=${correo}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=http://localhost:3000/login; Secure`
-      document.cookie = `contrasena=${contrasena}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=http://localhost:3000/login; Secure`
     }
-  } */
-
-  // const getCookieData = () => {
-  //   if (document.cookie.length !== 0) {
-  //     const cookies = document.cookie.split(';')
-  //     const correo = cookies[0].split('=')[1]
-  //     const contrasena = cookies[1].split('=')[1]
-
-  //     if (correo !== '' || contrasena !== '') {
-  //       document.querySelector('#check').checked = true
-  //       document.querySelector('#correo').value = correo
-  //       document.querySelector('#contrasena').value = contrasena
-  //       setBody({ correo, contrasena })
-  //     }
-  //   }
-  // }
+  }
 
   return (
     <div className='login-div'>
@@ -225,9 +197,7 @@ const Login = () => {
                 onSuccess={(credentialResponse) => {
                   const { credential } = credentialResponse
                   try {
-                    // Contiene los datos del cliente en google
-                    let decoded = jwt_decode(credential)
-                    localStorage.setItem('session', 'true')
+                    document.cookie = `token=${credential}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
                     setSession(true)
                     navigate('/')
                   } catch (err) {
@@ -263,7 +233,7 @@ const Login = () => {
             <Link to={'/recover-password'}>¿Olvidaste tú contraseña?</Link>
           </div>
           <div className='remind-me'>
-            <input type='checkbox' name='check' id='check' />
+            <input type='checkbox' name='check' id='check' onClick={checkRememberMe} />
             <label htmlFor='check'></label>
             <Button text={'Ingresar'} textDisabled={'Cargando'} disable={disabled} />
           </div>
