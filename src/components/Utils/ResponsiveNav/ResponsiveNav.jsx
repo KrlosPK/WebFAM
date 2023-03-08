@@ -7,11 +7,11 @@ import { Button, Button2 } from '../'
 import { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { SessionContext } from '../../../context/SessionContext'
+import jwtDecode from 'jwt-decode'
 
 //? Icons
 import { AiOutlineSetting } from 'react-icons/ai'
 import { BiLogOut } from 'react-icons/bi'
-import jwtDecode from 'jwt-decode'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {

@@ -41,23 +41,13 @@ const RecoverPassword = () => {
   }
 
   //TODO
-  const [toEmail, setToEmail] = useState('fademetmontajes@gmail.com')
+  const [toEmail, setToEmail] = useState('')
 
   const form = useRef(null)
 
-  const sendEmail = (e) => {
-    e.preventDefault()
-
+  const sendEmail = () => {
     emailjs
       .sendForm('service_nl11uxr', 'template_wa8h19ra', form.current, '-cZX9PkvRspHkBQSX')
-      .then(
-        (result) => {
-          console.log(result.text)
-        },
-        (error) => {
-          console.log(error.text)
-        }
-      )
   }
 
   const verifyEmail = async (e) => {
@@ -93,9 +83,9 @@ const RecoverPassword = () => {
     } else {
       setBody({ correo })
 
-      sendEmail(e)
-
       setDisabled(true)
+
+      setToEmail(correo)
 
       // TODO axios
       await axios
@@ -107,6 +97,7 @@ const RecoverPassword = () => {
             text: 'Entra al enlace que te hemos enviado al correo para que restablezcas tu contraseña.',
             footer: '<a href="/">Volver al inicio</a>'
           })
+          sendEmail()
         })
         .catch((err) => {
           console.log(err)
