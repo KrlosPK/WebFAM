@@ -15,7 +15,7 @@ import { BiLogOut } from 'react-icons/bi'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
-  const [navIsClicked, setNavIsClicked] = useState('')
+  const [navIsClicked, setNavIsClicked] = useState('clicked')
 
   let navClassName = 'navigation'
 
