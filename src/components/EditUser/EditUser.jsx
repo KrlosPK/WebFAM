@@ -1,7 +1,14 @@
 import './EditUser.css'
 
+//? Components
+import { Navbar, Input } from '../Utils'
+
 const EditUser = () => {
-  return <div>EditUser</div>
+  return (
+    <>
+      <Navbar renderButtons={3} />
+    </>
+  )
 }
 
 export { EditUser }

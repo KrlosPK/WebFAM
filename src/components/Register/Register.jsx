@@ -162,10 +162,10 @@ const Register = () => {
       focusInput(numDocumentoInputEl)
 
       return false
-    } else if (num_documento.length < 10 || num_documento.length >= 12) {
+    } else if (num_documento.length < 7 || num_documento.length >= 12) {
       e.preventDefault()
 
-      toast.error('¡El Número de Documento debe tener entre 10 y 12 dígitos!', {
+      toast.error('¡El Número de Documento debe tener entre 7 y 12 dígitos!', {
         theme: 'colored'
       })
 
@@ -227,19 +227,13 @@ const Register = () => {
 
       return false
     } else {
-      const nombreTrim = nombre.trim()
-      console.log(nombreTrim)
-      const apellidosTrim = apellidos.trim()
-      console.log(apellidosTrim)
-      setBody({ nombreTrim, apellidosTrim, correo, num_celular, contrasena, tipo_documento, num_documento })
+      setBody({ nombre, apellidos, correo, num_celular, contrasena, tipo_documento, num_documento })
 
       setDisabled(true)
-      // ! No funca el trim :(
       await axios
         .post(API_URL('signup'), body)
         .then(() => {
           setToastify(true)
-          console.log(body)
           navigate('/login')
         })
         .catch(() => {

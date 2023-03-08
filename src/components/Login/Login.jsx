@@ -23,8 +23,6 @@ const Login = () => {
 
   const { toastify } = useContext(ToastifyContext)
 
-  const [token, setToken] = useState(null)
-
   useEffect(() => {
     if (toastify === true) {
       toast.success('¡Usuario creado con éxito!', {
@@ -145,7 +143,6 @@ const Login = () => {
   }
 
   const setTokenData = (token) => {
-    setToken(token)
     document.cookie = `token=${token}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
   }
   //* guarda correo y contraseña
@@ -201,7 +198,6 @@ const Login = () => {
                     setSession(true)
                     navigate('/')
                   } catch (err) {
-                    console.log(err)
                   }
                 }}
                 onError={() => {
