@@ -112,9 +112,12 @@ const Login = () => {
       focusInput(contrasenaInputEl)
     } else if (!validatePassword(contrasena, regexContrasena)) {
       e.preventDefault()
-      toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
-        theme: 'colored'
-      })
+      toast.error(
+        '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
+        {
+          theme: 'colored'
+        }
+      )
 
       focusInput(contrasenaInputEl)
     } else {
@@ -133,10 +136,11 @@ const Login = () => {
 
           if (Authorization) return navigate('/')
         })
-        .catch(() => {
+        .catch((err) => {
           toast.error('¡Correo y/o contraseña incorrectos!', {
             theme: 'colored'
           })
+          console.log(err)
           setDisabled(false)
         })
     }
@@ -170,7 +174,8 @@ const Login = () => {
       const correo = document.querySelector('#correo').value
       const contrasena = document.querySelector('#contrasena').value
       const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-      const contrasenaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
+      const contrasenaRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
 
       if (!validateMail(correo, correoRegex) || !validatePassword(contrasena, contrasenaRegex)) {
         toast.error('¡Debes tener tus datos correctos para recordar! Vuelve a intentarlo...', {
@@ -197,8 +202,7 @@ const Login = () => {
                     document.cookie = `token=${credential}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
                     setSession(true)
                     navigate('/')
-                  } catch (err) {
-                  }
+                  } catch (err) {}
                 }}
                 onError={() => {
                   console.log('Login Failed')
@@ -219,10 +223,28 @@ const Login = () => {
         </div>
         <form className='second-login' onSubmit={validateLogin}>
           <div className='main-form'>
-            <Input text='Correo electrónico' innerId='correo' type='email' nameID='correo' value={body.correo} innerRef={correoInputEl} innerOnChange={inputChange} />
+            <Input
+              text='Correo electrónico'
+              innerId='correo'
+              type='email'
+              nameID='correo'
+              value={body.correo}
+              innerRef={correoInputEl}
+              innerOnChange={inputChange}
+            />
             <div className='input-container'>
-              <Input text='Contraseña' innerId='contrasena' type={showContrasena ? 'password' : 'text'} nameID='contrasena' value={body.contrasena} innerRef={contrasenaInputEl} innerOnChange={inputChange} />
-              <div onClick={handleShowContrasenaClick}>{showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}</div>
+              <Input
+                text='Contraseña'
+                innerId='contrasena'
+                type={showContrasena ? 'password' : 'text'}
+                nameID='contrasena'
+                value={body.contrasena}
+                innerRef={contrasenaInputEl}
+                innerOnChange={inputChange}
+              />
+              <div onClick={handleShowContrasenaClick}>
+                {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
+              </div>
             </div>
           </div>
           <div className='forgot-password'>
