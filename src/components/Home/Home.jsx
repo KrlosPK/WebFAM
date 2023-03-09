@@ -23,7 +23,7 @@ import { SessionContext } from '../../context/SessionContext'
 
 const Home = () => {
   //? Context
-  const { session } = useContext(SessionContext)
+  const { session, tempSession } = useContext(SessionContext)
   const { setToastify } = useContext(ToastifyContext)
 
   useEffect(() => {
@@ -40,7 +40,8 @@ const Home = () => {
 
   useEffect(() => {
     !session ? setButton(1) : setButton(2)
-  }, [session])
+    !tempSession ? setButton(1) : setButton(2)
+  }, [session, tempSession])
 
   return (
     <>

@@ -37,12 +37,14 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
     setButtonIsClicked('')
   }
 
-  const { session, setSession } = useContext(SessionContext)
+  const { tempSession, setSession, setTempSession } = useContext(SessionContext)
 
   const logout = () => {
-    localStorage.setItem('session', '')
+    localStorage.removeItem('session')
+    sessionStorage.removeItem('session')
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     setSession(false)
+    setTempSession(false)
   }
   useEffect(() => {
     getUserId()
@@ -73,7 +75,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
   return (
     <div className='menu' onBlur={hideNav}>
       <div className={navClassName}>
-        {session && (
+        {tempSession && (
         <li className='options__option'>
           <LazyLoadImage
             loading='lazy'

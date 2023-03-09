@@ -132,7 +132,7 @@ const RecoverPassword = () => {
       />
       <section className='recover-password__container'>
         <div className='recover-password__card'>
-          <AiFillBackward className='back-button' onClick={() => navigate(-1)} />
+          <AiFillBackward className='back-button' onClick={() => navigate('/login')} />
           <div className='container__image'>
             <img src='/recover-password-email.png' alt='Correo para recuperar la contraseña' />
           </div>

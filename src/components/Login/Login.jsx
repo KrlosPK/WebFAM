@@ -19,7 +19,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const Login = () => {
   //? Context
-  const { setSession } = useContext(SessionContext)
+  const { setSession, setTempSession } = useContext(SessionContext)
 
   const { toastify } = useContext(ToastifyContext)
 
@@ -132,6 +132,10 @@ const Login = () => {
           const { Authorization } = data.Headers
 
           setTokenData(Authorization)
+
+          sessionStorage.setItem('session', 'true')
+          setTempSession(true)
+
           setSession(true)
 
           if (Authorization) return navigate('/')
@@ -200,9 +204,13 @@ const Login = () => {
                   const { credential } = credentialResponse
                   try {
                     document.cookie = `token=${credential}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
+                    sessionStorage.setItem('session', 'true')
                     setSession(true)
+                    setTempSession(true)
                     navigate('/')
-                  } catch (err) {}
+                  } catch (err) {
+                    console.log(err)
+                  }
                 }}
                 onError={() => {
                   console.log('Login Failed')
