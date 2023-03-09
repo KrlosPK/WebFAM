@@ -40,9 +40,11 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
 
     if (decoded.data) {
       const { data } = decoded
+      console.log(decoded)
       setUsername(data[0].nombre)
     } else {
       const { given_name, picture } = decoded
+      console.log(decoded)
       setUsername(given_name)
       setUserPhoto(picture)
     }
@@ -51,6 +53,10 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   useEffect(() => {
     //* Get User name from API
     getUserId()
+
+    if (localStorage.getItem('session') === '') {
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    }
 
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
