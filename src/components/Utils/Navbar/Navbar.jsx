@@ -70,12 +70,14 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
     }
   }, [dropdownRef])
 
-  const { setSession } = useContext(SessionContext)
+  const { setSession, setTempSession } = useContext(SessionContext)
 
   const logout = () => {
-    localStorage.setItem('session', '')
+    localStorage.removeItem('session')
+    sessionStorage.removeItem('session')
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     setSession(false)
+    setTempSession(false)
   }
   return (
     <>
@@ -124,7 +126,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
             <>
               <ul className={expanded ? `user show` : 'user'}>
                 <li className='user user__container' onClick={handleExpandClick}>
-                  <LazyLoadImage loading='lazy' src={userPhoto ? userPhoto : '/default-avatar.png'} width={35} height={35} effect='blur' className='user__image' alt='Imagen de perfil del usuario' />
+                  <LazyLoadImage loading='lazy' src={userPhoto ? userPhoto : '/default-avatar.png'} width={35} height={35} className='user__image' alt='Profile Pic' />
                   <span className='flex gap user__text'>
                     Perfil
                     <FaAngleDown className='user__icon' />
@@ -134,11 +136,13 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                   <>
                     <ul className='user__options'>
                       <li className='options__option'>
-                        <LazyLoadImage loading='lazy' src={userPhoto ? userPhoto : '/default-avatar.png'} width={45} height={45} className='user__image' alt='Imagen de perfil del usuario' />
+                        <LazyLoadImage loading='lazy' src={userPhoto ? userPhoto : '/default-avatar.png'} width={45} height={45} className='user__image' alt='Profile pic' />
                         <strong className='user__name'>{username}</strong>
                       </li>
                       <li className='options__option'>
-                        <AiOutlineSetting /> Configuración
+                        <Link to='edit-user'>
+                          <AiOutlineSetting /> Configuración
+                        </Link>
                       </li>
                       <li className='options__option' onClick={logout}>
                         <BiLogOut />

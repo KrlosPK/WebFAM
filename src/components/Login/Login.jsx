@@ -19,11 +19,9 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const Login = () => {
   //? Context
-  const { setSession } = useContext(SessionContext)
+  const { setSession, setTempSession } = useContext(SessionContext)
 
   const { toastify } = useContext(ToastifyContext)
-
-  const [token, setToken] = useState(null)
 
   useEffect(() => {
     if (toastify === true) {
@@ -114,9 +112,12 @@ const Login = () => {
       focusInput(contrasenaInputEl)
     } else if (!validatePassword(contrasena, regexContrasena)) {
       e.preventDefault()
-      toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
-        theme: 'colored'
-      })
+      toast.error(
+        '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
+        {
+          theme: 'colored'
+        }
+      )
 
       focusInput(contrasenaInputEl)
     } else {
@@ -131,21 +132,25 @@ const Login = () => {
           const { Authorization } = data.Headers
 
           setTokenData(Authorization)
+
+          sessionStorage.setItem('session', 'true')
+          setTempSession(true)
+
           setSession(true)
 
           if (Authorization) return navigate('/')
         })
-        .catch(() => {
+        .catch((err) => {
           toast.error('¡Correo y/o contraseña incorrectos!', {
             theme: 'colored'
           })
+          console.log(err)
           setDisabled(false)
         })
     }
   }
 
   const setTokenData = (token) => {
-    setToken(token)
     document.cookie = `token=${token}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
   }
   //* guarda correo y contraseña
@@ -173,7 +178,8 @@ const Login = () => {
       const correo = document.querySelector('#correo').value
       const contrasena = document.querySelector('#contrasena').value
       const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-      const contrasenaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
+      const contrasenaRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
 
       if (!validateMail(correo, correoRegex) || !validatePassword(contrasena, contrasenaRegex)) {
         toast.error('¡Debes tener tus datos correctos para recordar! Vuelve a intentarlo...', {
@@ -198,7 +204,9 @@ const Login = () => {
                   const { credential } = credentialResponse
                   try {
                     document.cookie = `token=${credential}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
+                    sessionStorage.setItem('session', 'true')
                     setSession(true)
+                    setTempSession(true)
                     navigate('/')
                   } catch (err) {
                     console.log(err)
@@ -223,10 +231,28 @@ const Login = () => {
         </div>
         <form className='second-login' onSubmit={validateLogin}>
           <div className='main-form'>
-            <Input text='Correo electrónico' innerId='correo' type='email' nameID='correo' value={body.correo} innerRef={correoInputEl} innerOnChange={inputChange} />
+            <Input
+              text='Correo electrónico'
+              innerId='correo'
+              type='email'
+              nameID='correo'
+              value={body.correo}
+              innerRef={correoInputEl}
+              innerOnChange={inputChange}
+            />
             <div className='input-container'>
-              <Input text='Contraseña' innerId='contrasena' type={showContrasena ? 'password' : 'text'} nameID='contrasena' value={body.contrasena} innerRef={contrasenaInputEl} innerOnChange={inputChange} />
-              <div onClick={handleShowContrasenaClick}>{showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}</div>
+              <Input
+                text='Contraseña'
+                innerId='contrasena'
+                type={showContrasena ? 'password' : 'text'}
+                nameID='contrasena'
+                value={body.contrasena}
+                innerRef={contrasenaInputEl}
+                innerOnChange={inputChange}
+              />
+              <div onClick={handleShowContrasenaClick}>
+                {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
+              </div>
             </div>
           </div>
           <div className='forgot-password'>
