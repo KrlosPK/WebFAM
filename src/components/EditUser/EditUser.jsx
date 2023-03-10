@@ -30,7 +30,7 @@ const EditUser = () => {
   const [userData, setUserData] = useState({})
   const defaultImage = '/default-avatar.png'
 
-  const getUserId = async () => {
+  const getUserData = async () => {
     const cookies = document.cookie
     const tokenCookie = cookies.split('; ').find((cookie) => cookie.startsWith('token='))
     let token = null
@@ -41,7 +41,6 @@ const EditUser = () => {
 
     if (decoded.data) {
       const { data } = decoded
-      console.log(decoded)
       setUserData({
         ...userData,
         name: data[0].nombre,
@@ -52,14 +51,13 @@ const EditUser = () => {
       })
     } else {
       const { given_name, picture, family_name, email } = decoded
-      console.log(decoded)
       setUserData({ ...userData, name: given_name, lastname: family_name, picture, email })
     }
   }
 
   useEffect(() => {
-    //* Get User name from API
-    getUserId()
+    //* Get User Data from API
+    getUserData()
   }, [])
 
   const updateUserData = (e) => {
@@ -172,7 +170,6 @@ const EditUser = () => {
           </div>
         </form>
       </section>
-
       <Footer />
     </section>
   )
