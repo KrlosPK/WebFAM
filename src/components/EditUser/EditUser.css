@@ -32,18 +32,21 @@
 .edit-main-form {
   width: 500px;
 }
-.edit-main-form button {
+.edit-main-form a {
   background-color: transparent;
   border: none;
   cursor: pointer;
   font-size: 15px;
   margin-left: auto;
 }
-.edit-main-form button:hover {
+.edit-main-form a:hover {
   text-decoration: underline;
 }
 .edit-main-form input {
   font-weight: bold;
+}
+.actual-password {
+  margin-bottom: 1rem;
 }
 
 .edit-form__button {
