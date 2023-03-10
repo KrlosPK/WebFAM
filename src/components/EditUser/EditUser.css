@@ -1,0 +1,70 @@
+.edit-user {
+  border-radius: 15px;
+  flex: 1;
+  margin: 2rem;
+  padding: 3rem 1rem;
+}
+.edit-user__header {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+.edit-user__image {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-data {
+  display: flex;
+  flex-direction: column;
+}
+.user-data__email {
+  font-size: 14px;
+}
+.edit-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.edit-main-form {
+  width: 500px;
+}
+.edit-main-form button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  margin-left: auto;
+}
+.edit-main-form button:hover {
+  text-decoration: underline;
+}
+.edit-main-form input {
+  font-weight: bold;
+}
+
+.edit-form__button {
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .edit-user {
+    padding: 3rem 0;
+  }
+  .edit-user__header {
+    padding: 1rem 0;
+  }
+  .edit-user__image {
+    height: 45px;
+    width: 45px;
+  }
+  .user-data__email {
+    font-size: 13px;
+  }
+  .edit-main-form {
+    width: 100%;
+  }
+}

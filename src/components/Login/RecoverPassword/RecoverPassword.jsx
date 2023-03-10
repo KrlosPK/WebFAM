@@ -14,6 +14,7 @@ import emailjs from '@emailjs/browser'
 
 //? Icons
 import { AiFillBackward } from 'react-icons/ai'
+import { Footer } from '../../Home/Footer/Footer'
 
 const RecoverPassword = () => {
   const navigate = useNavigate()
@@ -46,8 +47,7 @@ const RecoverPassword = () => {
   const form = useRef(null)
 
   const sendEmail = () => {
-    emailjs
-      .sendForm('service_nl11uxr', 'template_wa8h19ra', form.current, '-cZX9PkvRspHkBQSX')
+    emailjs.sendForm('service_nl11uxr', 'template_wa8h19ra', form.current, '-cZX9PkvRspHkBQSX')
   }
 
   const verifyEmail = async (e) => {
@@ -121,74 +121,77 @@ const RecoverPassword = () => {
   }
 
   return (
-    <main className='recover-password'>
-      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <Navbar
-        elementTextLeft={['Inicio']}
-        urlLeft={['/']}
-        elementTextRight={['']}
-        urlRight={['']}
-        renderButtons={3}
-      />
-      <section className='recover-password__container'>
-        <div className='recover-password__card'>
-          <AiFillBackward className='back-button' onClick={() => navigate('/login')} />
-          <div className='container__image'>
-            <img src='/recover-password-email.png' alt='Correo para recuperar la contraseña' />
-          </div>
-          <div className='container__title'>
-            <h1>¿No recuerdas tu contraseña?</h1>
-          </div>
-          <div className='container__text'>
-            <p>¡No te preocupes! Nos sucede a todos. Ingresa tu Email y te ayudaremos.</p>
-          </div>
-          <form className='container__form' ref={form} onSubmit={verifyEmail}>
-            <div className='main-form'>
-              <Input
-                text='Correo electrónico'
-                innerId='correo'
-                type='email'
-                nameID='correo'
-                value={body.correo}
-                innerRef={correoInputEl}
-                innerOnChange={inputChange}
-                innerOnKeyDown={handleKeyDown}
-              />
-              <input
-                style={{ display: 'none' }}
-                readOnly
-                type='text'
-                id='recoverLink'
-                name='recoverLink'
-                value='https://fademetmontajes.netlify.app/reset-password'
-              />
-              <input
-                style={{ display: 'none' }}
-                readOnly
-                type='text'
-                id='fromName'
-                name='fromName'
-                value='FADEMET Montajes'
-              />
-              <input
-                style={{ display: 'none' }}
-                readOnly
-                type='text'
-                id='toEmail'
-                name='toEmail'
-                value={toEmail}
-              />
-              <Button
-                text={'Recuperar contraseña'}
-                textDisabled={'Enviado'}
-                disable={disabled}
-                animation={false}
-              />
+    <>
+      <main className='recover-password'>
+        <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
+        <Navbar
+          elementTextLeft={['Inicio']}
+          urlLeft={['/']}
+          elementTextRight={['']}
+          urlRight={['']}
+          renderButtons={3}
+        />
+        <section className='recover-password__container'>
+          <div className='recover-password__card'>
+            <AiFillBackward className='back-button' onClick={() => navigate('/login')} />
+            <div className='container__image'>
+              <img src='/recover-password-email.png' alt='Correo para recuperar la contraseña' />
             </div>
-          </form>
-        </div>
-      </section>
-    </main>
+            <div className='container__title'>
+              <h1>¿No recuerdas tu contraseña?</h1>
+            </div>
+            <div className='container__text'>
+              <p>¡No te preocupes! Nos sucede a todos. Ingresa tu Email y te ayudaremos.</p>
+            </div>
+            <form className='container__form' ref={form} onSubmit={verifyEmail}>
+              <div className='main-form'>
+                <Input
+                  text='Correo electrónico'
+                  innerId='correo'
+                  type='email'
+                  nameID='correo'
+                  value={body.correo}
+                  innerRef={correoInputEl}
+                  innerOnChange={inputChange}
+                  innerOnKeyDown={handleKeyDown}
+                />
+                <input
+                  style={{ display: 'none' }}
+                  readOnly
+                  type='text'
+                  id='recoverLink'
+                  name='recoverLink'
+                  value='https://fademetmontajes.netlify.app/reset-password'
+                />
+                <input
+                  style={{ display: 'none' }}
+                  readOnly
+                  type='text'
+                  id='fromName'
+                  name='fromName'
+                  value='FADEMET Montajes'
+                />
+                <input
+                  style={{ display: 'none' }}
+                  readOnly
+                  type='text'
+                  id='toEmail'
+                  name='toEmail'
+                  value={toEmail}
+                />
+                <Button
+                  text={'Recuperar contraseña'}
+                  textDisabled={'Enviado'}
+                  disable={disabled}
+                  animation={false}
+                />
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
   )
 }
 

@@ -50,8 +50,8 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
     getUserId()
   }, [])
 
-  const [username, setUsername] = useState(null)
-  const [userPhoto, setUserPhoto] = useState(null)
+  const [userData, setUserData] = useState({})
+  const defaultImage = '/default-avatar.png'
 
   const getUserId = async () => {
     const cookies = document.cookie
@@ -64,11 +64,10 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
 
     if (decoded.data) {
       const { data } = decoded
-      setUsername(data[0].nombre)
+      setUserData({ ...userData, name: data[0].nombre })
     } else {
       const { given_name, picture } = decoded
-      setUsername(given_name)
-      setUserPhoto(picture)
+      setUserData({ ...userData, name: given_name, picture })
     }
   }
 
@@ -76,17 +75,17 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
     <div className='menu' onBlur={hideNav}>
       <div className={navClassName}>
         {tempSession && (
-        <li className='options__option'>
-          <LazyLoadImage
-            loading='lazy'
-            src={userPhoto ? userPhoto : '/default-avatar.png'}
-            width={45}
-            height={45}
-            className='user__image'
-            alt='Imagen de perfil del usuario'
-          />
-          <strong className='user__name'>{username}</strong>
-        </li>
+          <li className='options__option'>
+            <LazyLoadImage
+              loading='lazy'
+              src={userData.picture || defaultImage}
+              width={45}
+              height={45}
+              className='user__image'
+              alt=''
+            />
+            <strong className='user__name'>{userData.name}</strong>
+          </li>
         )}
         {linkText.map((el, i) => {
           return (
@@ -114,7 +113,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
         )}
         {renderButtons === 2 && (
           <div className='logout'>
-            <Link to='/edit-user'>
+            <Link to='/account'>
               <AiOutlineSetting /> Configuración
             </Link>
             <Link to='/' onClick={logout}>
