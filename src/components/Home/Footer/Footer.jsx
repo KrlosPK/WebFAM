@@ -6,6 +6,20 @@ import { Link } from 'react-router-dom'
 const Footer = () => {
   return (
     <footer>
+      <div className='office-hours'>
+        <h2>Horario de atención</h2>
+        <ul className='office-hours__lista'>
+          <li className='office-hours__item'>
+            <strong>Lunes a Viernes</strong> 7:00 - 5:00 pm
+          </li>
+          <li className='office-hours__item'>
+            <strong>Sábado</strong> 8:00 - 12:00 pm
+          </li>
+          <li className='office-hours__item'>
+            <strong>Domingo</strong> Cerrado
+          </li>
+        </ul>
+      </div>
       <div className='footer__contact-links'>
         <a
           href='https://api.whatsapp.com/send/?phone=573147561960&text=¡Hola!%20Quisiera%20saber%20más%20sobre%20sus%20servicios.&type=phone_number&app_absent=0'

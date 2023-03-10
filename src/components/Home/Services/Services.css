@@ -6,7 +6,7 @@
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
   display: grid;
   grid-template-columns: 20% 1fr 20%;
-  margin: 0 auto 7rem;
+  margin: 7rem auto 2rem;
   max-width: 1200px;
   min-height: 400px;
   padding: 2rem;
