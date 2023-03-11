@@ -10,7 +10,7 @@ const ProtectedRoute = ({ session, children, redirectTo = '/' }) => {
     }
   }, [session])
 
-  return children ? children : <Outlet />
+  return children || <Outlet />
 }
 
 export { ProtectedRoute }

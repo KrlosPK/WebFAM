@@ -1,6 +1,6 @@
 import './Provide.css'
 
-//! Jsons
+// ! Jsons
 import provideData from '../../../json/provide.json'
 
 //* Components

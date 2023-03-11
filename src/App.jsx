@@ -1,4 +1,4 @@
-//? Hooks
+// ? Hooks
 import { Route, Routes } from 'react-router-dom'
 import { useContext } from 'react'
 
@@ -8,12 +8,12 @@ import { Login } from './components/Login/Login'
 import { Register } from './components/Register/Register'
 import { NotFound } from './components/Not-found/NotFound'
 import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
-import { ResetPassword } from './components/Login/ResetPassword/ResetPassword'
+// import { ResetPassword } from './components/Login/ResetPassword/ResetPassword'
 import { EditUser } from './components/EditUser/EditUser'
 
 import { ProtectedRoute } from './components/ProtectedRoute'
 
-//? Context
+// ? Context
 import { SessionContext } from './context/SessionContext'
 
 export const App = () => {
@@ -30,7 +30,7 @@ export const App = () => {
 
       <Route path='/recover-password' element={<RecoverPassword />} />
 
-      {/*//TODO Ruta Con Parámetro */}
+      {/* //TODO Ruta Con Parámetro */}
       {/* <Route path='/reset-password' element={<ResetPassword />} /> */}
 
       <Route path='*' element={<NotFound />} />

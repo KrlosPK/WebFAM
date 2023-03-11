@@ -1,6 +1,6 @@
 import './MiniCard.css'
 
-//? Libraries
+// ? Libraries
 import 'aos/dist/aos.css'
 import AOS from 'aos'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -27,7 +27,7 @@ const MiniCard = ({
         effect="blur"
         loading='lazy'
         alt={alt}
-        style={{ borderRadius: borderRadius }}
+        style={{ borderRadius }}
       />
       <div className='mini-card__header'>{header}</div>
       <div className='mini-card__text' style={{ color: textColor }}>

@@ -1,6 +1,6 @@
 import './RecoverPassword.css'
 
-//? Components
+// ? Components
 import { Input, Button, Navbar, API_URL, validateMail } from '../../Utils'
 
 //* Hooks
@@ -11,21 +11,22 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import emailjs from '@emailjs/browser'
+import Swal from 'sweetalert2'
 
-//? Icons
+// ? Icons
 import { AiFillBackward } from 'react-icons/ai'
 import { Footer } from '../../Home/Footer/Footer'
 
 const RecoverPassword = () => {
   const navigate = useNavigate()
 
-  //! Cambiar título de la página
+  // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes | Recuperar contraseña')
   useEffect(() => {
     document.title = title
   }, [setTitle])
 
-  //? Deshabilitar botón mientras carga
+  // ? Deshabilitar botón mientras carga
   const [disabled, setDisabled] = useState(false)
 
   //* Función para hacer focus en el input que no cumpla con los requisitos
@@ -34,14 +35,14 @@ const RecoverPassword = () => {
   //* Variables para hacer la validación
   const correoInputEl = useRef(null)
 
-  //? Desactivar tecla de enter
+  // ? Desactivar tecla de enter
   const handleKeyDown = (event) => {
     if (event.keyCode === 13) {
       event.preventDefault()
     }
   }
 
-  //TODO
+  // TODO
   const [toEmail, setToEmail] = useState('')
 
   const form = useRef(null)

@@ -21,12 +21,19 @@
     "react-icons": "^4.7.1",
     "react-lazy-load-image-component": "^1.5.6",
     "react-router-dom": "^6.6.2",
-    "react-toastify": "^9.1.1"
+    "react-toastify": "^9.1.1",
+    "sweetalert2": "^11.7.3"
   },
   "devDependencies": {
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
     "@vitejs/plugin-react": "2.2.0",
+    "eslint": "^8.36.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
     "nodemon": "2.0.20",
     "vite": "3.2.3"
   }
