@@ -1,20 +1,19 @@
 import './EditUser.css'
 
-//? Components
+// ? Components
 import { Footer } from '../Home/Footer/Footer'
-import { API_URL, Button2, Input, Navbar } from '../Utils'
+import { API_URL, Button2, Input, Navbar, validatePassword, setTokenData } from '../Utils'
 
-//? Hooks
+// ? Hooks
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useState, useEffect, useRef } from 'react'
 import jwtDecode from 'jwt-decode'
-import { validatePassword, setTokenData } from '../Utils'
 
 //* Libraries
 import axios from 'axios'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 
-//? Icons
+// ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const EditUser = () => {
@@ -101,9 +100,8 @@ const EditUser = () => {
       focusInput(nombreInputEl)
 
       return
-    }
-    // Validación Apellidos
-    else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
+    } else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
+      // Validación Apellidos
       toast.error('¡Los Apellidos no puede estar vacío!', {
         theme: 'colored'
       })
@@ -119,9 +117,8 @@ const EditUser = () => {
       focusInput(apellidosInputEl)
 
       return
-    }
-    // Validación Número de Celular
-    else if (num_celular.length === 0) {
+    } else if (num_celular.length === 0) {
+      // Validación Número de Celular
       toast.error('¡El Número de Celular no puede estar vacío!', {
         theme: 'colored'
       })
@@ -156,11 +153,11 @@ const EditUser = () => {
           })
         }
 
-        const cookies = document.cookie
+        /* const cookies = document.cookie
         const tokenCookie = cookies.split('; ').find((cookie) => cookie.startsWith('token='))
         let token = null
         if (!tokenCookie) return null
-        token = tokenCookie.split('=')[1]
+        token = tokenCookie.split('=')[1] */
 
         axios
           .post(API_URL(`nuevoToken/${userData.id_usuario}`))
@@ -173,13 +170,13 @@ const EditUser = () => {
               getUserData()
             }
           })
-          .catch((err) => {
+          .catch(() => {
             toast.error('¡Hubo un error al actualizar los datos!', {
               theme: 'colored'
             })
           })
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error('¡Hubo un error al actualizar los datos!', {
           theme: 'colored'
         })
@@ -191,7 +188,7 @@ const EditUser = () => {
 
     setDisabled(true)
 
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
 
     const data = {
       contrasenaActual: e.target[0].value,
@@ -295,111 +292,113 @@ const EditUser = () => {
             <span className='user-data__email'>{userData.email}</span>
           </div>
         </header>
-        {form === 'editUser' ? (
-          <form className='edit-form' onSubmit={updateUserData}>
-            <>
-              <div className='edit-main-form main-form'>
-                <Input
-                  innerOnChange={inputChange}
-                  innerDefaultValue={userData.name}
-                  text='Nombre'
-                  innerRef={nombreInputEl}
-                />
-                <Input
-                  innerOnChange={inputChange}
-                  innerDefaultValue={userData.lastname}
-                  text='Apellidos'
-                  innerRef={apellidosInputEl}
-                />
-                <Input
-                  innerOnChange={inputChange}
-                  innerDefaultValue={userData.phoneNumber}
-                  text='Número Celular'
-                  type='number'
-                  innerRef={numCelularInputEl}
-                />
-                <Input
-                  innerOnChange={inputChange}
-                  innerDefaultValue={userData.email}
-                  innerReadOnly={true}
-                  text='Correo'
-                />
-                <Input
-                  innerOnChange={inputChange}
-                  innerDefaultValue={userData.typeId}
-                  innerReadOnly={true}
-                  text='Tipo de Documento'
-                />
-                <Input
-                  innerOnChange={inputChange}
-                  innerDefaultValue={userData.id}
-                  innerReadOnly={true}
-                  text='Número de Documento'
-                />
-                <a onClick={changePassword}>Cambiar contraseña</a>
-              </div>
-              <div className='edit-form__button'>
-                <Button2
-                  text='Guardar'
-                  textDisabled='Guardar'
-                  disable={disabled}
-                  animation={false}
-                  width={220}
-                />
-              </div>
-            </>
-          </form>
-        ) : (
-          <form className='edit-form' onSubmit={updateUserPassword}>
-            <>
-              <div className='edit-main-form main-form'>
-                <div className='input-container actual-password'>
+        {form === 'editUser'
+          ? (
+            <form className='edit-form' onSubmit={updateUserData}>
+              <>
+                <div className='edit-main-form main-form'>
                   <Input
                     innerOnChange={inputChange}
-                    text='Contraseña actual'
-                    type={showContrasena ? 'password' : 'text'}
-                    innerRef={contrasenaActualEl}
+                    innerDefaultValue={userData.name}
+                    text='Nombre'
+                    innerRef={nombreInputEl}
                   />
-                  <div onClick={handleShowContrasenaClick}>
-                    {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
-                  </div>
-                </div>
-                <div className='input-container'>
                   <Input
                     innerOnChange={inputChange}
-                    text='Contraseña nueva'
-                    type={showContrasena ? 'password' : 'text'}
-                    innerRef={contrasenaNuevaEl}
+                    innerDefaultValue={userData.lastname}
+                    text='Apellidos'
+                    innerRef={apellidosInputEl}
                   />
-                  <div onClick={handleShowContrasenaClick}>
-                    {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
-                  </div>
-                </div>
-                <div className='input-container'>
                   <Input
                     innerOnChange={inputChange}
-                    text='Confirmar contraseña'
-                    type={showContrasena ? 'password' : 'text'}
-                    innerRef={confirmarContrasenaEl}
+                    innerDefaultValue={userData.phoneNumber}
+                    text='Número Celular'
+                    type='number'
+                    innerRef={numCelularInputEl}
                   />
-                  <div onClick={handleShowContrasenaClick}>
-                    {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
-                  </div>
+                  <Input
+                    innerOnChange={inputChange}
+                    innerDefaultValue={userData.email}
+                    innerReadOnly={true}
+                    text='Correo'
+                  />
+                  <Input
+                    innerOnChange={inputChange}
+                    innerDefaultValue={userData.typeId}
+                    innerReadOnly={true}
+                    text='Tipo de Documento'
+                  />
+                  <Input
+                    innerOnChange={inputChange}
+                    innerDefaultValue={userData.id}
+                    innerReadOnly={true}
+                    text='Número de Documento'
+                  />
+                  <a onClick={changePassword}>Cambiar contraseña</a>
                 </div>
-                <a onClick={changePassword}>Volver</a>
-              </div>
-              <div className='edit-form__button'>
-                <Button2
-                  text='Guardar'
-                  textDisabled='Guardar'
-                  disable={disabled}
-                  animation={false}
-                  width={220}
-                />
-              </div>
-            </>
-          </form>
-        )}
+                <div className='edit-form__button'>
+                  <Button2
+                    text='Guardar'
+                    textDisabled='Guardar'
+                    disable={disabled}
+                    animation={false}
+                    width={220}
+                  />
+                </div>
+              </>
+            </form>
+          )
+          : (
+            <form className='edit-form' onSubmit={updateUserPassword}>
+              <>
+                <div className='edit-main-form main-form'>
+                  <div className='input-container actual-password'>
+                    <Input
+                      innerOnChange={inputChange}
+                      text='Contraseña actual'
+                      type={showContrasena ? 'password' : 'text'}
+                      innerRef={contrasenaActualEl}
+                    />
+                    <div onClick={handleShowContrasenaClick}>
+                      {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
+                    </div>
+                  </div>
+                  <div className='input-container'>
+                    <Input
+                      innerOnChange={inputChange}
+                      text='Contraseña nueva'
+                      type={showContrasena ? 'password' : 'text'}
+                      innerRef={contrasenaNuevaEl}
+                    />
+                    <div onClick={handleShowContrasenaClick}>
+                      {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
+                    </div>
+                  </div>
+                  <div className='input-container'>
+                    <Input
+                      innerOnChange={inputChange}
+                      text='Confirmar contraseña'
+                      type={showContrasena ? 'password' : 'text'}
+                      innerRef={confirmarContrasenaEl}
+                    />
+                    <div onClick={handleShowContrasenaClick}>
+                      {showContrasena ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
+                    </div>
+                  </div>
+                  <a onClick={changePassword}>Volver</a>
+                </div>
+                <div className='edit-form__button'>
+                  <Button2
+                    text='Guardar'
+                    textDisabled='Guardar'
+                    disable={disabled}
+                    animation={false}
+                    width={220}
+                  />
+                </div>
+              </>
+            </form>
+          )}
       </section>
       <Footer />
     </section>

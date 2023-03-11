@@ -1,6 +1,6 @@
 import './ResponsiveNav.css'
 
-//? Components
+// ? Components
 import { Button, Button2 } from '../'
 
 //* Hooks
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 import { SessionContext } from '../../../context/SessionContext'
 import jwtDecode from 'jwt-decode'
 
-//? Icons
+// ? Icons
 import { AiOutlineSetting } from 'react-icons/ai'
 import { BiLogOut } from 'react-icons/bi'
 import { LazyLoadImage } from 'react-lazy-load-image-component'

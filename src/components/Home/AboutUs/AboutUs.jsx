@@ -1,7 +1,7 @@
 import './AboutUs.css'
 import { Card } from '../../Utils'
 
-//! Jsons
+// ! Jsons
 import aboutUsData from '../../../json/aboutUs.json'
 
 const AboutUs = () => {
@@ -14,7 +14,7 @@ const AboutUs = () => {
           que nuestros servicios sean los mejor para ti.
         </p>
         <div className='cards'>
-          {aboutUsData.map(({id, src, alt, title, description}) => (
+          {aboutUsData.map(({ id, src, alt, title, description }) => (
             <Card
               key={id}
               src={src}

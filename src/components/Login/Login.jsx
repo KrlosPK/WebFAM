@@ -1,25 +1,23 @@
 import './login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar } from '../Utils'
+import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar, setTokenData } from '../Utils'
 
-//? Hooks
+// ? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
 import { SessionContext } from '../../context/SessionContext'
 import { ToastifyContext } from '../../context/ToastifyContext'
-import { setTokenData } from '../Utils'
 
-//? Library
+// ? Library
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
-import { GoogleOAuthProvider } from '@react-oauth/google'
-import { GoogleLogin } from '@react-oauth/google'
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 
-//? Icons
+// ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const Login = () => {
-  //? Context
+  // ? Context
   const { setSession, setTempSession } = useContext(SessionContext)
 
   const { toastify } = useContext(ToastifyContext)
@@ -34,10 +32,10 @@ const Login = () => {
 
   const navigate = useNavigate()
 
-  //? Deshabilitar botón mientras carga
+  // ? Deshabilitar botón mientras carga
   const [disabled, setDisabled] = useState(false)
 
-  //! Cambiar título de la página
+  // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes | Inicio de Sesión')
   useEffect(() => {
     document.title = title
@@ -64,16 +62,15 @@ const Login = () => {
     const contrasena = e.target[1].value
 
     /*
-			Con el operador ?= (look ahead) compruebas que:
-				* Exista al menos 1 número (?:.*[0-9]){1}
-				* Exista al menos 1 mayúscula (?:.*[A-Z]){1}
-				* Exista al menos 1 minúscula (?:.*[a-z]){1}
-
-			? Con el cuantificador {8,} indicas que debe tener una longitud mínima de 8 sin límite máximo.
-2
-			? Con \S no permite espacios en blanco.
-		*/
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
+    Con el operador ?= (look ahead) compruebas que:
+    * Exista al menos 1 número (?:.*[0-9]){1}
+    * Exista al menos 1 mayúscula (?:.*[A-Z]){1}
+    * Exista al menos 1 minúscula (?:.*[a-z]){1}
+    ? Con el cuantificador {8,} indicas que debe tener una longitud mínima de 8 sin límite máximo.
+    2
+    ? Con \S no permite espacios en blanco.
+    */
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
 
     // ? Validación Correo
     if (validateMail(correo, /^\s+$/)) {
@@ -100,10 +97,8 @@ const Login = () => {
       })
 
       focusInput(correoInputEl)
-    }
-
-    // Validación Contraseña
-    else if (validatePassword(contrasena, /^\s+$/)) {
+    } else if (validatePassword(contrasena, /^\s+$/)) {
+      // Validación Contraseña
       e.preventDefault()
 
       toast.error('¡La contraseña no puede estar vacía!', {
@@ -177,7 +172,7 @@ const Login = () => {
       const contrasena = document.querySelector('#contrasena').value
       const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
       const contrasenaRegex =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
 
       if (!validateMail(correo, correoRegex) || !validatePassword(contrasena, contrasenaRegex)) {
         toast.error('¡Debes tener tus datos correctos para recordar! Vuelve a intentarlo...', {

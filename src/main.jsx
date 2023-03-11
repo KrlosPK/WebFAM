@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 
-//? Context
+// ? Context
 import { SessionContextProvider } from './context/SessionContext'
 import { ToastifyContextProvider } from './context/ToastifyContext'
 

@@ -1,6 +1,6 @@
 import './Card.css'
 
-//? Libraries
+// ? Libraries
 import 'aos/dist/aos.css'
 import AOS from 'aos'
 import { LazyLoadImage } from 'react-lazy-load-image-component'

@@ -1,12 +1,12 @@
 import './Accordion.css'
 
-//? Hooks
+// ? Hooks
 import { useState } from 'react'
 
-//? Icons
+// ? Icons
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa'
 
-//! Jsons
+// ! Jsons
 import accordionData from '../../../json/accordion.json'
 
 const Accordion = () => {
@@ -21,12 +21,14 @@ const Accordion = () => {
     return (
       <div className='open-card' key={id} onClick={() => handleExpandClick(i)}>
         <h3 className='open-card__header'>{header}</h3>
-        <p className={expanded === i ? `open-card__text show` : 'open-card__text'}>{text}</p>
-        {expanded === i ? (
-          <FaAngleUp className='open-card__icon' />
-        ) : (
-          <FaAngleDown className='open-card__icon' />
-        )}
+        <p className={expanded === i ? 'open-card__text show' : 'open-card__text'}>{text}</p>
+        {expanded === i
+          ? (
+            <FaAngleUp className='open-card__icon' />
+          )
+          : (
+            <FaAngleDown className='open-card__icon' />
+          )}
       </div>
     )
   })

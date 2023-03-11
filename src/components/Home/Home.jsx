@@ -1,10 +1,10 @@
 import './Home.css'
 
-//? Hooks
+// ? Hooks
 import { useState, useEffect, useContext } from 'react'
 import { ToastifyContext } from '../../context/ToastifyContext'
 
-//? JSON
+// ? JSON
 import serviceData from '../../json/services.json'
 
 //* Libraries
@@ -22,7 +22,7 @@ import { Footer } from './Footer/Footer'
 import { SessionContext } from '../../context/SessionContext'
 
 const Home = () => {
-  //? Context
+  // ? Context
   const { session, tempSession } = useContext(SessionContext)
   const { setToastify } = useContext(ToastifyContext)
 
@@ -30,7 +30,7 @@ const Home = () => {
     setToastify(false)
   }, [setToastify])
 
-  //! Cambiar título de la página
+  // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes | Inicio')
   useEffect(() => {
     document.title = title
@@ -71,7 +71,7 @@ const Home = () => {
         <div className='buttons'>
           <a
             href='https://api.whatsapp.com/send/?phone=573147561960&text=¡Hola!%20Quisiera%20saber%20más%20sobre%20sus%20servicios.&type=phone_number&app_absent=0'
-            target={'_blank'}
+            target={'_blank'} rel="noreferrer"
           >
             <Button text='Contáctanos »' width={220} />
           </a>

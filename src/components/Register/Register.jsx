@@ -2,21 +2,20 @@ import './Register.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Button2, Input, Select, API_URL, Navbar } from '../Utils'
 
-//? Hooks
+// ? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
 import { ToastifyContext } from '../../context/ToastifyContext'
 
-//? Library
+// ? Library
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-//? Icons
-import { FaEye } from 'react-icons/fa'
-import { FaEyeSlash } from 'react-icons/fa'
+// ? Icons
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import axios from 'axios'
 
 const Register = () => {
-  //? Context
+  // ? Context
   const { setToastify } = useContext(ToastifyContext)
 
   useEffect(() => {
@@ -25,10 +24,10 @@ const Register = () => {
 
   const navigate = useNavigate()
 
-  //? Deshabilitar botón mientras carga
+  // ? Deshabilitar botón mientras carga
   const [disabled, setDisabled] = useState(false)
 
-  //! Cambiar título de la página
+  // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes - Registro')
   useEffect(() => {
     document.title = title
@@ -53,7 +52,7 @@ const Register = () => {
   const correoInputEl = useRef(null)
   const contrasenaInputEl = useRef(null)
 
-  //! Evitar que se envie otro formulario de registro cuando ya lo hizo previamente
+  // ! Evitar que se envie otro formulario de registro cuando ya lo hizo previamente
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault()
@@ -71,7 +70,7 @@ const Register = () => {
     const correo = e.target[5].value
     const contrasena = e.target[6].value
 
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
 
     // Validación Nombre
     if (nombre.length === 0 || /^\s+$/.test(nombre)) {
@@ -94,9 +93,8 @@ const Register = () => {
       focusInput(nombreInputEl)
 
       return false
-    }
-    // Validación Apellidos
-    else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
+    } else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
+      // Validación Apellidos
       e.preventDefault()
 
       toast.error('¡Los Apellidos no puede estar vacío!', {
@@ -116,9 +114,8 @@ const Register = () => {
       focusInput(apellidosInputEl)
 
       return false
-    }
-    // Validación Número de Celular
-    else if (num_celular.length === 0) {
+    } else if (num_celular.length === 0) {
+      // Validación Número de Celular
       e.preventDefault()
 
       toast.error('¡El Número de Celular no puede estar vacío!', {
@@ -138,9 +135,8 @@ const Register = () => {
       focusInput(numCelularInputEl)
 
       return false
-    }
-    // Validación Tipo de Documento
-    else if (!tipo_documento) {
+    } else if (!tipo_documento) {
+      // Validación Tipo de Documento
       e.preventDefault()
 
       toast.error('¡Por favor seleccione su Tipo de Documento!', {
@@ -150,9 +146,8 @@ const Register = () => {
       focusInput(tipoDocumentoInputEl)
 
       return false
-    }
-    // Validación Número de Documento
-    else if (num_documento.length === 0) {
+    } else if (num_documento.length === 0) {
+      // Validación Número de Documento
       e.preventDefault()
 
       toast.error('¡El Número de Documento no puede estar vacío!', {
@@ -172,9 +167,8 @@ const Register = () => {
       focusInput(numDocumentoInputEl)
 
       return false
-    }
-    // Validación Correo Electrónico
-    else if (correo.length === 0 || /^\s+$/.test(correo)) {
+    } else if (correo.length === 0 || /^\s+$/.test(correo)) {
+      // Validación Correo Electrónico
       e.preventDefault()
 
       toast.error('¡El correo no puede estar vacío!', {
@@ -204,9 +198,8 @@ const Register = () => {
       focusInput(correoInputEl)
 
       return false
-    }
-    // Validación Contraseña
-    else if (contrasena.length === 0 || /^\s+$/.test(contrasena)) {
+    } else if (contrasena.length === 0 || /^\s+$/.test(contrasena)) {
+      // Validación Contraseña
       e.preventDefault()
 
       toast.error('¡La contraseña no puede estar vacía!', {

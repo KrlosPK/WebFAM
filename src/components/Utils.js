@@ -1,4 +1,4 @@
-//? Axios
+// ? Axios
 export { API_URL } from './Utils/API/APIRest'
 
 export { Accordion } from './Utils/Accordion/Accordion'
@@ -11,8 +11,8 @@ export { Navbar } from './Utils/Navbar/Navbar'
 export { ResponsiveNav } from './Utils/ResponsiveNav/ResponsiveNav'
 export { Select } from './Utils/Select/Select'
 
-//* Token
+// * Token
 export { setTokenData } from './Utils/Token'
 
-//? Validations
+// ? Validations
 export { validateMail, validatePassword } from './Utils/validations/validation'

@@ -1,7 +1,7 @@
 import './Navbar.css'
 
-//? Components
-import { API_URL, Button, Button2 } from '../../Utils'
+// ? Components
+import { Button, Button2 } from '../../Utils'
 
 //* Libraries
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -13,12 +13,18 @@ import { SessionContext } from '../../../context/SessionContext'
 import { useContext, useState, useEffect, useRef } from 'react'
 import jwtDecode from 'jwt-decode'
 
-//? Icons
+// ? Icons
 import { BiLogOut } from 'react-icons/bi'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { FaAngleDown } from 'react-icons/fa'
 
-const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
+const Navbar = ({
+  anchordText,
+  linkText,
+  anchordUrl,
+  linkUrl,
+  renderButtons
+}) => {
   const [expanded, setExpanded] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -33,7 +39,9 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
 
   const getUserData = async () => {
     const cookies = document.cookie
-    const tokenCookie = cookies.split('; ').find((cookie) => cookie.startsWith('token='))
+    const tokenCookie = cookies
+      .split('; ')
+      .find(cookie => cookie.startsWith('token='))
     let token = null
     if (!tokenCookie) return null
     token = tokenCookie.split('=')[1]
@@ -57,7 +65,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
       document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     }
 
-    function handleClickOutside(event) {
+    function handleClickOutside (event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setExpanded(false)
       }
@@ -99,25 +107,25 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
           <ul className='left'>
             {linkText
               ? linkText.map((el, i) => {
-                  return (
-                    <li key={i}>
-                      <Link id='RouterNavLink' to={linkUrl[i]}>
-                        <p className='flex gap fade-gray'>{el}</p>
-                      </Link>
-                    </li>
-                  )
-                })
+                return (
+                  <li key={i}>
+                    <Link id='RouterNavLink' to={linkUrl[i]}>
+                      <p className='flex gap fade-gray'>{el}</p>
+                    </Link>
+                  </li>
+                )
+              })
               : ''}
             {anchordText
               ? anchordText.map((el, i) => {
-                  return (
-                    <li key={i}>
-                      <a id='RouterNavLink' href={anchordUrl[i]}>
-                        <p className='flex gap fade-gray'>{el}</p>
-                      </a>
-                    </li>
-                  )
-                })
+                return (
+                  <li key={i}>
+                    <a id='RouterNavLink' href={anchordUrl[i]}>
+                      <p className='flex gap fade-gray'>{el}</p>
+                    </a>
+                  </li>
+                )
+              })
               : ''}
           </ul>
         </ul>
@@ -134,8 +142,11 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
           )}
           {renderButtons === 2 && (
             <>
-              <ul className={expanded ? `user show` : 'user'}>
-                <li className='user user__container' onClick={handleExpandClick}>
+              <ul className={expanded ? 'user show' : 'user'}>
+                <li
+                  className='user user__container'
+                  onClick={handleExpandClick}
+                >
                   <LazyLoadImage
                     loading='lazy'
                     src={userData.picture || defaultImage}
