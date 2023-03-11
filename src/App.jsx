@@ -26,7 +26,7 @@ export const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
       </Route>
-      {tempSession && <Route path='/edit-user' element={<EditUser />} />}
+      {tempSession && <Route path='/account' element={<EditUser />} />}
 
       <Route path='/recover-password' element={<RecoverPassword />} />
 

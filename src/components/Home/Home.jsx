@@ -93,8 +93,8 @@ const Home = () => {
       <AboutUs />
       <Provide />
       <Team />
-      <FrequentQuestions />
       <Services />
+      <FrequentQuestions />
       <Footer />
     </>
   )

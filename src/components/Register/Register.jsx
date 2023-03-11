@@ -106,10 +106,10 @@ const Register = () => {
       focusInput(apellidosInputEl)
 
       return false
-    } else if (apellidos.length < 4) {
+    } else if (apellidos.length < 3) {
       e.preventDefault()
 
-      toast.error('¡Los Apellidos deben tener mínimo 4 letras!', {
+      toast.error('¡Los Apellidos deben tener mínimo 3 letras!', {
         theme: 'colored'
       })
 

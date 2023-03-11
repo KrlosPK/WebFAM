@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Input, Navbar, validatePassword } from '../../Utils'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
+import { Footer } from '../../Home/Footer/Footer'
 
 const ResetPassword = () => {
   const navigate = useNavigate()
@@ -98,61 +99,64 @@ const ResetPassword = () => {
   }
 
   return (
-    <main className='reset-password'>
-      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <Navbar
-        elementTextLeft={['Inicio']}
-        urlLeft={['/']}
-        elementTextRight={['']}
-        urlRight={['']}
-        renderButtons={3}
-      />
-      <section className='reset-password__container'>
-        <div className='reset-password__card'>
-          <div className='container__image'>
-            <img src='/recover-password-reset.png' alt='Correo para recuperar la contraseña' />
-          </div>
-          <div className='container__title'>
-            <h1>¡Restablece tu contraseña!</h1>
-          </div>
-          <div className='container__text'>
-            <p>¡Es hora de renovarse! crea una nueva clave secreta.</p>
-          </div>
-          <form className='container__form' onSubmit={resetPassword}>
-            <div className='main-form'>
-              <div className='input-container'>
-                <Input
-                  text='Nueva contraseña'
-                  nameID='contrasena'
-                  type={showPassword ? 'password' : 'text'}
-                  value={body.contrasena}
-                  innerRef={contrasenaInputEl}
-                  innerOnChange={inputChange}
-                />
-                <div onClick={handleShowPasswordClick}>
-                  {showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
-                </div>
-              </div>
-              <div className='input-container'>
-                <Input
-                  text='Confirmar nueva contraseña'
-                  innerId='confirmarContrasena'
-                  type={showPassword ? 'password' : 'text'}
-                  nameID='confirmarContrasena'
-                  value={body.confirmarContrasena}
-                  innerRef={confirmarContrasenaInputEl}
-                  innerOnChange={inputChange}
-                />
-                <div onClick={handleShowPasswordClick}>
-                  {showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
-                </div>
-              </div>
-              <Button text={'Restablecer'} textDisabled={'Cargando'} disable={disabled} />
+    <>
+      <main className='reset-password'>
+        <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
+        <Navbar
+          elementTextLeft={['Inicio']}
+          urlLeft={['/']}
+          elementTextRight={['']}
+          urlRight={['']}
+          renderButtons={3}
+        />
+        <section className='reset-password__container'>
+          <div className='reset-password__card'>
+            <div className='container__image'>
+              <img src='/recover-password-reset.png' alt='Correo para recuperar la contraseña' />
             </div>
-          </form>
-        </div>
-      </section>
-    </main>
+            <div className='container__title'>
+              <h1>¡Restablece tu contraseña!</h1>
+            </div>
+            <div className='container__text'>
+              <p>¡Es hora de renovarse! crea una nueva clave secreta.</p>
+            </div>
+            <form className='container__form' onSubmit={resetPassword}>
+              <div className='main-form'>
+                <div className='input-container'>
+                  <Input
+                    text='Nueva contraseña'
+                    nameID='contrasena'
+                    type={showPassword ? 'password' : 'text'}
+                    value={body.contrasena}
+                    innerRef={contrasenaInputEl}
+                    innerOnChange={inputChange}
+                  />
+                  <div onClick={handleShowPasswordClick}>
+                    {showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
+                  </div>
+                </div>
+                <div className='input-container'>
+                  <Input
+                    text='Confirmar nueva contraseña'
+                    innerId='confirmarContrasena'
+                    type={showPassword ? 'password' : 'text'}
+                    nameID='confirmarContrasena'
+                    value={body.confirmarContrasena}
+                    innerRef={confirmarContrasenaInputEl}
+                    innerOnChange={inputChange}
+                  />
+                  <div onClick={handleShowPasswordClick}>
+                    {showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
+                  </div>
+                </div>
+                <Button text={'Restablecer'} textDisabled={'Cargando'} disable={disabled} />
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
   )
 }
 

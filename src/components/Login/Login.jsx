@@ -6,6 +6,7 @@ import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar
 import { useState, useRef, useEffect, useContext } from 'react'
 import { SessionContext } from '../../context/SessionContext'
 import { ToastifyContext } from '../../context/ToastifyContext'
+import { setTokenData } from '../Utils'
 
 //? Library
 import { ToastContainer, toast, Zoom } from 'react-toastify'
@@ -150,9 +151,6 @@ const Login = () => {
     }
   }
 
-  const setTokenData = (token) => {
-    document.cookie = `token=${token}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
-  }
   //* guarda correo y contraseña
   const [body, setBody] = useState({ correo: '', contrasena: '' })
 

@@ -17,3 +17,20 @@
   border-color: #f39a25;
   color: #f39a25;
 }
+.Button-2.disabled {
+  filter: brightness(80%);
+  gap: 8px;
+  pointer-events: none;
+}
+.Button-2.disabled svg {
+  animation: rotate 1.2s infinite linear;
+  stroke-width: 70px;
+}
+@keyframes rotate {
+  from {
+    rotate: 0;
+  }
+  to {
+    rotate: 360deg;
+  }
+}

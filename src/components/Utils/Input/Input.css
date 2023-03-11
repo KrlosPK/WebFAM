@@ -3,6 +3,15 @@
   flex-direction: column;
   position: relative;
 }
+.input-login:read-only {
+  background-color: #eee;
+  border: 1.7px solid gray;
+  cursor: default;
+  outline: none;
+}
+.input-login:read-only:focus {
+  border: 1.7px solid gray;
+}
 .input-login:focus {
   border: 1.7px solid var(--icon-color);
   outline: none;
