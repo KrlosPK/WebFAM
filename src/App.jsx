@@ -6,12 +6,14 @@ import { useContext } from 'react'
 import { Home } from './components/Home/Home'
 import { Login } from './components/Login/Login'
 import { Register } from './components/Register/Register'
-import { NotFound } from './components/Not-found/NotFound'
-import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
-// import { ResetPassword } from './components/Login/ResetPassword/ResetPassword'
+import { Services } from './components/Services/Services'
 import { EditUser } from './components/EditUser/EditUser'
+import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
 
-import { ProtectedRoute } from './components/ProtectedRoute'
+import { NotFound } from './components/Not-found/NotFound'
+// import { ResetPassword } from './components/Login/ResetPassword/ResetPassword'
+
+import { ProtectedRoute } from './components/Utils'
 
 // ? Context
 import { SessionContext } from './context/SessionContext'
@@ -21,7 +23,6 @@ export const App = () => {
 
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
       <Route element={<ProtectedRoute session={tempSession} />}>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
@@ -32,7 +33,9 @@ export const App = () => {
 
       {/* //TODO Ruta Con Parámetro */}
       {/* <Route path='/reset-password' element={<ResetPassword />} /> */}
-
+      <Route path='/' element={<Home />} />
+      <Route path='/services' element={<Services />} />
+      <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   )

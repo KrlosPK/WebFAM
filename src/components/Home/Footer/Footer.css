@@ -10,16 +10,16 @@ footer a {
 }
 .office-hours {
   align-items: center;
-  background-color: white;
+  background-color: rgba(168, 157, 157, 0.061);
   border-radius: 15px;
-  color: #000;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
   margin: 0 auto 2rem;
-  padding: 1rem 3rem;
+  padding: 2rem 4rem;
   width: fit-content;
 }
 .office-hours {
