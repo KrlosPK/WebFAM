@@ -17,7 +17,7 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const EditUser = () => {
-  //! Cambiar título de la página
+  // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes | Editar Perfil')
   useEffect(() => {
     document.title = title

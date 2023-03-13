@@ -2,6 +2,8 @@ import './Services.css'
 
 // ? Components
 import { Navbar, ResponsiveNav } from '../Utils'
+import { Footer } from '../Home/Footer/Footer'
+import { AboutUs } from '../AboutUs/AboutUs'
 
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
@@ -28,8 +30,6 @@ const Services = () => {
       <ResponsiveNav
         linkText={['Inicio', 'Agendar', 'Servicios']}
         linkUrl={['/', '/', '/services']}
-        anchordText={['Preguntas Frecuentes']}
-        anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
       />
       <Navbar
@@ -38,9 +38,9 @@ const Services = () => {
         renderButtons={button}
       />
       <section className='servicios'>
-        <h1>Servicios</h1>
-        <div className="servicios__card"></div>
+        <AboutUs/>
       </section>
+      <Footer />
     </>
   )
 }

@@ -1,8 +1,8 @@
 import './AboutUs.css'
-import { Card } from '../../Utils'
+import { Card } from '../Utils'
 
 // ! Jsons
-import aboutUsData from '../../../json/aboutUs.json'
+import aboutUsData from '../../json/aboutUs.json'
 
 const AboutUs = () => {
   return (
