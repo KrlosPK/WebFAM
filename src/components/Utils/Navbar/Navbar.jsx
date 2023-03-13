@@ -18,13 +18,7 @@ import { BiLogOut } from 'react-icons/bi'
 import { AiOutlineSetting } from 'react-icons/ai'
 import { FaAngleDown } from 'react-icons/fa'
 
-const Navbar = ({
-  anchordText,
-  linkText,
-  anchordUrl,
-  linkUrl,
-  renderButtons
-}) => {
+const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [expanded, setExpanded] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -39,9 +33,7 @@ const Navbar = ({
 
   const getUserData = async () => {
     const cookies = document.cookie
-    const tokenCookie = cookies
-      .split('; ')
-      .find(cookie => cookie.startsWith('token='))
+    const tokenCookie = cookies.split('; ').find((cookie) => cookie.startsWith('token='))
     let token = null
     if (!tokenCookie) return null
     token = tokenCookie.split('=')[1]
@@ -105,8 +97,8 @@ const Navbar = ({
             />
           </Link>
           <ul className='left'>
-            {linkText
-              ? linkText.map((el, i) => {
+            {linkText &&
+              linkText.map((el, i) => {
                 return (
                   <li key={i}>
                     <Link id='RouterNavLink' to={linkUrl[i]}>
@@ -114,10 +106,9 @@ const Navbar = ({
                     </Link>
                   </li>
                 )
-              })
-              : ''}
-            {anchordText
-              ? anchordText.map((el, i) => {
+              })}
+            {anchordText &&
+              anchordText.map((el, i) => {
                 return (
                   <li key={i}>
                     <a id='RouterNavLink' href={anchordUrl[i]}>
@@ -125,8 +116,7 @@ const Navbar = ({
                     </a>
                   </li>
                 )
-              })
-              : ''}
+              })}
           </ul>
         </ul>
         <ul className='right'>
@@ -143,10 +133,7 @@ const Navbar = ({
           {renderButtons === 2 && (
             <>
               <ul className={expanded ? 'user show' : 'user'}>
-                <li
-                  className='user user__container'
-                  onClick={handleExpandClick}
-                >
+                <li className='user user__container' onClick={handleExpandClick}>
                   <LazyLoadImage
                     loading='lazy'
                     src={userData.picture || defaultImage}

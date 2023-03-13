@@ -13,7 +13,6 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 
 //* Components
 import { Button, Button2, ResponsiveNav, Navbar } from '../Utils'
-import { AboutUs } from './AboutUs/AboutUs'
 import { Team } from './Team/Team'
 import { Provide } from './Provide/Provide'
 import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
@@ -46,15 +45,15 @@ const Home = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={['Inicio', 'Productos', 'Servicios']}
-        linkUrl={['/', '/', '/']}
+        linkText={['Inicio', 'Agendar', 'Servicios']}
+        linkUrl={['/', '/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
       />
       <Navbar
-        linkText={['Inicio', 'Productos', 'Servicios']}
-        linkUrl={['/', '/', '/']}
+        linkText={['Inicio', 'Agendar', 'Servicios']}
+        linkUrl={['/', '/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
@@ -90,7 +89,6 @@ const Home = () => {
           </div>
         ))}
       </section>
-      <AboutUs />
       <Provide />
       <Team />
       <Services />

@@ -87,20 +87,22 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
             <strong className='user__name'>{userData.name}</strong>
           </li>
         )}
-        {linkText.map((el, i) => {
-          return (
-            <Link className='flex' to={linkUrl[i]} key={i}>
-              <span>{el}</span>
-            </Link>
-          )
-        })}
-        {anchordText.map((el, i) => {
-          return (
-            <a className='flex' href={anchordUrl[i]} key={i}>
-              <span>{el}</span>
-            </a>
-          )
-        })}
+        {linkText &&
+          linkText.map((el, i) => {
+            return (
+              <Link className='flex' to={linkUrl[i]} key={i}>
+                <span>{el}</span>
+              </Link>
+            )
+          })}
+        {anchordText &&
+          anchordText.map((el, i) => {
+            return (
+              <a className='flex' href={anchordUrl[i]} key={i}>
+                <span>{el}</span>
+              </a>
+            )
+          })}
         {renderButtons === 1 && (
           <>
             <Link className='flex' to='/login'>
