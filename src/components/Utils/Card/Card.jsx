@@ -6,11 +6,20 @@ import AOS from 'aos'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
-const Card = ({ title, description, titleColor, descriptionColor, size = '100%', src, alt }) => {
+const Card = ({
+  title,
+  description,
+  titleColor,
+  descriptionColor,
+  size = '100%',
+  src,
+  alt,
+  innerOnClick = ''
+}) => {
   AOS.init({ duration: 700 })
 
   return (
-    <div className='card' data-aos='fade-right'>
+    <div className='card' data-aos='fade-right' onClick={innerOnClick}>
       <picture>
         <LazyLoadImage
           className='card__image'

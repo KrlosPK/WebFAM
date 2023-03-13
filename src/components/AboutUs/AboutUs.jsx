@@ -4,7 +4,7 @@ import { Card } from '../Utils'
 // ! Jsons
 import aboutUsData from '../../json/aboutUs.json'
 
-const AboutUs = () => {
+const AboutUs = ({ innerOnClick = '' }) => {
   return (
     <section className='about-us-container'>
       <div className='info'>
@@ -20,6 +20,7 @@ const AboutUs = () => {
               src={src}
               alt={alt}
               title={title}
+              innerOnClick={innerOnClick}
               description={description}
             />
           ))}

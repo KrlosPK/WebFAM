@@ -34,7 +34,11 @@ export const App = () => {
       {/* //TODO Ruta Con Parámetro */}
       {/* <Route path='/reset-password' element={<ResetPassword />} /> */}
       <Route path='/' element={<Home />} />
-      <Route path='/services' element={<Services />} />
+
+      <Route path='/services' element={<Services />}>
+        <Route path=':serviceId' element={<h1>Servicio</h1>} />
+      </Route>
+
       <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='*' element={<NotFound />} />
     </Routes>

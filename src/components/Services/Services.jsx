@@ -8,6 +8,7 @@ import { AboutUs } from '../AboutUs/AboutUs'
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
 import { SessionContext } from '../../context/SessionContext'
+// import { useParams } from 'react-router-dom'
 
 const Services = () => {
   // ? Context
@@ -25,6 +26,13 @@ const Services = () => {
   useEffect(() => {
     document.title = title
   }, [setTitle])
+
+  // const { serviceId } = useParams()
+
+  const redirectService = () => {
+    console.log('hola')
+  }
+
   return (
     <>
       <ResponsiveNav
@@ -37,9 +45,7 @@ const Services = () => {
         linkUrl={['/', '/', '/services']}
         renderButtons={button}
       />
-      <section className='servicios'>
-        <AboutUs/>
-      </section>
+      <AboutUs innerOnClick={redirectService} />
       <Footer />
     </>
   )
