@@ -125,16 +125,16 @@ const Login = () => {
       await axios
         .post(API_URL('signin'), body)
         .then(({ data }) => {
-          const { Authorization } = data.Headers
+          const { token } = data
 
-          setTokenData(Authorization)
+          setTokenData(token)
 
           sessionStorage.setItem('session', 'true')
           setTempSession(true)
 
           setSession(true)
 
-          if (Authorization) return navigate('/')
+          if (token) return navigate('/')
         })
         .catch((err) => {
           toast.error('¡Correo y/o contraseña incorrectos!', {
