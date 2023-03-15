@@ -8,6 +8,7 @@ import { Login } from './components/Login/Login'
 import { Register } from './components/Register/Register'
 import { Services } from './components/Services/Services'
 import { Service } from './components/Services/Service/Service'
+import { Citas } from './components/Citas/Citas'
 import { EditUser } from './components/EditUser/EditUser'
 import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
 
@@ -38,6 +39,8 @@ export const App = () => {
 
       <Route path='/services' element={<Services />} />
       <Route path='/services/:serviceId' element={<Service />} />
+
+      <Route path='/citas' element={<Citas />} />
 
       <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='*' element={<NotFound />} />
