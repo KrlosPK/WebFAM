@@ -25,6 +25,12 @@
   flex-direction: column;
   gap: 1.5rem;
 }
+.service-aside p {
+  font-weight: 100;
+  line-height: 1.7rem;
+  max-width: 50ch;
+  text-align: justify;
+}
 .service-aside__title,
 .description__title {
   font-family: syne;
@@ -70,6 +76,18 @@
   }
 }
 @media (max-width: 768px) {
+  .service-aside button {
+    margin: 1rem auto 0;
+  }
+  .description__title {
+    text-align: center;
+    width: 100%;
+  }
+  .offers {
+    grid-template-columns: 1fr;
+    margin: auto;
+    width: 280px;
+  }
   .service-info > div {
     flex-direction: column;
   }

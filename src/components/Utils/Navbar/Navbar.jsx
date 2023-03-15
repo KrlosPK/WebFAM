@@ -8,7 +8,8 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
 //* Hooks
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { NavLink } from '../../NavLink'
 import { SessionContext } from '../../../context/SessionContext'
 import { useContext, useState, useEffect, useRef } from 'react'
 import jwtDecode from 'jwt-decode'
@@ -87,7 +88,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
     <>
       <nav className='navbar' ref={dropdownRef}>
         <ul className='logo'>
-          <Link to='/'>
+          <NavLink to='/'>
             <LazyLoadImage
               src='/logotype-small.png'
               loading='lazy'
@@ -95,15 +96,15 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
               height={45}
               alt='Logo de Fademet Montajes'
             />
-          </Link>
+          </NavLink>
           <ul className='left'>
             {linkText &&
               linkText.map((el, i) => {
                 return (
                   <li key={i}>
-                    <Link id='RouterNavLink' to={linkUrl[i]}>
+                    <NavLink id='RouterNavLink' to={linkUrl[i]}>
                       <p className='flex gap fade-gray'>{el}</p>
-                    </Link>
+                    </NavLink>
                   </li>
                 )
               })}
@@ -122,12 +123,12 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
         <ul className='right'>
           {renderButtons === 1 && (
             <li className='register-login-buttons'>
-              <Link className='flex gap' to='/login'>
+              <NavLink className='flex gap' to='/login'>
                 <Button text='Ingresar' width={140} />
-              </Link>
-              <Link className='flex gap' to='/register'>
+              </NavLink>
+              <NavLink className='flex gap' to='/register'>
                 <Button2 text='Registrarse' width={140} />
-              </Link>
+              </NavLink>
             </li>
           )}
           {renderButtons === 2 && (

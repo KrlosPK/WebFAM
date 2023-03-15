@@ -52,3 +52,11 @@ img {
 a {
   text-decoration: none;
 }
+
+nav a.is-active {
+  font-weight: bold;
+}
+
+img[alt] {
+  color: #fff;
+}
