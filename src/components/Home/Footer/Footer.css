@@ -112,6 +112,10 @@ footer a {
 }
 
 @media (max-width: 768px) {
+  .office-hours {
+    padding: 2rem;
+  }
+
   .footer__copyright {
     flex-direction: column;
     gap: 4px;

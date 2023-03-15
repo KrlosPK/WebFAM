@@ -212,9 +212,12 @@ const Register = () => {
     } else if (!regexContrasena.test(contrasena)) {
       e.preventDefault()
 
-      toast.error('¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!', {
-        theme: 'colored'
-      })
+      toast.error(
+        '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
+        {
+          theme: 'colored'
+        }
+      )
 
       focusInput(contrasenaInputEl)
 
@@ -274,21 +277,76 @@ const Register = () => {
         </div>
         <form className='second-login' onSubmit={createUser} onKeyDown={handleKeyDown}>
           <div className='main-form'>
-            <Input text='Nombre' nameID='nombre' value={body.nombre} innerRef={nombreInputEl} innerOnChange={inputChange} />
+            <Input
+              text='Nombre'
+              nameID='nombre'
+              value={body.nombre}
+              innerRef={nombreInputEl}
+              innerOnChange={inputChange}
+            />
 
-            <Input text='Apellidos' nameID='apellidos' value={body.apellidos} innerRef={apellidosInputEl} innerOnChange={inputChange} />
+            <Input
+              text='Apellidos'
+              nameID='apellidos'
+              value={body.apellidos}
+              innerRef={apellidosInputEl}
+              innerOnChange={inputChange}
+            />
 
-            <Input text='Número de celular' type='number' nameID='num_celular' value={body.num_celular} innerRef={numCelularInputEl} innerOnChange={inputChange} />
+            <Input
+              text='Número de celular'
+              type='number'
+              nameID='num_celular'
+              value={body.num_celular}
+              innerRef={numCelularInputEl}
+              innerOnChange={inputChange}
+            />
 
-            <Select innerRef={tipoDocumentoInputEl} innerValue={body.tipo_documento} innerOnChange={selectChange} innerName='tipo_documento' value={['', 'C.C', 'C.E', 'NIT']} option={['Selecciona una opción', 'Cédula de Ciudadanía', 'Cédula de Extranjería', '(NIT) Número de Identificación Tributaria']} text='Tipo de Documento' />
+            <Select
+              innerRef={tipoDocumentoInputEl}
+              innerValue={body.tipo_documento}
+              innerOnChange={selectChange}
+              innerName='tipo_documento'
+              value={['', 'C.C', 'C.E', 'NIT']}
+              option={[
+                'Selecciona una opción',
+                'Cédula de Ciudadanía',
+                'Cédula de Extranjería',
+                '(NIT) Número de Identificación Tributaria'
+              ]}
+              text='Tipo de Documento'
+            />
 
-            <Input text='Número de Documento' type='number' nameID='num_documento' value={body.num_documento} innerRef={numDocumentoInputEl} innerOnChange={inputChange} />
+            <Input
+              text='Número de Documento'
+              type='number'
+              nameID='num_documento'
+              value={body.num_documento}
+              innerRef={numDocumentoInputEl}
+              innerOnChange={inputChange}
+            />
 
-            <Input text='Correo' type='email' nameID='correo' value={body.correo} innerRef={correoInputEl} innerOnChange={inputChange} />
+            <Input
+              text='Correo'
+              type='email'
+              nameID='correo'
+              value={body.correo}
+              innerRef={correoInputEl}
+              innerOnChange={inputChange}
+            />
 
             <div className='input-container'>
-              <Input text='Contraseña' nameID='contrasena' type={showPassword ? 'password' : 'text'} value={body.contrasena} innerRef={contrasenaInputEl} innerOnChange={inputChange} />
-              <div onClick={handleShowPasswordClick}>{showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}</div>
+              <Input
+                text='Contraseña'
+                nameID='contrasena'
+                type={showPassword ? 'password' : 'text'}
+                value={body.contrasena}
+                innerRef={contrasenaInputEl}
+                innerOnChange={inputChange}
+              />
+              <div onClick={handleShowPasswordClick}>
+                {showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
+              </div>
             </div>
           </div>
           <div className='register'>
@@ -302,6 +360,13 @@ const Register = () => {
         <Link to={'/login'}>
           <Button2 text='Inicia sesión' width={280} />
         </Link>
+        <div className='register-section__terms'>
+          Al registrarte aceptas los{' '}
+          <a href='https://policies.google.com/terms' target='_blank' rel='noreferrer'>
+            Términos y Condiciones
+          </a>{' '}
+          de Google
+        </div>
       </section>
     </div>
   )

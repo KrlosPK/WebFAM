@@ -7,6 +7,7 @@ import { Home } from './components/Home/Home'
 import { Login } from './components/Login/Login'
 import { Register } from './components/Register/Register'
 import { Services } from './components/Services/Services'
+import { Service } from './components/Services/Service/Service'
 import { EditUser } from './components/EditUser/EditUser'
 import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
 
@@ -35,9 +36,9 @@ export const App = () => {
       {/* <Route path='/reset-password' element={<ResetPassword />} /> */}
       <Route path='/' element={<Home />} />
 
-      <Route path='/services' element={<Services />}>
-        <Route path=':serviceId' element={<h1>Servicio</h1>} />
-      </Route>
+      <Route path='/services' element={<Services />} />
+      <Route path='/services/:serviceId' element={<Service />} />
+      <Route path='/services/*' element={<NotFound />} />
 
       <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='*' element={<NotFound />} />

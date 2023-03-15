@@ -24,6 +24,12 @@ ul {
   justify-content: center;
   margin: 0.5rem;
 }
+.logo a img {
+  transition: scale 300ms ease;
+}
+.logo a img:hover {
+  scale: 1.05;
+}
 .logo a {
   align-items: center;
   display: flex;
@@ -82,6 +88,7 @@ a {
   padding: 2px 1rem;
   position: relative;
   transition: border-color 300ms ease-in-out;
+  z-index: 2;
 }
 .user__text {
   transition: color 300ms ease;

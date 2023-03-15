@@ -3,11 +3,12 @@ import './EditUser.css'
 // ? Components
 import { Footer } from '../Home/Footer/Footer'
 import { API_URL, Button2, Input, Navbar, validatePassword, setTokenData } from '../Utils'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 // ? Hooks
-import { LazyLoadImage } from 'react-lazy-load-image-component'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import jwtDecode from 'jwt-decode'
+import { SessionContext } from '../../context/SessionContext'
 
 //* Libraries
 import axios from 'axios'
@@ -17,6 +18,9 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 
 const EditUser = () => {
+  // ? Context
+  const { session, tempSession } = useContext(SessionContext)
+
   // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes | Editar Perfil')
   useEffect(() => {
@@ -273,10 +277,21 @@ const EditUser = () => {
     form === 'editUser' ? setForm('changePassword') : setForm('editUser')
   }
 
+  const [button, setButton] = useState(null)
+
+  useEffect(() => {
+    !session ? setButton(1) : setButton(2)
+    !tempSession ? setButton(1) : setButton(2)
+  }, [session, tempSession])
+
   return (
     <section>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
-      <Navbar renderButtons={3} />
+      <Navbar
+        linkText={['Inicio', 'Agendar', 'Servicios']}
+        linkUrl={['/', '/', '/services']}
+        renderButtons={button}
+      />
       <section className='edit-user'>
         <header className='edit-user__header'>
           <LazyLoadImage

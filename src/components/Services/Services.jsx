@@ -8,7 +8,6 @@ import { AboutUs } from '../AboutUs/AboutUs'
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
 import { SessionContext } from '../../context/SessionContext'
-// import { useParams } from 'react-router-dom'
 
 const Services = () => {
   // ? Context
@@ -24,14 +23,11 @@ const Services = () => {
   // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes | Servicios')
   useEffect(() => {
+    // ? Scroll to top
+    window.scrollTo(0, 0)
+
     document.title = title
   }, [setTitle])
-
-  // const { serviceId } = useParams()
-
-  const redirectService = () => {
-    console.log('hola')
-  }
 
   return (
     <>
@@ -45,7 +41,7 @@ const Services = () => {
         linkUrl={['/', '/', '/services']}
         renderButtons={button}
       />
-      <AboutUs innerOnClick={redirectService} />
+      <AboutUs />
       <Footer />
     </>
   )

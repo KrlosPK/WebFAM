@@ -1,10 +1,10 @@
 {
   "name": "webfam",
   "private": true,
-  "version": "0.16.0",
+  "version": "0.16.7",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "vite build",
     "preview": "vite preview"
   },
