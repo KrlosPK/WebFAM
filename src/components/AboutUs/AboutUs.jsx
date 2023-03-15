@@ -11,17 +11,16 @@ const AboutUs = () => {
 
   useEffect(() => {
     axios.get(API_URL('servicios')).then(({ data }) => {
-      console.log(data.services)
       setServices(data.services)
     })
   }, [])
   return (
     <section className='about-us-container'>
       <div className='info'>
-        <h2 className='info__title'>¡Los mejores servicios para nuestros clientes!</h2>
+        <h2 className='info__title'>¡Ofrecemos los mejores servicios para nuestros clientes!</h2>
         <p className='info__subtitle'>
-          En FADEMET tenemos en cuenta tus deseos, y por ello, día a día nos esforzamos para hacer
-          que nuestros servicios sean lo mejor para ti.
+          En FADEMET valoramos tus deseos, por lo que trabajamos arduamente día a día para ofrecerte
+          servicios que se adapten a tus necesidades y sean de la más alta calidad.
         </p>
         <div className='cards'>
           {services.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
