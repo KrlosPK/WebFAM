@@ -2,6 +2,7 @@ import './Services.css'
 
 // ? Components
 import { Button } from '../../Utils'
+import { Link } from 'react-router-dom'
 
 //* Libraries
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -24,16 +25,18 @@ const Services = () => {
         <p className='services-info-card__text'>
           Estamos disponibles para ti, contáctanos y te daremos una cotización
         </p>
-        <Button text='Servicios' />
+        <Link to='/services'>
+          <Button text='Servicios' />
+        </Link>
       </div>
       <div className='service-info-card__right'>
-        <LazyLoadImage effect='blur' src='/services-sierra-de-mano.png' loading='lazy' alt='Sierra de mano' />
         <LazyLoadImage
           effect='blur'
-          src='/services-pergola.png'
+          src='/services-sierra-de-mano.png'
           loading='lazy'
-          alt='Pérgola'
+          alt='Sierra de mano'
         />
+        <LazyLoadImage effect='blur' src='/services-pergola.png' loading='lazy' alt='Pérgola' />
       </div>
     </section>
   )

@@ -13,13 +13,12 @@ const Card = ({
   descriptionColor,
   size = '100%',
   src,
-  alt,
-  innerOnClick = ''
+  alt = 'Servicio que ofrece Fademet Montajes'
 }) => {
   AOS.init({ duration: 700 })
 
   return (
-    <div className='card' data-aos='fade-right' onClick={innerOnClick}>
+    <div className='card' data-aos='fade-right'>
       <picture>
         <LazyLoadImage
           className='card__image'
