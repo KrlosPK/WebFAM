@@ -36,7 +36,6 @@ const Service = () => {
       .get(API_URL(`servicios/${serviceId}`))
       .then(({ data }) => {
         setService(data.service)
-        console.log(service)
       })
 
     // ? Scroll to top

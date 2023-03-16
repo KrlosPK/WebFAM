@@ -87,7 +87,6 @@ footer a {
   width: 80px;
 }
 .footer__logo img:hover {
-  rotate: 15deg;
   scale: 1.15;
 }
 .footer__logo p {

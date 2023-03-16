@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const AboutUs = () => {
-  const [services, setServices] = useState([])
+  const [services, setServices] = useState(null)
 
   useEffect(() => {
     axios.get(API_URL('servicios')).then(({ data }) => {
@@ -23,11 +23,14 @@ const AboutUs = () => {
           servicios que se adapten a tus necesidades y sean de la más alta calidad.
         </p>
         <div className='cards'>
-          {services.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
-            <Link to={`/services/${id_servicio}`} key={id_servicio}>
-              <Card src={foto_servicio} title={nombre_servicio} description={resumen_servicio} />
-            </Link>
-          ))}
+          {services
+            ? services.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
+              <Link to={`/services/${id_servicio}`} key={id_servicio}>
+                <Card src={foto_servicio} title={nombre_servicio} description={resumen_servicio} />
+              </Link>
+            ))
+            : <div className='loader'>Cargando...</div>
+          }
         </div>
       </div>
     </section>

@@ -136,11 +136,10 @@ const Login = () => {
 
           if (token) return navigate('/')
         })
-        .catch((err) => {
+        .catch(() => {
           toast.error('¡Correo y/o contraseña incorrectos!', {
             theme: 'colored'
           })
-          console.log(err)
           setDisabled(false)
         })
     }
@@ -206,7 +205,9 @@ const Login = () => {
                   }
                 }}
                 onError={() => {
-                  console.log('Login Failed')
+                  toast.error('¡Error al iniciar sesión con Google! Vuelve a intentarlo...', {
+                    theme: 'colored'
+                  })
                 }}
                 size='medium'
                 shape='circle'
