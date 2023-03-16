@@ -289,7 +289,7 @@ const EditUser = () => {
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <Navbar
         linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/', '/services']}
+        linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
       <section className='edit-user'>
