@@ -12,22 +12,36 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 
 //* Components
-import { Button, Button2, ResponsiveNav, Navbar } from '../Utils'
+import { Button, Button2, ResponsiveNav, Navbar, getToken } from '../Utils'
 import { Team } from './Team/Team'
 import { Provide } from './Provide/Provide'
 import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
 import { Services } from './Services/Services'
 import { Footer } from './Footer/Footer'
 import { SessionContext } from '../../context/SessionContext'
+import jwtDecode from 'jwt-decode'
 
 const Home = () => {
   // ? Context
   const { session, tempSession } = useContext(SessionContext)
   const { setToastify } = useContext(ToastifyContext)
+  const [idUsuario, setIdUsuario] = useState(null)
 
   useEffect(() => {
     setToastify(false)
   }, [setToastify])
+
+  useEffect(() => {
+    const token = getToken()
+
+    new Promise((resolve, reject) => {
+      const decoded = jwtDecode(token)
+      resolve(decoded.data)
+      reject(new Error('Error al decodificar el token'))
+    }).then((decoded) => {
+      setIdUsuario(decoded[0].id_usuario)
+    })
+  }, [])
 
   // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes | Inicio')
@@ -52,8 +66,8 @@ const Home = () => {
         renderButtons={button}
       />
       <Navbar
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/citas', '/services']}
+        linkText={idUsuario !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idUsuario !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}

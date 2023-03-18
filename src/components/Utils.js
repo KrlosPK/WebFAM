@@ -15,6 +15,7 @@ export { ProtectedRoute } from './ProtectedRoute'
 
 // * Token
 export { setTokenData } from './Utils/Token'
+export { getToken } from './Utils/GetToken/GetToken'
 
 // ? Validations
 export { validateMail, validatePassword } from './Utils/validations/validation'
