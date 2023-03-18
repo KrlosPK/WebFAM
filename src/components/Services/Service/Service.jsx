@@ -108,19 +108,23 @@ const Service = () => {
           </div>
         </article>
         {service[0] && service[0].galeria_servicios && (
-          <figure className='service-info__gallery'>
-            {service[0].galeria_servicios.split(', ').map((img, i) => (
-              <LazyLoadImage
-                key={i}
-                src={img}
-                loading='lazy'
-                width={380}
-                alt='Servicio que ofrece Fademet Montajes'
-                style={{ background: 'transparent' }}
-                onClick={fullscreen}
-              />
-            ))}
-          </figure>
+          <>
+            <h3 className='gallery__title'>Galería</h3>
+            <figure className='service-info__gallery'>
+              {service[0].galeria_servicios.split(', ').map((img, i) => (
+                <LazyLoadImage
+                  key={i}
+                  src={img}
+                  loading='lazy'
+                  width={380}
+                  height={380}
+                  alt='Servicio que ofrece Fademet Montajes'
+                  style={{ background: 'transparent' }}
+                  onClick={fullscreen}
+                />
+              ))}
+            </figure>
+          </>
         )}
       </section>
 
