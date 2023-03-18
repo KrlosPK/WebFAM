@@ -11,7 +11,7 @@
   letter-spacing: 1px;
   min-width: max-content;
   padding: 10px 1rem;
-  transition: border-color 300ms ease-in-out, color 300ms ease-in-out;
+  transition: border-color 250ms ease-in-out, color 250ms ease-in-out;
 }
 .Button-2:hover {
   border-color: #f39a25;

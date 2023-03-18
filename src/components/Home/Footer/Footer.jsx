@@ -16,7 +16,7 @@ const Footer = () => {
             <strong>Sábado</strong> 8:00 - 12:00 pm
           </li>
           <li className='office-hours__item'>
-            <strong>Domingo</strong> Cerrado
+            <strong>Domingo y festivos</strong> Cerrado
           </li>
         </ul>
       </div>
