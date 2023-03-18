@@ -45,15 +45,15 @@ const Home = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/citas', '/services']}
+        linkText={['Inicio', 'Servicios']}
+        linkUrl={['/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
       />
       <Navbar
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/citas', '/services']}
+        linkText={['Inicio', 'Servicios']}
+        linkUrl={['/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}

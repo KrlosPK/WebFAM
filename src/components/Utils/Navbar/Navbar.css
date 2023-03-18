@@ -52,11 +52,11 @@ ul {
   position: relative;
 }
 .logo__text-span::before {
-  background-color: #fff;
+  background-color: var(--white-color);
   content: '';
-  height: 1px;
+  height: 3px;
   position: absolute;
-  top: 1px;
+  top: 0px;
   width: 100%;
 }
 .left {

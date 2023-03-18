@@ -22,8 +22,9 @@
   place-items: center;
 }
 .service-info img {
-  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  background: linear-gradient(to right, #dbe1e4, #e7f0f2, #d9dee1);
   border-radius: 15px;
+  height: auto;
   object-fit: contain;
 }
 
@@ -43,6 +44,9 @@
 .description__title {
   font-family: syne;
   font-size: 28px;
+}
+.service-aside__desc {
+  padding: 0 10px;
 }
 .service-aside button {
   margin-top: 1rem;
@@ -79,10 +83,50 @@
   font-weight: 300;
 }
 
+.service-info__gallery {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+.service-info__gallery img {
+  border-radius: 15px;
+  cursor: pointer;
+  transition: translate 300ms ease;
+}
+.service-info__gallery img:hover {
+  translate: 5px;
+}
+.overlay {
+  align-items: center;
+  background-color: rgb(0, 0, 0, 0.9);
+  cursor: pointer;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 100;
+}
+.overlay img {
+  width: 100%;
+}
+
+@media (max-width: 1300px) {
+  .service-info__gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @media (max-width: 1000px) {
   .service-info img {
-    height: 400px;
+    height: auto;
     width: 400px;
+  }
+  .service-info__gallery img {
+    height: auto;
+    width: 320px;
   }
   .service-info > div {
     grid-template-columns: 1fr;
@@ -121,8 +165,18 @@
     width: 280px;
   }
   .service-info img {
-    height: 350px;
+    height: auto;
     width: 350px;
+  }
+  .service-info__gallery img {
+    height: auto;
+    width: 300px;
+  }
+}
+@media (max-width: 700px) {
+  .service-info__gallery {
+    gap: 3rem;
+    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 500px) {
@@ -133,7 +187,11 @@
     margin: 1.5rem 0;
   }
   .service-info img {
-    height: 280px;
-    width: 280px;
+    height: auto;
+    width: 300px;
+  }
+  .service-info__gallery img {
+    height: auto;
+    width: 285px;
   }
 }

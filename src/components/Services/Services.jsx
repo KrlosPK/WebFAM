@@ -1,5 +1,3 @@
-import './Services.css'
-
 // ? Components
 import { Navbar, ResponsiveNav } from '../Utils'
 import { Footer } from '../Home/Footer/Footer'
@@ -32,13 +30,13 @@ const Services = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/citas', '/services']}
+        linkText={['Inicio', 'Servicios']}
+        linkUrl={['/', '/services']}
         renderButtons={button}
       />
       <Navbar
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/citas', '/services']}
+        linkText={['Inicio', 'Servicios']}
+        linkUrl={['/', '/services']}
         renderButtons={button}
       />
       <AboutUs />
