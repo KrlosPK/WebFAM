@@ -9,29 +9,24 @@ import { useContext, useEffect, useState } from 'react'
 
 // ? Context
 import { SessionContext } from '../../context/SessionContext'
-import { ToastifyContext } from '../../context/ToastifyContext'
 import jwtDecode from 'jwt-decode'
 import { useNavigate } from 'react-router-dom'
 
 const Citas = () => {
   const { session, tempSession } = useContext(SessionContext)
-  const { setToastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
     const token = getToken()
-
+    if (!token) return navigate('/login')
     const decode = jwtDecode(token)
     const { id_usuario } = decode.data[0]
     if (id_usuario === 2) return navigate('/')
   }, [])
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setToastify('citas')
-    }
     !session ? setButton(1) : setButton(2)
     !tempSession ? setButton(1) : setButton(2)
   }, [])
