@@ -63,6 +63,9 @@ ul {
   display: flex;
   gap: 2rem;
 }
+.left a:hover {
+  scale: unset;
+}
 .left li {
   width: max-content;
 }
