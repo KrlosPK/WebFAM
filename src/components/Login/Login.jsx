@@ -67,6 +67,10 @@ const Login = () => {
   //* Función para hacer focus en el input que no cumpla con los requisitos
   const focusInput = (input) => input.current.focus()
 
+  useEffect(() => {
+    focusInput(correoInputEl)
+  }, [toastify])
+
   //* Variables para hacer la validación
   const correoInputEl = useRef(null)
   const contrasenaInputEl = useRef(null)
