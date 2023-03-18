@@ -111,7 +111,7 @@
   z-index: 100;
 }
 .overlay img {
-  width: 100%;
+  width: 50%;
 }
 
 @media (max-width: 1300px) {
@@ -171,6 +171,9 @@
   .service-info__gallery img {
     height: auto;
     width: 300px;
+  }
+  .overlay img {
+    width: 100%;
   }
 }
 @media (max-width: 700px) {
