@@ -68,13 +68,11 @@ footer a {
   height: 1px;
   width: 100%;
 }
-.footer__contact-links svg {
-  color: #ffffff99;
-  font-size: 2rem;
+.footer__contact-links img {
   transition: all 300ms;
 }
-.footer__contact-links svg:hover {
-  color: white;
+.footer__contact-links img:hover,
+.footer__logo img:hover {
   scale: 1.15;
 }
 
@@ -85,9 +83,6 @@ footer a {
   margin-bottom: 1rem;
   transition: all 400ms ease;
   width: 80px;
-}
-.footer__logo img:hover {
-  scale: 1.15;
 }
 .footer__logo p {
   font-size: 13px;
@@ -122,9 +117,6 @@ footer a {
   .footer__contact-links::after,
   .footer__contact-links::before {
     display: none;
-  }
-  .footer__contact-links svg {
-    font-size: 1.5rem;
   }
   .footer__copyright a:nth-child(1)::after,
   .footer__copyright a:nth-child(2)::after {
