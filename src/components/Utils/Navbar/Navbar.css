@@ -24,15 +24,40 @@ ul {
   justify-content: center;
   margin: 0.5rem;
 }
-.logo a img {
-  transition: scale 300ms ease;
-}
-.logo a img:hover {
-  scale: 1.05;
-}
 .logo a {
   align-items: center;
   display: flex;
+  gap: 0.5rem;
+  transition: scale 300ms ease;
+}
+.logo a:hover {
+  scale: 1.05;
+}
+.logo__text {
+  color: #999;
+  font-family: 'Syne', sans-serif;
+  position: relative;
+}
+.logo__text::before {
+  background-color: #999;
+  content: '';
+  height: 1px;
+  position: absolute;
+  top: 1px;
+  width: 100%;
+}
+.logo__text-span {
+  color: #000;
+  font-family: 'Syne', sans-serif;
+  position: relative;
+}
+.logo__text-span::before {
+  background-color: #fff;
+  content: '';
+  height: 1px;
+  position: absolute;
+  top: 1px;
+  width: 100%;
 }
 .left {
   display: flex;

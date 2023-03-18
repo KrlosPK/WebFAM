@@ -16,13 +16,14 @@
   transition: background 200ms;
 }
 .open-card:hover {
-  background-color: #ccc;
+  background-color: #eee;
 }
 .open-card:focus {
   outline: none;
 }
 .open-card__header {
   color: #000;
+  font-size: 17px;
   font-weight: 400;
 }
 .open-card__text {
