@@ -12,7 +12,7 @@ const Team = () => {
       <h2 className='team__title'>Nuestro equipo</h2>
       <p className='team__text'>
         Contamos con un equipo altamente capacitado para soluciones metalmecánicas. Especializados
-        en diseño, fabricación y montaje de estructuras metálicas para sector industrial y
+        en diseño, fabricación y montaje de estructuras metálicas para el sector industrial y
         doméstico.
       </p>
       <div className='colleagues'>
