@@ -1,7 +1,7 @@
 import './Navbar.css'
 
 // ? Components
-import { Button, Button2 } from '../../Utils'
+import { Button, Button2, getToken } from '../../Utils'
 
 //* Libraries
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -33,11 +33,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   const defaultImage = '/default-avatar.png'
 
   const getUserData = async () => {
-    const cookies = document.cookie
-    const tokenCookie = cookies.split('; ').find((cookie) => cookie.startsWith('token='))
-    let token = null
-    if (!tokenCookie) return null
-    token = tokenCookie.split('=')[1]
+    const token = getToken()
 
     const decoded = await jwtDecode(token)
 

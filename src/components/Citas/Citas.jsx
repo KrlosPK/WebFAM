@@ -2,7 +2,7 @@ import './Citas.css'
 
 // ? Components
 import { Footer } from '../Home/Footer/Footer'
-import { Navbar, ResponsiveNav } from '../Utils'
+import { getToken, Navbar, ResponsiveNav } from '../Utils'
 
 // ? Hooks
 import { useContext, useEffect, useState } from 'react'
@@ -10,12 +10,23 @@ import { useContext, useEffect, useState } from 'react'
 // ? Context
 import { SessionContext } from '../../context/SessionContext'
 import { ToastifyContext } from '../../context/ToastifyContext'
+import jwtDecode from 'jwt-decode'
+import { useNavigate } from 'react-router-dom'
 
 const Citas = () => {
   const { session, tempSession } = useContext(SessionContext)
   const { setToastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const token = getToken()
+
+    const decode = jwtDecode(token)
+    const { id_usuario } = decode.data[0]
+    if (id_usuario === 2) return navigate('/')
+  }, [])
 
   useEffect(() => {
     if (!session || !tempSession) {
@@ -33,17 +44,16 @@ const Citas = () => {
 
     document.title = title
   }, [setTitle])
-
   return (
     <>
       <ResponsiveNav
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/', '/services']}
+        linkText={['Inicio', 'Agendas', 'Servicios']}
+        linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
       <Navbar
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/', '/services']}
+        linkText={['Inicio', 'Agendas', 'Servicios']}
+        linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
       <div className='citas'>
