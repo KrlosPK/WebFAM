@@ -34,6 +34,8 @@ const Home = () => {
   useEffect(() => {
     const token = getToken()
 
+    if (!token) return
+
     new Promise((resolve, reject) => {
       const decoded = jwtDecode(token)
       resolve(decoded.data)
@@ -59,15 +61,15 @@ const Home = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={['Inicio', 'Servicios']}
-        linkUrl={['/', '/services']}
+        linkText={idUsuario ? idUsuario !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idUsuario ? idUsuario !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] : ['/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
       />
       <Navbar
-        linkText={idUsuario !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idUsuario !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={idUsuario ? idUsuario !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idUsuario ? idUsuario !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] : ['/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}

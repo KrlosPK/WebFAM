@@ -35,6 +35,8 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   const getUserData = async () => {
     const token = getToken()
 
+    if (!token) return
+
     const decoded = await jwtDecode(token)
 
     if (decoded.data) {
