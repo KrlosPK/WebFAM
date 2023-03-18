@@ -16,7 +16,7 @@ import { Button, Button2, ResponsiveNav, Navbar } from '../Utils'
 import { Team } from './Team/Team'
 import { Provide } from './Provide/Provide'
 import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
-import { ServicesSection } from './Services/Services'
+import { ServicesSection } from './ServicesSection/ServicesSection'
 import { Footer } from './Footer/Footer'
 import { SessionContext } from '../../context/SessionContext'
 
