@@ -1,7 +1,7 @@
 import './Footer.css'
 
-import { BsWhatsapp, BsInstagram } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const Footer = () => {
   return (
@@ -16,25 +16,42 @@ const Footer = () => {
             <strong>Sábado</strong> 8:00 - 12:00 pm
           </li>
           <li className='office-hours__item'>
-            <strong>Domingo</strong> Cerrado
+            <strong>Domingo y festivos</strong> Cerrado
           </li>
         </ul>
       </div>
       <div className='footer__contact-links'>
         <a
           href='https://api.whatsapp.com/send/?phone=573147561960&text=¡Hola!%20Quisiera%20saber%20más%20sobre%20sus%20servicios.&type=phone_number&app_absent=0'
-          target={'_blank'} rel="noreferrer"
+          target={'_blank'}
+          rel='noreferrer'
         >
-          <BsWhatsapp />
+          <LazyLoadImage
+            src='/whatsapp.png'
+            loading='lazy'
+            width={32}
+            height={32}
+            alt='Whatsapp de Fademet Montajes'
+          />
         </a>
-        <a href='https://www.instagram.com/fademetmontajes/?hl=es' target={'_blank'} rel="noreferrer">
-          <BsInstagram />
+        <a
+          href='https://www.instagram.com/fademetmontajes/?hl=es'
+          target={'_blank'}
+          rel='noreferrer'
+        >
+          <LazyLoadImage
+            src='/instagram.png'
+            loading='lazy'
+            width={32}
+            height={32}
+            alt='Página de INSTAGRAM de Fademet Montajes'
+          />
         </a>
       </div>
       <div className='footer__bottom'>
         <div className='footer__logo'>
           <Link to='/'>
-            <img
+            <LazyLoadImage
               src='/logotype-small.png'
               width={64}
               loading='lazy'

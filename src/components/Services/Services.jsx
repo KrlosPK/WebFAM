@@ -1,5 +1,3 @@
-import './Services.css'
-
 // ? Components
 import { getToken, Navbar, ResponsiveNav } from '../Utils'
 import { Footer } from '../Home/Footer/Footer'
@@ -46,6 +44,8 @@ const Services = () => {
   return (
     <>
       <ResponsiveNav
+        linkText={['Inicio', 'Servicios']}
+        linkUrl={['/', '/services']}
         linkText={idUsuario !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
         linkUrl={idUsuario !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}

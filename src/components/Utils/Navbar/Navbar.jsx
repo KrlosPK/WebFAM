@@ -92,6 +92,9 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
               height={45}
               alt='Logo de Fademet Montajes'
             />
+            <b className='logo__text'>
+              FADE<span className='logo__text-span'>MET</span>
+            </b>
           </NavLink>
           <ul className='left'>
             {linkText &&

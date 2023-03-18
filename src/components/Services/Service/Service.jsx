@@ -32,12 +32,9 @@ const Service = () => {
   const { serviceId } = useParams()
   useEffect(() => {
     // ? Fetch serivice data
-    axios
-      .get(API_URL(`servicios/${serviceId}`))
-      .then(({ data }) => {
-        setService(data.service)
-        console.log(service)
-      })
+    axios.get(API_URL(`servicios/${serviceId}`)).then(({ data }) => {
+      setService(data.service)
+    })
 
     // ? Scroll to top
     window.scrollTo(0, 0)
@@ -46,16 +43,29 @@ const Service = () => {
     !tempSession ? setButton(1) : setButton(2)
   }, [session, tempSession])
 
+  const fullscreen = (e) => {
+    document.body.style.overflow = 'hidden'
+    const img = e.target
+    const overlay = document.createElement('div')
+    overlay.classList.add('overlay')
+    overlay.appendChild(img.cloneNode())
+    overlay.addEventListener('click', () => {
+      overlay.remove()
+      document.body.style.overflow = 'auto'
+    })
+    document.body.appendChild(overlay)
+  }
+
   return (
     <>
       <ResponsiveNav
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/citas', '/services']}
+        linkText={['Inicio', 'Servicios']}
+        linkUrl={['/', '/services']}
         renderButtons={button}
       />
       <Navbar
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/citas', '/services']}
+        linkText={['Inicio', 'Servicios']}
+        linkUrl={['/', '/services']}
         renderButtons={button}
       />
       <section className='service-info'>
@@ -66,12 +76,11 @@ const Service = () => {
             width={500}
             height={500}
             alt='Servicio que ofrece Fademet Montajes'
+            style={{ background: 'transparent' }}
           />
           <aside className='service-aside'>
             <h2 className='service-aside__title'>{service[0] && service[0].nombre_servicio}</h2>
-            <p className='service-aside__desc'>
-              {service[0] && service[0].descripcion_servicio}
-            </p>
+            <p className='service-aside__desc'>{service[0] && service[0].descripcion_servicio}</p>
             <Button2 text='Solicitar' width={210} />
           </aside>
         </div>
@@ -98,6 +107,21 @@ const Service = () => {
             </div>
           </div>
         </article>
+        {service[0] && service[0].galeria_servicios && (
+          <figure className='service-info__gallery'>
+            {service[0].galeria_servicios.split(', ').map((img, i) => (
+              <LazyLoadImage
+                key={i}
+                src={img}
+                loading='lazy'
+                width={380}
+                alt='Servicio que ofrece Fademet Montajes'
+                style={{ background: 'transparent' }}
+                onClick={fullscreen}
+              />
+            ))}
+          </figure>
+        )}
       </section>
 
       {/* {serviceId.map(({ id, src, alt, title, description }) => (

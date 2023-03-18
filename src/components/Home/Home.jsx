@@ -16,7 +16,7 @@ import { Button, Button2, ResponsiveNav, Navbar, getToken } from '../Utils'
 import { Team } from './Team/Team'
 import { Provide } from './Provide/Provide'
 import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
-import { Services } from './Services/Services'
+import { ServicesSection } from './ServicesSection/ServicesSection'
 import { Footer } from './Footer/Footer'
 import { SessionContext } from '../../context/SessionContext'
 import jwtDecode from 'jwt-decode'
@@ -59,8 +59,8 @@ const Home = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/citas', '/services']}
+        linkText={['Inicio', 'Servicios']}
+        linkUrl={['/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
@@ -105,7 +105,7 @@ const Home = () => {
       </section>
       <Provide />
       <Team />
-      <Services />
+      <ServicesSection />
       <FrequentQuestions />
       <Footer />
     </>

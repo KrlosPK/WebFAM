@@ -3,7 +3,7 @@ import './Team.css'
 //* Components
 import { MiniCard } from '../../Utils/MiniCard/MiniCard'
 
-//! Jsons
+// ! Jsons
 import teamData from '../../../json/team.json'
 
 const Team = () => {
@@ -11,9 +11,9 @@ const Team = () => {
     <section className='team' id='nuestroEquipo'>
       <h2 className='team__title'>Nuestro equipo</h2>
       <p className='team__text'>
-        Contamos con {teamData.length} trabajadores altamente capacitados para brindarte las mejores
-        soluciones metalmecánicas. Nos especializamos en el diseño, fabricación y montaje de
-        estructruas metálicas para el sector industrial y doméstico.
+        Contamos con un equipo altamente capacitado para soluciones metalmecánicas. Especializados
+        en diseño, fabricación y montaje de estructuras metálicas para el sector industrial y
+        doméstico.
       </p>
       <div className='colleagues'>
         {teamData.map(({ id, src, alt, header, text, textColor, animation, borderRadius }) => (
