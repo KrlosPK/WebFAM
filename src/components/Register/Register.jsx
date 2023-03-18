@@ -229,7 +229,7 @@ const Register = () => {
       await axios
         .post(API_URL('signup'), body)
         .then(() => {
-          setToastify(true)
+          setToastify('login')
           navigate('/login')
         })
         .catch(() => {

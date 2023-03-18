@@ -1,6 +1,15 @@
 import './login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button, Button2, Input, validateMail, validatePassword, API_URL, Navbar, setTokenData } from '../Utils'
+import {
+  Button,
+  Button2,
+  Input,
+  validateMail,
+  validatePassword,
+  API_URL,
+  Navbar,
+  setTokenData
+} from '../Utils'
 
 // ? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
@@ -23,10 +32,17 @@ const Login = () => {
   const { toastify } = useContext(ToastifyContext)
 
   useEffect(() => {
-    if (toastify === true) {
+    if (toastify === 'login') {
       toast.success('¡Usuario creado con éxito!', {
         theme: 'colored'
       })
+      focusInput(correoInputEl)
+    }
+    if (toastify === 'citas') {
+      toast.info('¡Debes iniciar sesión para agendar una cita!', {
+        theme: 'colored'
+      })
+      focusInput(correoInputEl)
     }
   }, [toastify])
 
@@ -170,8 +186,7 @@ const Login = () => {
       const correo = document.querySelector('#correo').value
       const contrasena = document.querySelector('#contrasena').value
       const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-      const contrasenaRegex =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
+      const contrasenaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
 
       if (!validateMail(correo, correoRegex) || !validatePassword(contrasena, contrasenaRegex)) {
         toast.error('¡Debes tener tus datos correctos para recordar! Vuelve a intentarlo...', {
