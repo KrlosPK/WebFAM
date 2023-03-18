@@ -29,7 +29,12 @@ export const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
       </Route>
+
       {tempSession && <Route path='/account' element={<EditUser />} />}
+
+      <Route element={<ProtectedRoute session={!tempSession} redirectTo='/login' />}>
+        <Route path='/citas' element={<Citas />} />
+      </Route>
 
       <Route path='/recover-password' element={<RecoverPassword />} />
 
@@ -39,8 +44,6 @@ export const App = () => {
 
       <Route path='/services' element={<Services />} />
       <Route path='/services/:serviceId' element={<Service />} />
-
-      <Route path='/citas' element={<Citas />} />
 
       <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='*' element={<NotFound />} />

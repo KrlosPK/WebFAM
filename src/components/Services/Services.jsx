@@ -33,12 +33,12 @@ const Services = () => {
     <>
       <ResponsiveNav
         linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/', '/services']}
+        linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
       <Navbar
         linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/', '/services']}
+        linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
       <AboutUs />
