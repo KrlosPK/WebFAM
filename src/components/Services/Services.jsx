@@ -37,15 +37,15 @@ const Services = () => {
   useEffect(() => {
     const token = getToken()
 
-    if (!token) return false
-
-    new Promise((resolve, reject) => {
-      const decoded = jwtDecode(token)
-      resolve(decoded.data)
-      reject(new Error('Error al decodificar el token'))
-    }).then((decoded) => {
-      setIdRol(decoded[0].id_rol)
-    })
+    if (token !== null) {
+      new Promise((resolve, reject) => {
+        const decoded = jwtDecode(token)
+        resolve(decoded.data)
+        reject(new Error('Error al decodificar el token'))
+      }).then((decoded) => {
+        setIdRol(decoded[0].id_rol)
+      })
+    }
   }, [])
 
   useEffect(() => {
@@ -59,13 +59,13 @@ const Services = () => {
     <>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
-        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={ idRol !== null && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={ idRol !== null && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
       <Navbar
-        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={ idRol !== null && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={ idRol !== null && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
       <AboutUs />

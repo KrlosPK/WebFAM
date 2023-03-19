@@ -13,9 +13,12 @@ const AboutUs = () => {
 
   useEffect(() => {
     const token = getToken()
-    const decode = jwtDecode(token)
-    setIdUsuario(decode.data[0].id_usuario)
+    if (token !== null) {
+      const decode = jwtDecode(token)
+      setIdUsuario(decode.data[0].id_usuario)
+    }
   }, [])
+
   useEffect(() => {
     axios.get(API_URL('servicios')).then(({ data }) => {
       setServices(data.services)
