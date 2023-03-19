@@ -38,12 +38,6 @@ const Login = () => {
       })
       focusInput(correoInputEl)
     }
-    if (toastify === 'citas') {
-      toast.info('¡Debes iniciar sesión para agendar una cita!', {
-        theme: 'colored'
-      })
-      focusInput(correoInputEl)
-    }
   }, [toastify])
 
   const navigate = useNavigate()
