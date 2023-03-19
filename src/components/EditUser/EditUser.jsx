@@ -157,19 +157,14 @@ const EditUser = () => {
           })
         }
 
-        /* const cookies = document.cookie
-        const tokenCookie = cookies.split('; ').find((cookie) => cookie.startsWith('token='))
-        let token = null
-        if (!tokenCookie) return null
-        token = tokenCookie.split('=')[1] */
-
         axios
           .post(API_URL(`nuevoToken/${userData.id_usuario}`))
-          .then((res) => {
-            const { Authorization } = res.data.Headers
+          .then(({ data }) => {
+            console.log(data.token)
+            const { token } = data
 
             if (res.status === 200) {
-              setTokenData(Authorization)
+              setTokenData(token)
 
               getUserData()
             }
