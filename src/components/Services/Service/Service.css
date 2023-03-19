@@ -41,7 +41,8 @@
   text-align: justify;
 }
 .service-aside__title,
-.description__title {
+.description__title,
+.gallery__title {
   font-family: syne;
   font-size: 28px;
 }
@@ -88,6 +89,11 @@
   gap: 10px;
   grid-template-columns: repeat(3, 1fr);
   place-items: center;
+}
+.gallery__title {
+  border-top: 2px solid #000;
+  margin: auto;
+  padding: 0.5rem 2rem 0;
 }
 .service-info__gallery img {
   border-radius: 15px;

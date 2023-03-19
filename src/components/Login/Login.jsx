@@ -38,12 +38,6 @@ const Login = () => {
       })
       focusInput(correoInputEl)
     }
-    if (toastify === 'citas') {
-      toast.info('¡Debes iniciar sesión para agendar una cita!', {
-        theme: 'colored'
-      })
-      focusInput(correoInputEl)
-    }
   }, [toastify])
 
   const navigate = useNavigate()
@@ -66,6 +60,10 @@ const Login = () => {
 
   //* Función para hacer focus en el input que no cumpla con los requisitos
   const focusInput = (input) => input.current.focus()
+
+  useEffect(() => {
+    focusInput(correoInputEl)
+  }, [toastify])
 
   //* Variables para hacer la validación
   const correoInputEl = useRef(null)
