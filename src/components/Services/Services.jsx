@@ -37,6 +37,8 @@ const Services = () => {
   useEffect(() => {
     const token = getToken()
 
+    if (!token) return false
+
     new Promise((resolve, reject) => {
       const decoded = jwtDecode(token)
       resolve(decoded.data)
