@@ -25,7 +25,7 @@ const Home = () => {
   // ? Context
   const { session, tempSession } = useContext(SessionContext)
   const { setToastify } = useContext(ToastifyContext)
-  const [idUsuario, setIdUsuario] = useState(null)
+  const [idRol, setIdRol] = useState(null)
 
   useEffect(() => {
     setToastify(false)
@@ -41,7 +41,7 @@ const Home = () => {
       resolve(decoded.data)
       reject(new Error('Error al decodificar el token'))
     }).then((decoded) => {
-      setIdUsuario(decoded[0].id_usuario)
+      setIdRol(decoded[0].id_rol)
     })
   }, [])
 
@@ -61,15 +61,15 @@ const Home = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={idUsuario ? idUsuario !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idUsuario ? idUsuario !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] : ['/', '/services']}
+        linkText={idRol ? idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idRol ? idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] : ['/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
       />
       <Navbar
-        linkText={idUsuario ? idUsuario !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idUsuario ? idUsuario !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] : ['/', '/services']}
+        linkText={idRol ? idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idRol ? idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] : ['/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}

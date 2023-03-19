@@ -22,8 +22,8 @@ const Citas = () => {
     const token = getToken()
     if (!token) return navigate('/login')
     const decode = jwtDecode(token)
-    const { id_usuario } = decode.data[0]
-    if (id_usuario === 2) return navigate('/')
+    const { id_rol } = decode.data[0]
+    if (id_rol === 2) return navigate('/')
   }, [])
 
   useEffect(() => {
