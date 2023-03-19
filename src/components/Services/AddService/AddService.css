@@ -1,0 +1,64 @@
+.send {
+  display: grid;
+  place-content: center;
+  margin-block: 1rem;
+}
+/* first login form */
+.add-service-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.add-service-form p {
+  font-size: 14px;
+  font-weight: lighter;
+  margin: 20px;
+  text-align: center;
+}
+.info-create:first-child {
+  margin-top: 3.5rem;
+}
+.buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  justify-content: center;
+  width: 320px;
+}
+.add-service-button {
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  font-family: 'Syne', sans-serif;
+  gap: 5px;
+  justify-content: center;
+  letter-spacing: 1.3px;
+  padding: 10px 1rem;
+}
+.service-form {
+  display: flex;
+  flex-direction: column;
+  padding-block: 1.5rem;
+  padding-inline: 0.7rem;
+  width: 400px;
+}
+.input-service {
+  color: rgba(0, 0, 0, 0.7);
+}
+.main-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.main-form label {
+  font-size: 14px;
+}
+.main-form input {
+  border: 1px solid gray;
+  border-radius: 6px;
+  height: 40px;
+  padding: 1em;
+}

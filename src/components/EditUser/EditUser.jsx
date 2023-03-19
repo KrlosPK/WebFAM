@@ -2,7 +2,7 @@ import './EditUser.css'
 
 // ? Components
 import { Footer } from '../Home/Footer/Footer'
-import { API_URL, Button2, Input, Navbar, validatePassword, setTokenData } from '../Utils'
+import { API_URL, Button2, Input, Navbar, validatePassword, setTokenData, getToken, ResponsiveNav } from '../Utils'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 // ? Hooks
@@ -29,6 +29,7 @@ const EditUser = () => {
 
   //* Mostrar contraseña
   const [showContrasena, setShowContrasena] = useState(true)
+  const [idRol, setIdRol] = useState(null)
 
   const handleShowContrasenaClick = () => {
     showContrasena ? setShowContrasena(false) : setShowContrasena(true)
@@ -103,7 +104,7 @@ const EditUser = () => {
 
       focusInput(nombreInputEl)
 
-      return
+      return false
     } else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
       // Validación Apellidos
       toast.error('¡Los Apellidos no puede estar vacío!', {
@@ -112,7 +113,7 @@ const EditUser = () => {
 
       focusInput(apellidosInputEl)
 
-      return
+      return false
     } else if (apellidos.length < 3) {
       toast.error('¡Los Apellidos deben tener mínimo 3 letras!', {
         theme: 'colored'
@@ -120,7 +121,7 @@ const EditUser = () => {
 
       focusInput(apellidosInputEl)
 
-      return
+      return false
     } else if (num_celular.length === 0) {
       // Validación Número de Celular
       toast.error('¡El Número de Celular no puede estar vacío!', {
@@ -129,7 +130,7 @@ const EditUser = () => {
 
       focusInput(numCelularInputEl)
 
-      return
+      return false
     } else if (num_celular.length < 9 || num_celular.length >= 12) {
       e.preventDefault()
 
@@ -139,7 +140,7 @@ const EditUser = () => {
 
       focusInput(numCelularInputEl)
 
-      return
+      return false
     }
 
     axios
@@ -201,7 +202,7 @@ const EditUser = () => {
       focusInput(contrasenaActualEl)
       setDisabled(false)
 
-      return
+      return false
     }
 
     if (data.contrasenaNueva === '') {
@@ -278,12 +279,29 @@ const EditUser = () => {
     !tempSession ? setButton(1) : setButton(2)
   }, [session, tempSession])
 
+  useEffect(() => {
+    const token = getToken()
+
+    new Promise((resolve, reject) => {
+      const decoded = jwtDecode(token)
+      resolve(decoded.data)
+      reject(new Error('Error al decodificar el token'))
+    }).then((decoded) => {
+      setIdRol(decoded[0].id_rol)
+    })
+  }, [])
+
   return (
     <section>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
+      <ResponsiveNav
+        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        renderButtons={button}
+      />
       <Navbar
-        linkText={['Inicio', 'Agendar', 'Servicios']}
-        linkUrl={['/', '/citas', '/services']}
+        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
       <section className='edit-user'>

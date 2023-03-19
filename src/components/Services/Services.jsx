@@ -7,13 +7,24 @@ import { AboutUs } from '../AboutUs/AboutUs'
 import { useContext, useEffect, useState } from 'react'
 import { SessionContext } from '../../context/SessionContext'
 import jwtDecode from 'jwt-decode'
+import { ToastifyContext } from '../../context/ToastifyContext'
+import { toast, ToastContainer, Zoom } from 'react-toastify'
 
 const Services = () => {
   // ? Context
   const { session, tempSession } = useContext(SessionContext)
+  const { toastify } = useContext(ToastifyContext)
+
+  useEffect(() => {
+    if (toastify === 'serviceCreated') {
+      toast.success('¡Servicio creado con éxito!', {
+        theme: 'colored'
+      })
+    }
+  }, [toastify])
 
   const [button, setButton] = useState(null)
-  const [idUsuario, setIdUsuario] = useState(null)
+  const [idRol, setIdRol] = useState(null)
 
   useEffect(() => {
     !session ? setButton(1) : setButton(2)
@@ -31,9 +42,10 @@ const Services = () => {
       resolve(decoded.data)
       reject(new Error('Error al decodificar el token'))
     }).then((decoded) => {
-      setIdUsuario(decoded[0].id_usuario)
+      setIdRol(decoded[0].id_rol)
     })
   }, [])
+
   useEffect(() => {
     // ? Scroll to top
     window.scrollTo(0, 0)
@@ -43,14 +55,15 @@ const Services = () => {
 
   return (
     <>
+      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
-        linkText={idUsuario !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idUsuario !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
       <Navbar
-        linkText={idUsuario !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idUsuario !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
       <AboutUs />

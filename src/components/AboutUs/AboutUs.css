@@ -33,6 +33,12 @@
   height: max-content;
 }
 
+#add-service-link {
+  font-size: 1.3rem;
+  color: #000;
+  border-bottom: 1px solid black;
+}
+
 .loader {
   left: 200%;
 }

@@ -10,7 +10,8 @@ const Input = ({
   innerId,
   innerOnKeyDown,
   innerDefaultValue = '',
-  innerReadOnly = false
+  innerReadOnly = false,
+  multiple
 }) => {
   return (
     <div className='input-container'>
@@ -26,6 +27,7 @@ const Input = ({
         onKeyDown={innerOnKeyDown}
         defaultValue={innerDefaultValue}
         readOnly={innerReadOnly}
+        multiple={multiple}
       />
       <label className='label-login'>{text}</label>
     </div>

@@ -11,6 +11,7 @@ import { Service } from './components/Services/Service/Service'
 import { Citas } from './components/Citas/Citas'
 import { EditUser } from './components/EditUser/EditUser'
 import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
+import { AddService } from './components/Services/AddService/AddService'
 
 import { NotFound } from './components/Not-found/NotFound'
 // import { ResetPassword } from './components/Login/ResetPassword/ResetPassword'
@@ -43,6 +44,7 @@ export const App = () => {
       <Route path='/' element={<Home />} />
 
       <Route path='/services' element={<Services />} />
+      <Route path='/add-service' element={<AddService />} />
       <Route path='/services/:serviceId' element={<Service />} />
 
       <Route path='/recover-password' element={<RecoverPassword />} />

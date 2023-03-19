@@ -10,6 +10,7 @@ export { MiniCard } from './Utils/MiniCard/MiniCard'
 export { Navbar } from './Utils/Navbar/Navbar'
 export { ResponsiveNav } from './Utils/ResponsiveNav/ResponsiveNav'
 export { Select } from './Utils/Select/Select'
+export { storage } from './Utils/firebase'
 
 export { ProtectedRoute } from './ProtectedRoute'
 
