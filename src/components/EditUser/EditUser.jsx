@@ -160,7 +160,6 @@ const EditUser = () => {
         axios
           .post(API_URL(`nuevoToken/${userData.id_usuario}`))
           .then(({ data }) => {
-            console.log(data.token)
             const { token } = data
 
             if (res.status === 200) {
