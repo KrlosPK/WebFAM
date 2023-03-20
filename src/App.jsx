@@ -48,7 +48,7 @@ export const App = () => {
       <Route path='/add-service' element={<AddService />} />
       <Route path='/services/:serviceId' element={<Service />} />
 
-      <Route path='/allUsers' element={<AllUsers />} />
+      <Route path='/all-users' element={<AllUsers />} />
 
       <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='*' element={<NotFound />} />
