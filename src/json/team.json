@@ -24,57 +24,17 @@
     "src": "/avatar3.png",
     "alt": "Empleado de FADEMET",
     "header": "Dulfari Urrego",
-    "text": "Soldador",
+    "text": "CEO",
     "textColor": "var(--icon-color)",
     "animation": "zoom-in-up",
     "borderRadius": "50%"
   },
   {
     "id": 4,
-    "src": "/avatar4.png",
-    "alt": "Empleado de FADEMET",
-    "header": "Hernán Velásquez",
-    "text": "Soldador",
-    "textColor": "var(--icon-color)",
-    "animation": "zoom-in-up",
-    "borderRadius": "50%"
-  },
-  {
-    "id": 5,
-    "src": "/avatar5.png",
-    "alt": "Empleado de FADEMET",
-    "header": "Pedro Arrieta",
-    "text": "Ayudante de Soldadura",
-    "textColor": "var(--icon-color)",
-    "animation": "zoom-in-up",
-    "borderRadius": "50%"
-  },
-  {
-    "id": 6,
-    "src": "/avatar6.png",
-    "alt": "Empleado de FADEMET",
-    "header": "Juan Zuleta",
-    "text": "Ayudante de Soldadura",
-    "textColor": "var(--icon-color)",
-    "animation": "zoom-in-up",
-    "borderRadius": "50%"
-  },
-  {
-    "id": 7,
-    "src": "/avatar7.png",
-    "alt": "Empleado de FADEMET",
-    "header": "Danilo Zapata",
-    "text": "Ayudante de Soldadura",
-    "textColor": "var(--icon-color)",
-    "animation": "zoom-in-up",
-    "borderRadius": "50%"
-  },
-  {
-    "id": 8,
     "src": "/avatar8.png",
     "alt": "Empleado de FADEMET",
-    "header": "Karen Gomez",
-    "text": "Recursos Humanos",
+    "header": "Laura Urrego",
+    "text": "Aux. Administrativa",
     "textColor": "var(--icon-color)",
     "animation": "zoom-in-up",
     "borderRadius": "50%"

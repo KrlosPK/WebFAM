@@ -99,13 +99,13 @@ const Service = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
       <Navbar
-        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
       <section className='service-info'>
