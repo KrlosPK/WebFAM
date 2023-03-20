@@ -115,6 +115,7 @@ const Service = () => {
             loading='lazy'
             width={500}
             height={500}
+            className='service-info__img'
             alt='Servicio que ofrece Fademet Montajes'
             style={{ background: 'transparent' }}
           />
@@ -157,8 +158,8 @@ const Service = () => {
                   src={img}
                   loading='lazy'
                   effect='blur'
-                  width={380}
-                  height={380}
+                  width={350}
+                  height={350}
                   alt='Servicio que ofrece Fademet Montajes'
                   style={{ background: 'transparent' }}
                   onClick={fullscreen}
