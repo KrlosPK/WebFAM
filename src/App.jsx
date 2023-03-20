@@ -40,8 +40,7 @@ export const App = () => {
 
       <Route path='/recover-password' element={<RecoverPassword />} />
 
-      {/* //TODO Ruta Con Parámetro */}
-      <Route path='/reset-password/:idUsuario' element={<ResetPassword />} />
+      <Route path='/reset-password/:token' element={<ResetPassword />} />
       <Route path='/' element={<Home />} />
 
       <Route path='/services' element={<Services />} />

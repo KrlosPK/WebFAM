@@ -300,9 +300,9 @@ const EditUser = () => {
     })
   }, [])
 
-  const changeUserPhoto = () => {
+  /* const changeUserPhoto = () => {
 
-  }
+  } */
 
   return (
     <section>
