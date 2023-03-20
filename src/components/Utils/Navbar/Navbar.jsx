@@ -81,6 +81,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     setSession(false)
     setTempSession(false)
+    navigate('/')
   }
 
   const account = () => {
