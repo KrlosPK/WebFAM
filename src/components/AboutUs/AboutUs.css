@@ -16,8 +16,8 @@
   font-family: 'Syne', sans-serif;
   font-size: 42px;
   font-weight: 700;
-  text-align: center;
   padding: 0 2rem;
+  text-align: center;
 }
 .info__subtitle {
   font-size: 1rem;
@@ -34,9 +34,9 @@
 }
 
 #add-service-link {
-  font-size: 1.3rem;
-  color: #000;
   border-bottom: 1px solid black;
+  color: #000;
+  font-size: 1.3rem;
 }
 
 .loader {

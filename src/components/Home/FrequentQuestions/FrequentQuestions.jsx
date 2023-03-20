@@ -15,7 +15,8 @@ const FrequentQuestions = () => {
         </p>
         <a
           href='https://api.whatsapp.com/send/?phone=573147561960&text=¡Hola!%20Quisiera%20saber%20más%20sobre%20sus%20servicios.&type=phone_number&app_absent=0'
-          target={'_blank'} rel="noreferrer"
+          target={'_blank'}
+          rel='noreferrer'
         >
           <Button2 text='Escríbenos' />
         </a>

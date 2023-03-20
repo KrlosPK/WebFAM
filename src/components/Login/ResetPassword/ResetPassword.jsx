@@ -4,7 +4,7 @@ import './ResetPassword.css'
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-//? Components
+// ? Components
 import { Button, Input, Navbar, validatePassword } from '../../Utils'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
@@ -13,13 +13,13 @@ import { Footer } from '../../Home/Footer/Footer'
 const ResetPassword = () => {
   const navigate = useNavigate()
 
-  //! Cambiar título de la página
+  // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes - Restablecer contraseña')
   useEffect(() => {
     document.title = title
   }, [setTitle])
 
-  //? Deshabilitar botón mientras carga
+  // ? Deshabilitar botón mientras carga
   const [disabled, setDisabled] = useState(false)
 
   //* Mostrar contraseña
@@ -40,7 +40,7 @@ const ResetPassword = () => {
     const contrasena = e.target[0].value
     const confirmarContrasena = e.target[1].value
 
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-\*\$\%\&\=ñÑ]{8,16}$/
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
 
     if (validatePassword(contrasena, /^\s+$/)) {
       e.preventDefault()
