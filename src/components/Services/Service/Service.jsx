@@ -171,10 +171,6 @@ const Service = () => {
           </>
         )}
       </section>
-
-      {/* {serviceId.map(({ id, src, alt, title, description }) => (
-        <Card key={id} src={src} alt={alt} title={title} description={description} />
-      ))} */}
       <Footer />
     </>
   )
