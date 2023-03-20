@@ -44,15 +44,6 @@
   letter-spacing: 1.3px;
   padding: 10px 1rem;
 }
-.button_fb {
-  background: #3b5998;
-  color: #eef;
-  transition: background 300ms ease-in-out;
-  width: 100%;
-}
-.button_fb:hover {
-  background: #2c4375;
-}
 .button_gg {
   color: #777;
   transition: background 300ms ease-in-out;
@@ -125,6 +116,9 @@
 }
 .forgot-password:hover {
   text-decoration: underline;
+}
+.forgot-password a {
+  padding: 1rem 0;
 }
 
 /* Remind me */

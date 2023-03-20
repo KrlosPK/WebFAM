@@ -100,8 +100,7 @@ const RecoverPassword = () => {
           })
           sendEmail()
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
           toast.error('¡Este correo no está asociado a ninguna de nuestras cuentas!', {
             theme: 'colored'
           })
