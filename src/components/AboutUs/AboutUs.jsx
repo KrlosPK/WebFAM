@@ -32,7 +32,7 @@ const AboutUs = () => {
           En FADEMET valoramos tus deseos, por lo que trabajamos arduamente día a día para ofrecerte
           servicios que se adapten a tus necesidades y sean de la más alta calidad.
         </p>
-        {idRol !== 2 && <Link to='/add-service'><Button2 text={'Crear servicio'}/></Link>}
+        {idRol && idRol !== 2 && <Link to='/add-service'><Button2 text={'Crear servicio'}/></Link>}
         <div className='cards'>
           {services
             ? services.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
