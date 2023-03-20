@@ -1,7 +1,7 @@
 import './RecoverPassword.css'
 
 // ? Components
-import { Input, Button, Navbar, API_URL, validateMail } from '../../Utils'
+import { Input, Navbar, API_URL, validateMail, Button2 } from '../../Utils'
 
 //* Hooks
 import { useEffect, useRef, useState } from 'react'
@@ -90,18 +90,17 @@ const RecoverPassword = () => {
 
       // TODO axios
       await axios
-        .post(API_URL('comprobarCorreo'), body)
-        .then(() => {
+        .post(API_URL('crearTokenContrasena'), body)
+        .then(({ data }) => {
+          setToken(data.token)
           Swal.fire({
             icon: 'success',
             title: '¡Hemos enviado un correo a tu cuenta!',
             text: 'Entra al enlace que te hemos enviado al correo para que restablezcas tu contraseña.',
             footer: '<a href="/">Volver al inicio</a>'
           })
-          sendEmail()
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
           toast.error('¡Este correo no está asociado a ninguna de nuestras cuentas!', {
             theme: 'colored'
           })
@@ -109,6 +108,9 @@ const RecoverPassword = () => {
         })
     }
   }
+
+  // * Guardar token para enviar autenticación
+  const [token, setToken] = useState('')
 
   //* guarda correo
   const [body, setBody] = useState({ correo: '' })
@@ -120,6 +122,16 @@ const RecoverPassword = () => {
       [name]: value
     })
   }
+
+  const recoverLinkEL = useRef(null)
+
+  useEffect(() => {
+    if (token !== '') {
+      const tokenUrl = token.replace(/\./g, '-')
+      recoverLinkEL.current.value = `https://fademetmontajes.netlify.app/reset-password/${tokenUrl}`
+      sendEmail()
+    }
+  }, [token])
 
   return (
     <>
@@ -162,7 +174,7 @@ const RecoverPassword = () => {
                   type='text'
                   id='recoverLink'
                   name='recoverLink'
-                  value='https://fademetmontajes.netlify.app/reset-password'
+                  ref={recoverLinkEL}
                 />
                 <input
                   style={{ display: 'none' }}
@@ -180,7 +192,7 @@ const RecoverPassword = () => {
                   name='toEmail'
                   value={toEmail}
                 />
-                <Button
+                <Button2
                   text={'Recuperar contraseña'}
                   textDisabled={'Enviado'}
                   disable={disabled}

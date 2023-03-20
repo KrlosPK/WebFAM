@@ -4,7 +4,7 @@
     "src": "/avatar1.png",
     "alt": "Empleado de FADEMET",
     "header": "Ramiro Urrego",
-    "text": "Director General",
+    "text": "CEO",
     "textColor": "var(--icon-color)",
     "animation": "zoom-in-up",
     "borderRadius": "50%"
@@ -14,7 +14,7 @@
     "src": "/avatar2.png",
     "alt": "Empleado de FADEMET",
     "header": "Mauricio Urrego",
-    "text": "Jefe de Operaciones",
+    "text": "COO",
     "textColor": "var(--icon-color)",
     "animation": "zoom-in-up",
     "borderRadius": "50%"
@@ -24,17 +24,17 @@
     "src": "/avatar3.png",
     "alt": "Empleado de FADEMET",
     "header": "Dulfari Urrego",
-    "text": "CEO",
+    "text": "RRHH",
     "textColor": "var(--icon-color)",
     "animation": "zoom-in-up",
     "borderRadius": "50%"
   },
   {
     "id": 4,
-    "src": "/avatar8.png",
+    "src": "/avatar4.png",
     "alt": "Empleado de FADEMET",
-    "header": "Laura Urrego",
-    "text": "Aux. Administrativa",
+    "header": "Ruby David",
+    "text": "Auxiliar administrativo",
     "textColor": "var(--icon-color)",
     "animation": "zoom-in-up",
     "borderRadius": "50%"

@@ -3,12 +3,12 @@ import './Button.css'
 // ? Icons
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 
-const Button = ({ text, textDisabled = '', width, disable = false, animation = true }) => {
+const Button = ({ text, textDisabled = '', width, disable = false, animation = true, innerOnClick }) => {
   return (
     <>
       {!disable
         ? (
-          <button className='Button' style={{ width }}>
+          <button onClick={innerOnClick} className='Button' style={{ width }}>
             {text}
           </button>
         )

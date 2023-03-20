@@ -25,6 +25,7 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 
 // ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
+import { AiFillEdit } from 'react-icons/ai'
 
 const EditUser = () => {
   // ? Context
@@ -77,7 +78,8 @@ const EditUser = () => {
         email: data[0].correo,
         phoneNumber: data[0].num_celular,
         id: data[0].num_documento,
-        typeId: data[0].tipo_documento
+        typeId: data[0].tipo_documento,
+        picture: data[0].foto_perfil
       })
     } else {
       const { given_name, picture, family_name, email } = decoded
@@ -172,11 +174,9 @@ const EditUser = () => {
           .then(({ data }) => {
             const { token } = data
 
-            if (res.status === 200) {
-              setTokenData(token)
+            setTokenData(token)
 
-              getUserData()
-            }
+            getUserData()
           })
           .catch(() => {
             toast.error('¡Hubo un error al actualizar los datos!', {
@@ -300,6 +300,10 @@ const EditUser = () => {
     })
   }, [])
 
+  /* const changeUserPhoto = () => {
+
+  } */
+
   return (
     <section>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
@@ -315,14 +319,18 @@ const EditUser = () => {
       />
       <section className='edit-user'>
         <header className='edit-user__header'>
-          <LazyLoadImage
-            loading='lazy'
-            src={userData.picture || defaultImage}
-            width={55}
-            height={55}
-            className='edit-user__image'
-            alt=''
-          />
+          <div className="overlay-img">
+            <LazyLoadImage
+              loading='lazy'
+              src={userData.picture || defaultImage}
+              width={55}
+              height={55}
+              className='edit-user__image'
+              alt=''
+            />
+            <label htmlFor="changePhotoUser"><AiFillEdit/></label>
+            <input type="file" name='changePhotoUser'/>
+          </div>
           <div className='user-data'>
             <strong className='user-data__name'>{userData.name} / Editar Perfil</strong>
             <span className='user-data__email'>{userData.email}</span>
