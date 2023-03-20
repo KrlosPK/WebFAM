@@ -127,7 +127,7 @@ const RecoverPassword = () => {
 
   useEffect(() => {
     if (token !== '') {
-      const tokenUrl = token.replace(/\./g, '-')
+      const tokenUrl = token.replace(/\./g, '+')
       recoverLinkEL.current.value = `https://fademetmontajes.netlify.app/reset-password/${tokenUrl}`
       sendEmail()
     }

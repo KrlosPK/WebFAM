@@ -19,7 +19,7 @@ const ResetPassword = () => {
 
   // * Verificar token y estado, si está inactivo redireccionar a "/" o si no tiene token
   useEffect(() => {
-    const parseToken = token.replace(/-/g, '.')
+    const parseToken = token.replace(/\+/g, '.')
     axios.post(API_URL('authToken'), { token: parseToken })
       .then(() => {
         const decode = jwtDecode(parseToken)
