@@ -8,7 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
 import { SessionContext } from '../../../context/SessionContext'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 // ? Icons
@@ -47,6 +47,8 @@ const Service = () => {
       setIdRol(decoded[0].id_rol)
     })
   }, [])
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     // ? Fetch serivice data
@@ -154,6 +156,7 @@ const Service = () => {
                   key={i}
                   src={img}
                   loading='lazy'
+                  effect='blur'
                   width={380}
                   height={380}
                   alt='Servicio que ofrece Fademet Montajes'
