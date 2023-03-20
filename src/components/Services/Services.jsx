@@ -51,7 +51,6 @@ const Services = () => {
   useEffect(() => {
     // ? Scroll to top
     window.scrollTo(0, 0)
-
     document.title = title
   }, [setTitle])
 
