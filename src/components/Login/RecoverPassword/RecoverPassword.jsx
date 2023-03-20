@@ -1,7 +1,7 @@
 import './RecoverPassword.css'
 
 // ? Components
-import { Input, Button, Navbar, API_URL, validateMail } from '../../Utils'
+import { Input, Navbar, API_URL, validateMail, Button2 } from '../../Utils'
 
 //* Hooks
 import { useEffect, useRef, useState } from 'react'
@@ -100,8 +100,7 @@ const RecoverPassword = () => {
           })
           sendEmail()
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
           toast.error('¡Este correo no está asociado a ninguna de nuestras cuentas!', {
             theme: 'colored'
           })
@@ -180,7 +179,7 @@ const RecoverPassword = () => {
                   name='toEmail'
                   value={toEmail}
                 />
-                <Button
+                <Button2
                   text={'Recuperar contraseña'}
                   textDisabled={'Enviado'}
                   disable={disabled}
