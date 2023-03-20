@@ -31,6 +31,8 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
 
     buttonIsClicked ? setButtonIsClicked('') : setButtonIsClicked('clicked')
   }
+  // ? Prevent body scroll when menu is open
+  navIsClicked ? (document.body.style.overflow = 'auto') : (document.body.style.overflow = 'hidden')
 
   const hideNav = () => {
     setNavIsClicked('clicked')
