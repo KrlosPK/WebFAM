@@ -27,6 +27,8 @@ Será un aplicativo web interactivo e intuitivo con buena experiencia de usuario
 
 # Vista general
 
-![imagen](https://user-images.githubusercontent.com/80909795/223597778-bc5fdd92-34ef-4449-8f45-c3b74dc754cc.png)
+![image](https://user-images.githubusercontent.com/103198977/226403636-3b231dd3-cdf9-4568-acd4-d353123a6c10.png)
+![image](https://user-images.githubusercontent.com/103198977/226403738-a64dd4fb-8e4b-44e0-833f-bfc6d98c60fe.png)
+![image](https://user-images.githubusercontent.com/103198977/226403820-4a2032e5-8c59-4806-9f93-375b48d09e25.png)
 
 > Hecho en React 18, CSS3, MySQL8
