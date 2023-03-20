@@ -61,15 +61,19 @@ const Home = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] }
-        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] }
+        linkText={
+          idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']
+        }
+        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
       />
       <Navbar
-        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] }
-        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] }
+        linkText={
+          idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']
+        }
+        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
@@ -86,7 +90,8 @@ const Home = () => {
         <div className='buttons'>
           <a
             href='https://api.whatsapp.com/send/?phone=573147561960&text=¡Hola!%20Quisiera%20saber%20más%20sobre%20sus%20servicios.&type=phone_number&app_absent=0'
-            target={'_blank'} rel="noreferrer"
+            target={'_blank'}
+            rel='noreferrer'
           >
             <Button text='Contáctanos »' width={220} />
           </a>

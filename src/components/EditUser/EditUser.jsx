@@ -2,7 +2,16 @@ import './EditUser.css'
 
 // ? Components
 import { Footer } from '../Home/Footer/Footer'
-import { API_URL, Button2, Input, Navbar, validatePassword, setTokenData, getToken, ResponsiveNav } from '../Utils'
+import {
+  API_URL,
+  Button2,
+  Input,
+  Navbar,
+  validatePassword,
+  setTokenData,
+  getToken,
+  ResponsiveNav
+} from '../Utils'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 // ? Hooks

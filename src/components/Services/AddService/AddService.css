@@ -1,7 +1,7 @@
 .send {
   display: grid;
-  place-content: center;
   margin-block: 1rem;
+  place-content: center;
 }
 /* first login form */
 .add-service-form {
