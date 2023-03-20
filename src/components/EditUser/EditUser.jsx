@@ -10,7 +10,8 @@ import {
   validatePassword,
   setTokenData,
   getToken,
-  ResponsiveNav
+  ResponsiveNav,
+  storage
 } from '../Utils'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
@@ -26,6 +27,8 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 // ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { AiFillEdit } from 'react-icons/ai'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { uuidv4 } from '@firebase/util'
 
 const EditUser = () => {
   // ? Context
@@ -58,6 +61,8 @@ const EditUser = () => {
 
   const [userData, setUserData] = useState({})
   const defaultImage = '/default-avatar.png'
+  const [disabled, setDisabled] = useState(true)
+  const [disabledButtonPicture, setDisabledButtonPicture] = useState(true)
 
   const getUserData = async () => {
     const cookies = document.cookie
@@ -269,8 +274,6 @@ const EditUser = () => {
       })
   }
 
-  const [disabled, setDisabled] = useState(true)
-
   const inputChange = () => {
     setDisabled(false)
   }
@@ -300,8 +303,29 @@ const EditUser = () => {
     })
   }, [])
 
-  const changeUserPhoto = () => {
+  const userImageEl = useRef(null)
 
+  const updateUserPhoto = async (e) => {
+    e.preventDefault()
+
+    if (!userImageEl.current.files[0] || userImageEl.current.files[0].length === 0) {
+      toast.error('¡Debes seleccionar una imagen!', {
+        theme: 'colored'
+      })
+      return false
+    }
+
+    try {
+      setDisabledButtonPicture(false)
+      const userImage = userImageEl.current.files[0]
+      if (!userImage) return false
+      const imgRef = ref(storage, `userPhotos/${userImage.name + uuidv4()}`)
+      await uploadBytes(imgRef, userImage)
+      const url = await getDownloadURL(imgRef)
+      return url
+    } catch (error) {
+      throw new Error(error)
+    }
   }
 
   return (
@@ -319,18 +343,26 @@ const EditUser = () => {
       />
       <section className='edit-user'>
         <header className='edit-user__header'>
-          <div className="overlay-img">
+          <form className='overlay-img' onSubmit={updateUserPhoto}>
             <LazyLoadImage
               loading='lazy'
               src={userData.picture || defaultImage}
               width={55}
               height={55}
               className='edit-user__image'
-              alt=''
+              alt={`Foto de Perfil de ${userData.name}}`}
             />
-            <label htmlFor="changePhotoUser"><AiFillEdit/></label>
-            <input type="file" name='changePhotoUser'/>
-          </div>
+            <label htmlFor='file'>
+              <AiFillEdit />
+            </label>
+            <input type='file' id='file' accept='image/*' ref={userImageEl} />
+            <Button2
+              text='Actualizar'
+              disable={disabledButtonPicture}
+              textDisabled='Actualizar'
+              animation={false}
+            />
+          </form>
           <div className='user-data'>
             <strong className='user-data__name'>{userData.name} / Editar Perfil</strong>
             <span className='user-data__email'>{userData.email}</span>

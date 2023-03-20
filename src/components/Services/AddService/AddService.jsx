@@ -144,7 +144,7 @@ const AddService = () => {
     }
     const decode = await jwtDecode(token)
     const { id_rol } = decode.data[0]
-    if (id_rol === 2) navigate('/')
+    if (id_rol === 2) navigate('/', { replace: true })
   }, [])
 
   // * Upload photo to firebase and bd

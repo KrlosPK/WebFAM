@@ -29,7 +29,6 @@ const Service = () => {
   const freeCancelDay = date.getDate() + 1
   const freeCancelDate = date.toLocaleString('default', { month: 'long' })
 
-  // eslint-disable-next-line no-unused-vars
   const [service, setService] = useState({})
 
   const { serviceId } = useParams()
