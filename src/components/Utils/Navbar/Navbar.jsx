@@ -41,7 +41,12 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
 
     if (decoded.data) {
       const { data } = decoded
-      setUserData({ ...userData, name: data[0].nombre })
+      setUserData({
+        ...userData,
+        name: data[0].nombre,
+        id_rol: data[0].id_rol,
+        picture: data[0].foto_perfil
+      })
     } else {
       const { given_name, picture } = decoded
       setUserData({ ...userData, name: given_name, picture })
@@ -83,7 +88,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   }
 
   const allUsers = () => {
-    navigate('/allUsers')
+    navigate('/all-users')
   }
 
   return (
@@ -167,14 +172,14 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                         />
                         <strong className='user__name'>{userData.name}</strong>
                       </li>
+                      {userData.id_rol !== 2 && (
+                        <li className='options__option see-users' onClick={allUsers}>
+                          <AiOutlineUser /> <span id='see-all-users'>Usuarios</span>
+                        </li>
+                      )}
                       <li className='options__option' onClick={account}>
                         <AiOutlineSetting /> Configuración
                       </li>
-                      {userData.id_rol !== 1 && (
-                        <li className='options__option see-users' onClick={allUsers}>
-                          <AiOutlineUser/> <span id='see-all-users'>Usuarios</span>
-                        </li>
-                      )}
                       <li className='options__option' onClick={logout}>
                         <BiLogOut />
                         Cerrar sesión
