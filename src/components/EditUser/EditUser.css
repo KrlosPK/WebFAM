@@ -10,6 +10,21 @@
   gap: 1rem;
   padding: 1rem;
 }
+.overlay-img {
+  position: relative;
+  border-radius: 50%;
+}
+.overlay-img label {
+  color: black;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  bottom: -15px;
+  right: -18px;
+}
+.overlay-img input[type="file"] {
+  display: none;
+}
 .edit-user__image {
   aspect-ratio: 1;
   border-radius: 50%;
