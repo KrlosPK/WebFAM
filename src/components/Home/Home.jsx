@@ -61,15 +61,15 @@ const Home = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={idRol ? idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idRol ? idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] : ['/', '/services']}
+        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] }
+        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] }
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
       />
       <Navbar
-        linkText={idRol ? idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idRol ? idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] : ['/', '/services']}
+        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios'] }
+        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services'] }
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
