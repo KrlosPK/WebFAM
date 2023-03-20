@@ -1,7 +1,7 @@
 import './RecoverPassword.css'
 
 // ? Components
-import { Input, Button, Navbar, API_URL, validateMail } from '../../Utils'
+import { Input, Navbar, API_URL, validateMail, Button2 } from '../../Utils'
 
 //* Hooks
 import { useEffect, useRef, useState } from 'react'
@@ -179,7 +179,7 @@ const RecoverPassword = () => {
                   name='toEmail'
                   value={toEmail}
                 />
-                <Button
+                <Button2
                   text={'Recuperar contraseña'}
                   textDisabled={'Enviado'}
                   disable={disabled}

@@ -2,16 +2,18 @@ import './ResetPassword.css'
 
 //* Hooks
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 // ? Components
-import { Button, Input, Navbar, validatePassword } from '../../Utils'
+import { API_URL, Button2, Input, Navbar, validatePassword } from '../../Utils'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { Footer } from '../../Home/Footer/Footer'
+import axios from 'axios'
 
 const ResetPassword = () => {
   const navigate = useNavigate()
+  const { idUsuario } = useParams()
 
   // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes - Restablecer contraseña')
@@ -22,7 +24,7 @@ const ResetPassword = () => {
   // ? Deshabilitar botón mientras carga
   const [disabled, setDisabled] = useState(false)
 
-  //* Mostrar contraseña
+  // * Mostrar contraseña
   const [showPassword, setShowPassword] = useState(true)
 
   const handleShowPasswordClick = () => {
@@ -78,17 +80,37 @@ const ResetPassword = () => {
       )
 
       focusInput(confirmarContrasenaInputEl)
+    } else if (contrasena !== confirmarContrasena) {
+      e.preventDefault()
+
+      toast.error('¡Las contraseñas no coinciden!', {
+        theme: 'colored'
+      })
+
+      focusInput(confirmarContrasenaInputEl)
     } else {
-      setBody({ contrasena, confirmarContrasena })
-
+      setBody({ contrasena })
       setDisabled(true)
-
-      navigate('/login')
+      axios
+        .patch(API_URL(`recuperarContrasena/${idUsuario}`), {
+          contrasena: body.contrasena
+        })
+        .then(() => {
+          navigate('/login')
+          toast.success('¡Contraseña actualizada correctamente!', {
+            theme: 'colored'
+          })
+        })
+        .catch(() => {
+          toast.error('¡Hubo un error al cambiar la contraseña!', {
+            theme: 'colored'
+          })
+        })
     }
   }
 
-  //* guarda correo y contraseña
-  const [body, setBody] = useState({ contrasena: '', confirmarContrasena: '' })
+  // * guarda correo y contraseña
+  const [body, setBody] = useState({ contrasena: '' })
 
   const inputChange = ({ target }) => {
     const { name, value } = target
@@ -149,7 +171,7 @@ const ResetPassword = () => {
                     {showPassword ? <FaEye className='eye' /> : <FaEyeSlash className='eye' />}
                   </div>
                 </div>
-                <Button text={'Restablecer'} textDisabled={'Cargando'} disable={disabled} />
+                <Button2 text={'Restablecer'} textDisabled={'Cargando'} disable={disabled} />
               </div>
             </form>
           </div>

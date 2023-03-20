@@ -148,7 +148,7 @@ const Login = () => {
 
           setSession(true)
 
-          if (token) return navigate('/')
+          if (token) return navigate('/', { replace: true })
         })
         .catch(() => {
           toast.error('¡Correo y/o contraseña incorrectos!', {
@@ -212,7 +212,7 @@ const Login = () => {
                     sessionStorage.setItem('session', 'true')
                     setSession(true)
                     setTempSession(true)
-                    navigate('/')
+                    navigate('/', { replace: true })
                   } catch (err) {
                     console.log(err)
                   }
