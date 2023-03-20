@@ -10,10 +10,29 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { Footer } from '../../Home/Footer/Footer'
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 
 const ResetPassword = () => {
   const navigate = useNavigate()
-  const { idUsuario } = useParams()
+  const { token } = useParams()
+  const [idUsuario, setIdUsuario] = useState('')
+
+  // * Verificar token y estado, si está inactivo redireccionar a "/" o si no tiene token
+  useEffect(() => {
+    const parseToken = token.replace(/-/g, '.')
+    axios.post(API_URL('authToken'), { token: parseToken })
+      .then(() => {
+        const decode = jwtDecode(parseToken)
+        const { id_usuario, estado } = decode.data[0]
+        verifyState(!estado) && navigate('/')
+        setIdUsuario(id_usuario)
+      })
+      .catch(() => {
+        navigate('/')
+      })
+  }, [])
+
+  const verifyState = (estado) => estado === 'inactivo'
 
   // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes - Restablecer contraseña')
