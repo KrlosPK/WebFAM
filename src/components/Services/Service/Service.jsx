@@ -8,7 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
 import { SessionContext } from '../../../context/SessionContext'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 // ? Icons
@@ -47,8 +47,6 @@ const Service = () => {
       setIdRol(decoded[0].id_rol)
     })
   }, [])
-
-  const navigate = useNavigate()
 
   useEffect(() => {
     // ? Fetch serivice data
@@ -99,17 +97,13 @@ const Service = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={
-          idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']
-        }
-        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
       <Navbar
-        linkText={
-          idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']
-        }
-        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
       <section className='service-info'>

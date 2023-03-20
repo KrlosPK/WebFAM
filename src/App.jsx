@@ -20,6 +20,7 @@ import { ProtectedRoute } from './components/Utils'
 
 // ? Context
 import { SessionContext } from './context/SessionContext'
+import { AllUsers } from './components/AllUsers/AllUsers'
 
 export const App = () => {
   const { tempSession } = useContext(SessionContext)
@@ -46,6 +47,8 @@ export const App = () => {
       <Route path='/services' element={<Services />} />
       <Route path='/add-service' element={<AddService />} />
       <Route path='/services/:serviceId' element={<Service />} />
+
+      <Route path='/allUsers' element={<AllUsers />} />
 
       <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='*' element={<NotFound />} />

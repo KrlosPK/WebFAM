@@ -1,16 +1,22 @@
-import './AddService.css'
-
-import { API_URL, Button, getToken, Input, Navbar, ResponsiveNav, storage } from '../../Utils'
-import { SessionContext } from '../../../context/SessionContext'
-
+// * Hooks
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { SessionContext } from '../../../context/SessionContext'
+import { ToastifyContext } from '../../../context/ToastifyContext'
+
+// * Libraries
 import { toast, ToastContainer, Zoom } from 'react-toastify'
-import jwtDecode from 'jwt-decode'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { v4 as uuidv4 } from 'uuid'
+import jwtDecode from 'jwt-decode'
 import axios from 'axios'
-import { ToastifyContext } from '../../../context/ToastifyContext'
+
+// * Utils
+import { API_URL, Button, getToken, Input, Navbar, ResponsiveNav, storage } from '../../Utils'
+
+// * Styles
+import './AddService.css'
 
 const AddService = () => {
   // * Navigate
@@ -130,12 +136,15 @@ const AddService = () => {
   }, [setTitle])
 
   // * Validate if user is admin
-  useEffect(() => {
+  useEffect(async () => {
     const token = getToken()
-    if (!token) return navigate('/login')
-    const decode = jwtDecode(token)
+    if (token === null) {
+      navigate('/login')
+      return null
+    }
+    const decode = await jwtDecode(token)
     const { id_rol } = decode.data[0]
-    if (id_rol === 2) return navigate('/')
+    if (id_rol === 2) navigate('/')
   }, [])
 
   // * Upload photo to firebase and bd
