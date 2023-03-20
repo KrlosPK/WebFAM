@@ -160,6 +160,7 @@ const Service = () => {
                   key={i}
                   src={img}
                   loading='lazy'
+                  effect='blur'
                   width={380}
                   height={380}
                   alt='Servicio que ofrece Fademet Montajes'
