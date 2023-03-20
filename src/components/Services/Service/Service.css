@@ -53,7 +53,7 @@
   margin-top: 1rem;
   width: fit-content;
 }
-.service-aside > * {
+.service-aside > *:not(button) {
   user-select: text;
 }
 
@@ -86,29 +86,35 @@
 
 .service-info__gallery {
   display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  grid-auto-flow: row dense;
   place-items: center;
+}
+.service-info__gallery img {
+  border-radius: 15px;
+  cursor: pointer;
+  height: 100%;
+  transition: translate 300ms ease !important;
+  width: 100%;
+}
+.service-info__gallery img:hover {
+  translate: 5px;
 }
 .gallery__title {
   border-top: 2px solid #000;
   margin: auto;
   padding: 0.5rem 2rem 0;
 }
-.service-info__gallery img {
-  border-radius: 15px;
-  cursor: pointer;
-  transition: translate 300ms ease;
-}
-.service-info__gallery img:hover {
-  translate: 5px;
+.service-info__gallery span {
+  height: fit-content !important;
+  width: fit-content !important;
 }
 .overlay {
   align-items: center;
   background-color: rgb(0, 0, 0, 0.9);
   cursor: pointer;
   display: flex;
-  height: 100vh;
+  height: 100lvh;
   justify-content: center;
   left: 0;
   position: fixed;
@@ -117,22 +123,34 @@
   z-index: 100;
 }
 .overlay img {
+  object-fit: contain;
   width: 50%;
 }
 
-@media (max-width: 1300px) {
+/* * Gallery Responsive */
+@media all and (min-width: 320px) {
+  .service-info__gallery {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media all and (min-width: 768px) {
   .service-info__gallery {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+@media all and (min-width: 1024px) {
+  .service-info__gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+/* * Fin Gallery Responsive */
+
 @media (max-width: 1000px) {
-  .service-info img {
+  .service-info__img {
     height: auto;
     width: 400px;
-  }
-  .service-info__gallery img {
-    height: auto;
-    width: 320px;
   }
   .service-info > div {
     grid-template-columns: 1fr;
@@ -170,22 +188,12 @@
     margin: auto;
     width: 280px;
   }
-  .service-info img {
+  .service-info__img {
     height: auto;
     width: 350px;
   }
-  .service-info__gallery img {
-    height: auto;
-    width: 300px;
-  }
   .overlay img {
     width: 100%;
-  }
-}
-@media (max-width: 700px) {
-  .service-info__gallery {
-    gap: 3rem;
-    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 500px) {
@@ -195,12 +203,8 @@
     box-shadow: none;
     margin: 1.5rem 0;
   }
-  .service-info img {
+  .service-info__img {
     height: auto;
-    width: 300px;
-  }
-  .service-info__gallery img {
-    height: auto;
-    width: 285px;
+    width: 280px;
   }
 }
