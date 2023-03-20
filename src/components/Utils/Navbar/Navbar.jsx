@@ -16,7 +16,7 @@ import jwtDecode from 'jwt-decode'
 
 // ? Icons
 import { BiLogOut } from 'react-icons/bi'
-import { AiOutlineSetting } from 'react-icons/ai'
+import { AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
 import { FaAngleDown } from 'react-icons/fa'
 
 const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
@@ -80,6 +80,10 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
 
   const account = () => {
     navigate('/account')
+  }
+
+  const allUsers = () => {
+    navigate('/allUsers')
   }
 
   return (
@@ -166,6 +170,11 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                       <li className='options__option' onClick={account}>
                         <AiOutlineSetting /> Configuración
                       </li>
+                      {userData.id_rol !== 1 && (
+                        <li className='options__option see-users' onClick={allUsers}>
+                          <AiOutlineUser/> <span id='see-all-users'>Usuarios</span>
+                        </li>
+                      )}
                       <li className='options__option' onClick={logout}>
                         <BiLogOut />
                         Cerrar sesión
