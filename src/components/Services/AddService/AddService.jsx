@@ -86,20 +86,32 @@ const AddService = () => {
       })
       focusInput(resumen_servicioInputEl)
       return false
-    } else if (!foto_servicioInputEl.current.files[0] || foto_servicioInputEl.current.files[0].length === 0) {
+    } else if (
+      !foto_servicioInputEl.current.files[0] ||
+      foto_servicioInputEl.current.files[0].length === 0
+    ) {
       toast.error('¡Debes seleccionar una foto!', {
         theme: 'colored'
       })
       focusInput(foto_servicioInputEl)
       return false
-    } else if (!galeria_serviciosInputEl.current.files || galeria_serviciosInputEl.current.files.length === 0) {
+    } else if (
+      !galeria_serviciosInputEl.current.files ||
+      galeria_serviciosInputEl.current.files.length === 0
+    ) {
       toast.error('¡Debes seleccionar al menos una foto!', {
         theme: 'colored'
       })
       focusInput(galeria_serviciosInputEl)
       return false
     }
-    return { nombre_servicio, descripcion_servicio, resumen_servicio, foto_servicio, galeria_servicios }
+    return {
+      nombre_servicio,
+      descripcion_servicio,
+      resumen_servicio,
+      foto_servicio,
+      galeria_servicios
+    }
   }
 
   // * Renderizar botones de navbar
@@ -128,10 +140,9 @@ const AddService = () => {
 
   // * Upload photo to firebase and bd
   useEffect(() => {
-    axios.get(API_URL('ultimoId'))
-      .then(({ data }) => {
-        setLastId(data.lastID[0].lastID)
-      })
+    axios.get(API_URL('ultimoId')).then(({ data }) => {
+      setLastId(data.lastID[0].lastID)
+    })
   })
 
   // * Upload Gallery to firebase
@@ -142,7 +153,10 @@ const AddService = () => {
     const urls = []
     for (let i = 0; i < galeria_servicios.length; i++) {
       const galeria_servicio = galeria_servicios[i]
-      const imgRef = ref(storage, `servicesGaleria${lastId + 1}/${galeria_servicio.name + uuidv4()}`)
+      const imgRef = ref(
+        storage,
+        `servicesGaleria${lastId + 1}/${galeria_servicio.name + uuidv4()}`
+      )
       await uploadBytes(imgRef, galeria_servicio)
       const url = await getDownloadURL(imgRef)
       urls.push(url)
@@ -174,7 +188,8 @@ const AddService = () => {
   }
 
   const postForm = (body) => {
-    axios.post(API_URL('servicios'), body)
+    axios
+      .post(API_URL('servicios'), body)
       .then(() => {
         navigate('/services')
         setToastify('serviceCreated')
@@ -204,8 +219,7 @@ const AddService = () => {
         <section className='add-service-form'>
           <div className='info-create'>
             <p>Llena este formulario para crear un nuevo servicio</p>
-            <div className='buttons'>
-            </div>
+            <div className='buttons'></div>
           </div>
           <form className='service-form' onSubmit={submitService}>
             <div className='main-form'>
@@ -249,8 +263,8 @@ const AddService = () => {
                 multiple='multiple'
               />
             </div>
-            <div className="send">
-              <Button text={'Crear'} width={150} disable={disabled} textDisabled={'Cargando'}/>
+            <div className='send'>
+              <Button text={'Crear'} width={150} disable={disabled} textDisabled={'Cargando'} />
             </div>
           </form>
         </section>

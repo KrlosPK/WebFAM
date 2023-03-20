@@ -26,7 +26,7 @@ const ServicesSection = () => {
           effect='blur'
           src='/techo-metálico.jpg'
           loading='lazy'
-          alt='Mini soldador'
+          alt='Techo metálico Elaborado por FADEMET'
         />
       </div>
     </section>

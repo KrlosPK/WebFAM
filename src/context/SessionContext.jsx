@@ -10,7 +10,9 @@ export const SessionContextProvider = ({ children }) => {
   const [session, setSession] = useState(storage)
 
   return (
-    <SessionContext.Provider value={{ session, setSession, tempSession, setTempSession }}>{children}</SessionContext.Provider>
+    <SessionContext.Provider value={{ session, setSession, tempSession, setTempSession }}>
+      {children}
+    </SessionContext.Provider>
   )
 }
 
