@@ -152,7 +152,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                     width={35}
                     height={35}
                     className='user__image'
-                    alt=''
+                    alt={`Foto de Perfil de ${userData.name}}`}
                   />
                   <span className='flex gap user__text'>
                     Perfil
@@ -169,7 +169,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                           width={45}
                           height={45}
                           className='user__image'
-                          alt=''
+                          alt={`Foto de Perfil de ${userData.name}}`}
                         />
                         <strong className='user__name'>{userData.name}</strong>
                       </li>
