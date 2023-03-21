@@ -82,13 +82,13 @@ const Login = () => {
     const contrasena = e.target[1].value
 
     /*
-    Con el operador ?= (look ahead) compruebas que:
-    * Exista al menos 1 número (?:.*[0-9]){1}
-    * Exista al menos 1 mayúscula (?:.*[A-Z]){1}
-    * Exista al menos 1 minúscula (?:.*[a-z]){1}
-    ? Con el cuantificador {8,} indicas que debe tener una longitud mínima de 8 sin límite máximo.
-    2
-    ? Con \S no permite espacios en blanco.
+      Con el operador ?= (look ahead) compruebas que:
+      * @params: Exista al menos 1 número (?:.*[0-9]){1}
+      * @params: Exista al menos 1 mayúscula (?:.*[A-Z]){1}
+      * @params: Exista al menos 1 minúscula (?:.*[a-z]){1}
+      ? Con el cuantificador {8,} indicas que debe tener una longitud mínima de 8 sin límite máximo.
+
+      ? Con \S no permite espacios en blanco.
     */
     const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
 
@@ -209,7 +209,7 @@ const Login = () => {
         <div className='first-login'>
           <p>Para continuar, inicie sesión</p>
           <div className='buttons'>
-            <GoogleOAuthProvider clientId='294667816272-supt23ie3grtgl1ed50n6e1et58st5f1.apps.googleusercontent.com'>
+            <GoogleOAuthProvider clientId='1080803906494-0hbpsufmopje9arrn1o1ofua1qbesjoa.apps.googleusercontent.com'>
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   const { credential } = credentialResponse
