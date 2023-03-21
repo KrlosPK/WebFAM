@@ -37,15 +37,15 @@ const Services = () => {
   useEffect(() => {
     const token = getToken()
 
-    if (token !== null) {
-      new Promise((resolve, reject) => {
-        const decoded = jwtDecode(token)
-        resolve(decoded.data)
-        reject(new Error('Error al decodificar el token'))
-      }).then((decoded) => {
-        setIdRol(decoded[0].id_rol)
-      })
-    }
+    if (!token) return
+
+    new Promise((resolve, reject) => {
+      const decoded = jwtDecode(token)
+      resolve(decoded.data)
+      reject(new Error('Error al decodificar el token'))
+    }).then((decoded) => {
+      setIdRol(decoded[0].id_rol)
+    })
   }, [])
 
   useEffect(() => {
