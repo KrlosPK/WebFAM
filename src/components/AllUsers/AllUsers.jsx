@@ -55,13 +55,11 @@ const AllUsers = () => {
     axios
       .get(API_URL('usuarios'))
       .then(({ data }) => {
-        console.log(data)
         setUsers(data.users)
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
+        setUsers([])
       })
-    console.log(users)
   }, [])
 
   return (
