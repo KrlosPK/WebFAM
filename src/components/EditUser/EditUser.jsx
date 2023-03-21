@@ -392,7 +392,10 @@ const EditUser = () => {
   const handleImageChange = () => {
     const file = userImageEl.current.files[0]
     const imageBlob = new Blob([file], { type: file.type })
-    toast.info('La imagen se visualizará de esta manera. Por favor, haz clic en "Actualizar foto" para que se reflejen los cambios.', { theme: 'colored' })
+    toast.info(
+      'La imagen se visualizará de esta manera. Por favor, haz clic en "Actualizar foto" para que se reflejen los cambios.',
+      { theme: 'colored' }
+    )
     setTempPhoto(imageBlob)
   }
 
@@ -427,7 +430,7 @@ const EditUser = () => {
         <form className='overlay-img' onSubmit={updateUserPhoto}>
           <LazyLoadImage
             loading='lazy'
-            src={ (tempPhoto && URL.createObjectURL(tempPhoto)) || userData.picture || defaultImage}
+            src={(tempPhoto && URL.createObjectURL(tempPhoto)) || userData.picture || defaultImage}
             width={56}
             height={56}
             className='edit-user__image'
@@ -436,7 +439,13 @@ const EditUser = () => {
           <label htmlFor='file'>
             <AiFillEdit /> <span>Editar foto</span>
           </label>
-          <input type='file' id='file' accept='image/*' ref={userImageEl} onChange={handleImageChange} />
+          <input
+            type='file'
+            id='file'
+            accept='image/*'
+            ref={userImageEl}
+            onChange={handleImageChange}
+          />
           <Button2 text='Actualizar foto' width={170} />
         </form>
         <Button text='Eliminar foto' width={170} innerOnClick={deleteUserPhoto} />
