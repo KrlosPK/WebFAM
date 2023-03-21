@@ -140,7 +140,7 @@ const AddService = () => {
     const token = getToken()
     if (token === null) {
       navigate('/login')
-      return null
+      return
     }
     const decode = await jwtDecode(token)
     const { id_rol } = decode.data[0]
