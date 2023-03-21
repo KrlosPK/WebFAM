@@ -38,6 +38,12 @@ const Login = () => {
       })
       focusInput(correoInputEl)
     }
+    if (toastify === 'recover') {
+      toast.success('¡Contraseña restablecida con éxito!', {
+        theme: 'colored'
+      })
+      focusInput(correoInputEl)
+    }
   }, [toastify])
 
   const navigate = useNavigate()
