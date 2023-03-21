@@ -8,30 +8,37 @@
   align-items: center;
   display: flex;
   gap: 1rem;
+  margin-bottom: 1rem;
   padding: 1rem;
 }
 .overlay-img {
-  border-radius: 50%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
   position: relative;
 }
+.overlay-img ~ button {
+  height: 43px;
+  left: 50%;
+  margin-top: 0.8rem;
+  position: relative;
+  translate: -50%;
+  width: 171px;
+}
 .overlay-img label {
+  align-items: center;
   bottom: -15px;
-  color: #000;
   cursor: pointer;
-  height: 30px;
-  position: absolute;
-  right: -18px;
+  display: flex;
+  gap: 0.5rem;
+  /* position: absolute; */
   transition: color 300ms;
-  width: 30px;
+  width: fit-content;
 }
 .overlay-img label:hover {
   color: #333;
-}
-.overlay-img button {
-  bottom: -45px;
-  position: absolute;
-  right: -50%;
-  scale: 0.7;
 }
 .overlay-img input[type='file'] {
   display: none;
