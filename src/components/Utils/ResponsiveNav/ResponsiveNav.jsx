@@ -10,7 +10,7 @@ import { SessionContext } from '../../../context/SessionContext'
 import jwtDecode from 'jwt-decode'
 
 // ? Icons
-import { AiOutlineSetting } from 'react-icons/ai'
+import { AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
 import { BiLogOut } from 'react-icons/bi'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
@@ -66,7 +66,12 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
 
     if (decoded.data) {
       const { data } = decoded
-      setUserData({ ...userData, name: data[0].nombre })
+      setUserData({
+        ...userData,
+        name: data[0].nombre,
+        picture: data[0].foto_perfil,
+        id_rol: data[0].id_rol
+      })
     } else {
       const { given_name, picture } = decoded
       setUserData({ ...userData, name: given_name, picture })
@@ -84,7 +89,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
               width={45}
               height={45}
               className='user__image'
-              alt=''
+              alt={`Foto de Perfil de ${userData.name}}`}
             />
             <strong className='user__name'>{userData.name}</strong>
           </li>
@@ -120,6 +125,11 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
             <Link to='/account'>
               <AiOutlineSetting /> Configuración
             </Link>
+            {userData.id_rol !== 2 && (
+              <Link to='/all-users'>
+                <AiOutlineUser /> Usuarios
+              </Link>
+            )}
             <Link to='/' onClick={logout}>
               <BiLogOut /> Cerrar sesión
             </Link>
