@@ -1,7 +1,7 @@
 import './ResetPassword.css'
 
 //* Hooks
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 // ? Components
@@ -11,11 +11,13 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { Footer } from '../../Home/Footer/Footer'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
+import { ToastifyContext } from '../../../context/ToastifyContext'
 
 const ResetPassword = () => {
   const navigate = useNavigate()
   const { token } = useParams()
   const [idUsuario, setIdUsuario] = useState('')
+  const { setToastify } = useContext(ToastifyContext)
 
   // * Verificar token y estado, si está inactivo redireccionar a "/" o si no tiene token
   useEffect(() => {
@@ -115,10 +117,8 @@ const ResetPassword = () => {
           contrasena: body.contrasena
         })
         .then(() => {
+          setToastify('recover')
           navigate('/login')
-          toast.success('¡Contraseña actualizada correctamente!', {
-            theme: 'colored'
-          })
         })
         .catch(() => {
           toast.error('¡Hubo un error al cambiar la contraseña!', {
