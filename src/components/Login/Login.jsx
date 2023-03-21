@@ -21,6 +21,7 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+import jwtDecode from 'jwt-decode'
 
 // ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
@@ -82,13 +83,13 @@ const Login = () => {
     const contrasena = e.target[1].value
 
     /*
-    Con el operador ?= (look ahead) compruebas que:
-    * Exista al menos 1 número (?:.*[0-9]){1}
-    * Exista al menos 1 mayúscula (?:.*[A-Z]){1}
-    * Exista al menos 1 minúscula (?:.*[a-z]){1}
-    ? Con el cuantificador {8,} indicas que debe tener una longitud mínima de 8 sin límite máximo.
-    2
-    ? Con \S no permite espacios en blanco.
+      Con el operador ?= (look ahead) compruebas que:
+      * @params: Exista al menos 1 número (?:.*[0-9]){1}
+      * @params: Exista al menos 1 mayúscula (?:.*[A-Z]){1}
+      * @params: Exista al menos 1 minúscula (?:.*[a-z]){1}
+      ? Con el cuantificador {8,} indicas que debe tener una longitud mínima de 8 sin límite máximo.
+
+      ? Con \S no permite espacios en blanco.
     */
     const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
 
@@ -141,28 +142,49 @@ const Login = () => {
       rememberSession()
 
       setDisabled(true)
-
-      await axios
-        .post(API_URL('signin'), body)
-        .then(({ data }) => {
-          const { token } = data
-
-          setTokenData(token)
-
-          sessionStorage.setItem('session', 'true')
-          setTempSession(true)
-
-          setSession(true)
-
-          if (token) return navigate('/', { replace: true })
-        })
-        .catch(() => {
-          toast.error('¡Correo y/o contraseña incorrectos!', {
-            theme: 'colored'
-          })
-          setDisabled(false)
-        })
+      await loginUser()
     }
+  }
+
+  const loginUser = async () => {
+    await axios
+      .post(API_URL('signin'), body)
+      .then(({ data }) => {
+        const { token } = data
+
+        setTokenData(token)
+
+        sessionStorage.setItem('session', 'true')
+        setTempSession(true)
+
+        setSession(true)
+
+        if (token) return navigate('/', { replace: true })
+      })
+      .catch(() => {
+        toast.error('¡Correo y/o contraseña incorrectos!', {
+          theme: 'colored'
+        })
+        setDisabled(false)
+      })
+  }
+
+  const googleLogin = async (email) => {
+    await axios
+      .post(API_URL('comprobarCorreo'), { correo: email, tipo: 'google' })
+      .then(({ data }) => {
+        const { token } = data
+        setTokenData(token)
+        sessionStorage.setItem('session', 'true')
+        setTempSession(true)
+        navigate('/', { replace: true })
+      })
+      .catch(() => {
+        toast.error('¡El correo no existe en nuestro sistema! Primero regístrate', {
+          theme: 'colored'
+        })
+        setDisabled(false)
+      })
   }
 
   //* guarda correo y contraseña
@@ -209,18 +231,18 @@ const Login = () => {
         <div className='first-login'>
           <p>Para continuar, inicie sesión</p>
           <div className='buttons'>
-            <GoogleOAuthProvider clientId='294667816272-supt23ie3grtgl1ed50n6e1et58st5f1.apps.googleusercontent.com'>
+            <GoogleOAuthProvider clientId='1080803906494-0hbpsufmopje9arrn1o1ofua1qbesjoa.apps.googleusercontent.com'>
               <GoogleLogin
-                onSuccess={(credentialResponse) => {
+                onSuccess={async (credentialResponse) => {
                   const { credential } = credentialResponse
                   try {
-                    document.cookie = `token=${credential}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
-                    sessionStorage.setItem('session', 'true')
-                    setSession(true)
-                    setTempSession(true)
-                    navigate('/', { replace: true })
+                    const decoded = jwtDecode(credential)
+                    const { email } = decoded
+                    await googleLogin(email)
                   } catch (err) {
-                    console.log(err)
+                    toast.error('¡Error al iniciar sesión con Google! Vuelve a intentarlo...', {
+                      theme: 'colored'
+                    })
                   }
                 }}
                 onError={() => {
