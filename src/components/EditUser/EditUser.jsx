@@ -387,6 +387,15 @@ const EditUser = () => {
       })
   }
 
+  const [tempPhoto, setTempPhoto] = useState(null)
+
+  const handleImageChange = () => {
+    const file = userImageEl.current.files[0]
+    const imageBlob = new Blob([file], { type: file.type })
+    toast.info('La imagen se visualizará de esta manera. Por favor, haz clic en "Actualizar foto" para que se reflejen los cambios.', { theme: 'colored' })
+    setTempPhoto(imageBlob)
+  }
+
   return (
     <section>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
@@ -405,8 +414,8 @@ const EditUser = () => {
           <LazyLoadImage
             loading='lazy'
             src={userData.picture || defaultImage}
-            width={55}
-            height={55}
+            width={64}
+            height={64}
             className='edit-user__image'
             alt={`Foto de Perfil de ${userData.name}}`}
           />
@@ -418,19 +427,19 @@ const EditUser = () => {
         <form className='overlay-img' onSubmit={updateUserPhoto}>
           <LazyLoadImage
             loading='lazy'
-            src={userData.picture || defaultImage}
-            width={50}
-            height={50}
+            src={ (tempPhoto && URL.createObjectURL(tempPhoto)) || userData.picture || defaultImage}
+            width={56}
+            height={56}
             className='edit-user__image'
             alt={`Foto de Perfil de ${userData.name}}`}
           />
           <label htmlFor='file'>
             <AiFillEdit /> <span>Editar foto</span>
           </label>
-          <input type='file' id='file' accept='image/*' ref={userImageEl} />
-          <Button2 text='Actualizar foto' />
+          <input type='file' id='file' accept='image/*' ref={userImageEl} onChange={handleImageChange} />
+          <Button2 text='Actualizar foto' width={170} />
         </form>
-        <Button text='Eliminar foto' innerOnClick={deleteUserPhoto} />
+        <Button text='Eliminar foto' width={170} innerOnClick={deleteUserPhoto} />
         {form === 'editUser'
           ? (
             <form className='edit-form' onSubmit={updateUserData}>
