@@ -1,7 +1,7 @@
 import './RecoverPassword.css'
 
 // ? Components
-import { Input, Navbar, API_URL, validateMail, Button2 } from '../../Utils'
+import { Input, Navbar, API_URL, validateMail, Button2, verifyStatus } from '../../Utils'
 
 //* Hooks
 import { useEffect, useRef, useState } from 'react'
@@ -16,6 +16,7 @@ import Swal from 'sweetalert2'
 // ? Icons
 import { AiFillBackward } from 'react-icons/ai'
 import { Footer } from '../../Home/Footer/Footer'
+import jwtDecode from 'jwt-decode'
 
 const RecoverPassword = () => {
   const navigate = useNavigate()
@@ -88,17 +89,10 @@ const RecoverPassword = () => {
 
       setToEmail(correo)
 
-      // TODO axios
       await axios
         .post(API_URL('crearTokenContrasena'), body)
         .then(({ data }) => {
           setToken(data.token)
-          Swal.fire({
-            icon: 'success',
-            title: '¡Hemos enviado un correo a tu cuenta!',
-            text: 'Entra al enlace que te hemos enviado al correo para que restablezcas tu contraseña.',
-            footer: '<a href="/">Volver al inicio</a>'
-          })
         })
         .catch(() => {
           toast.error('¡Este correo no está asociado a ninguna de nuestras cuentas!', {
@@ -107,6 +101,15 @@ const RecoverPassword = () => {
           setDisabled(false)
         })
     }
+  }
+
+  const sendAlert = () => {
+    Swal.fire({
+      icon: 'success',
+      title: '¡Hemos enviado un correo a tu cuenta!',
+      text: 'Entra al enlace que te hemos enviado al correo para que restablezcas tu contraseña.',
+      footer: '<a href="/">Volver al inicio</a>'
+    })
   }
 
   // * Guardar token para enviar autenticación
@@ -129,6 +132,11 @@ const RecoverPassword = () => {
     if (token !== '') {
       const tokenUrl = token.replace(/\./g, '+')
       recoverLinkEL.current.value = `https://fademetmontajes.netlify.app/reset-password/${tokenUrl}`
+      const estadoDataUser = jwtDecode(token)
+      const { estado } = estadoDataUser.data[0]
+      const status = verifyStatus(estado, { toast, setDisabled })
+      if (!status) return
+      sendAlert()
       sendEmail()
     }
   }, [token])
