@@ -61,37 +61,43 @@ const AddService = () => {
         theme: 'colored'
       })
       focusInput(nombre_servicioInputEl)
-      return false
+      setDisabled(false)
+      return
     } else if (nombre_servicio.length < 3) {
       toast.error('¡El nombre del servicio debe tener mínimo 3 letras!', {
         theme: 'colored'
       })
       focusInput(nombre_servicioInputEl)
-      return false
+      setDisabled(false)
+      return
     } else if (descripcion_servicio.length === 0 || /^\s+$/.test(descripcion_servicio)) {
       toast.error('¡La descripción no puede estar vacía!', {
         theme: 'colored'
       })
       focusInput(descripcion_servicioInputEl)
-      return false
+      setDisabled(false)
+      return
     } else if (descripcion_servicio.length < 3) {
       toast.error('¡La descripción deben tener mínimo 3 letras!', {
         theme: 'colored'
       })
       focusInput(descripcion_servicioInputEl)
-      return false
+      setDisabled(false)
+      return
     } else if (resumen_servicio.length === 0) {
       toast.error('¡El resumen del servicio no puede estar vacío!', {
         theme: 'colored'
       })
       focusInput(resumen_servicioInputEl)
-      return false
+      setDisabled(false)
+      return
     } else if (resumen_servicio.length < 3) {
       toast.error('¡El resumen del servicio debe tener mínimo 3 letras!', {
         theme: 'colored'
       })
       focusInput(resumen_servicioInputEl)
-      return false
+      setDisabled(false)
+      return
     } else if (
       !foto_servicioInputEl.current.files[0] ||
       foto_servicioInputEl.current.files[0].length === 0
@@ -99,8 +105,14 @@ const AddService = () => {
       toast.error('¡Debes seleccionar una foto!', {
         theme: 'colored'
       })
-      focusInput(foto_servicioInputEl)
-      return false
+      setDisabled(false)
+      return
+    } else if (foto_servicioInputEl.current.files[0].type.split('/')[0] !== 'image') {
+      toast.error('¡El formato de la foto debe ser jpg, jpeg o png!', {
+        theme: 'colored'
+      })
+      setDisabled(false)
+      return
     } else if (
       !galeria_serviciosInputEl.current.files ||
       galeria_serviciosInputEl.current.files.length === 0
@@ -108,8 +120,8 @@ const AddService = () => {
       toast.error('¡Debes seleccionar al menos una foto!', {
         theme: 'colored'
       })
-      focusInput(galeria_serviciosInputEl)
-      return false
+      setDisabled(false)
+      return
     }
     setToastify('serviceCreated')
     return {
@@ -137,13 +149,13 @@ const AddService = () => {
   }, [setTitle])
 
   // * Validate if user is admin
-  useEffect(async () => {
+  useEffect(() => {
     const token = getToken()
     if (!token) {
       navigate('/login')
       return
     }
-    const decode = await jwtDecode(token)
+    const decode = jwtDecode(token)
     const { id_rol } = decode.data[0]
     if (id_rol === 2) navigate('/', { replace: true })
   }, [])
@@ -153,7 +165,7 @@ const AddService = () => {
     axios.get(API_URL('ultimoId')).then(({ data }) => {
       setLastId(data.lastID[0].lastID)
     })
-  })
+  }, [])
 
   // * Upload Gallery to firebase
   const uploadGallery = async () => {
@@ -179,7 +191,7 @@ const AddService = () => {
   const uploadPhoto = async () => {
     try {
       const foto_servicio = foto_servicioInputEl.current.files[0]
-      if (!foto_servicio) return false
+      if (!foto_servicio) return
       const imgRef = ref(storage, `servicesPhoto${lastId + 1}/${foto_servicio.name + uuidv4()}`)
       await uploadBytes(imgRef, foto_servicio)
       const url = await getDownloadURL(imgRef)
@@ -193,7 +205,7 @@ const AddService = () => {
     e.preventDefault()
     setDisabled(true)
     const body = await validarInputs(e)
-    if (body.length === 0) return false
+    if (!body) return
     postForm(body)
   }
 
@@ -216,12 +228,12 @@ const AddService = () => {
     <>
       <ResponsiveNav
         linkText={['Inicio', 'Agendas', 'Servicios']}
-        linkUrl={['/', 'citas', '/services']}
+        linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
       <Navbar
         linkText={['Inicio', 'Agendas', 'Servicios']}
-        linkUrl={['/', 'citas', '/services']}
+        linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
       <div className='service-div'>
@@ -261,6 +273,7 @@ const AddService = () => {
                 text='Foto del servicio'
                 innerId='foto-servicio'
                 type='file'
+                accept='image/*'
                 nameID='foto_servicio'
                 innerRef={foto_servicioInputEl}
               />
@@ -268,6 +281,7 @@ const AddService = () => {
                 text='Galería de los servicios'
                 innerId='galeria-servicio'
                 type='file'
+                accept='image/*'
                 nameID='galeria_servicios'
                 innerRef={galeria_serviciosInputEl}
                 multiple='multiple'
