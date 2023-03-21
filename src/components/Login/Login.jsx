@@ -21,6 +21,7 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+import jwtDecode from 'jwt-decode'
 
 // ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
@@ -141,28 +142,49 @@ const Login = () => {
       rememberSession()
 
       setDisabled(true)
-
-      await axios
-        .post(API_URL('signin'), body)
-        .then(({ data }) => {
-          const { token } = data
-
-          setTokenData(token)
-
-          sessionStorage.setItem('session', 'true')
-          setTempSession(true)
-
-          setSession(true)
-
-          if (token) return navigate('/', { replace: true })
-        })
-        .catch(() => {
-          toast.error('¡Correo y/o contraseña incorrectos!', {
-            theme: 'colored'
-          })
-          setDisabled(false)
-        })
+      await loginUser()
     }
+  }
+
+  const loginUser = async () => {
+    await axios
+      .post(API_URL('signin'), body)
+      .then(({ data }) => {
+        const { token } = data
+
+        setTokenData(token)
+
+        sessionStorage.setItem('session', 'true')
+        setTempSession(true)
+
+        setSession(true)
+
+        if (token) return navigate('/', { replace: true })
+      })
+      .catch(() => {
+        toast.error('¡Correo y/o contraseña incorrectos!', {
+          theme: 'colored'
+        })
+        setDisabled(false)
+      })
+  }
+
+  const googleLogin = async (email) => {
+    await axios
+      .post(API_URL('comprobarCorreo'), { correo: email, tipo: 'google' })
+      .then(({ data }) => {
+        const { token } = data
+        setTokenData(token)
+        sessionStorage.setItem('session', 'true')
+        setTempSession(true)
+        navigate('/', { replace: true })
+      })
+      .catch(() => {
+        toast.error('¡El correo no existe en nuestro sistema! Primero regístrate', {
+          theme: 'colored'
+        })
+        setDisabled(false)
+      })
   }
 
   //* guarda correo y contraseña
@@ -211,16 +233,16 @@ const Login = () => {
           <div className='buttons'>
             <GoogleOAuthProvider clientId='1080803906494-0hbpsufmopje9arrn1o1ofua1qbesjoa.apps.googleusercontent.com'>
               <GoogleLogin
-                onSuccess={(credentialResponse) => {
+                onSuccess={async (credentialResponse) => {
                   const { credential } = credentialResponse
                   try {
-                    document.cookie = `token=${credential}; path=https://fademetmontajes.netlify.app/; secure; SameSite=Lax`
-                    sessionStorage.setItem('session', 'true')
-                    setSession(true)
-                    setTempSession(true)
-                    navigate('/', { replace: true })
+                    const decoded = jwtDecode(credential)
+                    const { email } = decoded
+                    await googleLogin(email)
                   } catch (err) {
-                    console.log(err)
+                    toast.error('¡Error al iniciar sesión con Google! Vuelve a intentarlo...', {
+                      theme: 'colored'
+                    })
                   }
                 }}
                 onError={() => {
