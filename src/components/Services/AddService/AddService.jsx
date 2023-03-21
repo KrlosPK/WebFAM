@@ -111,6 +111,7 @@ const AddService = () => {
       focusInput(galeria_serviciosInputEl)
       return false
     }
+    setToastify('serviceCreated')
     return {
       nombre_servicio,
       descripcion_servicio,
@@ -138,7 +139,7 @@ const AddService = () => {
   // * Validate if user is admin
   useEffect(async () => {
     const token = getToken()
-    if (token === null) {
+    if (!token) {
       navigate('/login')
       return
     }
@@ -214,13 +215,13 @@ const AddService = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={['Inicio', 'Servicios']}
-        linkUrl={['/', '/services']}
+        linkText={['Inicio', 'Agendas', 'Servicios']}
+        linkUrl={['/', 'citas', '/services']}
         renderButtons={button}
       />
       <Navbar
-        linkText={['Inicio', 'Servicios']}
-        linkUrl={['/', '/services']}
+        linkText={['Inicio', 'Agendas', 'Servicios']}
+        linkUrl={['/', 'citas', '/services']}
         renderButtons={button}
       />
       <div className='service-div'>
