@@ -25,7 +25,6 @@
   margin-top: 0.8rem;
   position: relative;
   translate: -50%;
-  width: 171px;
 }
 .overlay-img label {
   align-items: center;
@@ -33,7 +32,6 @@
   cursor: pointer;
   display: flex;
   gap: 0.5rem;
-  /* position: absolute; */
   transition: color 300ms;
   width: fit-content;
 }
