@@ -1,34 +1,38 @@
 [
   {
     "id": 1,
-    "src": "/provideDesign.png",
+    "src": "/provide-design.mp4",
     "alt": "Servicio que Provee la empresa FADEMET",
     "header": "Diseño",
     "text": "Llevamos tus ideas a la realidad",
-    "animation": "flip-left"
+    "animation": "flip-left",
+    "isVideo": true
   },
   {
     "id": 2,
-    "src": "/provideFabrication.png",
+    "src": "/provide-fabrication.mp4",
     "alt": "Servicio que Provee la empresa FADEMET",
     "header": "Fabricación",
     "text": "Elaboramos con amor y dedicación",
-    "animation": "flip-left"
+    "animation": "flip-left",
+    "isVideo": true
   },
   {
     "id": 3,
-    "src": "/provideAdvisory.png",
+    "src": "/provide-asesory.mp4",
     "alt": "Servicio que Provee la empresa FADEMET",
     "header": "Asesoría",
     "text": "Te orientamos para que tengas tu hogar de ensueño",
-    "animation": "flip-left"
+    "animation": "flip-left",
+    "isVideo": true
   },
   {
     "id": 4,
-    "src": "/provideRepair.png",
+    "src": "/provide-repair.mp4",
     "alt": "Servicio que Provee la empresa FADEMET",
     "header": "Reparación",
     "text": "Restauramos tus estructuras metálicas",
-    "animation": "flip-left"
+    "animation": "flip-left",
+    "isVideo": true
   }
 ]
