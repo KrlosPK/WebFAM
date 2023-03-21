@@ -34,7 +34,7 @@ const Home = () => {
   useEffect(() => {
     const token = getToken()
 
-    if (!token) return null
+    if (!token) return
 
     new Promise((resolve, reject) => {
       const decoded = jwtDecode(token)
