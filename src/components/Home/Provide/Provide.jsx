@@ -14,7 +14,7 @@ const Provide = () => {
         Soluciones metalmecánicas adaptadas a todo tipo de proyecto o necesidad del cliente.
       </p>
       <div className='provides'>
-        {provideData.map(({ id, src, alt, header, text, animation }) => (
+        {provideData.map(({ id, src, alt, header, text, animation, isVideo }) => (
           <MiniCard
             key={id}
             src={src}
@@ -22,6 +22,7 @@ const Provide = () => {
             header={header}
             text={text}
             animation={animation}
+            isVideo={isVideo}
           />
         ))}
       </div>

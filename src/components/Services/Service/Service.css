@@ -123,8 +123,9 @@
   z-index: 100;
 }
 .overlay img {
+  height: 60vh;
   object-fit: contain;
-  width: 50%;
+  width: 60vw;
 }
 
 /* * Gallery Responsive */
