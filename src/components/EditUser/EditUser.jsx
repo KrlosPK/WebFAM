@@ -11,7 +11,8 @@ import {
   setTokenData,
   getToken,
   ResponsiveNav,
-  storage
+  storage,
+  Button
 } from '../Utils'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
@@ -62,7 +63,6 @@ const EditUser = () => {
   const [userData, setUserData] = useState({})
   const defaultImage = '/default-avatar.png'
   const [disabled, setDisabled] = useState(true)
-  const [disabledButtonPicture, setDisabledButtonPicture] = useState(true)
 
   const getUserData = async () => {
     const cookies = document.cookie
@@ -305,7 +305,7 @@ const EditUser = () => {
 
   const userImageEl = useRef(null)
 
-  const updateUserPhoto = async (e) => {
+  const uploadUserPhoto = async (e) => {
     e.preventDefault()
 
     if (!userImageEl.current.files[0] || userImageEl.current.files[0].length === 0) {
@@ -316,16 +316,75 @@ const EditUser = () => {
     }
 
     try {
-      setDisabledButtonPicture(false)
       const userImage = userImageEl.current.files[0]
       if (!userImage) return false
-      const imgRef = ref(storage, `userPhotos/${userImage.name + uuidv4()}`)
+      const imgRef = ref(storage, `userPictures/${userImage.name}-${uuidv4()}`)
       await uploadBytes(imgRef, userImage)
       const url = await getDownloadURL(imgRef)
+
       return url
     } catch (error) {
       throw new Error(error)
     }
+  }
+
+  const updateUserPhoto = async (e) => {
+    const url = await uploadUserPhoto(e)
+
+    if (!url) return
+
+    axios
+      .patch(API_URL(`editarUsuario/${userData.id_usuario}`), {
+        foto_perfil: url
+      })
+      .then(async () => {
+        toast.success(
+          '¡Imagen actualizada correctamente! Algunos cambios aún no se verán reflejados',
+          {
+            theme: 'colored'
+          }
+        )
+        userImageEl.current.value = ''
+        axios.post(API_URL(`nuevoToken/${userData.id_usuario}`)).then(({ data }) => {
+          const { token } = data
+
+          setTokenData(token)
+
+          getUserData()
+        })
+      })
+      .catch(() => {
+        toast.error('¡Hubo un error al actualizar la foto de perfil!', {
+          theme: 'colored'
+        })
+      })
+  }
+
+  const deleteUserPhoto = () => {
+    axios
+      .patch(API_URL(`editarUsuario/${userData.id_usuario}`), {
+        foto_perfil: ''
+      })
+      .then(async () => {
+        toast.success(
+          '¡Imagen eliminada correctamente! Algunos cambios aún no se verán reflejados',
+          {
+            theme: 'colored'
+          }
+        )
+        axios.post(API_URL(`nuevoToken/${userData.id_usuario}`)).then(({ data }) => {
+          const { token } = data
+
+          setTokenData(token)
+
+          getUserData()
+        })
+      })
+      .catch(() => {
+        toast.error('¡Hubo un error al eliminar la foto de perfil!', {
+          theme: 'colored'
+        })
+      })
   }
 
   return (
@@ -343,31 +402,35 @@ const EditUser = () => {
       />
       <section className='edit-user'>
         <header className='edit-user__header'>
-          <form className='overlay-img' onSubmit={updateUserPhoto}>
-            <LazyLoadImage
-              loading='lazy'
-              src={userData.picture || defaultImage}
-              width={55}
-              height={55}
-              className='edit-user__image'
-              alt={`Foto de Perfil de ${userData.name}}`}
-            />
-            <label htmlFor='file'>
-              <AiFillEdit />
-            </label>
-            <input type='file' id='file' accept='image/*' ref={userImageEl} />
-            <Button2
-              text='Actualizar'
-              disable={disabledButtonPicture}
-              textDisabled='Actualizar'
-              animation={false}
-            />
-          </form>
+          <LazyLoadImage
+            loading='lazy'
+            src={userData.picture || defaultImage}
+            width={55}
+            height={55}
+            className='edit-user__image'
+            alt={`Foto de Perfil de ${userData.name}}`}
+          />
           <div className='user-data'>
             <strong className='user-data__name'>{userData.name} / Editar Perfil</strong>
             <span className='user-data__email'>{userData.email}</span>
           </div>
         </header>
+        <form className='overlay-img' onSubmit={updateUserPhoto}>
+          <LazyLoadImage
+            loading='lazy'
+            src={userData.picture || defaultImage}
+            width={50}
+            height={50}
+            className='edit-user__image'
+            alt={`Foto de Perfil de ${userData.name}}`}
+          />
+          <label htmlFor='file'>
+            <AiFillEdit /> <span>Editar foto</span>
+          </label>
+          <input type='file' id='file' accept='image/*' ref={userImageEl} />
+          <Button2 text='Actualizar foto' />
+        </form>
+        <Button text='Eliminar foto' innerOnClick={deleteUserPhoto} />
         {form === 'editUser'
           ? (
             <form className='edit-form' onSubmit={updateUserData}>
