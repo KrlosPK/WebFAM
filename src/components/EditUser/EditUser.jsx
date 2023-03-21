@@ -65,11 +65,7 @@ const EditUser = () => {
   const [disabled, setDisabled] = useState(true)
 
   const getUserData = async () => {
-    const cookies = document.cookie
-    const tokenCookie = cookies.split('; ').find((cookie) => cookie.startsWith('token='))
-    let token = null
-    if (!tokenCookie) return null
-    token = tokenCookie.split('=')[1]
+    const token = getToken()
 
     const decoded = await jwtDecode(token)
 
@@ -86,9 +82,6 @@ const EditUser = () => {
         typeId: data[0].tipo_documento,
         picture: data[0].foto_perfil
       })
-    } else {
-      const { given_name, picture, family_name, email } = decoded
-      setUserData({ ...userData, name: given_name, lastname: family_name, picture, email })
     }
   }
 
