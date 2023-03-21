@@ -1,6 +1,6 @@
 // * Hooks
 import { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // * Context
 import { SessionContext } from '../../context/SessionContext'
@@ -13,7 +13,7 @@ import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 
 // * Utils
-import { API_URL, getToken, MiniCard, Navbar, ResponsiveNav } from '../Utils'
+import { API_URL, Button2, getToken, MiniCard, Navbar, ResponsiveNav } from '../Utils'
 
 // * Styles
 import './AllUsers.css'
@@ -86,6 +86,11 @@ const AllUsers = () => {
                 text={correo}
                 textColor='orange'
               />
+              <div className="colleague__button-edit">
+                <Link to={`/info-user-edit/${id_usuario}`}>
+                  <Button2 key={id_usuario} text='Editar' width={150}/>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
