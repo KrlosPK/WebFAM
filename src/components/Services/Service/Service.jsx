@@ -1,7 +1,7 @@
 import './Service.css'
 
 // ? Components
-import { API_URL, Button2, getToken, Navbar, ResponsiveNav } from '../../Utils'
+import { API_URL, getToken, ModalService, Navbar, ResponsiveNav } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
@@ -98,12 +98,16 @@ const Service = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkText={
+          idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']
+        }
         linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
       <Navbar
-        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
+        linkText={
+          idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']
+        }
         linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
@@ -121,7 +125,9 @@ const Service = () => {
           <aside className='service-aside'>
             <h2 className='service-aside__title'>{service[0] && service[0].nombre_servicio}</h2>
             <p className='service-aside__desc'>{service[0] && service[0].descripcion_servicio}</p>
-            <Button2 text='Solicitar' width={210} />
+            <div className='aside__modal-service'>
+              <ModalService />
+            </div>
           </aside>
         </div>
         <article className='service-info__description'>
