@@ -58,7 +58,11 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
     getUserData()
 
     if (localStorage.getItem('session') === '') {
-      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=Domain:"fademetmontajes.netlify.app";'
+    }
+
+    if (!sessionStorage.getItem('session')) {
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=Domain:"fademetmontajes.netlify.app";'
     }
 
     function handleClickOutside (event) {
