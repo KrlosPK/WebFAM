@@ -1,8 +1,8 @@
 import './InfoUserEdit.css'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { SessionContext } from '../../../context/SessionContext'
-import { API_URL, Button, Button2, Input, Navbar, ResponsiveNav, storage, validatePassword } from '../../Utils'
+import { API_URL, Button, Button2, getToken, Input, inputChangeCheck, Navbar, ResponsiveNav, storage, validatePassword } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
@@ -11,6 +11,7 @@ import { uuidv4 } from '@firebase/util'
 import axios from 'axios'
 import { AiFillEdit } from 'react-icons/ai'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
+import jwtDecode from 'jwt-decode'
 
 const InfoUserEdit = () => {
   // ? Context
@@ -52,19 +53,28 @@ const InfoUserEdit = () => {
           phoneNumber: infoUser.num_celular,
           id: infoUser.num_documento,
           typeId: infoUser.tipo_documento,
-          picture: infoUser.foto_perfil
+          picture: infoUser.foto_perfil,
+          status: infoUser.estado
         })
       })
   }
 
-  useEffect(() => {
-    id && getUserData()
-  }, [id])
+  useEffect(() => id && getUserData(), [id])
 
   useEffect(() => {
     !session ? setButton(1) : setButton(2)
     !tempSession ? setButton(1) : setButton(2)
   }, [session, tempSession])
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const token = getToken()
+    if (!token) return navigate('/')
+    const decode = jwtDecode(token)
+    const { id_rol } = decode.data[0]
+    if (id_rol !== 1) return navigate('/')
+  }, [])
 
   // ! Cambiar título de la página
   const [title, setTitle] = useState('FADEMET Montajes | Editar usuario')
@@ -313,7 +323,7 @@ const InfoUserEdit = () => {
   const deleteUserPhoto = () => {
     axios
       .patch(API_URL(`editarUsuario/${userData.id_usuario}`), {
-        foto_perfil: ''
+        foto_perfil: '/default-avatar.png'
       })
       .then(async () => {
         toast.success(
@@ -322,13 +332,7 @@ const InfoUserEdit = () => {
             theme: 'colored'
           }
         )
-        axios.post(API_URL(`nuevoToken/${userData.id_usuario}`)).then(({ data }) => {
-          // const { token } = data
-
-          // setTokenData(token)
-
-          getUserData()
-        })
+        getUserData()
       })
       .catch(() => {
         toast.error('¡Hubo un error al eliminar la foto de perfil!', {
@@ -337,7 +341,25 @@ const InfoUserEdit = () => {
       })
   }
 
-  const inputChange = () => setDisabled(false)
+  const inputChange = (e) => inputChangeCheck(e, { userData, setDisabled })
+
+  const toggleUserStatus = () => {
+    axios
+      .patch(API_URL(`eliminarUsuario/${userData.id_usuario}`), {
+        estado: userData.status === 'inactivo' ? 'activo' : 'inactivo'
+      })
+      .then(() => {
+        toast.success('¡Estado actualizado correctamente!', {
+          theme: 'colored'
+        })
+        getUserData()
+      })
+      .catch(() => {
+        toast.error('¡Hubo un error al actualizar el estado!', {
+          theme: 'colored'
+        })
+      })
+  }
 
   return (
     <>
@@ -394,12 +416,13 @@ const InfoUserEdit = () => {
           <Button text='Eliminar foto' width={170} innerOnClick={deleteUserPhoto} />
           {form === 'editUser'
             ? (
-              <form className='edit-form' onSubmit={updateUserData}>
-                <>
+              <>
+                <form className='edit-form' onSubmit={updateUserData}>
                   <div className='edit-main-form main-form'>
                     <Input
                       innerOnChange={inputChange}
                       innerDefaultValue={userData.name}
+                      nameID='name'
                       text='Nombre'
                       innerRef={nombreInputEl}
                     />
@@ -407,6 +430,7 @@ const InfoUserEdit = () => {
                       innerOnChange={inputChange}
                       innerDefaultValue={userData.lastname}
                       text='Apellidos'
+                      nameID='lastname'
                       innerRef={apellidosInputEl}
                     />
                     <Input
@@ -414,25 +438,28 @@ const InfoUserEdit = () => {
                       innerDefaultValue={userData.phoneNumber}
                       text='Número Celular'
                       type='number'
+                      nameID='phoneNumber'
                       innerRef={numCelularInputEl}
                     />
                     <Input
-                      innerOnChange={inputChange}
-                      innerDefaultValue={userData.email}
+                      innerValue={userData.email}
                       innerReadOnly={true}
                       text='Correo'
                     />
                     <Input
-                      innerOnChange={inputChange}
-                      innerDefaultValue={userData.typeId}
+                      innerValue={userData.typeId}
                       innerReadOnly={true}
                       text='Tipo de Documento'
                     />
                     <Input
-                      innerOnChange={inputChange}
-                      innerDefaultValue={userData.id}
+                      innerValue={userData.id}
                       innerReadOnly={true}
                       text='Número de Documento'
+                    />
+                    <Input
+                      innerValue={(userData.status).charAt(0).toUpperCase() + (userData.status).slice(1)}
+                      innerReadOnly={true}
+                      text='Estado'
                     />
                     <a onClick={changePassword}>Cambiar contraseña</a>
                   </div>
@@ -445,8 +472,13 @@ const InfoUserEdit = () => {
                       width={220}
                     />
                   </div>
-                </>
-              </form>
+                </form>
+                <Button
+                  text={userData && userData.status === 'inactivo' ? 'Activar usuario' : 'Desactivar usuario'}
+                  width={220}
+                  innerOnClick={toggleUserStatus}
+                />
+              </>
             )
             : (
               <form className='edit-form' onSubmit={updateUserPassword}>
