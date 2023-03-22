@@ -480,17 +480,17 @@ const EditUser = () => {
                     innerRef={numCelularInputEl}
                   />
                   <Input
-                    innerValue={userData.email}
+                    innerDefaultValue={userData.email}
                     innerReadOnly={true}
                     text='Correo'
                   />
                   <Input
-                    innerValue={userData.typeId}
+                    innerDefaultValue={userData.typeId}
                     innerReadOnly={true}
                     text='Tipo de Documento'
                   />
                   <Input
-                    innerValue={userData.id}
+                    innerDefaultValue={userData.id}
                     innerReadOnly={true}
                     text='Número de Documento'
                   />

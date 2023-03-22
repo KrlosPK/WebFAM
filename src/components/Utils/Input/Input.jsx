@@ -15,10 +15,10 @@ const Input = ({
   multiple,
   accept
 }) => {
-  return innerValue
-    ? (
-      (
-        <div className='input-container'>
+  return (
+    <div className='input-container'>
+      {innerValue
+        ? (
           <input
             onChange={innerOnChange}
             className='input-login'
@@ -34,13 +34,8 @@ const Input = ({
             multiple={multiple}
             accept={accept}
           />
-          <label className='label-login'>{text}</label>
-        </div>
-      )
-    )
-    : (
-      (
-        <div className='input-container'>
+        )
+        : (
           <input
             onChange={innerOnChange}
             className='input-login'
@@ -56,10 +51,11 @@ const Input = ({
             multiple={multiple}
             accept={accept}
           />
-          <label className='label-login'>{text}</label>
-        </div>
-      )
-    )
+        )}
+
+      <label className='label-login'>{text}</label>
+    </div>
+  )
 }
 
 export { Input }
