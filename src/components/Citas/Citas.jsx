@@ -2,21 +2,28 @@ import './Citas.css'
 
 // ? Components
 import { Footer } from '../Home/Footer/Footer'
-import { getToken, Navbar, ResponsiveNav } from '../Utils'
+import { API_URL, getToken, MiniCard, Navbar, ResponsiveNav } from '../Utils'
+import { Button } from '@mui/material'
 
 // ? Hooks
 import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // ? Context
 import { SessionContext } from '../../context/SessionContext'
+
+// ? Libraries
 import jwtDecode from 'jwt-decode'
-import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Citas = () => {
   const { session, tempSession } = useContext(SessionContext)
 
   const [button, setButton] = useState(null)
   const navigate = useNavigate()
+
+  const [citasData, setCitasData] = useState([])
+  const [dates, setDates] = useState('pendientes')
 
   useEffect(() => {
     const token = getToken()
@@ -39,6 +46,19 @@ const Citas = () => {
 
     document.title = title
   }, [setTitle])
+
+  useEffect(() => {
+    axios
+      .get(API_URL('citas'))
+      .then(({ data }) => {
+        const { citas } = data
+        setCitasData(citas)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
   return (
     <>
       <ResponsiveNav
@@ -51,9 +71,44 @@ const Citas = () => {
         linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
-      <div className='citas'>
-        <h1>Citas</h1>
-      </div>
+      <section className='citas'>
+        <nav className='citas-nav'>
+          <ul className='citas-nav__ul'>
+            <Button variant='outlined' onClick={() => setDates('pendientes')} color='warning'>
+              Pendientes
+            </Button>
+            <Button variant='outlined' onClick={() => setDates('respondidas')} color='warning'>
+              Respondidas
+            </Button>
+          </ul>
+        </nav>
+        {dates === 'pendientes' &&
+          citasData.map((el) => {
+            return (
+              <article key={el.id_cita} className='cita'>
+                <MiniCard
+                  src='/default-avatar.png'
+                  alt='prueba'
+                  header={el.direccion}
+                  text={`Fecha de Creación: ${el.fecha_creacion.substring(0, 10)}`}
+                />
+              </article>
+            )
+          })}
+        {dates === 'respondidas' &&
+          citasData.map((el) => {
+            return (
+              <article key={el.id_cita} className='cita'>
+                <MiniCard
+                  src='/default-avatar.png'
+                  alt='prueba'
+                  header={el.direccion}
+                  text={`Fecha de Creación: ${el.fecha_creacion.substring(0, 10)}`}
+                />
+              </article>
+            )
+          })}
+      </section>
       <Footer />
     </>
   )

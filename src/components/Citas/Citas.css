@@ -1,0 +1,46 @@
+.citas {
+  border-radius: 15px;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+  left: 50%;
+  margin: 2rem 2rem 2rem 0;
+  max-width: 1400px;
+  position: relative;
+  translate: -50%;
+}
+.citas-nav {
+  border-radius: 15px 15px 0 0;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.3);
+}
+.citas-nav__ul {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 1rem;
+}
+.citas-nav__ul button {
+  font-size: 1rem;
+}
+
+.cita {
+  display: flex;
+  place-content: center;
+}
+
+@media (max-width: 768px) {
+  .citas-nav__ul {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .citas {
+    border: none;
+    border-radius: 0;
+    margin: 1rem 0;
+  }
+  .citas-nav {
+    border-radius: 0;
+  }
+}
