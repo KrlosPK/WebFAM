@@ -3,6 +3,9 @@
   flex-direction: column;
   position: relative;
 }
+.input-login:hover {
+  border: 1.7px solid #222;
+}
 .input-login:read-only {
   background-color: #eee;
   border: 1.7px solid gray;

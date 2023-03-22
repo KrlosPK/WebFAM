@@ -157,7 +157,7 @@
     grid-template-columns: 1fr;
     place-items: center;
   }
-  .service-aside button {
+  .service-aside .aside__modal-service {
     margin: 1rem auto 0;
   }
   .offers {
