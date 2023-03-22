@@ -1,9 +1,13 @@
 import './AboutUs.css'
+
+// ? Components
 import { API_URL, Button2, Card, getToken } from '../Utils'
+import { Link } from 'react-router-dom'
 
 // * Hooks
-import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+
+// ? Libraries
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
@@ -32,16 +36,23 @@ const AboutUs = () => {
           En FADEMET valoramos tus deseos, por lo que trabajamos arduamente día a día para ofrecerte
           servicios que se adapten a tus necesidades y sean de la más alta calidad.
         </p>
-        {idRol && idRol !== 2 && <Link to='/add-service'><Button2 text={'Crear servicio'}/></Link>}
+        {idRol && idRol !== 2 && (
+          <Link to='/add-service'>
+            <Button2 text={'Crear servicio'} />
+          </Link>
+        )}
         <div className='cards'>
           {services
-            ? services.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
-              <Link to={`/services/${id_servicio}`} key={id_servicio}>
-                <Card src={foto_servicio} title={nombre_servicio} description={resumen_servicio} />
-              </Link>
-            ))
-            : <div className='loader'>Cargando...</div>
-          }
+            ? (
+              services.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
+                <Link to={`/services/${id_servicio}`} key={id_servicio}>
+                  <Card src={foto_servicio} title={nombre_servicio} description={resumen_servicio} />
+                </Link>
+              ))
+            )
+            : (
+              <div className='loader'>Cargando...</div>
+            )}
         </div>
       </div>
     </section>

@@ -11,7 +11,6 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import emailjs from '@emailjs/browser'
-import Swal from 'sweetalert2'
 
 // ? Icons
 import { AiFillBackward } from 'react-icons/ai'
@@ -104,12 +103,12 @@ const RecoverPassword = () => {
   }
 
   const sendAlert = () => {
-    Swal.fire({
-      icon: 'success',
-      title: '¡Hemos enviado un correo a tu cuenta!',
-      text: 'Entra al enlace que te hemos enviado al correo para que restablezcas tu contraseña.',
-      footer: '<a href="/">Volver al inicio</a>'
-    })
+    toast.info(
+      '¡Hemos enviado un correo a tu cuenta con las instrucciones para que restablezcas tu contraseña!',
+      {
+        theme: 'colored'
+      }
+    )
   }
 
   // * Guardar token para enviar autenticación

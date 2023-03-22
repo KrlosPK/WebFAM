@@ -2,7 +2,6 @@ import './Home.css'
 
 // ? Hooks
 import { useState, useEffect, useContext } from 'react'
-import { ToastifyContext } from '../../context/ToastifyContext'
 
 // ? JSON
 import serviceData from '../../json/services.json'
@@ -10,6 +9,8 @@ import serviceData from '../../json/services.json'
 //* Libraries
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import jwtDecode from 'jwt-decode'
+import { toast, ToastContainer, Zoom } from 'react-toastify'
 
 //* Components
 import { Button, Button2, ResponsiveNav, Navbar, getToken } from '../Utils'
@@ -18,13 +19,15 @@ import { Provide } from './Provide/Provide'
 import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
 import { ServicesSection } from './ServicesSection/ServicesSection'
 import { Footer } from './Footer/Footer'
+
+// ? Context
+import { ToastifyContext } from '../../context/ToastifyContext'
 import { SessionContext } from '../../context/SessionContext'
-import jwtDecode from 'jwt-decode'
 
 const Home = () => {
   // ? Context
   const { session, tempSession } = useContext(SessionContext)
-  const { setToastify } = useContext(ToastifyContext)
+  const { toastify, setToastify } = useContext(ToastifyContext)
   const [idRol, setIdRol] = useState(null)
 
   useEffect(() => {
@@ -58,8 +61,18 @@ const Home = () => {
     !tempSession ? setButton(1) : setButton(2)
   }, [session, tempSession])
 
+  useEffect(() => {
+    console.log(toastify)
+    if (toastify === 'tokenInvalido') {
+      toast.error('¡El enlace ha expirado!', {
+        theme: 'colored'
+      })
+    }
+  }, [])
+
   return (
     <>
+      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
         linkText={
           idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']
