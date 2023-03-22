@@ -94,6 +94,8 @@ const EditUser = () => {
 
   const updateUserData = (e) => {
     e.preventDefault()
+    setDisabled(true)
+    if (disabled) return
 
     const nombre = e.target[0].value
     const apellidos = e.target[1].value
@@ -195,6 +197,7 @@ const EditUser = () => {
     e.preventDefault()
 
     setDisabled(true)
+    if (disabled) return
 
     const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
 
