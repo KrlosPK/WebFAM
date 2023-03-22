@@ -1,7 +1,7 @@
 import './Navbar.css'
 
 // ? Components
-import { Button, Button2, getToken } from '../../Utils'
+import { Button, Button2, getToken, setTokenData } from '../../Utils'
 
 //* Libraries
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -22,6 +22,7 @@ import { FaAngleDown } from 'react-icons/fa'
 const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [expanded, setExpanded] = useState(false)
   const dropdownRef = useRef(null)
+  const { session, tempSession } = useContext(SessionContext)
 
   const navigate = useNavigate()
 
@@ -58,11 +59,12 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
     getUserData()
 
     if (localStorage.getItem('session') === '') {
-      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=Domain:"fademetmontajes.netlify.app";'
+      document.cookie =
+        'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=Domain:"fademetmontajes.netlify.app";'
     }
 
-    if (!sessionStorage.getItem('session')) {
-      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=Domain:"fademetmontajes.netlify.app";'
+    if (!session && !tempSession) {
+      setTokenData('')
     }
 
     function handleClickOutside (event) {

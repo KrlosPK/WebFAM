@@ -52,10 +52,11 @@ const Citas = () => {
       .get(API_URL('citas'))
       .then(({ data }) => {
         const { citas } = data
-        console.log(citas)
         setCitasData(citas)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+      })
   }, [])
 
   return (

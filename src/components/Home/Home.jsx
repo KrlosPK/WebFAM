@@ -62,7 +62,6 @@ const Home = () => {
   }, [session, tempSession])
 
   useEffect(() => {
-    console.log(toastify)
     if (toastify === 'tokenInvalido') {
       toast.error('¡El enlace ha expirado!', {
         theme: 'colored'
