@@ -12,6 +12,7 @@ export { ResponsiveNav } from './Utils/ResponsiveNav/ResponsiveNav'
 export { Select } from './Utils/Select/Select'
 export { storage } from './Utils/firebase'
 export { verifyStatus } from './Utils/VerifyStatus/verifyStatus'
+export { inputChangeCheck } from './Utils/InputChange/InputChange'
 
 export { ProtectedRoute } from './ProtectedRoute'
 

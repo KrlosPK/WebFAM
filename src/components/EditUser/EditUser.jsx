@@ -12,7 +12,8 @@ import {
   getToken,
   ResponsiveNav,
   storage,
-  Button
+  Button,
+  inputChangeCheck
 } from '../Utils'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
@@ -30,6 +31,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { AiFillEdit } from 'react-icons/ai'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { uuidv4 } from '@firebase/util'
+import Swal from 'sweetalert2'
 
 const EditUser = () => {
   // ? Context
@@ -267,9 +269,7 @@ const EditUser = () => {
       })
   }
 
-  const inputChange = () => {
-    setDisabled(false)
-  }
+  const inputChange = (e) => inputChangeCheck(e, { userData, setDisabled })
 
   const [form, setForm] = useState('editUser')
 
@@ -354,30 +354,40 @@ const EditUser = () => {
   }
 
   const deleteUserPhoto = () => {
-    axios
-      .patch(API_URL(`editarUsuario/${userData.id_usuario}`), {
-        foto_perfil: ''
-      })
-      .then(async () => {
-        toast.success(
-          '¡Imagen eliminada correctamente! Algunos cambios aún no se verán reflejados',
-          {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¡No podrás revertir este cambio!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#aaa',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isDismissed) return
+      axios
+        .patch(API_URL(`editarUsuario/${userData.id_usuario}`), {
+          foto_perfil: '/default-avatar.png'
+        })
+        .then(async () => {
+          axios.post(API_URL(`nuevoToken/${userData.id_usuario}`)).then(({ data }) => {
+            const { token } = data
+            toast.success('¡Imagen eliminada correctamente! Algunos cambios aún no se verán reflejados', {
+              theme: 'colored'
+            })
+
+            setTokenData(token)
+
+            setTempPhoto(null)
+            getUserData()
+          })
+        })
+        .catch(() => {
+          toast.error('¡Hubo un error al eliminar la foto de perfil!', {
             theme: 'colored'
-          }
-        )
-        axios.post(API_URL(`nuevoToken/${userData.id_usuario}`)).then(({ data }) => {
-          const { token } = data
-
-          setTokenData(token)
-
-          getUserData()
+          })
         })
-      })
-      .catch(() => {
-        toast.error('¡Hubo un error al eliminar la foto de perfil!', {
-          theme: 'colored'
-        })
-      })
+    })
   }
 
   const [tempPhoto, setTempPhoto] = useState(null)
@@ -451,12 +461,14 @@ const EditUser = () => {
                     innerOnChange={inputChange}
                     innerDefaultValue={userData.name}
                     text='Nombre'
+                    nameID={'name'}
                     innerRef={nombreInputEl}
                   />
                   <Input
                     innerOnChange={inputChange}
                     innerDefaultValue={userData.lastname}
                     text='Apellidos'
+                    nameID={'lastname'}
                     innerRef={apellidosInputEl}
                   />
                   <Input
@@ -464,23 +476,21 @@ const EditUser = () => {
                     innerDefaultValue={userData.phoneNumber}
                     text='Número Celular'
                     type='number'
+                    nameID={'phoneNumber'}
                     innerRef={numCelularInputEl}
                   />
                   <Input
-                    innerOnChange={inputChange}
-                    innerDefaultValue={userData.email}
+                    innerValue={userData.email}
                     innerReadOnly={true}
                     text='Correo'
                   />
                   <Input
-                    innerOnChange={inputChange}
-                    innerDefaultValue={userData.typeId}
+                    innerValue={userData.typeId}
                     innerReadOnly={true}
                     text='Tipo de Documento'
                   />
                   <Input
-                    innerOnChange={inputChange}
-                    innerDefaultValue={userData.id}
+                    innerValue={userData.id}
                     innerReadOnly={true}
                     text='Número de Documento'
                   />

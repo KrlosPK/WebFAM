@@ -20,6 +20,9 @@
 .select-container__select:not(:placeholder-shown) ~ label {
   font-size: 13px;
 }
+.bold {
+  font-weight: bold;
+}
 .label-select {
   background-color: white;
   color: rgba(0, 0, 0, 0.7);
