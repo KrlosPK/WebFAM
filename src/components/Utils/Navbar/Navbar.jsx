@@ -1,18 +1,20 @@
 import './Navbar.css'
 
 // ? Components
-import { Button, Button2, getToken, setTokenData } from '../../Utils'
+import { Button, Button2, getToken } from '../../Utils'
+import { NavLink } from '../../NavLink'
 
 //* Libraries
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import jwtDecode from 'jwt-decode'
 
 //* Hooks
-import { useNavigate } from 'react-router-dom'
-import { NavLink } from '../../NavLink'
-import { SessionContext } from '../../../context/SessionContext'
 import { useContext, useState, useEffect, useRef } from 'react'
-import jwtDecode from 'jwt-decode'
+import { useNavigate } from 'react-router-dom'
+
+// ? Context
+import { SessionContext } from '../../../context/SessionContext'
 
 // ? Icons
 import { BiLogOut } from 'react-icons/bi'
@@ -22,7 +24,6 @@ import { FaAngleDown } from 'react-icons/fa'
 const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [expanded, setExpanded] = useState(false)
   const dropdownRef = useRef(null)
-  const { session, tempSession } = useContext(SessionContext)
 
   const navigate = useNavigate()
 
@@ -48,9 +49,6 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
         id_rol: data[0].id_rol,
         picture: data[0].foto_perfil
       })
-    } else {
-      const { given_name, picture } = decoded
-      setUserData({ ...userData, name: given_name, picture })
     }
   }
 
@@ -61,10 +59,6 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
     if (localStorage.getItem('session') === '') {
       document.cookie =
         'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=Domain:"fademetmontajes.netlify.app";'
-    }
-
-    if (!session && !tempSession) {
-      setTokenData('')
     }
 
     function handleClickOutside (event) {

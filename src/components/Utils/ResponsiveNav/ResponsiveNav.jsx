@@ -2,17 +2,22 @@ import './ResponsiveNav.css'
 
 // ? Components
 import { Button, Button2 } from '../'
+import { Link } from 'react-router-dom'
+import { getToken } from '../GetToken/GetToken'
 
 //* Hooks
 import { useState, useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+
+//* Context
 import { SessionContext } from '../../../context/SessionContext'
+
+//* Libraries
 import jwtDecode from 'jwt-decode'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 // ? Icons
 import { AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
 import { BiLogOut } from 'react-icons/bi'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [navIsClicked, setNavIsClicked] = useState('clicked')
@@ -56,11 +61,9 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
   const defaultImage = '/default-avatar.png'
 
   const getUserId = async () => {
-    const cookies = document.cookie
-    const tokenCookie = cookies.split('; ').find((cookie) => cookie.startsWith('token='))
-    let token = null
-    if (!tokenCookie) return null
-    token = tokenCookie.split('=')[1]
+    const token = getToken()
+
+    if (!token) return
 
     const decoded = await jwtDecode(token)
 
@@ -72,9 +75,6 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
         picture: data[0].foto_perfil,
         id_rol: data[0].id_rol
       })
-    } else {
-      const { given_name, picture } = decoded
-      setUserData({ ...userData, name: given_name, picture })
     }
   }
 
