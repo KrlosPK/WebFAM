@@ -1,11 +1,7 @@
 {
   "name": "webfam",
   "private": true,
-<<<<<<< HEAD
   "version": "0.21.1",
-=======
-  "version": "0.22.0",
->>>>>>> b0945f488d75603260d83194e21a034cae3b12a9
   "type": "module",
   "scripts": {
     "dev": "vite --open",
