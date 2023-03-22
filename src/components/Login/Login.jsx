@@ -8,7 +8,8 @@ import {
   validatePassword,
   API_URL,
   Navbar,
-  setTokenData
+  setTokenData,
+  verifyStatus
 } from '../Utils'
 
 // ? Hooks
@@ -152,8 +153,12 @@ const Login = () => {
       .then(({ data }) => {
         const { token } = data
 
-        setTokenData(token)
+        const estadoDataUser = jwtDecode(token)
+        const { estado } = estadoDataUser.data[0]
 
+        const status = verifyStatus(estado, { toast, setDisabled })
+        if (!status) return false
+        setTokenData(token)
         sessionStorage.setItem('session', 'true')
         setTempSession(true)
 
@@ -174,6 +179,11 @@ const Login = () => {
       .post(API_URL('comprobarCorreo'), { correo: email, tipo: 'google' })
       .then(({ data }) => {
         const { token } = data
+        const estadoDataUser = jwtDecode(token)
+        const { estado } = estadoDataUser.data[0]
+
+        const status = verifyStatus(estado, { toast, setDisabled })
+        if (!status) return false
         setTokenData(token)
         sessionStorage.setItem('session', 'true')
         setTempSession(true)

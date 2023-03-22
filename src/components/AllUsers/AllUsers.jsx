@@ -24,6 +24,7 @@ const AllUsers = () => {
 
   // * States
   const [button, setButton] = useState(null)
+  const [localRolId, setLocalRolId] = useState(null)
 
   useEffect(() => {
     !session ? setButton(1) : setButton(2)
@@ -45,6 +46,7 @@ const AllUsers = () => {
     if (!token) return navigate('/')
     const decode = jwtDecode(token)
     const { id_rol } = decode.data[0]
+    setLocalRolId(id_rol)
     if (id_rol === 2) return navigate('/')
   }, [])
 
@@ -87,9 +89,12 @@ const AllUsers = () => {
                 textColor='orange'
               />
               <div className="colleague__button-edit">
-                <Link to={`/info-user-edit/${id_usuario}`}>
-                  <Button2 key={id_usuario} text='Editar' width={150}/>
-                </Link>
+                {(localRolId && localRolId === 1) &&
+                (
+                  <Link to={`/info-user-edit/${id_usuario}`}>
+                    <Button2 key={id_usuario} text='Editar' width={150}/>
+                  </Link>
+                )}
               </div>
             </div>
           ))}
