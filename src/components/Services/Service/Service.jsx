@@ -1,23 +1,27 @@
 import './Service.css'
 
 // ? Components
-import { API_URL, Button, getToken, ModalService, Navbar, ResponsiveNav } from '../../Utils'
+import { API_URL, getToken, ModalService, Navbar, ResponsiveNav } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+
+// ? Context
 import { SessionContext } from '../../../context/SessionContext'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+
+// ? Libraries
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 
 // ? Icons
 import { AiOutlineCar } from 'react-icons/ai'
 import { GrHostMaintenance } from 'react-icons/gr'
 import { BsPatchCheck, BsCalendarEvent } from 'react-icons/bs'
-import jwtDecode from 'jwt-decode'
-import { ToastifyContext } from '../../../context/ToastifyContext'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
+import { ToastifyContext } from '../../../context/ToastifyContext'
 
 const Service = () => {
   // ? Context
@@ -138,12 +142,10 @@ const Service = () => {
             <h2 className='service-aside__title'>{service[0] && service[0].nombre_servicio}</h2>
             <p className='service-aside__desc'>{service[0] && service[0].descripcion_servicio}</p>
             <div className='aside__modal-service'>
-              <ModalService />
-              {idRol && idRol !== 2 && (
-                <Link to={`/edit-service/${serviceId}`}>
-                  <Button text={'Editar servicio'} height={'41px'} width={'220px'}/>
-                </Link>
-              )}
+              <ModalService
+                nombre_servicio={service[0] && service[0].nombre_servicio}
+                id_servicio={service[0] && service[0].id_servicio}
+              />
             </div>
           </aside>
         </div>

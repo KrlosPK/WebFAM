@@ -2,7 +2,7 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 
 // ? Components
-import { API_URL, getToken, Input } from '../../Utils'
+import { API_URL, getToken, Input, TextArea } from '../../Utils'
 import { Button2 } from '../Button2/Button2'
 
 // ? MUI
@@ -16,11 +16,13 @@ import { style } from './ModalStyle'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import { SessionContext } from '../../../context/SessionContext'
+import { toast, ToastContainer, Zoom } from 'react-toastify'
 
-const ModalService = () => {
+const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
   const nombreInputEl = useRef()
   const correoInputEl = useRef()
   const numCelularInputEl = useRef()
+  const descripcionCitaInputEl = useRef()
 
   const { session, tempSession } = useContext(SessionContext)
 
@@ -37,6 +39,7 @@ const ModalService = () => {
     const nombre = nombreInputEl.current.value
     const correo = correoInputEl.current.value
     const num_celular = numCelularInputEl.current.value
+    const descripcion_cita = descripcionCitaInputEl.current.value
 
     if (nombre.length === 0 || /^\s+$/.test(nombre)) {
       handleSnackbarClick()
@@ -73,10 +76,30 @@ const ModalService = () => {
       focusInput(numCelularInputEl)
       return
     }
-    axios.get(API_URL('citas')).then(({ data }) => {
-      const { citas } = data
-      console.log(citas[0])
-    })
+    axios
+      .post(API_URL('citas'), {
+        nombre_completo: nombre,
+        correo,
+        num_celular,
+        id_usuario: userData.id_usuario,
+        nombre_servicio,
+        descripcion_cita,
+        id_servicio
+      })
+      .then(() => {
+        setOpenModal(false)
+        toast.success('¡La cita se ha creado con éxito!', {
+          theme: 'colored'
+        })
+      })
+      .catch(() => {
+        toast.info(
+          '¡Hemos agendado una cita para ti y estaremos encantados de atender tu solicitud en breve! 😄',
+          {
+            theme: 'colored'
+          }
+        )
+      })
   }
 
   const getUserData = async () => {
@@ -108,6 +131,7 @@ const ModalService = () => {
 
   return (
     <div>
+      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <Button2 innerOnClick={handleModalClick} text='Solicitar' width={220} />
       <Modal
         open={openModal}
@@ -138,23 +162,30 @@ const ModalService = () => {
             </Typography>
             <div className='main-form'>
               <Input
-                text='Nombre'
-                innerDefaultValue={`${userData.name} ${userData.lastname}`}
+                text='Nombre *'
+                innerDefaultValue={
+                  userData.name && userData.lastname ? `${userData.name} ${userData.lastname}` : ''
+                }
                 innerRef={nombreInputEl}
                 nameID='nombre'
               />
               <Input
-                text='Correo'
+                text='Correo *'
                 innerDefaultValue={userData.email}
                 innerRef={correoInputEl}
                 nameID='correo'
               />
               <Input
-                text='Número de Celular'
+                text='Número de Celular *'
                 innerDefaultValue={userData.phoneNumber}
                 innerRef={numCelularInputEl}
                 nameID='num_celular'
                 type='number'
+              />
+              <TextArea
+                innerRef={descripcionCitaInputEl}
+                placeholder='Describe brevemente que quieres'
+                max={400}
               />
             </div>
             <Button onClick={validateForm} variant='outlined' color='warning'>

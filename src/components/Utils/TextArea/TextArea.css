@@ -1,0 +1,31 @@
+.textarea {
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  resize: none;
+}
+.textarea:hover {
+  border: 1.7px solid #222;
+}
+.textarea:focus {
+  border: 1.7px solid var(--icon-color);
+  outline: none;
+}
+.label-textarea {
+  color: rgba(0, 0, 0, 0.7);
+  left: 16px;
+  pointer-events: none;
+  position: absolute;
+  top: 10%;
+  transform: translateY(-50%);
+  transition: 250ms;
+}
+.textarea:read-only {
+  background-color: #eee;
+  border: 1.7px solid gray;
+  cursor: default;
+  outline: none;
+}
+.textarea:read-only:focus {
+  border: 1.7px solid gray;
+}

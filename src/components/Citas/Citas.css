@@ -15,12 +15,20 @@
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
   list-style: none;
   padding: 1rem;
 }
 .citas-nav__ul button {
   font-size: 1rem;
+}
+button.todas:nth-child(1) {
+  color: #fd8b26;
+}
+button.pendientes:nth-child(2) {
+  color: #fd8b26;
+}
+button.respondidas:nth-child(3) {
+  color: #fd8b26;
 }
 
 .cita {
@@ -38,7 +46,7 @@
   .citas {
     border: none;
     border-radius: 0;
-    margin: 1rem 0;
+    margin: 0.5rem 0 1rem;
   }
   .citas-nav {
     border-radius: 0;
