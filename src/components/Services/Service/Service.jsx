@@ -1,7 +1,7 @@
 import './Service.css'
 
 // ? Components
-import { API_URL, Button, getToken, ModalService, Navbar, ResponsiveNav } from '../../Utils'
+import { API_URL, Button, ModalService, Navbar, ResponsiveNav } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
@@ -17,6 +17,7 @@ import { ToastifyContext } from '../../../context/ToastifyContext'
 // ? Libraries
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
+import Cookies from 'js-cookie'
 
 // ? Icons
 import { AiOutlineCar } from 'react-icons/ai'
@@ -49,7 +50,7 @@ const Service = () => {
   }, [toastify])
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     if (token === null) return
 

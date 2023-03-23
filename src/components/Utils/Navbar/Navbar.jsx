@@ -12,16 +12,15 @@ import jwtDecode from 'jwt-decode'
 //* Hooks
 import { useState, useEffect, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 // ? Context
-// import { SessionContext } from '../../../context/SessionContext'
+import { SessionContext } from '../../../context/SessionContext'
 
 // ? Icons
 import { BiLogOut } from 'react-icons/bi'
 import { AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
 import { FaAngleDown } from 'react-icons/fa'
-import { SessionContext } from '../../../context/SessionContext'
-import Cookies from 'js-cookie'
 
 const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const { setSession } = useContext(SessionContext)

@@ -1,5 +1,5 @@
 // ? Components
-import { getToken, Navbar, ResponsiveNav } from '../Utils'
+import { Navbar, ResponsiveNav } from '../Utils'
 import { Footer } from '../Home/Footer/Footer'
 import { AboutUs } from '../AboutUs/AboutUs'
 
@@ -13,6 +13,7 @@ import { SessionContext } from '../../context/SessionContext'
 import jwtDecode from 'jwt-decode'
 import { ToastifyContext } from '../../context/ToastifyContext'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
+import Cookies from 'js-cookie'
 
 const Services = () => {
   // ? Context
@@ -35,7 +36,7 @@ const Services = () => {
   }, [])
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     if (!token) return
 

@@ -8,7 +8,6 @@ import {
   Input,
   Navbar,
   validatePassword,
-  setTokenData,
   ResponsiveNav,
   storage,
   Button,
@@ -29,11 +28,11 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { uuidv4 } from '@firebase/util'
 import Swal from 'sweetalert2'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import Cookies from 'js-cookie'
 
 // ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { AiFillEdit } from 'react-icons/ai'
-import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 
 const EditUser = () => {
@@ -185,7 +184,8 @@ const EditUser = () => {
           .then(({ data }) => {
             const { token } = data
 
-            setTokenData(token)
+            const domain = window.location.hostname
+            Cookies.set('token', token, { domain, path: '' })
 
             getUserData()
           })
@@ -348,7 +348,8 @@ const EditUser = () => {
         axios.post(API_URL(`nuevoToken/${userData.id_usuario}`)).then(({ data }) => {
           const { token } = data
 
-          setTokenData(token)
+          const domain = window.location.hostname
+          Cookies.set('token', token, { domain, path: '' })
 
           getUserData()
         })
@@ -386,7 +387,8 @@ const EditUser = () => {
               }
             )
 
-            setTokenData(token)
+            const domain = window.location.hostname
+            Cookies.set('token', token, { domain, path: '' })
 
             setTempPhoto(null)
             getUserData()

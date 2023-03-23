@@ -11,9 +11,10 @@ import { Footer } from '../Home/Footer/Footer'
 // * Libs
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 // * Utils
-import { API_URL, Button2, getToken, MiniCard, Navbar, ResponsiveNav } from '../Utils'
+import { API_URL, Button2, MiniCard, Navbar, ResponsiveNav } from '../Utils'
 
 // * Styles
 import './AllUsers.css'
@@ -37,7 +38,7 @@ const AllUsers = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
     if (!token) {
       navigate('/')
       return

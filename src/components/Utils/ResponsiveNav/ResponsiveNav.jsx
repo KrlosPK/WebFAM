@@ -3,7 +3,6 @@ import './ResponsiveNav.css'
 // ? Components
 import { Button, Button2 } from '../'
 import { Link, useNavigate } from 'react-router-dom'
-import { getToken } from '../GetToken/GetToken'
 
 //* Hooks
 import { useState, useContext, useEffect } from 'react'
@@ -14,11 +13,11 @@ import { SessionContext } from '../../../context/SessionContext'
 //* Libraries
 import jwtDecode from 'jwt-decode'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import Cookies from 'js-cookie'
 
 // ? Icons
 import { AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
 import { BiLogOut } from 'react-icons/bi'
-import Cookies from 'js-cookie'
 
 const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [navIsClicked, setNavIsClicked] = useState('clicked')
@@ -62,7 +61,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
   const defaultImage = '/default-avatar.png'
 
   const getUserId = async () => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     if (!token) return
 

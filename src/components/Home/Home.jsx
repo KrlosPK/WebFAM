@@ -11,9 +11,10 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import jwtDecode from 'jwt-decode'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
+import Cookies from 'js-cookie'
 
 //* Components
-import { Button, Button2, ResponsiveNav, Navbar, getToken } from '../Utils'
+import { Button, Button2, ResponsiveNav, Navbar } from '../Utils'
 import { Team } from './Team/Team'
 import { Provide } from './Provide/Provide'
 import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
@@ -22,7 +23,6 @@ import { Footer } from './Footer/Footer'
 
 // ? Context
 import { ToastifyContext } from '../../context/ToastifyContext'
-// import Cookies from 'js-cookie'
 import { SessionContext } from '../../context/SessionContext'
 
 const Home = () => {
@@ -36,7 +36,7 @@ const Home = () => {
   }, [setToastify])
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     if (!token) return
 
