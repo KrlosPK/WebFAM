@@ -22,7 +22,7 @@ const Citas = () => {
   const [button, setButton] = useState(null)
   const navigate = useNavigate()
 
-  const [citasData, setCitasData] = useState([])
+  const [citasData, setCitasData] = useState(null)
   const [datesState, setDatesState] = useState('pendientes')
 
   useEffect(() => {
@@ -45,22 +45,27 @@ const Citas = () => {
     document.title = 'FADEMET Montajes | Citas'
   }, [])
 
+  async function fetchPhotos (citas) {
+    const updatedCitas = []
+    for (const cita of citas) {
+      const { id_usuario, id_servicio } = cita
+      const [userPhotoResponse, servicePhotoResponse] = await Promise.all([
+        axios.get(API_URL(`usuarios/${id_usuario}`)),
+        axios.get(API_URL(`servicios/${id_servicio}`))
+      ])
+      const { foto_perfil } = userPhotoResponse.data.user[0]
+      const { foto_servicio } = servicePhotoResponse.data.service[0]
+      updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
+    }
+    return updatedCitas
+  }
+
   useEffect(() => {
     axios
       .get(API_URL('citas'))
       .then(({ data }) => {
         const { citas } = data
-        setCitasData(citas)
-        const updatedCitas = []
-        const fetchUserPhotos = citas.map(async (cita) => {
-          const { id_usuario, id_servicio } = cita
-          const userPhotoResponse = await axios.get(API_URL(`usuarios/${id_usuario}`))
-          const { foto_perfil } = userPhotoResponse.data.user[0]
-          const servicePhotoResponse = await axios.get(API_URL(`servicios/${id_servicio}`))
-          const { foto_servicio } = servicePhotoResponse.data.service[0]
-          updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
-        })
-        Promise.all(fetchUserPhotos).then(() => {
+        fetchPhotos(citas).then((updatedCitas) => {
           setCitasData(updatedCitas)
         })
       })
@@ -68,6 +73,30 @@ const Citas = () => {
         throw new Error('Error al obtener las citas')
       })
   }, [])
+
+  // useEffect(() => {
+  //   axios
+  //     .get(API_URL('citas'))
+  //     .then(({ data }) => {
+  //       const { citas } = data
+  //       setCitasData(citas)
+  //       const updatedCitas = []
+  //       const fetchUserPhotos = citas.map(async (cita) => {
+  //         const { id_usuario, id_servicio } = cita
+  //         const userPhotoResponse = await axios.get(API_URL(`usuarios/${id_usuario}`))
+  //         const { foto_perfil } = userPhotoResponse.data.user[0]
+  //         const servicePhotoResponse = await axios.get(API_URL(`servicios/${id_servicio}`))
+  //         const { foto_servicio } = servicePhotoResponse.data.service[0]
+  //         updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
+  //       })
+  //       Promise.all(fetchUserPhotos).then(() => {
+  //         setCitasData(updatedCitas)
+  //       })
+  //     })
+  //     .catch(() => {
+  //       throw new Error('Error al obtener las citas')
+  //     })
+  // }, [])
 
   return (
     <>
@@ -113,7 +142,9 @@ const Citas = () => {
             </Button>
           </ul>
         </nav>
-        {datesState === 'todas' &&
+        {!citasData && <div className='citas-loader'>Cargando...</div>}
+        {citasData &&
+          datesState === 'todas' &&
           citasData.map(
             ({
               id_cita,
@@ -147,7 +178,8 @@ const Citas = () => {
               )
             }
           )}
-        {datesState === 'pendientes' &&
+        {citasData &&
+          datesState === 'pendientes' &&
           citasData
             .filter(({ estado }) => estado === 'pendiente')
             .map(
@@ -183,7 +215,8 @@ const Citas = () => {
                 )
               }
             )}
-        {datesState === 'respondidas' &&
+        {citasData &&
+          datesState === 'respondidas' &&
           citasData
             .filter(({ estado }) => estado === 'respondido')
             .map(
