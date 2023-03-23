@@ -1,7 +1,6 @@
 import './CitasUser.css'
 
 // ? Components
-// import { Footer } from '../Home/Footer/Footer'
 import { API_URL, Navbar, ResponsiveNav } from '../../Utils'
 import { useContext, useEffect, useState } from 'react'
 import { SessionContext } from '../../../context/SessionContext'
@@ -28,6 +27,7 @@ const CitasUser = () => {
   const { session } = useContext(SessionContext)
 
   const [button, setButton] = useState(null)
+  const [userDates, setUserDates] = useState(null)
 
   const navigate = useNavigate()
 
@@ -43,39 +43,37 @@ const CitasUser = () => {
     }
     const decoded = jwtDecode(token)
     const { id_usuario } = decoded.data[0]
-    axios.get(API_URL(`citasUsuario/${id_usuario}`))
-      .then(({ data }) => {
-        const { cita } = data
-        console.log(cita)
-        mapSchedule(cita)
-      })
+    axios.get(API_URL(`citasUsuario/${id_usuario}`)).then(({ data }) => {
+      const { cita } = data
+      setUserDates(cita[0])
+      mapSchedule(cita)
+    })
   }, [])
 
   // Mapear todas las citas en una funcion y luego llamarla en el return
-  const mapSchedule = (schedule) => {
-    console.log('hola')
-  }
+  const mapSchedule = (schedule) => {}
 
   return (
     <>
       <ResponsiveNav
         // linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios', 'Mis Agendas']}
         // linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']}
-        linkUrl={['/', '/services', '/mis-citas']}
         linkText={['Inicio', 'Servicios', 'Mis Agendas']}
+        linkUrl={['/', '/services', '/mis-citas']}
         renderButtons={button}
       />
       <Navbar
         // linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios', 'Mis Agendas']}
         // linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']}
-        linkUrl={['/', '/services', '/mis-citas']}
         linkText={['Inicio', 'Servicios', 'Mis Agendas']}
+        linkUrl={['/', '/services', '/mis-citas']}
         renderButtons={button}
       />
+      {!userDates && <div className='citas-loader'>Cargando...</div>}
       <section className='mis-citas'>
-        <h1 className='title__center'>Estas son tus citas</h1>
+        <h1 className='title__center'>Estas son tus citas:</h1>
       </section>
-      <Footer/>
+      <Footer />
     </>
   )
 }
