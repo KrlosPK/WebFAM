@@ -9,13 +9,15 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useContext, useEffect, useState } from 'react'
 import { SessionContext } from '../../../context/SessionContext'
 import { useNavigate, useParams } from 'react-router-dom'
+
+// ? Libraries
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 
 // ? Icons
 import { AiOutlineCar } from 'react-icons/ai'
 import { GrHostMaintenance } from 'react-icons/gr'
 import { BsPatchCheck, BsCalendarEvent } from 'react-icons/bs'
-import jwtDecode from 'jwt-decode'
 
 const Service = () => {
   // ? Context
