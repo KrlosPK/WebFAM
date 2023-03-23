@@ -11,6 +11,8 @@ const Card = ({
   description,
   titleColor,
   descriptionColor,
+  titleFont,
+  descriptionFont,
   size = '100%',
   src,
   alt = 'Servicio que ofrece Fademet Montajes'
@@ -30,10 +32,10 @@ const Card = ({
           alt={alt}
         />
       </picture>
-      <h2 className='card__title' style={{ color: titleColor }}>
+      <h2 className='card__title' style={{ color: titleColor, fontFamily: titleFont }}>
         {title}
       </h2>
-      <p className='card__text' style={{ color: descriptionColor }}>
+      <p className='card__text' style={{ color: descriptionColor, fontFamily: descriptionFont }}>
         {description}
       </p>
     </div>

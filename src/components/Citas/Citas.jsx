@@ -2,12 +2,12 @@ import './Citas.css'
 
 // ? Components
 import { Footer } from '../Home/Footer/Footer'
-import { API_URL, getToken, MiniCard, Navbar, ResponsiveNav } from '../Utils'
+import { API_URL, getToken, LongCard, Navbar, ResponsiveNav } from '../Utils'
 import { Button } from '@mui/material'
 
 // ? Hooks
 import { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // ? Context
 import { SessionContext } from '../../context/SessionContext'
@@ -23,7 +23,8 @@ const Citas = () => {
   const navigate = useNavigate()
 
   const [citasData, setCitasData] = useState([])
-  const [dates, setDates] = useState('pendientes')
+  // const [servicePhoto, setServicePhoto] = useState(null)
+  const [datesState, setDatesState] = useState('pendientes')
 
   useEffect(() => {
     const token = getToken()
@@ -53,9 +54,21 @@ const Citas = () => {
       .then(({ data }) => {
         const { citas } = data
         setCitasData(citas)
+        const updatedCitas = []
+        const fetchUserPhotos = citas.map(async (cita) => {
+          const { id_usuario, id_servicio } = cita
+          const userPhotoResponse = await axios.get(API_URL(`usuarios/${id_usuario}`))
+          const { foto_perfil } = userPhotoResponse.data.user[0]
+          const servicePhotoResponse = await axios.get(API_URL(`servicios/${id_servicio}`))
+          const { foto_servicio } = servicePhotoResponse.data.service[0]
+          updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
+        })
+        Promise.all(fetchUserPhotos).then(() => {
+          setCitasData(updatedCitas)
+        })
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
+        throw new Error('Error al obtener las citas')
       })
   }, [])
 
@@ -74,40 +87,120 @@ const Citas = () => {
       <section className='citas'>
         <nav className='citas-nav'>
           <ul className='citas-nav__ul'>
-            <Button variant='outlined' onClick={() => setDates('pendientes')} color='warning'>
+            <Button variant='text' onClick={() => setDatesState('todas')} color='warning'>
+              Todas
+            </Button>
+            <Button variant='text' onClick={() => setDatesState('pendientes')} color='warning'>
               Pendientes
             </Button>
-            <Button variant='outlined' onClick={() => setDates('respondidas')} color='warning'>
+            <Button variant='text' onClick={() => setDatesState('respondidas')} color='warning'>
               Respondidas
             </Button>
           </ul>
         </nav>
-        {dates === 'pendientes' &&
-          citasData.map((el) => {
-            return (
-              <article key={el.id_cita} className='cita'>
-                <MiniCard
-                  src='/default-avatar.png'
-                  alt='prueba'
-                  header={el.direccion}
-                  text={`Fecha de Creación: ${el.fecha_creacion.substring(0, 10)}`}
-                />
-              </article>
-            )
-          })}
-        {dates === 'respondidas' &&
-          citasData.map((el) => {
-            return (
-              <article key={el.id_cita} className='cita'>
-                <MiniCard
-                  src='/default-avatar.png'
-                  alt='prueba'
-                  header={el.direccion}
-                  text={`Fecha de Creación: ${el.fecha_creacion.substring(0, 10)}`}
-                />
-              </article>
-            )
-          })}
+        {datesState === 'todas' &&
+          citasData.map(
+            ({
+              id_cita,
+              nombre_completo,
+              correo,
+              num_celular,
+              nombre_servicio,
+              descripcion_cita,
+              fecha_creacion_cita,
+              hora_creacion_cita,
+              estado,
+              userPhoto,
+              servicePhoto
+            }) => {
+              return (
+                <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
+                  <LongCard
+                    foto_usuario={userPhoto || '/default-avatar.png'}
+                    nombre_completo={nombre_completo}
+                    correo={correo}
+                    num_celular={`+57 ${num_celular}`}
+                    nombre_servicio={nombre_servicio}
+                    descripcion_cita={descripcion_cita || 'Sin descripción'}
+                    foto_servicio={servicePhoto || '/techo-metálico.jpg'}
+                    fecha_servicio={fecha_creacion_cita.substring(0, 10)}
+                    hora_servicio={hora_creacion_cita.substring(0, 5)}
+                    estado_servicio={estado}
+                  />
+                </Link>
+              )
+            }
+          )}
+        {datesState === 'pendientes' &&
+          citasData
+            .filter(({ estado }) => estado === 'pendiente')
+            .map(
+              ({
+                id_cita,
+                nombre_completo,
+                correo,
+                num_celular,
+                nombre_servicio,
+                descripcion_cita,
+                fecha_creacion_cita,
+                hora_creacion_cita,
+                estado,
+                userPhoto,
+                servicePhoto
+              }) => {
+                return (
+                  <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
+                    <LongCard
+                      foto_usuario={userPhoto || '/default-avatar.png'}
+                      nombre_completo={nombre_completo}
+                      correo={correo}
+                      num_celular={`+57 ${num_celular}`}
+                      nombre_servicio={nombre_servicio}
+                      descripcion_cita={descripcion_cita || 'Sin descripción'}
+                      foto_servicio={servicePhoto || '/techo-metálico.jpg'}
+                      fecha_servicio={fecha_creacion_cita.substring(0, 10)}
+                      hora_servicio={hora_creacion_cita.substring(0, 5)}
+                      estado_servicio={estado}
+                    />
+                  </Link>
+                )
+              }
+            )}
+        {datesState === 'respondidas' &&
+          citasData
+            .filter(({ estado }) => estado === 'respondido')
+            .map(
+              ({
+                id_cita,
+                nombre_completo,
+                correo,
+                num_celular,
+                nombre_servicio,
+                descripcion_cita,
+                fecha_creacion_cita,
+                hora_creacion_cita,
+                estado,
+                userPhoto,
+                servicePhoto
+              }) => {
+                return (
+                  <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
+                    <LongCard
+                      foto_usuario={userPhoto || '/default-avatar.png'}
+                      nombre_completo={nombre_completo}
+                      correo={correo}
+                      num_celular={`+57 ${num_celular}`}
+                      nombre_servicio={nombre_servicio}
+                      descripcion_cita={descripcion_cita || 'Sin descripción'}
+                      foto_servicio={servicePhoto || '/techo-metálico.jpg'}
+                      fecha_servicio={fecha_creacion_cita.substring(0, 10)}
+                      hora_servicio={hora_creacion_cita.substring(0, 5)}
+                      estado_servicio={estado}
+                    />
+                  </Link>
+                )
+              }
+            )}
       </section>
       <Footer />
     </>

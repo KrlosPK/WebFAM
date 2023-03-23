@@ -12,6 +12,8 @@ const MiniCard = ({
   alt,
   header,
   text,
+  isSecoundaryText = false,
+  secoundaryText,
   animation,
   textColor = 'black',
   borderRadius = '0',
@@ -75,9 +77,14 @@ const MiniCard = ({
           />
         )}
       <div className='mini-card__header'>{header}</div>
-      <div className='mini-card__text' style={{ color: textColor }}>
+      <div className='mini-card__text' style={{ color: textColor, userSelect: 'all' }}>
         {text}
       </div>
+      {isSecoundaryText && (
+        <div className='mini-card__text' style={{ color: textColor, userSelect: 'all' }}>
+          {secoundaryText}
+        </div>
+      )}
     </div>
   )
 }
