@@ -163,7 +163,9 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
             <div className='main-form'>
               <Input
                 text='Nombre *'
-                innerDefaultValue={`${userData.name} ${userData.lastname}`}
+                innerDefaultValue={
+                  userData.name && userData.lastname ? `${userData.name} ${userData.lastname}` : ''
+                }
                 innerRef={nombreInputEl}
                 nameID='nombre'
               />
