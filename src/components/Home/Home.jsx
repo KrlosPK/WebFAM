@@ -71,15 +71,39 @@ const Home = () => {
     <>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
-        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios', 'Mis Agendas']}
-        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']}
+        linkText={
+          idRol && idRol !== 2
+            ? ['Inicio', 'Agendas', 'Servicios']
+            : !session
+              ? ['Inicio', 'Servicios']
+              : ['Inicio', 'Servicios', 'Mis Agendas']
+        }
+        linkUrl={
+          idRol && idRol !== 2
+            ? ['/', '/citas', '/services']
+            : !session
+              ? ['/', '/services']
+              : ['/', '/services', '/mis-citas']
+        }
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
       />
       <Navbar
-        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios', 'Mis Agendas']}
-        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']}
+        linkText={
+          idRol && idRol !== 2
+            ? ['Inicio', 'Agendas', 'Servicios']
+            : !session
+              ? ['Inicio', 'Servicios']
+              : ['Inicio', 'Servicios', 'Mis Agendas']
+        }
+        linkUrl={
+          idRol && idRol !== 2
+            ? ['/', '/citas', '/services']
+            : !session
+              ? ['/', '/services']
+              : ['/', '/services', '/mis-citas']
+        }
         anchordText={['Preguntas Frecuentes']}
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}

@@ -18,6 +18,9 @@ const AboutUs = () => {
 
   useEffect(() => {
     const token = Cookies.get('token')
+
+    if (!token) return
+
     if (token !== null) {
       const decode = jwtDecode(token)
       setIdRol(decode.data[0].id_rol)
