@@ -47,7 +47,8 @@ const AllUsers = () => {
     const decode = jwtDecode(token)
     const { id_rol } = decode.data[0]
     setLocalRolId(id_rol)
-    if (id_rol === 2) return navigate('/')
+    if (id_rol !== 2) return
+    navigate('/')
   }, [])
 
   // ? Get users

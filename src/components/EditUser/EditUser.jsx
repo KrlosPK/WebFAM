@@ -272,7 +272,7 @@ const EditUser = () => {
       })
   }
 
-  const inputChange = (e) => inputChangeCheck(e, { userData, setDisabled })
+  const inputChange = (e) => inputChangeCheck(e, { data: userData, setDisabled })
 
   const [form, setForm] = useState('editUser')
 

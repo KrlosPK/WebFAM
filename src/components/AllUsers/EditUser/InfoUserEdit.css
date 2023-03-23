@@ -1,0 +1,18 @@
+p.info-alert-edit-user {
+  font-size: 13px;
+}
+.mb-5 {
+  margin-bottom: 5rem;
+}
+.edit-photos-service {
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .service-form {
+    padding: 0 3rem;
+  }
+  .edit-photos-service {
+    flex-direction: column;
+  }
+}

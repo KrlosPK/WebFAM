@@ -41,11 +41,13 @@ const InfoUserEdit = () => {
 
   // * Obtener usuario para cambiar sus datos
   const [userData, setUserData] = useState(null)
+  const [rolUsuario, setRolUsuario] = useState(null)
 
   const getUserData = () => {
     axios.get(API_URL(`usuarios/${id}`, { id_usuario: id }))
       .then(({ data }) => {
         const [infoUser] = data.user
+        setRolUsuario(infoUser.id_rol)
         setUserData({
           id_usuario: infoUser.id_usuario,
           name: infoUser.nombre,
@@ -312,9 +314,7 @@ const InfoUserEdit = () => {
           }
         )
         userImageEl.current.value = ''
-        axios.post(API_URL(`nuevoToken/${userData.id_usuario}`)).then(({ data }) => {
-          getUserData()
-        })
+        getUserData()
       })
       .catch(() => {
         toast.error('¡Hubo un error al actualizar la foto de perfil!', {
@@ -348,7 +348,7 @@ const InfoUserEdit = () => {
       })
   }
 
-  const inputChange = (e) => inputChangeCheck(e, { userData, setDisabled })
+  const inputChange = (e) => inputChangeCheck(e, { data: userData, setDisabled })
 
   const selectChange = (e) => {
     const { value, name } = e.target
@@ -437,18 +437,20 @@ const InfoUserEdit = () => {
               <>
                 <form className='edit-form' onSubmit={updateUserData}>
                   <div className='edit-main-form main-form'>
-                    <Select
-                      innerDefaultValue={userData.rol}
-                      innerName='rol'
-                      text='Rol del usuario'
-                      value={[1, 2, 3, 4]}
-                      option={['Administrador', 'Cliente', 'Soldador', 'RRHH']}
-                      innerRef={rolInputEl}
-                      bold={'true'}
-                      font={'12px'}
-                      padding={'0 0 0 11px'}
-                      innerOnChange={selectChange}
-                    />
+                    {userData.id_usuario !== 1 && (
+                      <Select
+                        innerDefaultValue={rolUsuario || 2}
+                        innerName='rol'
+                        text='Rol del usuario'
+                        value={[1, 2, 3, 4]}
+                        option={['Administrador', 'Cliente', 'Soldador', 'RRHH']}
+                        innerRef={rolInputEl}
+                        bold={'true'}
+                        font={'12px'}
+                        padding={'0 0 0 11px'}
+                        innerOnChange={selectChange}
+                      />
+                    )}
                     <Input
                       innerOnChange={inputChange}
                       innerDefaultValue={userData.name}

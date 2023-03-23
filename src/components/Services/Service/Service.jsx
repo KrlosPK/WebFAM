@@ -1,14 +1,14 @@
 import './Service.css'
 
 // ? Components
-import { API_URL, getToken, ModalService, Navbar, ResponsiveNav } from '../../Utils'
+import { API_URL, Button, getToken, ModalService, Navbar, ResponsiveNav } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
 import { SessionContext } from '../../../context/SessionContext'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 // ? Icons
@@ -16,10 +16,13 @@ import { AiOutlineCar } from 'react-icons/ai'
 import { GrHostMaintenance } from 'react-icons/gr'
 import { BsPatchCheck, BsCalendarEvent } from 'react-icons/bs'
 import jwtDecode from 'jwt-decode'
+import { ToastifyContext } from '../../../context/ToastifyContext'
+import { toast, ToastContainer, Zoom } from 'react-toastify'
 
 const Service = () => {
   // ? Context
   const { session, tempSession } = useContext(SessionContext)
+  const { toastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
   const [idRol, setIdRol] = useState(null)
@@ -32,6 +35,14 @@ const Service = () => {
   const [service, setService] = useState({})
 
   const { serviceId } = useParams()
+
+  useEffect(() => {
+    if (toastify === 'serviceModified') {
+      toast.success('¡Servicio modificado con éxito!', {
+        theme: 'colored'
+      })
+    }
+  }, [toastify])
 
   useEffect(() => {
     const token = getToken()
@@ -97,6 +108,7 @@ const Service = () => {
 
   return (
     <>
+      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
         linkText={
           idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']
@@ -127,6 +139,11 @@ const Service = () => {
             <p className='service-aside__desc'>{service[0] && service[0].descripcion_servicio}</p>
             <div className='aside__modal-service'>
               <ModalService />
+              {idRol && idRol !== 2 && (
+                <Link to={`/edit-service/${serviceId}`}>
+                  <Button text={'Editar servicio'} height={'41px'} width={'220px'}/>
+                </Link>
+              )}
             </div>
           </aside>
         </div>
