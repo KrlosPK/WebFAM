@@ -418,13 +418,13 @@ const EditUser = () => {
     <section>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
-        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios', 'Mis Agendas']}
+        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']}
         renderButtons={button}
       />
       <Navbar
-        linkText={idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']}
-        linkUrl={idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
+        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios', 'Mis Agendas']}
+        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']}
         renderButtons={button}
       />
       <section className='edit-user'>
