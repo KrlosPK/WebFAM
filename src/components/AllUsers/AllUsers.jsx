@@ -29,15 +29,11 @@ const AllUsers = () => {
   useEffect(() => {
     !session ? setButton(1) : setButton(2)
     !tempSession ? setButton(1) : setButton(2)
-  }, [])
 
-  // * Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes | Usuarios')
-  useEffect(() => {
-    // ? Scroll to top
     window.scrollTo(0, 0)
-    document.title = title
-  }, [setTitle])
+
+    document.title = 'FADEMET Montajes | Usuarios'
+  }, [])
 
   const navigate = useNavigate()
 

@@ -2,6 +2,7 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
+// * Context
 import { SessionContext } from '../../../context/SessionContext'
 import { ToastifyContext } from '../../../context/ToastifyContext'
 
@@ -13,7 +14,16 @@ import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 
 // * Utils
-import { API_URL, Button2, getToken, Input, inputChangeCheck, Navbar, ResponsiveNav, storage } from '../../Utils'
+import {
+  API_URL,
+  Button2,
+  getToken,
+  Input,
+  inputChangeCheck,
+  Navbar,
+  ResponsiveNav,
+  storage
+} from '../../Utils'
 
 const EditService = () => {
   // * Navigate
@@ -101,7 +111,10 @@ const EditService = () => {
       focusInput(resumen_servicioInputEl)
       setDisabled(false)
       return
-    } else if (foto_servicioInputEl.current.files[0] && foto_servicioInputEl.current.files[0].type.split('/')[0] !== 'image') {
+    } else if (
+      foto_servicioInputEl.current.files[0] &&
+      foto_servicioInputEl.current.files[0].type.split('/')[0] !== 'image'
+    ) {
       toast.error('¡El formato de la foto debe ser jpg, jpeg o png!', {
         theme: 'colored'
       })
@@ -139,21 +152,13 @@ const EditService = () => {
   }, [serviceId])
 
   useEffect(() => {
-    // ? Scroll to top
-    window.scrollTo(0, 0)
-
     !session ? setButton(1) : setButton(2)
     !tempSession ? setButton(1) : setButton(2)
-  }, [session, tempSession])
 
-  // * Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes | Crear Servicio')
-  useEffect(() => {
-    // ? Scroll to top
     window.scrollTo(0, 0)
 
-    document.title = title
-  }, [setTitle])
+    document.title = 'FADEMET Montajes | Crear Servicio'
+  }, [])
 
   // * Validate if user is admin
   useEffect(() => {
@@ -321,10 +326,18 @@ const EditService = () => {
                 innerOnChange={handleFileInputChange}
                 multiple='multiple'
               />
-              <p className='info-alert-edit-user'>Nota: Si al ingresar nuevas fotos, no ingresas las fotos anteriores, se perderán</p>
+              <p className='info-alert-edit-user'>
+                Nota: Si al ingresar nuevas fotos, no ingresas las fotos anteriores, se perderán
+              </p>
             </div>
             <div className='send'>
-              <Button2 text={'Editar'} width={150} disable={disabled} animation={false} textDisabled={showTextDisabled} />
+              <Button2
+                text={'Editar'}
+                width={150}
+                disable={disabled}
+                animation={false}
+                textDisabled={showTextDisabled}
+              />
             </div>
           </form>
           <div className='flex mb-5 edit-photos-service'>

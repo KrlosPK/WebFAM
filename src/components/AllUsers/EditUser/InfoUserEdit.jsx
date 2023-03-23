@@ -2,7 +2,19 @@ import './InfoUserEdit.css'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SessionContext } from '../../../context/SessionContext'
-import { API_URL, Button, Button2, getToken, Input, inputChangeCheck, Navbar, ResponsiveNav, Select, storage, validatePassword } from '../../Utils'
+import {
+  API_URL,
+  Button,
+  Button2,
+  getToken,
+  Input,
+  inputChangeCheck,
+  Navbar,
+  ResponsiveNav,
+  Select,
+  storage,
+  validatePassword
+} from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
@@ -44,31 +56,25 @@ const InfoUserEdit = () => {
   const [rolUsuario, setRolUsuario] = useState(null)
 
   const getUserData = () => {
-    axios.get(API_URL(`usuarios/${id}`, { id_usuario: id }))
-      .then(({ data }) => {
-        const [infoUser] = data.user
-        setRolUsuario(infoUser.id_rol)
-        setUserData({
-          id_usuario: infoUser.id_usuario,
-          name: infoUser.nombre,
-          lastname: infoUser.apellidos,
-          email: infoUser.correo,
-          phoneNumber: infoUser.num_celular,
-          id: infoUser.num_documento,
-          typeId: infoUser.tipo_documento,
-          picture: infoUser.foto_perfil,
-          status: infoUser.estado,
-          rol: `rol ${infoUser.id_rol}`
-        })
+    axios.get(API_URL(`usuarios/${id}`, { id_usuario: id })).then(({ data }) => {
+      const [infoUser] = data.user
+      setRolUsuario(infoUser.id_rol)
+      setUserData({
+        id_usuario: infoUser.id_usuario,
+        name: infoUser.nombre,
+        lastname: infoUser.apellidos,
+        email: infoUser.correo,
+        phoneNumber: infoUser.num_celular,
+        id: infoUser.num_documento,
+        typeId: infoUser.tipo_documento,
+        picture: infoUser.foto_perfil,
+        status: infoUser.estado,
+        rol: `rol ${infoUser.id_rol}`
       })
+    })
   }
 
   useEffect(() => id && getUserData(), [id])
-
-  useEffect(() => {
-    !session ? setButton(1) : setButton(2)
-    !tempSession ? setButton(1) : setButton(2)
-  }, [session, tempSession])
 
   const navigate = useNavigate()
 
@@ -81,13 +87,15 @@ const InfoUserEdit = () => {
   }, [])
 
   // ! Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes | Editar usuario')
 
   useEffect(() => {
-    // ? Scroll to top
+    !session ? setButton(1) : setButton(2)
+    !tempSession ? setButton(1) : setButton(2)
+
     window.scrollTo(0, 0)
-    document.title = title
-  }, [setTitle])
+
+    document.title = 'FADEMET Montajes | Editar usuario'
+  }, [])
 
   const [tempPhoto, setTempPhoto] = useState(null)
   const userImageEl = useRef(null)
@@ -382,15 +390,13 @@ const InfoUserEdit = () => {
   return (
     <>
       <ResponsiveNav
-        linkText={
-          ['Inicio', 'Agendas', 'Servicios']
-        }
-        linkUrl= {['/', '/citas', '/services']}
+        linkText={['Inicio', 'Agendas', 'Servicios']}
+        linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
       <Navbar
         linkText={['Inicio', 'Agendas', 'Servicios']}
-        linkUrl= {['/', '/citas', '/services']}
+        linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
@@ -413,7 +419,9 @@ const InfoUserEdit = () => {
           <form className='overlay-img' onSubmit={updateUserPhoto}>
             <LazyLoadImage
               loading='lazy'
-              src={(tempPhoto && URL.createObjectURL(tempPhoto)) || userData.picture || defaultImage}
+              src={
+                (tempPhoto && URL.createObjectURL(tempPhoto)) || userData.picture || defaultImage
+              }
               width={56}
               height={56}
               className='edit-user__image'
@@ -473,23 +481,15 @@ const InfoUserEdit = () => {
                       nameID='phoneNumber'
                       innerRef={numCelularInputEl}
                     />
-                    <Input
-                      innerValue={userData.email}
-                      innerReadOnly={true}
-                      text='Correo'
-                    />
+                    <Input innerValue={userData.email} innerReadOnly={true} text='Correo' />
                     <Input
                       innerValue={userData.typeId}
                       innerReadOnly={true}
                       text='Tipo de Documento'
                     />
+                    <Input innerValue={userData.id} innerReadOnly={true} text='Número de Documento' />
                     <Input
-                      innerValue={userData.id}
-                      innerReadOnly={true}
-                      text='Número de Documento'
-                    />
-                    <Input
-                      innerValue={(userData.status).charAt(0).toUpperCase() + (userData.status).slice(1)}
+                      innerValue={userData.status.charAt(0).toUpperCase() + userData.status.slice(1)}
                       innerReadOnly={true}
                       text='Estado'
                     />
@@ -506,7 +506,11 @@ const InfoUserEdit = () => {
                   </div>
                 </form>
                 <Button
-                  text={userData && userData.status === 'inactivo' ? 'Activar usuario' : 'Desactivar usuario'}
+                  text={
+                    userData && userData.status === 'inactivo'
+                      ? 'Activar usuario'
+                      : 'Desactivar usuario'
+                  }
                   width={220}
                   innerOnClick={toggleUserStatus}
                 />

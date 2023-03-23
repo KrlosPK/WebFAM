@@ -5,7 +5,11 @@ import { AboutUs } from '../AboutUs/AboutUs'
 
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
+
+//* Context
 import { SessionContext } from '../../context/SessionContext'
+
+//* Libraries
 import jwtDecode from 'jwt-decode'
 import { ToastifyContext } from '../../context/ToastifyContext'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
@@ -17,7 +21,6 @@ const Services = () => {
 
   const [button, setButton] = useState(null)
   const [idRol, setIdRol] = useState(null)
-  const [title, setTitle] = useState('FADEMET Montajes | Servicios')
 
   useEffect(() => {
     if (toastify === 'serviceCreated') {
@@ -47,10 +50,10 @@ const Services = () => {
   }, [])
 
   useEffect(() => {
-    // ? Scroll to top
     window.scrollTo(0, 0)
-    document.title = title
-  }, [setTitle])
+
+    document.title = 'FADEMET Montajes | Servicios'
+  }, [])
 
   return (
     <>

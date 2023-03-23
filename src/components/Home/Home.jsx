@@ -48,18 +48,14 @@ const Home = () => {
     })
   }, [])
 
-  // ! Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes | Inicio')
-  useEffect(() => {
-    document.title = title
-  }, [setTitle])
-
-  const [button, setButton] = useState(null)
-
   useEffect(() => {
     !session ? setButton(1) : setButton(2)
     !tempSession ? setButton(1) : setButton(2)
-  }, [session, tempSession])
+
+    document.title = 'FADEMET Montajes | Inicio'
+  }, [])
+
+  const [button, setButton] = useState(null)
 
   useEffect(() => {
     if (toastify === 'tokenInvalido') {

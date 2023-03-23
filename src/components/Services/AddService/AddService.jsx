@@ -2,6 +2,7 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// * Context
 import { SessionContext } from '../../../context/SessionContext'
 import { ToastifyContext } from '../../../context/ToastifyContext'
 
@@ -12,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 
-// * Utils
+// * Components
 import { API_URL, Button2, getToken, Input, Navbar, ResponsiveNav, storage } from '../../Utils'
 
 // * Styles
@@ -139,14 +140,11 @@ const AddService = () => {
     !tempSession ? setButton(1) : setButton(2)
   }, [])
 
-  // * Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes | Crear Servicio')
   useEffect(() => {
-    // ? Scroll to top
     window.scrollTo(0, 0)
 
-    document.title = title
-  }, [setTitle])
+    document.title = 'FADEMET Montajes | Crear Servicio'
+  }, [])
 
   // * Validate if user is admin
   useEffect(() => {

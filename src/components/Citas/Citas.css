@@ -34,6 +34,12 @@ button.respondidas:nth-child(3) {
 .cita {
   display: flex;
   place-content: center;
+  position: relative;
+}
+.id-cita {
+  left: 2rem;
+  position: absolute;
+  top: 2rem;
 }
 
 @media (max-width: 768px) {

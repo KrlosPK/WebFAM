@@ -23,7 +23,6 @@ const Citas = () => {
   const navigate = useNavigate()
 
   const [citasData, setCitasData] = useState([])
-  // const [servicePhoto, setServicePhoto] = useState(null)
   const [datesState, setDatesState] = useState('pendientes')
 
   useEffect(() => {
@@ -37,16 +36,11 @@ const Citas = () => {
   useEffect(() => {
     !session ? setButton(1) : setButton(2)
     !tempSession ? setButton(1) : setButton(2)
-  }, [])
 
-  // ! Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes | Citas')
-  useEffect(() => {
-    // ? Scroll to top
     window.scrollTo(0, 0)
 
-    document.title = title
-  }, [setTitle])
+    document.title = 'FADEMET Montajes | Citas'
+  }, [])
 
   useEffect(() => {
     axios
@@ -133,6 +127,7 @@ const Citas = () => {
             }) => {
               return (
                 <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
+                  <span className='id-cita'>#{id_cita}</span>
                   <LongCard
                     foto_usuario={userPhoto || '/default-avatar.png'}
                     nombre_completo={nombre_completo}
@@ -168,6 +163,7 @@ const Citas = () => {
               }) => {
                 return (
                   <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
+                    <span className='id-cita'>#{id_cita}</span>
                     <LongCard
                       foto_usuario={userPhoto || '/default-avatar.png'}
                       nombre_completo={nombre_completo}
@@ -203,6 +199,7 @@ const Citas = () => {
               }) => {
                 return (
                   <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
+                    <span className='id-cita'>#{id_cita}</span>
                     <LongCard
                       foto_usuario={userPhoto || '/default-avatar.png'}
                       nombre_completo={nombre_completo}
