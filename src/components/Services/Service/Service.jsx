@@ -4,6 +4,7 @@ import './Service.css'
 import { API_URL, getToken, ModalService, Navbar, ResponsiveNav } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { toast, ToastContainer, Zoom } from 'react-toastify'
 
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
@@ -11,6 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 // ? Context
 import { SessionContext } from '../../../context/SessionContext'
+import { ToastifyContext } from '../../../context/ToastifyContext'
 
 // ? Libraries
 import axios from 'axios'
@@ -20,8 +22,6 @@ import jwtDecode from 'jwt-decode'
 import { AiOutlineCar } from 'react-icons/ai'
 import { GrHostMaintenance } from 'react-icons/gr'
 import { BsPatchCheck, BsCalendarEvent } from 'react-icons/bs'
-import { toast, ToastContainer, Zoom } from 'react-toastify'
-import { ToastifyContext } from '../../../context/ToastifyContext'
 
 const Service = () => {
   // ? Context
