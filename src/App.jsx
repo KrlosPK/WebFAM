@@ -16,6 +16,7 @@ import { AddService } from './components/Services/AddService/AddService'
 import { AllUsers } from './components/AllUsers/AllUsers'
 import { InfoUserEdit } from './components/AllUsers/EditUser/InfoUserEdit'
 import { EditService } from './components/Services/EditService/EditService'
+import { CitasUser } from './components/Citas/CitasUser/CitasUser'
 
 import { NotFound } from './components/Not-found/NotFound'
 import { ResetPassword } from './components/Login/ResetPassword/ResetPassword'
@@ -39,6 +40,7 @@ export const App = () => {
 
       <Route element={<ProtectedRoute session={!session} redirectTo='/login' />}>
         <Route path='/citas' element={<Citas />} />
+        <Route path='/mis-citas' element={<CitasUser />} />
         <Route path='/citas/:idCita' element={<CitaDetalle />} />
       </Route>
 
