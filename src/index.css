@@ -53,9 +53,18 @@ img {
 a {
   text-decoration: none;
 }
-
-nav a.is-active {
-  font-weight: bold;
+.navbar a.is-active {
+  position: relative;
+}
+.navbar a.is-active p::before {
+  background: var(--orange-gradient);
+  bottom: -2px;
+  content: '';
+  height: 1.3px;
+  left: 0;
+  position: absolute;
+  transition: width 250ms ease-out;
+  width: 100%;
 }
 
 img[alt] {
