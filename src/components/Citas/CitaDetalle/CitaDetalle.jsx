@@ -19,12 +19,6 @@ const CitaDetalle = () => {
 
   const [button, setButton] = useState(null)
   const [idRol, setIdRol] = useState(null)
-  const [title, setTitle] = useState('FADEMET Montajes | Cita')
-
-  useEffect(() => {
-    !session ? setButton(1) : setButton(2)
-    !tempSession ? setButton(1) : setButton(2)
-  }, [session, tempSession])
 
   useEffect(() => {
     const token = getToken()
@@ -41,8 +35,16 @@ const CitaDetalle = () => {
   }, [])
 
   useEffect(() => {
-    document.title = title
-  }, [setTitle])
+    if (!session || !tempSession) {
+      setButton(1)
+    } else {
+      setButton(2)
+    }
+
+    window.scrollTo(0, 0)
+
+    document.title = 'FADEMET Montajes | Cita'
+  }, [])
 
   return (
     <>

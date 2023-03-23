@@ -87,10 +87,10 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
         id_servicio
       })
       .then(() => {
-        setOpenModal(false)
         toast.success('¡La cita se ha creado con éxito!', {
           theme: 'colored'
         })
+        setOpenModal(false)
       })
       .catch(() => {
         toast.info(

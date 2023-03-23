@@ -6,11 +6,17 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 // ? Components
 import { API_URL, Button2, Input, Navbar, validatePassword } from '../../Utils'
-import { FaEye, FaEyeSlash } from 'react-icons/fa'
-import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { Footer } from '../../Home/Footer/Footer'
+
+// ? Libraries
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
+
+// ? Icons
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
+
+//* Context
+import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { ToastifyContext } from '../../../context/ToastifyContext'
 
 const ResetPassword = () => {
@@ -38,11 +44,9 @@ const ResetPassword = () => {
 
   const verifyState = (estado) => estado === 'inactivo'
 
-  // ! Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes - Restablecer contraseña')
   useEffect(() => {
-    document.title = title
-  }, [setTitle])
+    document.title = 'FADEMET Montajes - Restablecer contraseña'
+  }, [])
 
   // ? Deshabilitar botón mientras carga
   const [disabled, setDisabled] = useState(false)

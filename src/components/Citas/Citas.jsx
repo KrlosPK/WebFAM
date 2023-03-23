@@ -22,8 +22,7 @@ const Citas = () => {
   const [button, setButton] = useState(null)
   const navigate = useNavigate()
 
-  const [citasData, setCitasData] = useState([])
-  // const [servicePhoto, setServicePhoto] = useState(null)
+  const [citasData, setCitasData] = useState(null)
   const [datesState, setDatesState] = useState('pendientes')
 
   useEffect(() => {
@@ -35,35 +34,38 @@ const Citas = () => {
   }, [])
 
   useEffect(() => {
-    !session ? setButton(1) : setButton(2)
-    !tempSession ? setButton(1) : setButton(2)
-  }, [])
+    if (!session || !tempSession) {
+      setButton(1)
+    } else {
+      setButton(2)
+    }
 
-  // ! Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes | Citas')
-  useEffect(() => {
-    // ? Scroll to top
     window.scrollTo(0, 0)
 
-    document.title = title
-  }, [setTitle])
+    document.title = 'FADEMET Montajes | Citas'
+  }, [])
+
+  async function fetchPhotos (citas) {
+    const updatedCitas = []
+    for (const cita of citas) {
+      const { id_usuario, id_servicio } = cita
+      const [userPhotoResponse, servicePhotoResponse] = await Promise.all([
+        axios.get(API_URL(`usuarios/${id_usuario}`)),
+        axios.get(API_URL(`servicios/${id_servicio}`))
+      ])
+      const { foto_perfil } = userPhotoResponse.data.user[0]
+      const { foto_servicio } = servicePhotoResponse.data.service[0]
+      updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
+    }
+    return updatedCitas
+  }
 
   useEffect(() => {
     axios
       .get(API_URL('citas'))
       .then(({ data }) => {
         const { citas } = data
-        setCitasData(citas)
-        const updatedCitas = []
-        const fetchUserPhotos = citas.map(async (cita) => {
-          const { id_usuario, id_servicio } = cita
-          const userPhotoResponse = await axios.get(API_URL(`usuarios/${id_usuario}`))
-          const { foto_perfil } = userPhotoResponse.data.user[0]
-          const servicePhotoResponse = await axios.get(API_URL(`servicios/${id_servicio}`))
-          const { foto_servicio } = servicePhotoResponse.data.service[0]
-          updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
-        })
-        Promise.all(fetchUserPhotos).then(() => {
+        fetchPhotos(citas).then((updatedCitas) => {
           setCitasData(updatedCitas)
         })
       })
@@ -71,6 +73,30 @@ const Citas = () => {
         throw new Error('Error al obtener las citas')
       })
   }, [])
+
+  // useEffect(() => {
+  //   axios
+  //     .get(API_URL('citas'))
+  //     .then(({ data }) => {
+  //       const { citas } = data
+  //       setCitasData(citas)
+  //       const updatedCitas = []
+  //       const fetchUserPhotos = citas.map(async (cita) => {
+  //         const { id_usuario, id_servicio } = cita
+  //         const userPhotoResponse = await axios.get(API_URL(`usuarios/${id_usuario}`))
+  //         const { foto_perfil } = userPhotoResponse.data.user[0]
+  //         const servicePhotoResponse = await axios.get(API_URL(`servicios/${id_servicio}`))
+  //         const { foto_servicio } = servicePhotoResponse.data.service[0]
+  //         updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
+  //       })
+  //       Promise.all(fetchUserPhotos).then(() => {
+  //         setCitasData(updatedCitas)
+  //       })
+  //     })
+  //     .catch(() => {
+  //       throw new Error('Error al obtener las citas')
+  //     })
+  // }, [])
 
   return (
     <>
@@ -116,7 +142,9 @@ const Citas = () => {
             </Button>
           </ul>
         </nav>
-        {datesState === 'todas' &&
+        {!citasData && <div className='citas-loader'>Cargando...</div>}
+        {citasData &&
+          datesState === 'todas' &&
           citasData.map(
             ({
               id_cita,
@@ -133,6 +161,7 @@ const Citas = () => {
             }) => {
               return (
                 <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
+                  <span className='id-cita'>#{id_cita}</span>
                   <LongCard
                     foto_usuario={userPhoto || '/default-avatar.png'}
                     nombre_completo={nombre_completo}
@@ -149,7 +178,8 @@ const Citas = () => {
               )
             }
           )}
-        {datesState === 'pendientes' &&
+        {citasData &&
+          datesState === 'pendientes' &&
           citasData
             .filter(({ estado }) => estado === 'pendiente')
             .map(
@@ -168,6 +198,7 @@ const Citas = () => {
               }) => {
                 return (
                   <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
+                    <span className='id-cita'>#{id_cita}</span>
                     <LongCard
                       foto_usuario={userPhoto || '/default-avatar.png'}
                       nombre_completo={nombre_completo}
@@ -184,7 +215,8 @@ const Citas = () => {
                 )
               }
             )}
-        {datesState === 'respondidas' &&
+        {citasData &&
+          datesState === 'respondidas' &&
           citasData
             .filter(({ estado }) => estado === 'respondido')
             .map(
@@ -203,6 +235,7 @@ const Citas = () => {
               }) => {
                 return (
                   <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
+                    <span className='id-cita'>#{id_cita}</span>
                     <LongCard
                       foto_usuario={userPhoto || '/default-avatar.png'}
                       nombre_completo={nombre_completo}

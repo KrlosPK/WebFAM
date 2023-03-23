@@ -2,29 +2,29 @@ import './RecoverPassword.css'
 
 // ? Components
 import { Input, Navbar, API_URL, validateMail, Button2, verifyStatus } from '../../Utils'
+import { Footer } from '../../Home/Footer/Footer'
 
 //* Hooks
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+//* Context
+import { ToastContainer, toast, Zoom } from 'react-toastify'
 
 //* Library
-import { ToastContainer, toast, Zoom } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import emailjs from '@emailjs/browser'
+import jwtDecode from 'jwt-decode'
 
 // ? Icons
 import { AiFillBackward } from 'react-icons/ai'
-import { Footer } from '../../Home/Footer/Footer'
-import jwtDecode from 'jwt-decode'
 
 const RecoverPassword = () => {
   const navigate = useNavigate()
 
-  // ! Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes | Recuperar contraseña')
   useEffect(() => {
-    document.title = title
-  }, [setTitle])
+    document.title = 'FADEMET Montajes | Recuperar contraseña'
+  }, [])
 
   // ? Deshabilitar botón mientras carga
   const [disabled, setDisabled] = useState(false)

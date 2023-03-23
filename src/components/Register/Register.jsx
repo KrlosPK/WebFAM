@@ -4,15 +4,17 @@ import { Button, Button2, Input, Select, API_URL, Navbar } from '../Utils'
 
 // ? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
+
+// ? Context
 import { ToastifyContext } from '../../context/ToastifyContext'
 
 // ? Library
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import axios from 'axios'
 
 // ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
-import axios from 'axios'
 
 const Register = () => {
   // ? Context
@@ -27,11 +29,9 @@ const Register = () => {
   // ? Deshabilitar botón mientras carga
   const [disabled, setDisabled] = useState(false)
 
-  // ! Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes - Registro')
   useEffect(() => {
-    document.title = title
-  }, [setTitle])
+    document.title = 'FADEMET Montajes - Registro'
+  }, [])
 
   //* Mostrar contraseña
   const [showPassword, setShowPassword] = useState(true)

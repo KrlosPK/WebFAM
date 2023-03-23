@@ -19,29 +19,35 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 // ? Hooks
 import { useState, useEffect, useRef, useContext } from 'react'
-import jwtDecode from 'jwt-decode'
+
+// ? Context
 import { SessionContext } from '../../context/SessionContext'
 
 //* Libraries
+import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
+import { uuidv4 } from '@firebase/util'
+import Swal from 'sweetalert2'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 // ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { AiFillEdit } from 'react-icons/ai'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
-import { uuidv4 } from '@firebase/util'
-import Swal from 'sweetalert2'
 
 const EditUser = () => {
   // ? Context
   const { session, tempSession } = useContext(SessionContext)
 
   // ! Cambiar título de la página
-  const [title, setTitle] = useState('FADEMET Montajes | Editar Perfil')
   useEffect(() => {
-    document.title = title
-  }, [setTitle])
+    if (!session || !tempSession) {
+      setButton(1)
+    } else {
+      setButton(2)
+    }
+    document.title = 'FADEMET Montajes | Editar Perfil'
+  }, [])
 
   //* Mostrar contraseña
   const [showContrasena, setShowContrasena] = useState(true)
@@ -283,11 +289,6 @@ const EditUser = () => {
   const [button, setButton] = useState(null)
 
   useEffect(() => {
-    !session ? setButton(1) : setButton(2)
-    !tempSession ? setButton(1) : setButton(2)
-  }, [session, tempSession])
-
-  useEffect(() => {
     const token = getToken()
 
     new Promise((resolve, reject) => {
@@ -375,9 +376,12 @@ const EditUser = () => {
         .then(async () => {
           axios.post(API_URL(`nuevoToken/${userData.id_usuario}`)).then(({ data }) => {
             const { token } = data
-            toast.success('¡Imagen eliminada correctamente! Algunos cambios aún no se verán reflejados', {
-              theme: 'colored'
-            })
+            toast.success(
+              '¡Imagen eliminada correctamente! Algunos cambios aún no se verán reflejados',
+              {
+                theme: 'colored'
+              }
+            )
 
             setTokenData(token)
 
@@ -482,11 +486,7 @@ const EditUser = () => {
                     nameID={'phoneNumber'}
                     innerRef={numCelularInputEl}
                   />
-                  <Input
-                    innerDefaultValue={userData.email}
-                    innerReadOnly={true}
-                    text='Correo'
-                  />
+                  <Input innerDefaultValue={userData.email} innerReadOnly={true} text='Correo' />
                   <Input
                     innerDefaultValue={userData.typeId}
                     innerReadOnly={true}
