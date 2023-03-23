@@ -2,7 +2,7 @@ import './InfoUserEdit.css'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { SessionContext } from '../../../context/SessionContext'
-import { API_URL, Button, Button2, getToken, Input, inputChangeCheck, Navbar, ResponsiveNav, storage, validatePassword } from '../../Utils'
+import { API_URL, Button, Button2, getToken, Input, inputChangeCheck, Navbar, ResponsiveNav, Select, storage, validatePassword } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
@@ -35,6 +35,7 @@ const InfoUserEdit = () => {
   const nombreInputEl = useRef(null)
   const apellidosInputEl = useRef(null)
   const numCelularInputEl = useRef(null)
+  const rolInputEl = useRef(null)
 
   const defaultImage = '/default-avatar.png'
 
@@ -54,7 +55,8 @@ const InfoUserEdit = () => {
           id: infoUser.num_documento,
           typeId: infoUser.tipo_documento,
           picture: infoUser.foto_perfil,
-          status: infoUser.estado
+          status: infoUser.estado,
+          rol: `rol ${infoUser.id_rol}`
         })
       })
   }
@@ -129,10 +131,13 @@ const InfoUserEdit = () => {
 
   const updateUserData = (e) => {
     e.preventDefault()
+    setDisabled(true)
+    if (disabled) return
 
-    const nombre = e.target[0].value
-    const apellidos = e.target[1].value
-    const num_celular = e.target[2].value
+    const rol = e.target[0].value
+    const nombre = e.target[1].value
+    const apellidos = e.target[2].value
+    const num_celular = e.target[3].value
 
     // Validación Nombre
     if (nombre.length === 0 || /^\s+$/.test(nombre)) {
@@ -193,7 +198,8 @@ const InfoUserEdit = () => {
       .patch(API_URL(`editarUsuario/${userData.id_usuario}`), {
         nombre,
         apellidos,
-        num_celular
+        num_celular,
+        id_rol: rol
       })
       .then((res) => {
         setDisabled(true)
@@ -216,6 +222,7 @@ const InfoUserEdit = () => {
     e.preventDefault()
 
     setDisabled(true)
+    if (disabled) return
 
     const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
 
@@ -343,6 +350,17 @@ const InfoUserEdit = () => {
 
   const inputChange = (e) => inputChangeCheck(e, { userData, setDisabled })
 
+  const selectChange = (e) => {
+    const { value, name } = e.target
+    const rolAndValue = `rol ${value}`
+    const arrayUserDataKey = Object.keys(userData)
+    const arrayUserDataValues = Object.values(userData)
+    const findKey = arrayUserDataKey.find((key) => key === name)
+    const findValue = arrayUserDataValues.find((values) => values === rolAndValue)
+    if (findValue === rolAndValue && findKey === name) return setDisabled(true)
+    return setDisabled(false)
+  }
+
   const toggleUserStatus = () => {
     axios
       .patch(API_URL(`eliminarUsuario/${userData.id_usuario}`), {
@@ -419,6 +437,18 @@ const InfoUserEdit = () => {
               <>
                 <form className='edit-form' onSubmit={updateUserData}>
                   <div className='edit-main-form main-form'>
+                    <Select
+                      innerDefaultValue={userData.rol}
+                      innerName='rol'
+                      text='Rol del usuario'
+                      value={[1, 2, 3, 4]}
+                      option={['Administrador', 'Cliente', 'Soldador', 'RRHH']}
+                      innerRef={rolInputEl}
+                      bold={'true'}
+                      font={'12px'}
+                      padding={'0 0 0 11px'}
+                      innerOnChange={selectChange}
+                    />
                     <Input
                       innerOnChange={inputChange}
                       innerDefaultValue={userData.name}
