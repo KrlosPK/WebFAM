@@ -8,6 +8,7 @@ import { NavLink } from '../../NavLink'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import jwtDecode from 'jwt-decode'
+import deleteCookie from 'js-cookie'
 
 //* Hooks
 import { useContext, useState, useEffect, useRef } from 'react'
@@ -53,13 +54,15 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   }
 
   useEffect(() => {
+    if (!sessionStorage.getItem('session') && !localStorage.getItem('session')) {
+      deleteCookie.remove('token')
+    }
+  }, [SessionContext])
+
+  useEffect(() => {
+    if (!sessionStorage.getItem('session') && !localStorage.getItem('session')) return
     //* Get User name from API
     getUserData()
-
-    if (localStorage.getItem('session') === '') {
-      document.cookie =
-        'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=Domain:"fademetmontajes.netlify.app";'
-    }
 
     function handleClickOutside (event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -78,7 +81,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   const logout = () => {
     localStorage.removeItem('session')
     sessionStorage.removeItem('session')
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    deleteCookie.remove('token')
     setSession(false)
     setTempSession(false)
     navigate('/')
