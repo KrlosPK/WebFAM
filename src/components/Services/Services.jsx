@@ -16,7 +16,7 @@ import { toast, ToastContainer, Zoom } from 'react-toastify'
 
 const Services = () => {
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
   const { toastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
@@ -31,12 +31,8 @@ const Services = () => {
   }, [toastify])
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
-  }, [session, tempSession])
+    !session ? setButton(1) : setButton(2)
+  }, [])
 
   useEffect(() => {
     const token = getToken()

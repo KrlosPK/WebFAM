@@ -8,13 +8,11 @@ import {
   validatePassword,
   API_URL,
   Navbar,
-  setTokenData,
   verifyStatus
 } from '../Utils'
 
 // ? Hooks
 import { useState, useRef, useEffect, useContext } from 'react'
-import { SessionContext } from '../../context/SessionContext'
 import { ToastifyContext } from '../../context/ToastifyContext'
 
 // ? Library
@@ -23,15 +21,17 @@ import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import jwtDecode from 'jwt-decode'
+import cookie from 'js-cookie'
 
 // ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
+import { SessionContext } from '../../context/SessionContext'
 
 const Login = () => {
   // ? Context
-  const { setSession, setTempSession } = useContext(SessionContext)
 
   const { toastify } = useContext(ToastifyContext)
+  const { setSession } = useContext(SessionContext)
 
   useEffect(() => {
     if (toastify === 'login') {
@@ -54,9 +54,7 @@ const Login = () => {
   const [disabled, setDisabled] = useState(false)
 
   // ! Cambiar título de la página
-  useEffect(() => {
-    document.title = 'FADEMET Montajes | Inicio de Sesión'
-  }, [])
+  useEffect(() => { document.title = 'FADEMET Montajes | Inicio de Sesión' }, [])
 
   //* Mostrar contraseña
   const [showContrasena, setShowContrasena] = useState(true)
@@ -138,7 +136,6 @@ const Login = () => {
       setDisabled(false)
     } else {
       setBody({ correo, contrasena })
-      rememberSession()
 
       setDisabled(true)
       await loginUser()
@@ -150,19 +147,15 @@ const Login = () => {
       .post(API_URL('signin'), body)
       .then(({ data }) => {
         const { token } = data
-
         const estadoDataUser = jwtDecode(token)
         const { estado } = estadoDataUser.data[0]
 
         const status = verifyStatus(estado, { toast, setDisabled })
         if (!status) return false
-        setTokenData(token)
-        sessionStorage.setItem('session', 'true')
-        setTempSession(true)
-
+        const domain = window.location.hostname
         setSession(true)
-
-        if (token) return navigate('/', { replace: true })
+        cookie.set('token', token, { domain, path: '' })
+        return (token && navigate('/', { replace: true }))
       })
       .catch(() => {
         toast.error('¡Correo y/o contraseña incorrectos!', {
@@ -182,10 +175,10 @@ const Login = () => {
 
         const status = verifyStatus(estado, { toast, setDisabled })
         if (!status) return false
-        setTokenData(token)
-        sessionStorage.setItem('session', 'true')
-        setTempSession(true)
-        navigate('/', { replace: true })
+        const domain = window.location.hostname
+        setSession(true)
+        cookie.set('token', token, { domain, path: '' })
+        return (token && navigate('/', { replace: true }))
       })
       .catch(() => {
         toast.error('¡El correo no existe en nuestro sistema! Primero regístrate', {
@@ -204,31 +197,6 @@ const Login = () => {
       ...body,
       [name]: value
     })
-  }
-
-  const rememberSession = () => {
-    const rememberMe = document.querySelector('#check').checked
-    if (rememberMe) {
-      localStorage.setItem('session', 'true')
-    } else {
-      localStorage.removeItem('session')
-    }
-  }
-
-  const checkRememberMe = () => {
-    if (document.querySelector('#check').checked) {
-      const correo = document.querySelector('#correo').value
-      const contrasena = document.querySelector('#contrasena').value
-      const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-      const contrasenaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
-
-      if (!validateMail(correo, correoRegex) || !validatePassword(contrasena, contrasenaRegex)) {
-        toast.error('¡Debes tener tus datos correctos para recordar! Vuelve a intentarlo...', {
-          theme: 'colored'
-        })
-        return (document.querySelector('#check').checked = false)
-      }
-    }
   }
 
   return (
@@ -302,7 +270,7 @@ const Login = () => {
             <Link to={'/recover-password'}>¿Olvidaste tú contraseña?</Link>
           </div>
           <div className='remind-me'>
-            <input type='checkbox' name='check' id='check' onClick={checkRememberMe} />
+            <input type='checkbox' name='check' id='check' />
             <label htmlFor='check'></label>
             <Button text={'Ingresar'} textDisabled={'Cargando'} disable={disabled} />
           </div>

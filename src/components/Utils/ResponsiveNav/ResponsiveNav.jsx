@@ -2,7 +2,7 @@ import './ResponsiveNav.css'
 
 // ? Components
 import { Button, Button2 } from '../'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getToken } from '../GetToken/GetToken'
 
 //* Hooks
@@ -18,6 +18,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 // ? Icons
 import { AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
 import { BiLogOut } from 'react-icons/bi'
+import Cookies from 'js-cookie'
 
 const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
   const [navIsClicked, setNavIsClicked] = useState('clicked')
@@ -44,15 +45,15 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
     setButtonIsClicked('')
   }
 
-  const { tempSession, setSession, setTempSession } = useContext(SessionContext)
+  const { session, setSession } = useContext(SessionContext)
+  const navigate = useNavigate()
 
   const logout = () => {
-    localStorage.removeItem('session')
-    sessionStorage.removeItem('session')
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    Cookies.remove('token')
     setSession(false)
-    setTempSession(false)
+    navigate('/')
   }
+
   useEffect(() => {
     getUserId()
   }, [])
@@ -81,7 +82,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
   return (
     <div className='menu' onBlur={hideNav}>
       <div className={navClassName}>
-        {tempSession && (
+        {session && (
           <li className='options__option'>
             <LazyLoadImage
               loading='lazy'

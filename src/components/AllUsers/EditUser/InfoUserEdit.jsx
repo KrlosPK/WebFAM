@@ -27,7 +27,7 @@ import jwtDecode from 'jwt-decode'
 
 const InfoUserEdit = () => {
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   // * States
   const [button, setButton] = useState(null)
@@ -89,11 +89,7 @@ const InfoUserEdit = () => {
   // ! Cambiar título de la página
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
+    !session ? setButton(1) : setButton(2)
 
     window.scrollTo(0, 0)
 

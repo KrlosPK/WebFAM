@@ -15,7 +15,7 @@ import jwtDecode from 'jwt-decode'
 
 const CitaDetalle = () => {
   const { idCita } = useParams()
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   const [button, setButton] = useState(null)
   const [idRol, setIdRol] = useState(null)
@@ -35,11 +35,7 @@ const CitaDetalle = () => {
   }, [])
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
+    !session ? setButton(1) : setButton(2)
 
     window.scrollTo(0, 0)
 

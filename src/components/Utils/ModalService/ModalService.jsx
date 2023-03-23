@@ -24,7 +24,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
   const numCelularInputEl = useRef()
   const descripcionCitaInputEl = useRef()
 
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   const [openModal, setOpenModal] = useState(false)
   const [openSnackbar, setOpenSnackbar] = useState(false)
@@ -105,7 +105,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
   const getUserData = async () => {
     const token = getToken()
 
-    if (!session && !tempSession) return
+    if (!session) return
 
     if (!token) return
 

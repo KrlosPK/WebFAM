@@ -1,28 +1,31 @@
 import './Navbar.css'
 
 // ? Components
-import { Button, Button2, getToken } from '../../Utils'
+import { Button, Button2 } from '../../Utils'
 import { NavLink } from '../../NavLink'
 
 //* Libraries
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import jwtDecode from 'jwt-decode'
-import deleteCookie from 'js-cookie'
 
 //* Hooks
-import { useContext, useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // ? Context
-import { SessionContext } from '../../../context/SessionContext'
+// import { SessionContext } from '../../../context/SessionContext'
 
 // ? Icons
 import { BiLogOut } from 'react-icons/bi'
 import { AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
 import { FaAngleDown } from 'react-icons/fa'
+import { SessionContext } from '../../../context/SessionContext'
+import Cookies from 'js-cookie'
 
 const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) => {
+  const { setSession } = useContext(SessionContext)
+
   const [expanded, setExpanded] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -36,7 +39,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   const defaultImage = '/default-avatar.png'
 
   const getUserData = async () => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     if (!token) return
 
@@ -54,13 +57,6 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
   }
 
   useEffect(() => {
-    if (!sessionStorage.getItem('session') && !localStorage.getItem('session')) {
-      deleteCookie.remove('token')
-    }
-  }, [SessionContext])
-
-  useEffect(() => {
-    if (!sessionStorage.getItem('session') && !localStorage.getItem('session')) return
     //* Get User name from API
     getUserData()
 
@@ -76,14 +72,20 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
     }
   }, [dropdownRef])
 
-  const { setSession, setTempSession } = useContext(SessionContext)
+  useEffect(() => {
+    const cookie = Cookies.get('token')
+    if (cookie) {
+      setSession(true)
+    } else {
+      setSession(false)
+      const domain = window.location.hostname
+      Cookies.remove('token', { path: '', domain })
+    }
+  }, [])
 
   const logout = () => {
-    localStorage.removeItem('session')
-    sessionStorage.removeItem('session')
-    deleteCookie.remove('token')
+    Cookies.remove('token')
     setSession(false)
-    setTempSession(false)
     navigate('/')
   }
 

@@ -25,7 +25,7 @@ import { BsPatchCheck, BsCalendarEvent } from 'react-icons/bs'
 
 const Service = () => {
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
   const { toastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
@@ -77,13 +77,11 @@ const Service = () => {
 
     // ? Scroll to top
     window.scrollTo(0, 0)
+  }, [])
 
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
-  }, [session, tempSession])
+  useEffect(() => {
+    !session ? setButton(1) : setButton(2)
+  }, [])
 
   const fullscreen = (e) => {
     document.body.style.overflow = 'hidden'

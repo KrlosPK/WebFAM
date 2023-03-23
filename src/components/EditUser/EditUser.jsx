@@ -9,7 +9,6 @@ import {
   Navbar,
   validatePassword,
   setTokenData,
-  getToken,
   ResponsiveNav,
   storage,
   Button,
@@ -34,18 +33,17 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 // ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { AiFillEdit } from 'react-icons/ai'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
 const EditUser = () => {
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
+  const navigate = useNavigate()
 
   // ! Cambiar título de la página
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
+    !session ? setButton(1) : setButton(2)
     document.title = 'FADEMET Montajes | Editar Perfil'
   }, [])
 
@@ -73,7 +71,12 @@ const EditUser = () => {
   const [disabled, setDisabled] = useState(true)
 
   const getUserData = async () => {
-    const token = getToken()
+    const token = Cookies.get('token')
+
+    if (!token) {
+      navigate('/login')
+      return
+    }
 
     const decoded = await jwtDecode(token)
 
@@ -289,7 +292,7 @@ const EditUser = () => {
   const [button, setButton] = useState(null)
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     new Promise((resolve, reject) => {
       const decoded = jwtDecode(token)

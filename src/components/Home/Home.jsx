@@ -22,11 +22,12 @@ import { Footer } from './Footer/Footer'
 
 // ? Context
 import { ToastifyContext } from '../../context/ToastifyContext'
+// import Cookies from 'js-cookie'
 import { SessionContext } from '../../context/SessionContext'
 
 const Home = () => {
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
   const { toastify, setToastify } = useContext(ToastifyContext)
   const [idRol, setIdRol] = useState(null)
 
@@ -49,14 +50,12 @@ const Home = () => {
   }, [])
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
-
     document.title = 'FADEMET Montajes | Inicio'
   }, [])
+
+  useEffect(() => {
+    !session ? setButton(1) : setButton(2)
+  }, [session])
 
   const [button, setButton] = useState(null)
 
