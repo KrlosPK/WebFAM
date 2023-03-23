@@ -27,8 +27,11 @@ const AllUsers = () => {
   const [localRolId, setLocalRolId] = useState(null)
 
   useEffect(() => {
-    !session ? setButton(1) : setButton(2)
-    !tempSession ? setButton(1) : setButton(2)
+    if (!session || !tempSession) {
+      setButton(1)
+    } else {
+      setButton(2)
+    }
 
     window.scrollTo(0, 0)
 
@@ -85,11 +88,10 @@ const AllUsers = () => {
                 text={correo}
                 textColor='orange'
               />
-              <div className="colleague__button-edit">
-                {(localRolId && localRolId === 1) &&
-                (
+              <div className='colleague__button-edit'>
+                {localRolId && localRolId === 1 && (
                   <Link to={`/info-user-edit/${id_usuario}`}>
-                    <Button2 key={id_usuario} text='Editar' width={150}/>
+                    <Button2 key={id_usuario} text='Editar' width={150} />
                   </Link>
                 )}
               </div>

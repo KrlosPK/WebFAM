@@ -31,8 +31,11 @@ const Services = () => {
   }, [toastify])
 
   useEffect(() => {
-    !session ? setButton(1) : setButton(2)
-    !tempSession ? setButton(1) : setButton(2)
+    if (!session || !tempSession) {
+      setButton(1)
+    } else {
+      setButton(2)
+    }
   }, [session, tempSession])
 
   useEffect(() => {
