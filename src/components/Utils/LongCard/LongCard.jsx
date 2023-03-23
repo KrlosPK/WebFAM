@@ -30,7 +30,6 @@ const LongCard = ({
           isSecoundaryText
           secoundaryText={num_celular}
           animation='zoom-out'
-          textColor='#09f'
           borderRadius='50%'
         />
       </article>

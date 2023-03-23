@@ -21,6 +21,15 @@
 .citas-nav__ul button {
   font-size: 1rem;
 }
+button.todas:nth-child(1) {
+  color: #fd8b26;
+}
+button.pendientes:nth-child(2) {
+  color: #fd8b26;
+}
+button.respondidas:nth-child(3) {
+  color: #fd8b26;
+}
 
 .cita {
   display: flex;
