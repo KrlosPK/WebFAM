@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500&family=Syne:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500&family=Syne:wght@400;600;700&display=swap');
 
 :root {
+  --background-color: #78c525;
   --background-color: #faa628;
   --icon-color: #fd8b26;
   --icon-hover-color: #fd5d21;

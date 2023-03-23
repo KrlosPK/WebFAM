@@ -87,13 +87,31 @@ const Citas = () => {
       <section className='citas'>
         <nav className='citas-nav'>
           <ul className='citas-nav__ul'>
-            <Button variant='text' onClick={() => setDatesState('todas')} color='warning'>
+            <Button
+              variant='text'
+              className={datesState}
+              onClick={() => setDatesState('todas')}
+              color='inherit'
+              sx={{ fontFamily: 'Syne', fontWeight: '400' }}
+            >
               Todas
             </Button>
-            <Button variant='text' onClick={() => setDatesState('pendientes')} color='warning'>
+            <Button
+              variant='text'
+              className={datesState}
+              onClick={() => setDatesState('pendientes')}
+              color='inherit'
+              sx={{ fontFamily: 'Syne', fontWeight: '400' }}
+            >
               Pendientes
             </Button>
-            <Button variant='text' onClick={() => setDatesState('respondidas')} color='warning'>
+            <Button
+              variant='text'
+              className={datesState}
+              onClick={() => setDatesState('respondidas')}
+              color='inherit'
+              sx={{ fontFamily: 'Syne', fontWeight: '400' }}
+            >
               Respondidas
             </Button>
           </ul>
