@@ -8,12 +8,12 @@ const Button2 = ({ text, width, textDisabled = '', disable = false, animation = 
     <>
       {!disable
         ? (
-          <button onClick={innerOnClick} className='Button-2' style={{ width }}>
+          <button onClick={innerOnClick} className='Button-2' style={{ width }} >
             {text}
           </button>
         )
         : (
-          <button className='Button-2 disabled flex' style={{ width }}>
+          <button className='Button-2 disabled flex' style={{ width }} >
             {textDisabled} {animation ? <AiOutlineLoading3Quarters /> : null}
           </button>
         )}

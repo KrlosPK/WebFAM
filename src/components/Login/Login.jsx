@@ -79,6 +79,8 @@ const Login = () => {
 
   const validateLogin = async (e) => {
     e.preventDefault()
+    setDisabled(true)
+    if (disabled) return
 
     const correo = e.target[0].value
     const contrasena = e.target[1].value
@@ -96,40 +98,36 @@ const Login = () => {
 
     // ? Validación Correo
     if (validateMail(correo, /^\s+$/)) {
-      e.preventDefault()
-
       toast.error('¡El correo no puede estar vacío!', {
         theme: 'colored'
       })
 
       focusInput(correoInputEl)
+      setDisabled(false)
     } else if (!validateMail(correo, /\S+@\S+/)) {
-      e.preventDefault()
-
       toast.error('¡El correo debe contener "@dominio.com"!', {
         theme: 'colored'
       })
 
       focusInput(correoInputEl)
+      setDisabled(false)
     } else if (!validateMail(correo, /\S+\.\S+/)) {
-      e.preventDefault()
-
       toast.error('¡El correo debe contener "@dominio.com"!', {
         theme: 'colored'
       })
 
       focusInput(correoInputEl)
+      setDisabled(false)
     } else if (validatePassword(contrasena, /^\s+$/)) {
       // Validación Contraseña
-      e.preventDefault()
 
       toast.error('¡La contraseña no puede estar vacía!', {
         theme: 'colored'
       })
 
       focusInput(contrasenaInputEl)
+      setDisabled(false)
     } else if (!validatePassword(contrasena, regexContrasena)) {
-      e.preventDefault()
       toast.error(
         '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
         {
@@ -138,6 +136,7 @@ const Login = () => {
       )
 
       focusInput(contrasenaInputEl)
+      setDisabled(false)
     } else {
       setBody({ correo, contrasena })
       rememberSession()

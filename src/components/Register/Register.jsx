@@ -52,15 +52,11 @@ const Register = () => {
   const correoInputEl = useRef(null)
   const contrasenaInputEl = useRef(null)
 
-  // ! Evitar que se envie otro formulario de registro cuando ya lo hizo previamente
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault()
-    }
-  }
-
   const createUser = async (e) => {
     e.preventDefault()
+
+    setDisabled(true)
+    if (disabled) return
 
     const nombre = e.target[0].value
     const apellidos = e.target[1].value
@@ -74,144 +70,135 @@ const Register = () => {
 
     // Validación Nombre
     if (nombre.length === 0 || /^\s+$/.test(nombre)) {
-      e.preventDefault()
-
       toast.error('¡El Nombre no puede estar vacío!', {
         theme: 'colored'
       })
 
       focusInput(nombreInputEl)
+      setDisabled(false)
 
       return false
     } else if (nombre.length < 2) {
-      e.preventDefault()
-
       toast.error('¡El Nombre debe tener mínimo 2 letras!', {
         theme: 'colored'
       })
 
       focusInput(nombreInputEl)
+      setDisabled(false)
 
       return false
     } else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
       // Validación Apellidos
-      e.preventDefault()
 
       toast.error('¡Los Apellidos no puede estar vacío!', {
         theme: 'colored'
       })
 
       focusInput(apellidosInputEl)
+      setDisabled(false)
 
       return false
     } else if (apellidos.length < 3) {
-      e.preventDefault()
-
       toast.error('¡Los Apellidos deben tener mínimo 3 letras!', {
         theme: 'colored'
       })
 
       focusInput(apellidosInputEl)
+      setDisabled(false)
 
       return false
     } else if (num_celular.length === 0) {
       // Validación Número de Celular
-      e.preventDefault()
 
       toast.error('¡El Número de Celular no puede estar vacío!', {
         theme: 'colored'
       })
 
       focusInput(numCelularInputEl)
+      setDisabled(false)
 
       return false
     } else if (num_celular.length < 9 || num_celular.length >= 12) {
-      e.preventDefault()
-
       toast.error('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
         theme: 'colored'
       })
 
       focusInput(numCelularInputEl)
+      setDisabled(false)
 
       return false
     } else if (!tipo_documento) {
       // Validación Tipo de Documento
-      e.preventDefault()
 
       toast.error('¡Por favor seleccione su Tipo de Documento!', {
         theme: 'colored'
       })
 
       focusInput(tipoDocumentoInputEl)
+      setDisabled(false)
 
       return false
     } else if (num_documento.length === 0) {
       // Validación Número de Documento
-      e.preventDefault()
 
       toast.error('¡El Número de Documento no puede estar vacío!', {
         theme: 'colored'
       })
 
       focusInput(numDocumentoInputEl)
+      setDisabled(false)
 
       return false
     } else if (num_documento.length < 7 || num_documento.length >= 12) {
-      e.preventDefault()
-
       toast.error('¡El Número de Documento debe tener entre 7 y 12 dígitos!', {
         theme: 'colored'
       })
 
       focusInput(numDocumentoInputEl)
+      setDisabled(false)
 
       return false
     } else if (correo.length === 0 || /^\s+$/.test(correo)) {
       // Validación Correo Electrónico
-      e.preventDefault()
 
       toast.error('¡El correo no puede estar vacío!', {
         theme: 'colored'
       })
 
       focusInput(correoInputEl)
+      setDisabled(false)
 
       return false
     } else if (!/\S+@\S+/.test(correo)) {
-      e.preventDefault()
-
       toast.error('¡El correo debe contener "@dominio.com"!', {
         theme: 'colored'
       })
 
       focusInput(correoInputEl)
+      setDisabled(false)
 
       return false
     } else if (!/\S+\.\S+/.test(correo)) {
-      e.preventDefault()
-
       toast.error('¡El correo debe contener "@dominio.com"!', {
         theme: 'colored'
       })
 
       focusInput(correoInputEl)
+      setDisabled(false)
 
       return false
     } else if (contrasena.length === 0 || /^\s+$/.test(contrasena)) {
       // Validación Contraseña
-      e.preventDefault()
 
       toast.error('¡La contraseña no puede estar vacía!', {
         theme: 'colored'
       })
 
       focusInput(contrasenaInputEl)
+      setDisabled(false)
 
       return false
     } else if (!regexContrasena.test(contrasena)) {
-      e.preventDefault()
-
       toast.error(
         '¡La contraseña debe tener entre 8 y 16 caracteres, una mayúscula, una minúscula y un número!',
         {
@@ -220,6 +207,7 @@ const Register = () => {
       )
 
       focusInput(contrasenaInputEl)
+      setDisabled(false)
 
       return false
     } else {
@@ -275,7 +263,7 @@ const Register = () => {
         <div className='register-label'>
           <p>Regístrate</p>
         </div>
-        <form className='second-login' onSubmit={createUser} onKeyDown={handleKeyDown}>
+        <form className='second-login' onSubmit={createUser}>
           <div className='main-form'>
             <Input
               text='Nombre'
