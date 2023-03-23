@@ -118,8 +118,10 @@ const Register = () => {
       setDisabled(false)
 
       return false
-    } else if (num_celular.length < 9 || num_celular.length >= 12) {
-      toast.error('¡El Número de Celular debe tener entre 9 y 11 dígitos!', {
+    } else if (num_celular.length < 9 || num_celular.length >= 13) {
+      e.preventDefault()
+
+      toast.error('¡El Número de Celular debe tener entre 9 y 12 dígitos!', {
         theme: 'colored'
       })
 
