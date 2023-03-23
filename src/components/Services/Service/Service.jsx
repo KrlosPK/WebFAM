@@ -1,14 +1,14 @@
 import './Service.css'
 
 // ? Components
-import { API_URL, getToken, ModalService, Navbar, ResponsiveNav } from '../../Utils'
+import { API_URL, Button, getToken, ModalService, Navbar, ResponsiveNav } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
 
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 // ? Context
 import { SessionContext } from '../../../context/SessionContext'
@@ -149,6 +149,11 @@ const Service = () => {
                 nombre_servicio={service[0] && service[0].nombre_servicio}
                 id_servicio={service[0] && service[0].id_servicio}
               />
+              {idRol && idRol !== 2 && (
+                <Link to={`/edit-service/${serviceId}`}>
+                  <Button text={'Editar servicio'} height={'41px'} width={'220px'}/>
+                </Link>
+              )}
             </div>
           </aside>
         </div>
