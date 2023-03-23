@@ -4,6 +4,7 @@ import './Service.css'
 import { API_URL, getToken, ModalService, Navbar, ResponsiveNav } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { toast, ToastContainer, Zoom } from 'react-toastify'
 
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
@@ -11,6 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 // ? Context
 import { SessionContext } from '../../../context/SessionContext'
+import { ToastifyContext } from '../../../context/ToastifyContext'
 
 // ? Libraries
 import axios from 'axios'
@@ -24,6 +26,7 @@ import { BsPatchCheck, BsCalendarEvent } from 'react-icons/bs'
 const Service = () => {
   // ? Context
   const { session, tempSession } = useContext(SessionContext)
+  const { toastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
   const [idRol, setIdRol] = useState(null)
@@ -36,6 +39,14 @@ const Service = () => {
   const [service, setService] = useState({})
 
   const { serviceId } = useParams()
+
+  useEffect(() => {
+    if (toastify === 'serviceModified') {
+      toast.success('¡Servicio modificado con éxito!', {
+        theme: 'colored'
+      })
+    }
+  }, [toastify])
 
   useEffect(() => {
     const token = getToken()
@@ -101,6 +112,7 @@ const Service = () => {
 
   return (
     <>
+      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
         linkText={
           idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios']

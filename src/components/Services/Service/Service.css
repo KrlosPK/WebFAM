@@ -127,6 +127,11 @@
   object-fit: contain;
   width: 60vw;
 }
+.aside__modal-service {
+  display: flex;
+  gap: 0 1rem;
+  flex-wrap: wrap;
+}
 
 /* * Gallery Responsive */
 @media all and (min-width: 320px) {
@@ -160,6 +165,9 @@
   .service-aside .aside__modal-service {
     margin: 1rem auto 0;
   }
+  .aside__modal-service {
+    display: block;
+  }
   .offers {
     grid-template-columns: 1fr;
     margin: auto;
@@ -178,7 +186,7 @@
     padding: 0;
   }
   .service-aside button {
-    margin: 1rem auto 0;
+    margin-inline: auto;
   }
   .description__title {
     text-align: center;
