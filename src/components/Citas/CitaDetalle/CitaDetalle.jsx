@@ -1,31 +1,25 @@
+import './CitaDetalle.css'
+
 // ? Components
-import { getToken, Navbar, ResponsiveNav } from '../Utils'
-import { Footer } from '../Home/Footer/Footer'
-import { AboutUs } from '../AboutUs/AboutUs'
+import { ToastContainer, Zoom } from 'react-toastify'
+import { getToken, Navbar, ResponsiveNav } from '../../Utils'
+import { Footer } from '../../Home/Footer/Footer'
 
-//* Hooks
+// ? Hooks
+import { useParams } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
-import { SessionContext } from '../../context/SessionContext'
-import jwtDecode from 'jwt-decode'
-import { ToastifyContext } from '../../context/ToastifyContext'
-import { toast, ToastContainer, Zoom } from 'react-toastify'
 
-const Services = () => {
-  // ? Context
+// ? Context
+import { SessionContext } from '../../../context/SessionContext'
+import jwtDecode from 'jwt-decode'
+
+const CitaDetalle = () => {
+  const { idCita } = useParams()
   const { session, tempSession } = useContext(SessionContext)
-  const { toastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
   const [idRol, setIdRol] = useState(null)
-  const [title, setTitle] = useState('FADEMET Montajes | Servicios')
-
-  useEffect(() => {
-    if (toastify === 'serviceCreated') {
-      toast.success('¡Servicio creado con éxito!', {
-        theme: 'colored'
-      })
-    }
-  }, [toastify])
+  const [title, setTitle] = useState('FADEMET Montajes | Cita')
 
   useEffect(() => {
     !session ? setButton(1) : setButton(2)
@@ -47,8 +41,6 @@ const Services = () => {
   }, [])
 
   useEffect(() => {
-    // ? Scroll to top
-    window.scrollTo(0, 0)
     document.title = title
   }, [setTitle])
 
@@ -69,10 +61,10 @@ const Services = () => {
         linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services']}
         renderButtons={button}
       />
-      <AboutUs />
+      <h1>Cita {idCita}</h1>
       <Footer />
     </>
   )
 }
 
-export { Services }
+export { CitaDetalle }

@@ -7,15 +7,19 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 //* Hooks
 import { useContext, useEffect, useState } from 'react'
-import { SessionContext } from '../../../context/SessionContext'
 import { useNavigate, useParams } from 'react-router-dom'
+
+// ? Context
+import { SessionContext } from '../../../context/SessionContext'
+
+// ? Libraries
 import axios from 'axios'
+import jwtDecode from 'jwt-decode'
 
 // ? Icons
 import { AiOutlineCar } from 'react-icons/ai'
 import { GrHostMaintenance } from 'react-icons/gr'
 import { BsPatchCheck, BsCalendarEvent } from 'react-icons/bs'
-import jwtDecode from 'jwt-decode'
 
 const Service = () => {
   // ? Context
@@ -126,7 +130,10 @@ const Service = () => {
             <h2 className='service-aside__title'>{service[0] && service[0].nombre_servicio}</h2>
             <p className='service-aside__desc'>{service[0] && service[0].descripcion_servicio}</p>
             <div className='aside__modal-service'>
-              <ModalService />
+              <ModalService
+                nombre_servicio={service[0] && service[0].nombre_servicio}
+                id_servicio={service[0] && service[0].id_servicio}
+              />
             </div>
           </aside>
         </div>

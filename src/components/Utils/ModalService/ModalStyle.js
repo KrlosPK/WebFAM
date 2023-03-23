@@ -26,6 +26,7 @@ export const style = {
   },
   modalSpan: {
     color: 'gray',
-    fontSize: '13px'
+    fontSize: '13px',
+    marginTop: '0.5rem'
   }
 }

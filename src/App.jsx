@@ -9,6 +9,7 @@ import { Register } from './components/Register/Register'
 import { Services } from './components/Services/Services'
 import { Service } from './components/Services/Service/Service'
 import { Citas } from './components/Citas/Citas'
+import { CitaDetalle } from './components/Citas/CitaDetalle/CitaDetalle'
 import { EditUser } from './components/EditUser/EditUser'
 import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
 import { AddService } from './components/Services/AddService/AddService'
@@ -37,6 +38,7 @@ export const App = () => {
 
       <Route element={<ProtectedRoute session={!tempSession} redirectTo='/login' />}>
         <Route path='/citas' element={<Citas />} />
+        <Route path='/citas/:idCita' element={<CitaDetalle />} />
       </Route>
 
       <Route path='/recover-password' element={<RecoverPassword />} />
