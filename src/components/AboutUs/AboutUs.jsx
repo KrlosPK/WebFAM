@@ -1,7 +1,7 @@
 import './AboutUs.css'
 
 // ? Components
-import { API_URL, Button2, Card, getToken } from '../Utils'
+import { API_URL, Button2, Card } from '../Utils'
 import { Link } from 'react-router-dom'
 
 // * Hooks
@@ -10,13 +10,14 @@ import { useEffect, useState } from 'react'
 // ? Libraries
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
+import Cookies from 'js-cookie'
 
 const AboutUs = () => {
   const [services, setServices] = useState(null)
   const [idRol, setIdRol] = useState(null)
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
     if (token !== null) {
       const decode = jwtDecode(token)
       setIdRol(decode.data[0].id_rol)

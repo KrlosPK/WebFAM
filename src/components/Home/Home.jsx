@@ -11,9 +11,10 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import jwtDecode from 'jwt-decode'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
+import Cookies from 'js-cookie'
 
 //* Components
-import { Button, Button2, ResponsiveNav, Navbar, getToken } from '../Utils'
+import { Button, Button2, ResponsiveNav, Navbar } from '../Utils'
 import { Team } from './Team/Team'
 import { Provide } from './Provide/Provide'
 import { FrequentQuestions } from './FrequentQuestions/FrequentQuestions'
@@ -26,7 +27,7 @@ import { SessionContext } from '../../context/SessionContext'
 
 const Home = () => {
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
   const { toastify, setToastify } = useContext(ToastifyContext)
   const [idRol, setIdRol] = useState(null)
 
@@ -35,7 +36,7 @@ const Home = () => {
   }, [setToastify])
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     if (!token) return
 
@@ -49,14 +50,12 @@ const Home = () => {
   }, [])
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
-
     document.title = 'FADEMET Montajes | Inicio'
   }, [])
+
+  useEffect(() => {
+    !session ? setButton(1) : setButton(2)
+  }, [session])
 
   const [button, setButton] = useState(null)
 

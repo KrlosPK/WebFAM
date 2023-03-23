@@ -26,18 +26,18 @@ import { ProtectedRoute } from './components/Utils'
 import { SessionContext } from './context/SessionContext'
 
 export const App = () => {
-  const { tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   return (
     <Routes>
-      <Route element={<ProtectedRoute session={tempSession} />}>
+      <Route element={<ProtectedRoute session={session} />}>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
       </Route>
 
-      {tempSession && <Route path='/account' element={<EditUser />} />}
+      {session && <Route path='/account' element={<EditUser />} />}
 
-      <Route element={<ProtectedRoute session={!tempSession} redirectTo='/login' />}>
+      <Route element={<ProtectedRoute session={!session} redirectTo='/login' />}>
         <Route path='/citas' element={<Citas />} />
         <Route path='/citas/:idCita' element={<CitaDetalle />} />
       </Route>

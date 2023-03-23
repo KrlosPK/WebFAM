@@ -2,7 +2,7 @@ import './CitaDetalle.css'
 
 // ? Components
 import { ToastContainer, Zoom } from 'react-toastify'
-import { getToken, Navbar, ResponsiveNav } from '../../Utils'
+import { Navbar, ResponsiveNav } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 
 // ? Hooks
@@ -13,15 +13,18 @@ import { useContext, useEffect, useState } from 'react'
 import { SessionContext } from '../../../context/SessionContext'
 import jwtDecode from 'jwt-decode'
 
+// * Libs
+import Cookies from 'js-cookie'
+
 const CitaDetalle = () => {
   const { idCita } = useParams()
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   const [button, setButton] = useState(null)
   const [idRol, setIdRol] = useState(null)
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     if (!token) return
 
@@ -35,11 +38,7 @@ const CitaDetalle = () => {
   }, [])
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
+    !session ? setButton(1) : setButton(2)
 
     window.scrollTo(0, 0)
 

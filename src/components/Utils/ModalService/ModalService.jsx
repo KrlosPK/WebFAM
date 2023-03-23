@@ -2,7 +2,7 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 
 // ? Components
-import { API_URL, getToken, Input, TextArea } from '../../Utils'
+import { API_URL, Input, TextArea } from '../../Utils'
 import { Button2 } from '../Button2/Button2'
 
 // ? MUI
@@ -17,6 +17,7 @@ import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import { SessionContext } from '../../../context/SessionContext'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
+import Cookies from 'js-cookie'
 
 const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
   const nombreInputEl = useRef()
@@ -24,7 +25,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
   const numCelularInputEl = useRef()
   const descripcionCitaInputEl = useRef()
 
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   const [openModal, setOpenModal] = useState(false)
   const [openSnackbar, setOpenSnackbar] = useState(false)
@@ -103,9 +104,9 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
   }
 
   const getUserData = async () => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
-    if (!session && !tempSession) return
+    if (!session) return
 
     if (!token) return
 

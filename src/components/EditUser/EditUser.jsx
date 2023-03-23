@@ -8,8 +8,6 @@ import {
   Input,
   Navbar,
   validatePassword,
-  setTokenData,
-  getToken,
   ResponsiveNav,
   storage,
   Button,
@@ -30,22 +28,21 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import { uuidv4 } from '@firebase/util'
 import Swal from 'sweetalert2'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import Cookies from 'js-cookie'
 
 // ? Icons
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { AiFillEdit } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
 
 const EditUser = () => {
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
+  const navigate = useNavigate()
 
   // ! Cambiar título de la página
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
+    !session ? setButton(1) : setButton(2)
     document.title = 'FADEMET Montajes | Editar Perfil'
   }, [])
 
@@ -73,7 +70,12 @@ const EditUser = () => {
   const [disabled, setDisabled] = useState(true)
 
   const getUserData = async () => {
-    const token = getToken()
+    const token = Cookies.get('token')
+
+    if (!token) {
+      navigate('/login')
+      return
+    }
 
     const decoded = await jwtDecode(token)
 
@@ -182,7 +184,8 @@ const EditUser = () => {
           .then(({ data }) => {
             const { token } = data
 
-            setTokenData(token)
+            const domain = window.location.hostname
+            Cookies.set('token', token, { domain, path: '' })
 
             getUserData()
           })
@@ -289,7 +292,7 @@ const EditUser = () => {
   const [button, setButton] = useState(null)
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     new Promise((resolve, reject) => {
       const decoded = jwtDecode(token)
@@ -345,7 +348,8 @@ const EditUser = () => {
         axios.post(API_URL(`nuevoToken/${userData.id_usuario}`)).then(({ data }) => {
           const { token } = data
 
-          setTokenData(token)
+          const domain = window.location.hostname
+          Cookies.set('token', token, { domain, path: '' })
 
           getUserData()
         })
@@ -383,7 +387,8 @@ const EditUser = () => {
               }
             )
 
-            setTokenData(token)
+            const domain = window.location.hostname
+            Cookies.set('token', token, { domain, path: '' })
 
             setTempPhoto(null)
             getUserData()

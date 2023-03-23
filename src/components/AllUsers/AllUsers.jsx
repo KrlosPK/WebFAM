@@ -11,27 +11,24 @@ import { Footer } from '../Home/Footer/Footer'
 // * Libs
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 // * Utils
-import { API_URL, Button2, getToken, MiniCard, Navbar, ResponsiveNav } from '../Utils'
+import { API_URL, Button2, MiniCard, Navbar, ResponsiveNav } from '../Utils'
 
 // * Styles
 import './AllUsers.css'
 
 const AllUsers = () => {
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   // * States
   const [button, setButton] = useState(null)
   const [localRolId, setLocalRolId] = useState(null)
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
+    !session ? setButton(1) : setButton(2)
 
     window.scrollTo(0, 0)
 
@@ -41,8 +38,11 @@ const AllUsers = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const token = getToken()
-    if (!token) return navigate('/')
+    const token = Cookies.get('token')
+    if (!token) {
+      navigate('/')
+      return
+    }
     const decode = jwtDecode(token)
     const { id_rol } = decode.data[0]
     setLocalRolId(id_rol)

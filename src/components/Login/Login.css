@@ -181,11 +181,6 @@
   background: var(--orange-gradient);
 }
 
-/** Login Button */
-.remind-me Button {
-  color: white;
-}
-
 /* Register section */
 .breaker-footer {
   height: 1px;

@@ -2,7 +2,7 @@ import './Citas.css'
 
 // ? Components
 import { Footer } from '../Home/Footer/Footer'
-import { API_URL, getToken, LongCard, Navbar, ResponsiveNav } from '../Utils'
+import { API_URL, LongCard, Navbar, ResponsiveNav } from '../Utils'
 import { Button } from '@mui/material'
 
 // ? Hooks
@@ -15,9 +15,10 @@ import { SessionContext } from '../../context/SessionContext'
 // ? Libraries
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 const Citas = () => {
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   const [button, setButton] = useState(null)
   const navigate = useNavigate()
@@ -26,7 +27,7 @@ const Citas = () => {
   const [datesState, setDatesState] = useState('pendientes')
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
     if (!token) return navigate('/login')
     const decode = jwtDecode(token)
     const { id_rol } = decode.data[0]
@@ -34,11 +35,7 @@ const Citas = () => {
   }, [])
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
+    !session ? setButton(1) : setButton(2)
 
     window.scrollTo(0, 0)
 

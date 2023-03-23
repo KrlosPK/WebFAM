@@ -2,8 +2,7 @@ import './ResponsiveNav.css'
 
 // ? Components
 import { Button, Button2 } from '../'
-import { Link } from 'react-router-dom'
-import { getToken } from '../GetToken/GetToken'
+import { Link, useNavigate } from 'react-router-dom'
 
 //* Hooks
 import { useState, useContext, useEffect } from 'react'
@@ -14,6 +13,7 @@ import { SessionContext } from '../../../context/SessionContext'
 //* Libraries
 import jwtDecode from 'jwt-decode'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import Cookies from 'js-cookie'
 
 // ? Icons
 import { AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
@@ -44,15 +44,15 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
     setButtonIsClicked('')
   }
 
-  const { tempSession, setSession, setTempSession } = useContext(SessionContext)
+  const { session, setSession } = useContext(SessionContext)
+  const navigate = useNavigate()
 
   const logout = () => {
-    localStorage.removeItem('session')
-    sessionStorage.removeItem('session')
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    Cookies.remove('token')
     setSession(false)
-    setTempSession(false)
+    navigate('/')
   }
+
   useEffect(() => {
     getUserId()
   }, [])
@@ -61,7 +61,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
   const defaultImage = '/default-avatar.png'
 
   const getUserId = async () => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     if (!token) return
 
@@ -81,7 +81,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
   return (
     <div className='menu' onBlur={hideNav}>
       <div className={navClassName}>
-        {tempSession && (
+        {session && (
           <li className='options__option'>
             <LazyLoadImage
               loading='lazy'

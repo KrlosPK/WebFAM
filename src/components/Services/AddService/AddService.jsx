@@ -12,9 +12,10 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { v4 as uuidv4 } from 'uuid'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 // * Components
-import { API_URL, Button2, getToken, Input, Navbar, ResponsiveNav, storage } from '../../Utils'
+import { API_URL, Button2, Input, Navbar, ResponsiveNav, storage } from '../../Utils'
 
 // * Styles
 import './AddService.css'
@@ -24,7 +25,7 @@ const AddService = () => {
   const navigate = useNavigate()
 
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
   const { setToastify } = useContext(ToastifyContext)
 
   // * States
@@ -136,11 +137,7 @@ const AddService = () => {
 
   // * Renderizar botones de navbar
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
+    !session ? setButton(1) : setButton(2)
   }, [])
 
   useEffect(() => {
@@ -151,7 +148,7 @@ const AddService = () => {
 
   // * Validate if user is admin
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
     if (!token) {
       navigate('/login')
       return

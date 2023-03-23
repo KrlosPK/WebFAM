@@ -1,5 +1,5 @@
 // ? Components
-import { getToken, Navbar, ResponsiveNav } from '../Utils'
+import { Navbar, ResponsiveNav } from '../Utils'
 import { Footer } from '../Home/Footer/Footer'
 import { AboutUs } from '../AboutUs/AboutUs'
 
@@ -13,10 +13,11 @@ import { SessionContext } from '../../context/SessionContext'
 import jwtDecode from 'jwt-decode'
 import { ToastifyContext } from '../../context/ToastifyContext'
 import { toast, ToastContainer, Zoom } from 'react-toastify'
+import Cookies from 'js-cookie'
 
 const Services = () => {
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
   const { toastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
@@ -31,15 +32,11 @@ const Services = () => {
   }, [toastify])
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
-  }, [session, tempSession])
+    !session ? setButton(1) : setButton(2)
+  }, [])
 
   useEffect(() => {
-    const token = getToken()
+    const token = Cookies.get('token')
 
     if (!token) return
 

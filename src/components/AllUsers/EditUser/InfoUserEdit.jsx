@@ -1,12 +1,22 @@
+// * Styles
 import './InfoUserEdit.css'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { toast, ToastContainer, Zoom } from 'react-toastify'
+import { AiFillEdit } from 'react-icons/ai'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
+
+// * Hooks
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+
+// ? Context
 import { SessionContext } from '../../../context/SessionContext'
+
+// * Utils
 import {
   API_URL,
   Button,
   Button2,
-  getToken,
   Input,
   inputChangeCheck,
   Navbar,
@@ -15,19 +25,18 @@ import {
   storage,
   validatePassword
 } from '../../Utils'
+
+// * Libs
 import { Footer } from '../../Home/Footer/Footer'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
-import { toast, ToastContainer, Zoom } from 'react-toastify'
 import { getDownloadURL, ref, uploadBytes } from '@firebase/storage'
 import { uuidv4 } from '@firebase/util'
 import axios from 'axios'
-import { AiFillEdit } from 'react-icons/ai'
-import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import jwtDecode from 'jwt-decode'
+import Cookies from 'js-cookie'
 
 const InfoUserEdit = () => {
   // ? Context
-  const { session, tempSession } = useContext(SessionContext)
+  const { session } = useContext(SessionContext)
 
   // * States
   const [button, setButton] = useState(null)
@@ -79,8 +88,11 @@ const InfoUserEdit = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const token = getToken()
-    if (!token) return navigate('/')
+    const token = Cookies.get('token')
+    if (!token) {
+      navigate('/')
+      return
+    }
     const decode = jwtDecode(token)
     const { id_rol } = decode.data[0]
     if (id_rol !== 1) return navigate('/')
@@ -89,11 +101,7 @@ const InfoUserEdit = () => {
   // ! Cambiar título de la página
 
   useEffect(() => {
-    if (!session || !tempSession) {
-      setButton(1)
-    } else {
-      setButton(2)
-    }
+    !session ? setButton(1) : setButton(2)
 
     window.scrollTo(0, 0)
 
