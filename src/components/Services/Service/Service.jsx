@@ -47,12 +47,22 @@ const Service = () => {
         theme: 'colored'
       })
     }
+    if (toastify === 'citaAgendada') {
+      toast.success('¡Cita agendada con éxito!', {
+        theme: 'colored'
+      })
+    }
+    if (toastify === 'citaAgendadaError') {
+      toast.error('¡Hubo un error al crear la cita!', {
+        theme: 'colored'
+      })
+    }
   }, [toastify])
 
   useEffect(() => {
     const token = Cookies.get('token')
 
-    if (token === null) return
+    if (!token) return
 
     new Promise((resolve, reject) => {
       const decoded = jwtDecode(token)

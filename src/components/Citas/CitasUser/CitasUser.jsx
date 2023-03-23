@@ -69,10 +69,17 @@ const CitasUser = () => {
         linkUrl={['/', '/services', '/mis-citas']}
         renderButtons={button}
       />
-      {!userDates && <div className='citas-loader'>Cargando...</div>}
-      <section className='mis-citas'>
-        <h1 className='title__center'>Estas son tus citas:</h1>
-      </section>
+      {!userDates && (
+        <section className='mis-citas'>
+          {' '}
+          <h2 className='title__center'>Aún no tienes citas</h2>
+        </section>
+      )}
+      {userDates && (
+        <section className='mis-citas'>
+          <h2 className='title__center'>Estas son tus citas:</h2>
+        </section>
+      )}
       <Footer />
     </>
   )
