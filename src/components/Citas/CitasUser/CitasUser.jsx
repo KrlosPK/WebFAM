@@ -71,7 +71,6 @@ const CitasUser = () => {
       />
       {!userDates && (
         <section className='mis-citas'>
-          {' '}
           <h2 className='title__center'>Aún no tienes citas</h2>
         </section>
       )}
