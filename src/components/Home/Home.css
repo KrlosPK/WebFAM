@@ -59,7 +59,7 @@
   justify-content: center;
   margin: auto;
   min-height: 35vh;
-  width: 70%;
+  padding: 0 2rem;
 }
 .service {
   align-items: center;
@@ -80,6 +80,9 @@
   .home-container h1 {
     font-size: calc(3em + 1vmin);
     width: 600px;
+  }
+  .services {
+    margin: 2rem auto;
   }
 }
 @media (max-width: 630px) {
