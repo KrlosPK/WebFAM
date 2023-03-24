@@ -2,31 +2,26 @@
   {
     "id": 1,
     "name": "Plataformas",
-    "url": "/aparejo.png"
+    "url": "/service-aparejo.png"
   },
   {
     "id": 2,
     "name": "Casetas",
-    "url": "/crisol.png"
+    "url": "/service-caseta.png"
   },
   {
     "id": 3,
     "name": "Pérgolas",
-    "url": "/horno.png"
+    "url": "/service-pergola.png"
   },
   {
     "id": 4,
     "name": "Mezzanine",
-    "url": "/metal.png"
+    "url": "/service-mezanine.png"
   },
   {
     "id": 5,
     "name": "Cubiertas",
-    "url": "/soldador.png"
-  },
-  {
-    "id": 6,
-    "name": "Asesoría",
-    "url": "/yunque.png"
+    "url": "/service-cubierta.png"
   }
 ]
