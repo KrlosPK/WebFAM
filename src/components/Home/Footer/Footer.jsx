@@ -29,6 +29,7 @@ const Footer = () => {
           <LazyLoadImage
             src='/whatsapp.png'
             loading='lazy'
+            efect='blur'
             width={32}
             height={32}
             alt='Whatsapp de Fademet Montajes'
@@ -42,6 +43,7 @@ const Footer = () => {
           <LazyLoadImage
             src='/instagram.png'
             loading='lazy'
+            efect='blur'
             width={32}
             height={32}
             alt='Página de INSTAGRAM de Fademet Montajes'
