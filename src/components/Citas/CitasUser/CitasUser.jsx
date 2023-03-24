@@ -43,11 +43,19 @@ const CitasUser = () => {
     }
     const decoded = jwtDecode(token)
     const { id_usuario } = decoded.data[0]
-    axios.get(API_URL(`citasUsuario/${id_usuario}`)).then(({ data }) => {
-      const { cita } = data
-      setUserDates(cita[0])
-      mapSchedule(cita)
-    })
+    axios
+      .get(API_URL(`citasUsuario/${id_usuario}`))
+      .then(({ data }) => {
+        const { cita } = data
+        setUserDates(cita[0])
+        mapSchedule(cita)
+      })
+      .catch(({ response }) => {
+        if (response.status === 404) {
+          throw new Error('No se encontraron citas')
+        }
+        setUserDates(null)
+      })
   }, [])
 
   // Mapear todas las citas en una funcion y luego llamarla en el return
