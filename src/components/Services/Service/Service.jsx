@@ -127,35 +127,35 @@ const Service = () => {
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
         linkText={
-          idRol && idRol !== 2
-            ? ['Inicio', 'Agendas', 'Servicios']
-            : !session
-              ? ['Inicio', 'Servicios']
-              : ['Inicio', 'Servicios', 'Mis Agendas']
+          !session
+            ? ['Inicio', 'Servicios']
+            : idRol && idRol === 2
+              ? ['Inicio', 'Servicios', 'Mis Agendas']
+              : ['Inicio', 'Agendas', 'Servicios']
         }
         linkUrl={
-          idRol && idRol !== 2
-            ? ['/', '/citas', '/services']
-            : !session
-              ? ['/', '/services']
-              : ['/', '/services', '/mis-citas']
+          !session
+            ? ['/', '/services']
+            : idRol && idRol === 2
+              ? ['/', '/services', '/mis-citas']
+              : ['/', '/citas', '/services']
         }
         renderButtons={button}
       />
       <Navbar
         linkText={
-          idRol && idRol !== 2
-            ? ['Inicio', 'Agendas', 'Servicios']
-            : !session
-              ? ['Inicio', 'Servicios']
-              : ['Inicio', 'Servicios', 'Mis Agendas']
+          !session
+            ? ['Inicio', 'Servicios']
+            : idRol && idRol === 2
+              ? ['Inicio', 'Servicios', 'Mis Agendas']
+              : ['Inicio', 'Agendas', 'Servicios']
         }
         linkUrl={
-          idRol && idRol !== 2
-            ? ['/', '/citas', '/services']
-            : !session
-              ? ['/', '/services']
-              : ['/', '/services', '/mis-citas']
+          !session
+            ? ['/', '/services']
+            : idRol && idRol === 2
+              ? ['/', '/services', '/mis-citas']
+              : ['/', '/citas', '/services']
         }
         renderButtons={button}
       />
