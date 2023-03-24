@@ -64,7 +64,9 @@ const EditUser = () => {
   const nombreInputEl = useRef(null)
   const apellidosInputEl = useRef(null)
   const numCelularInputEl = useRef(null)
+  const userImageEl = useRef(null)
 
+  const [button, setButton] = useState(null)
   const [userData, setUserData] = useState({})
   const defaultImage = '/default-avatar.png'
   const [disabled, setDisabled] = useState(true)
@@ -289,8 +291,6 @@ const EditUser = () => {
     form === 'editUser' ? setForm('changePassword') : setForm('editUser')
   }
 
-  const [button, setButton] = useState(null)
-
   useEffect(() => {
     const token = Cookies.get('token')
 
@@ -302,8 +302,6 @@ const EditUser = () => {
       setIdRol(decoded[0].id_rol)
     })
   }, [])
-
-  const userImageEl = useRef(null)
 
   const uploadUserPhoto = async (e) => {
     e.preventDefault()
@@ -408,7 +406,7 @@ const EditUser = () => {
     const file = userImageEl.current.files[0]
     const imageBlob = new Blob([file], { type: file.type })
     toast.info(
-      'La imagen se visualizará de esta manera. Por favor, haz clic en "Actualizar foto" para que se reflejen los cambios.',
+      'La imagen se visualizará de esta manera. Haz clic en "Actualizar foto" para que se reflejen los cambios.',
       { theme: 'colored' }
     )
     setTempPhoto(imageBlob)
@@ -418,13 +416,25 @@ const EditUser = () => {
     <section>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
-        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios', 'Mis Agendas']}
-        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']}
+        linkText={
+          idRol && idRol !== 2
+            ? ['Inicio', 'Agendas', 'Servicios']
+            : ['Inicio', 'Servicios', 'Mis Agendas']
+        }
+        linkUrl={
+          idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']
+        }
         renderButtons={button}
       />
       <Navbar
-        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios', 'Mis Agendas']}
-        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']}
+        linkText={
+          idRol && idRol !== 2
+            ? ['Inicio', 'Agendas', 'Servicios']
+            : ['Inicio', 'Servicios', 'Mis Agendas']
+        }
+        linkUrl={
+          idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']
+        }
         renderButtons={button}
       />
       <section className='edit-user'>

@@ -1,5 +1,6 @@
 // ? Hooks
 import { useContext, useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // ? Components
 import { API_URL, Input, TextArea } from '../../Utils'
@@ -15,9 +16,11 @@ import { style } from './ModalStyle'
 // ? Libraries
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
-import { SessionContext } from '../../../context/SessionContext'
-import { toast, ToastContainer, Zoom } from 'react-toastify'
 import Cookies from 'js-cookie'
+
+// ? Context
+import { SessionContext } from '../../../context/SessionContext'
+import { ToastifyContext } from '../../../context/ToastifyContext'
 
 const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
   const nombreInputEl = useRef()
@@ -26,15 +29,28 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
   const descripcionCitaInputEl = useRef()
 
   const { session } = useContext(SessionContext)
+  const { setToastify } = useContext(ToastifyContext)
 
   const [openModal, setOpenModal] = useState(false)
   const [openSnackbar, setOpenSnackbar] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
   const [userData, setUserData] = useState({})
 
-  const handleModalClick = () => (openModal ? setOpenModal(false) : setOpenModal(true))
+  const navigate = useNavigate()
+
+  const handleModalClick = () => {
+    (openModal ? setOpenModal(false) : setOpenModal(true))
+    validateSession()
+  }
   const handleSnackbarClick = () => (openSnackbar ? setOpenSnackbar(false) : setOpenSnackbar(true))
   const focusInput = (input) => input.current.focus()
+
+  const validateSession = () => {
+    if (!session) {
+      navigate('/login')
+      setToastify('citaValidar')
+    }
+  }
 
   const validateForm = () => {
     const nombre = nombreInputEl.current.value
@@ -88,20 +104,17 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
         id_servicio
       })
       .then(() => {
-        toast.success('¡La cita se ha creado con éxito!', {
-          theme: 'colored'
-        })
+        setToastify('citaAgendada')
         setOpenModal(false)
       })
       .catch(() => {
-        toast.info(
-          '¡Hemos agendado una cita para ti y estaremos encantados de atender tu solicitud en breve! 😄',
-          {
-            theme: 'colored'
-          }
-        )
+        setToastify('citaAgendadaError')
       })
   }
+
+  useEffect(() => {
+    setToastify(false)
+  }, [setToastify])
 
   const getUserData = async () => {
     const token = Cookies.get('token')
@@ -132,7 +145,6 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
 
   return (
     <div>
-      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <Button2 innerOnClick={handleModalClick} text='Solicitar' width={220} />
       <Modal
         open={openModal}

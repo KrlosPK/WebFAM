@@ -57,7 +57,7 @@
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-  margin: 2rem auto;
+  margin: auto;
   min-height: 35vh;
   width: 70%;
 }
@@ -75,30 +75,6 @@
   color: var(--text-color);
   display: flex;
 }
-
-/* @media (min-height: 630px) AND (max-height: 750px) {
-  .services {
-    margin-top: 5rem;
-  }
-}
-@media (max-height: 630px) {
-  .services {
-    margin-bottom: 3rem;
-    margin-top: 6rem;
-  }
-}
-@media (max-height: 610px) {
-  .services {
-    margin-bottom: 3rem;
-    margin-top: 10rem;
-  }
-}
-@media (max-height: 500px) {
-  .services {
-    margin-bottom: 4rem;
-    margin-top: 19rem;
-  }
-} */
 
 @media (max-width: 857px) {
   .home-container h1 {

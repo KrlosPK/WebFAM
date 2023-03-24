@@ -35,6 +35,7 @@
 
 .navigation .options__option {
   align-items: center;
+  cursor: pointer;
   display: flex;
   gap: 8px;
   justify-content: center;
@@ -42,6 +43,9 @@
   position: absolute;
   right: 0;
   top: 0;
+}
+.navigation .options__option:hover {
+  background: #777;
 }
 
 .menu {

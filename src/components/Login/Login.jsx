@@ -46,6 +46,12 @@ const Login = () => {
       })
       focusInput(correoInputEl)
     }
+    if (toastify === 'citaValidar') {
+      toast.info('¡Debes iniciar sesión para agendar una cita!', {
+        theme: 'colored'
+      })
+      focusInput(correoInputEl)
+    }
   }, [toastify])
 
   const navigate = useNavigate()

@@ -47,12 +47,22 @@ const Service = () => {
         theme: 'colored'
       })
     }
+    if (toastify === 'citaAgendada') {
+      toast.success('¡Cita agendada con éxito!', {
+        theme: 'colored'
+      })
+    }
+    if (toastify === 'citaAgendadaError') {
+      toast.error('¡Hubo un error al crear la cita!', {
+        theme: 'colored'
+      })
+    }
   }, [toastify])
 
   useEffect(() => {
     const token = Cookies.get('token')
 
-    if (token === null) return
+    if (!token) return
 
     new Promise((resolve, reject) => {
       const decoded = jwtDecode(token)
@@ -116,13 +126,37 @@ const Service = () => {
     <>
       <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
-        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios', 'Mis Agendas']}
-        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']}
+        linkText={
+          !session
+            ? ['Inicio', 'Servicios']
+            : idRol && idRol === 2
+              ? ['Inicio', 'Servicios', 'Mis Agendas']
+              : ['Inicio', 'Agendas', 'Servicios']
+        }
+        linkUrl={
+          !session
+            ? ['/', '/services']
+            : idRol && idRol === 2
+              ? ['/', '/services', '/mis-citas']
+              : ['/', '/citas', '/services']
+        }
         renderButtons={button}
       />
       <Navbar
-        linkText={idRol && idRol !== 2 ? ['Inicio', 'Agendas', 'Servicios'] : ['Inicio', 'Servicios', 'Mis Agendas']}
-        linkUrl={idRol && idRol !== 2 ? ['/', '/citas', '/services'] : ['/', '/services', '/mis-citas']}
+        linkText={
+          !session
+            ? ['Inicio', 'Servicios']
+            : idRol && idRol === 2
+              ? ['Inicio', 'Servicios', 'Mis Agendas']
+              : ['Inicio', 'Agendas', 'Servicios']
+        }
+        linkUrl={
+          !session
+            ? ['/', '/services']
+            : idRol && idRol === 2
+              ? ['/', '/services', '/mis-citas']
+              : ['/', '/citas', '/services']
+        }
         renderButtons={button}
       />
       <section className='service-info'>
@@ -146,7 +180,7 @@ const Service = () => {
               />
               {idRol && idRol !== 2 && (
                 <Link to={`/edit-service/${serviceId}`}>
-                  <Button text={'Editar servicio'} height={'41px'} width={'220px'}/>
+                  <Button text={'Editar servicio'} height={'41px'} width={'220px'} />
                 </Link>
               )}
             </div>
