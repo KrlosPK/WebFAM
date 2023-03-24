@@ -82,7 +82,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
     <div className='menu' onBlur={hideNav}>
       <div className={navClassName}>
         {session && (
-          <li className='options__option'>
+          <Link to='/account' className='options__option'>
             <LazyLoadImage
               loading='lazy'
               src={userData.picture || defaultImage}
@@ -92,7 +92,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
               alt={`Foto de Perfil de ${userData.name}}`}
             />
             <strong className='user__name'>{userData.name}</strong>
-          </li>
+          </Link>
         )}
         {linkText &&
           linkText.map((el, i) => {
