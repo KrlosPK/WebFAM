@@ -1,8 +1,9 @@
 .edit-user {
   border-radius: 15px;
   flex: 1;
-  margin: 2rem;
-  padding: 3rem 1rem;
+  margin: 0 2rem;
+  padding: 1rem;
+  padding-bottom: 3rem;
 }
 .edit-user__header {
   align-items: center;
