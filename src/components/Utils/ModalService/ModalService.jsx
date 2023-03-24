@@ -39,7 +39,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
   const navigate = useNavigate()
 
   const handleModalClick = () => {
-    (openModal ? setOpenModal(false) : setOpenModal(true))
+    openModal ? setOpenModal(false) : setOpenModal(true)
     validateSession()
   }
   const handleSnackbarClick = () => (openSnackbar ? setOpenSnackbar(false) : setOpenSnackbar(true))
@@ -58,46 +58,47 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
     const num_celular = numCelularInputEl.current.value
     const descripcion_cita = descripcionCitaInputEl.current.value
 
+    const fecha = new Date()
+    const hora_creacion_cita =
+      fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds()
+    const fecha_creacion_cita =
+      fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear()
+
     if (nombre.length === 0 || /^\s+$/.test(nombre)) {
       handleSnackbarClick()
       setAlertMessage('¡El nombre no puede estar vacío!')
       focusInput(nombreInputEl)
-      return
     } else if (nombre.length < 2) {
       handleSnackbarClick()
       setAlertMessage('¡El Nombre debe tener mínimo 2 letras!')
       focusInput(nombreInputEl)
-      return
     } else if (correo.length === 0 || /^\s+$/.test(correo)) {
       handleSnackbarClick()
       setAlertMessage('¡El correo no puede estar vacío!')
       focusInput(correoInputEl)
-      return
     } else if (!/\S+@\S+/.test(correo)) {
       handleSnackbarClick()
       setAlertMessage('¡El correo debe contener "@dominio.com"!')
-      return
     } else if (!/\S+\.\S+/.test(correo)) {
       handleSnackbarClick()
       setAlertMessage('¡El correo debe contener "@dominio.com"!')
       focusInput(correoInputEl)
-      return
     } else if (num_celular.length === 0) {
       handleSnackbarClick()
       setAlertMessage('¡El Número de Celular no puede estar vacío!')
       focusInput(numCelularInputEl)
-      return
     } else if (num_celular.length < 9 || num_celular.length >= 12) {
       handleSnackbarClick()
       setAlertMessage('¡El Número de Celular debe tener entre 9 y 11 dígitos!')
       focusInput(numCelularInputEl)
-      return
     }
     axios
       .post(API_URL('citas'), {
         nombre_completo: nombre,
         correo,
         num_celular,
+        hora_creacion_cita,
+        fecha_creacion_cita,
         id_usuario: userData.id_usuario,
         nombre_servicio,
         descripcion_cita,
