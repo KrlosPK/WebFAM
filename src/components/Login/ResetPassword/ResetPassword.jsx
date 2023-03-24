@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 // ? Components
 import { API_URL, Button2, Input, Navbar, validatePassword } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 // ? Libraries
 import axios from 'axios'
@@ -159,7 +160,12 @@ const ResetPassword = () => {
         <section className='reset-password__container'>
           <div className='reset-password__card'>
             <div className='container__image'>
-              <img src='/recover-password-reset.png' alt='Correo para recuperar la contraseña' />
+              <LazyLoadImage
+                loading='lazy'
+                effect='blur'
+                src='/recover-password-reset.png'
+                alt='Correo para recuperar la contraseña'
+              />
             </div>
             <div className='container__title'>
               <h1>¡Restablece tu contraseña!</h1>

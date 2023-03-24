@@ -441,6 +441,7 @@ const EditUser = () => {
         <header className='edit-user__header'>
           <LazyLoadImage
             loading='lazy'
+            effect='blur'
             src={userData.picture || defaultImage}
             width={64}
             height={64}

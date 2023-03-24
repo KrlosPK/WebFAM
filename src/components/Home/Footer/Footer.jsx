@@ -57,6 +57,7 @@ const Footer = () => {
               src='/logotype-small.png'
               width={64}
               loading='lazy'
+              efect='blur'
               alt='Logo de la empresa FADEMET'
             />
           </Link>
