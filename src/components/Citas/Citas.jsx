@@ -28,65 +28,67 @@ const Citas = () => {
 
   useEffect(() => {
     const token = Cookies.get('token')
-    if (!token) return navigate('/login')
+    if (!token) navigate('/login')
+
     const decode = jwtDecode(token)
     const { id_rol } = decode.data[0]
-    if (id_rol === 2) return navigate('/')
+    if (id_rol === 2) navigate('/')
   }, [])
 
   useEffect(() => {
     !session ? setButton(1) : setButton(2)
 
-    window.scrollTo(0, 0)
-
     document.title = 'FADEMET Montajes | Citas'
   }, [])
 
   async function fetchPhotos (citas) {
-    const updatedCitas = []
-    for (const cita of citas) {
-      const { id_usuario, id_servicio } = cita
-      const [userPhotoResponse, servicePhotoResponse] = await Promise.all([
-        axios.get(API_URL(`usuarios/${id_usuario}`)),
-        axios.get(API_URL(`servicios/${id_servicio}`))
-      ])
-      const { foto_perfil } = userPhotoResponse.data.user[0]
-      const { foto_servicio } = servicePhotoResponse.data.service[0]
-      updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
-    }
+    const updatedCitas = await Promise.all(
+      citas.map(async (cita) => {
+        const { id_usuario, id_servicio } = cita
+        const [userPhotoResponse, servicePhotoResponse] = await axios.all([
+          axios.get(API_URL(`usuarios/${id_usuario}`)),
+          axios.get(API_URL(`servicios/${id_servicio}`))
+        ])
+        const userPhoto = userPhotoResponse?.data?.user?.[0]?.foto_perfil ?? '/default-avatar.png'
+        const servicePhoto =
+          servicePhotoResponse?.data?.service?.[0]?.foto_servicio ?? '/techo-metálico.jpg'
+        return { ...cita, userPhoto, servicePhoto }
+      })
+    )
     return updatedCitas
   }
 
   useEffect(() => {
     axios
       .get(API_URL('citas'))
-      .then(({ data }) => {
-        const { citas } = data
-        fetchPhotos(citas).then((updatedCitas) => {
-          setCitasData(updatedCitas)
-        })
-      })
+      .then(({ data }) => fetchPhotos(data.citas))
+      .then(setCitasData)
       .catch(() => {
         throw new Error('Error al obtener las citas')
       })
   }, [])
+
+  // async function fetchPhotos (citas) {
+  //   const updatedCitas = []
+  //   for (const cita of citas) {
+  //     const { id_usuario, id_servicio } = cita
+  //     const [userPhotoResponse, servicePhotoResponse] = await Promise.all([
+  //       axios.get(API_URL(`usuarios/${id_usuario}`)),
+  //       axios.get(API_URL(`servicios/${id_servicio}`))
+  //     ])
+  //     const { foto_perfil } = userPhotoResponse.data.user[0]
+  //     const { foto_servicio } = servicePhotoResponse.data.service[0]
+  //     updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
+  //   }
+  //   return updatedCitas
+  // }
 
   // useEffect(() => {
   //   axios
   //     .get(API_URL('citas'))
   //     .then(({ data }) => {
   //       const { citas } = data
-  //       setCitasData(citas)
-  //       const updatedCitas = []
-  //       const fetchUserPhotos = citas.map(async (cita) => {
-  //         const { id_usuario, id_servicio } = cita
-  //         const userPhotoResponse = await axios.get(API_URL(`usuarios/${id_usuario}`))
-  //         const { foto_perfil } = userPhotoResponse.data.user[0]
-  //         const servicePhotoResponse = await axios.get(API_URL(`servicios/${id_servicio}`))
-  //         const { foto_servicio } = servicePhotoResponse.data.service[0]
-  //         updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
-  //       })
-  //       Promise.all(fetchUserPhotos).then(() => {
+  //       fetchPhotos(citas).then((updatedCitas) => {
   //         setCitasData(updatedCitas)
   //       })
   //     })
@@ -112,28 +114,28 @@ const Citas = () => {
           <ul className='citas-nav__ul'>
             <Button
               variant='text'
-              className={datesState}
+              className={datesState === 'todas' ? 'cita-active' : ''}
               onClick={() => setDatesState('todas')}
               color='inherit'
-              sx={{ fontFamily: 'Syne', fontWeight: '400' }}
+              sx={{ fontFamily: 'Syne' }}
             >
               Todas
             </Button>
             <Button
               variant='text'
-              className={datesState}
+              className={datesState === 'pendientes' ? 'cita-active' : ''}
               onClick={() => setDatesState('pendientes')}
               color='inherit'
-              sx={{ fontFamily: 'Syne', fontWeight: '400' }}
+              sx={{ fontFamily: 'Syne' }}
             >
               Pendientes
             </Button>
             <Button
               variant='text'
-              className={datesState}
+              className={datesState === 'respondidas' ? 'cita-active' : ''}
               onClick={() => setDatesState('respondidas')}
               color='inherit'
-              sx={{ fontFamily: 'Syne', fontWeight: '400' }}
+              sx={{ fontFamily: 'Syne' }}
             >
               Respondidas
             </Button>
