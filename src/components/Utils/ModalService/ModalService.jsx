@@ -188,6 +188,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
                 innerDefaultValue={userData.email}
                 innerRef={correoInputEl}
                 nameID='correo'
+                type='email'
               />
               <Input
                 text='Número de Celular *'
