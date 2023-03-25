@@ -1,18 +1,11 @@
 import './Citas.css'
-
-// ? Components
 import { Footer } from '../Home/Footer/Footer'
-import { API_URL, LongCard, Navbar, ResponsiveNav } from '../Utils'
+import { API_URL, Navbar, ResponsiveNav } from '../Utils'
+import { Cita } from './Cita'
 import { Button } from '@mui/material'
-
-// ? Hooks
-import { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-
-// ? Context
+import { useContext, useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { SessionContext } from '../../context/SessionContext'
-
-// ? Libraries
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -23,7 +16,8 @@ const Citas = () => {
   const [button, setButton] = useState(null)
   const navigate = useNavigate()
 
-  const [citasData, setCitasData] = useState(null)
+  const [citasPendientesData, setCitasPendientesData] = useState(null)
+  const [citasRespondidasData, setCitasRespondidasData] = useState(null)
   const [datesState, setDatesState] = useState('pendientes')
 
   useEffect(() => {
@@ -31,71 +25,73 @@ const Citas = () => {
     if (!token) navigate('/login')
 
     const decode = jwtDecode(token)
-    const { id_rol } = decode.data[0]
+    const [{ id_rol }] = decode.data
     if (id_rol === 2) navigate('/')
-  }, [])
 
-  useEffect(() => {
     !session ? setButton(1) : setButton(2)
 
     document.title = 'FADEMET Montajes | Citas'
   }, [])
 
-  async function fetchPhotos (citas) {
-    const updatedCitas = await Promise.all(
-      citas.map(async (cita) => {
-        const { id_usuario, id_servicio } = cita
-        const [userPhotoResponse, servicePhotoResponse] = await axios.all([
-          axios.get(API_URL(`usuarios/${id_usuario}`)),
-          axios.get(API_URL(`servicios/${id_servicio}`))
-        ])
-        const userPhoto = userPhotoResponse?.data?.user?.[0]?.foto_perfil ?? '/default-avatar.png'
-        const servicePhoto =
-          servicePhotoResponse?.data?.service?.[0]?.foto_servicio ?? '/techo-metálico.jpg'
-        return { ...cita, userPhoto, servicePhoto }
-      })
-    )
-    return updatedCitas
+  const fetchPhotos = async (citas) => {
+    try {
+      const updatedCitas = await Promise.all(
+        citas.map(async ({ id_usuario, id_servicio, ...cita }) => {
+          const [userPhotoResponse, servicePhotoResponse] = await axios.all([
+            axios.get(API_URL(`usuarios/${id_usuario}`)),
+            axios.get(API_URL(`servicios/${id_servicio}`))
+          ])
+          const userPhoto = userPhotoResponse?.data?.user?.[0]?.foto_perfil ?? '/default-avatar.png'
+          const servicePhoto =
+            servicePhotoResponse?.data?.service?.[0]?.foto_servicio ?? '/techo-metálico.jpg'
+          return { ...cita, userPhoto, servicePhoto }
+        })
+      )
+      return updatedCitas
+    } catch (error) {
+      console.error('Error al obtener las fotos:', error)
+      throw new Error('Error al obtener las fotos')
+    }
+  }
+
+  const updateCitasPendientesData = (citas) => {
+    setCitasPendientesData(citas)
+  }
+  const updateCitasRespondidasData = (citas) => {
+    setCitasRespondidasData(citas)
+  }
+
+  const fetchCitasPendientes = async () => {
+    try {
+      const { data } = await axios.get(API_URL('citasPendientes'))
+      const updatedCitas = await fetchPhotos(data.citas)
+      updateCitasPendientesData(updatedCitas)
+    } catch (err) {
+      updateCitasPendientesData(false)
+    }
+  }
+
+  const fetchCitasRespondidas = async () => {
+    try {
+      const { data } = await axios.get(API_URL('citasRespondidas'))
+      const updatedCitas = await fetchPhotos(data.citas)
+      updateCitasRespondidasData(updatedCitas)
+    } catch (err) {
+      updateCitasRespondidasData(false)
+    }
   }
 
   useEffect(() => {
-    axios
-      .get(API_URL('citas'))
-      .then(({ data }) => fetchPhotos(data.citas))
-      .then(setCitasData)
-      .catch(() => {
-        throw new Error('Error al obtener las citas')
-      })
+    fetchCitasPendientes()
+    fetchCitasRespondidas()
   }, [])
 
-  // async function fetchPhotos (citas) {
-  //   const updatedCitas = []
-  //   for (const cita of citas) {
-  //     const { id_usuario, id_servicio } = cita
-  //     const [userPhotoResponse, servicePhotoResponse] = await Promise.all([
-  //       axios.get(API_URL(`usuarios/${id_usuario}`)),
-  //       axios.get(API_URL(`servicios/${id_servicio}`))
-  //     ])
-  //     const { foto_perfil } = userPhotoResponse.data.user[0]
-  //     const { foto_servicio } = servicePhotoResponse.data.service[0]
-  //     updatedCitas.push({ ...cita, userPhoto: foto_perfil, servicePhoto: foto_servicio })
-  //   }
-  //   return updatedCitas
-  // }
+  const memoizedPendientesData = useMemo(() => citasPendientesData, [citasPendientesData])
+  const memoizedRespondidasData = useMemo(() => citasRespondidasData, [citasRespondidasData])
 
-  // useEffect(() => {
-  //   axios
-  //     .get(API_URL('citas'))
-  //     .then(({ data }) => {
-  //       const { citas } = data
-  //       fetchPhotos(citas).then((updatedCitas) => {
-  //         setCitasData(updatedCitas)
-  //       })
-  //     })
-  //     .catch(() => {
-  //       throw new Error('Error al obtener las citas')
-  //     })
-  // }, [])
+  const getCitas = (data) => data.map(Cita)
+
+  const loading = !memoizedPendientesData && !memoizedRespondidasData
 
   return (
     <>
@@ -109,18 +105,10 @@ const Citas = () => {
         linkUrl={['/', '/citas', '/services']}
         renderButtons={button}
       />
+
       <section className='citas'>
         <nav className='citas-nav'>
           <ul className='citas-nav__ul'>
-            <Button
-              variant='text'
-              className={datesState === 'todas' ? 'cita-active' : ''}
-              onClick={() => setDatesState('todas')}
-              color='inherit'
-              sx={{ fontFamily: 'Syne' }}
-            >
-              Todas
-            </Button>
             <Button
               variant='text'
               className={datesState === 'pendientes' ? 'cita-active' : ''}
@@ -141,116 +129,23 @@ const Citas = () => {
             </Button>
           </ul>
         </nav>
-        {!citasData && <div className='citas-loader'>Cargando...</div>}
-        {citasData &&
-          datesState === 'todas' &&
-          citasData.map(
-            ({
-              id_cita,
-              nombre_completo,
-              correo,
-              num_celular,
-              nombre_servicio,
-              descripcion_cita,
-              fecha_creacion_cita,
-              hora_creacion_cita,
-              estado,
-              userPhoto,
-              servicePhoto
-            }) => {
-              return (
-                <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
-                  <span className='id-cita'>#{id_cita}</span>
-                  <LongCard
-                    foto_usuario={userPhoto || '/default-avatar.png'}
-                    nombre_completo={nombre_completo}
-                    correo={correo}
-                    num_celular={`+57 ${num_celular}`}
-                    nombre_servicio={nombre_servicio}
-                    descripcion_cita={descripcion_cita || 'Sin descripción'}
-                    foto_servicio={servicePhoto || '/techo-metálico.jpg'}
-                    fecha_servicio={fecha_creacion_cita.substring(0, 10)}
-                    hora_servicio={hora_creacion_cita.substring(0, 5)}
-                    estado_servicio={estado}
-                  />
-                </Link>
-              )
-            }
-          )}
-        {citasData &&
-          datesState === 'pendientes' &&
-          citasData
-            .filter(({ estado }) => estado === 'pendiente')
-            .map(
-              ({
-                id_cita,
-                nombre_completo,
-                correo,
-                num_celular,
-                nombre_servicio,
-                descripcion_cita,
-                fecha_creacion_cita,
-                hora_creacion_cita,
-                estado,
-                userPhoto,
-                servicePhoto
-              }) => {
-                return (
-                  <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
-                    <span className='id-cita'>#{id_cita}</span>
-                    <LongCard
-                      foto_usuario={userPhoto || '/default-avatar.png'}
-                      nombre_completo={nombre_completo}
-                      correo={correo}
-                      num_celular={`+57 ${num_celular}`}
-                      nombre_servicio={nombre_servicio}
-                      descripcion_cita={descripcion_cita || 'Sin descripción'}
-                      foto_servicio={servicePhoto || '/techo-metálico.jpg'}
-                      fecha_servicio={fecha_creacion_cita.substring(0, 10)}
-                      hora_servicio={hora_creacion_cita.substring(0, 5)}
-                      estado_servicio={estado}
-                    />
-                  </Link>
-                )
-              }
-            )}
-        {citasData &&
+
+        {loading && <div className='citas-loader'>Cargando...</div>}
+
+        {!loading && (
+          <>
+            {(!memoizedPendientesData && datesState === 'pendientes') ||
+              (!memoizedRespondidasData && datesState === 'respondidas' && (
+                <div className='title__center'>No hay citas {datesState}</div>
+              ))}
+          </>
+        )}
+
+        {memoizedPendientesData && datesState === 'pendientes' && getCitas(memoizedPendientesData)}
+
+        {memoizedRespondidasData &&
           datesState === 'respondidas' &&
-          citasData
-            .filter(({ estado }) => estado === 'respondido')
-            .map(
-              ({
-                id_cita,
-                nombre_completo,
-                correo,
-                num_celular,
-                nombre_servicio,
-                descripcion_cita,
-                fecha_creacion_cita,
-                hora_creacion_cita,
-                estado,
-                userPhoto,
-                servicePhoto
-              }) => {
-                return (
-                  <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
-                    <span className='id-cita'>#{id_cita}</span>
-                    <LongCard
-                      foto_usuario={userPhoto || '/default-avatar.png'}
-                      nombre_completo={nombre_completo}
-                      correo={correo}
-                      num_celular={`+57 ${num_celular}`}
-                      nombre_servicio={nombre_servicio}
-                      descripcion_cita={descripcion_cita || 'Sin descripción'}
-                      foto_servicio={servicePhoto || '/techo-metálico.jpg'}
-                      fecha_servicio={fecha_creacion_cita.substring(0, 10)}
-                      hora_servicio={hora_creacion_cita.substring(0, 5)}
-                      estado_servicio={estado}
-                    />
-                  </Link>
-                )
-              }
-            )}
+          getCitas(memoizedRespondidasData)}
       </section>
       <Footer />
     </>
