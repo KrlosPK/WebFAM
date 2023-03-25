@@ -76,7 +76,6 @@ const Service = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // ? Fetch serivice data
     axios
       .get(API_URL(`servicios/${serviceId}`))
       .then(({ data }) => {
@@ -86,7 +85,6 @@ const Service = () => {
         navigate('/404', { replace: true })
       })
 
-    // ? Scroll to top
     window.scrollTo(0, 0)
   }, [])
 
@@ -107,7 +105,6 @@ const Service = () => {
     document.body.appendChild(overlay)
   }
 
-  // ? Close fullscreen with escape key
   useEffect(() => {
     const closeFullscreen = (e) => {
       if (e.key === 'Escape') {
