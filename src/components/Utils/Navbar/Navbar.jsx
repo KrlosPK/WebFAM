@@ -84,12 +84,10 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
 
   const logout = () => {
     const domain = window.location.hostname
-    console.log(domain, Cookies.get('token'), Cookies.get('session'))
-    Cookies.remove('session', { domain, path: '' })
     Cookies.remove('session', { domain: `.${domain}`, path: '' })
     Cookies.remove('token', { domain: `.${domain}`, path: '' })
     setSession(false)
-    // navigate('/')
+    navigate('/')
   }
 
   const account = () => {
