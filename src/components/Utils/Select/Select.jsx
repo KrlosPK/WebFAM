@@ -1,6 +1,6 @@
 import './Select.css'
 
-const Select = ({ text, value, option, innerRef, innerOnChange, innerValue, innerName, bold = 'false', font, padding, innerDefaultValue }) => {
+const Select = ({ text, value, option, innerRef, innerOnChange, innerValue, innerName, bold = 'false', font, padding, innerDefaultValue, innerDisabled }) => {
   return (
     <div className='select-container'>
       <select
@@ -8,6 +8,7 @@ const Select = ({ text, value, option, innerRef, innerOnChange, innerValue, inne
         value={innerValue}
         onChange={innerOnChange}
         name={innerName}
+        disabled={innerDisabled}
         defaultValue={innerDefaultValue}
         className={bold === 'false' ? 'select-container__select' : 'select-container__select bold'}
         style={{ fontSize: font, padding }}
