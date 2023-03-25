@@ -108,6 +108,7 @@ const Home = () => {
         anchordUrl={['#preguntasFrecuentes']}
         renderButtons={button}
       />
+
       <main className='home-container'>
         <h1>
           SOLDANDO SUEÑOS

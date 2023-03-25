@@ -19,7 +19,7 @@ import { ToastifyContext } from '../../context/ToastifyContext'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google'
 import jwtDecode from 'jwt-decode'
 import cookie from 'js-cookie'
 
@@ -159,8 +159,9 @@ const Login = () => {
         const status = verifyStatus(estado, { toast, setDisabled })
         if (!status) return false
         const domain = window.location.hostname
-        setSession(true)
+        cookie.set('session', true, { domain, path: '' })
         cookie.set('token', token, { domain, path: '' })
+        setSession(true)
         return (token && navigate('/', { replace: true }))
       })
       .catch(() => {
@@ -236,8 +237,8 @@ const Login = () => {
                 size='medium'
                 shape='circle'
                 width='300'
-                useOneTap
                 ux_mode='popup'
+                useOneTap
               />
             </GoogleOAuthProvider>
           </div>
