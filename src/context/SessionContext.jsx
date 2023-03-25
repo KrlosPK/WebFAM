@@ -1,9 +1,11 @@
+import Cookies from 'js-cookie'
 import { createContext, useState } from 'react'
 
 const SessionContext = createContext({})
 
 export const SessionContextProvider = ({ children }) => {
-  const [session, setSession] = useState(null)
+  const sessionCookie = Cookies.get('session')
+  const [session, setSession] = useState(sessionCookie)
 
   return (
     <SessionContext.Provider value={{ session, setSession }}>

@@ -182,8 +182,9 @@ const Login = () => {
         const status = verifyStatus(estado, { toast, setDisabled })
         if (!status) return false
         const domain = window.location.hostname
-        setSession(true)
+        cookie.set('session', true, { domain, path: '' })
         cookie.set('token', token, { domain, path: '' })
+        setSession(true)
         return (token && navigate('/', { replace: true }))
       })
       .catch(() => {

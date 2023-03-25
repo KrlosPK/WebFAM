@@ -84,6 +84,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
 
   const logout = () => {
     Cookies.remove('token')
+    Cookies.remove('session')
     setSession(false)
     navigate('/')
   }
