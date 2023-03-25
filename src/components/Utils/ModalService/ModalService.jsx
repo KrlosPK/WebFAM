@@ -62,7 +62,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
     const hora_creacion_cita =
       fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds()
     const fecha_creacion_cita =
-      fecha.getFullYear() + '-' + (fecha.getMonth() + 1) + '-' + fecha.getDate()
+      fecha.getFullYear() + '-' + (fecha.getMonth() + 1) + '-' + (fecha.getDate() + 1)
 
     if (nombre.length === 0 || /^\s+$/.test(nombre)) {
       handleSnackbarClick()
