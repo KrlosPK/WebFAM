@@ -49,8 +49,8 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
 
   const logout = () => {
     const domain = window.location.hostname
-    Cookies.remove('session', { domain, path: '' })
-    Cookies.remove('token', { domain, path: '' })
+    Cookies.remove('session', { domain: `.${domain}`, path: '' })
+    Cookies.remove('token', { domain: `.${domain}`, path: '' })
     setSession(false)
     navigate('/')
   }
