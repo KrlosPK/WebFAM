@@ -5,6 +5,7 @@ import 'aos/dist/aos.css'
 import AOS from 'aos'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import { Button2 } from '../Button2/Button2'
 
 const Card = ({
   title,
@@ -15,6 +16,8 @@ const Card = ({
   descriptionFont,
   size = '100%',
   src,
+  isButton = false,
+  buttonText,
   alt = 'Servicio que ofrece Fademet Montajes'
 }) => {
   AOS.init({ duration: 700 })
@@ -38,6 +41,9 @@ const Card = ({
       <p className='card__text' style={{ color: descriptionColor, fontFamily: descriptionFont }}>
         {description}
       </p>
+      {isButton && (
+        <Button2 width={150} text={buttonText} innerClassName='card__button' />
+      )}
     </div>
   )
 }
