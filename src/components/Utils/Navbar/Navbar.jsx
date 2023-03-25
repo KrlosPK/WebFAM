@@ -104,6 +104,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
             <LazyLoadImage
               src='/logotype-small.png'
               loading='lazy'
+              effect='blur'
               width={45}
               height={45}
               alt='Logo de Fademet Montajes'
@@ -152,6 +153,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                 <li className='user user__container' onClick={handleExpandClick}>
                   <LazyLoadImage
                     loading='lazy'
+                    effect='blur'
                     src={userData.picture || defaultImage}
                     width={35}
                     height={35}
@@ -169,6 +171,7 @@ const Navbar = ({ anchordText, linkText, anchordUrl, linkUrl, renderButtons }) =
                       <li className='options__option'>
                         <LazyLoadImage
                           loading='lazy'
+                          effect='blur'
                           src={userData.picture || defaultImage}
                           width={45}
                           height={45}

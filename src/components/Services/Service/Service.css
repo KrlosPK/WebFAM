@@ -105,6 +105,7 @@
   margin: auto;
   padding: 0.5rem 2rem 0;
 }
+.service-info span,
 .service-info__gallery span {
   height: fit-content !important;
   width: fit-content !important;

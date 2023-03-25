@@ -3,6 +3,7 @@ import './RecoverPassword.css'
 // ? Components
 import { Input, Navbar, API_URL, validateMail, Button2, verifyStatus } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 //* Hooks
 import { useEffect, useRef, useState } from 'react'
@@ -155,7 +156,12 @@ const RecoverPassword = () => {
           <div className='recover-password__card'>
             <AiFillBackward className='back-button' onClick={() => navigate('/login')} />
             <div className='container__image'>
-              <img src='/recover-password-email.png' alt='Correo para recuperar la contraseña' />
+              <LazyLoadImage
+                loading='lazy'
+                effect='blur'
+                src='/recover-password-email.png'
+                alt='Correo para recuperar la contraseña'
+              />
             </div>
             <div className='container__title'>
               <h1>¿No recuerdas tu contraseña?</h1>

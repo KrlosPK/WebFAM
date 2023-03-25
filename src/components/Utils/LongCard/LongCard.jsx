@@ -44,6 +44,7 @@ const LongCard = ({
           src={foto_servicio}
           alt={nombre_servicio}
           className='long-card__image'
+          loading='lazy'
           effect='blur'
         />
         <div className='column__date'>

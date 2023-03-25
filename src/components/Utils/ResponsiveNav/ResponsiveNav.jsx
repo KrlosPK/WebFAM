@@ -85,6 +85,7 @@ const ResponsiveNav = ({ anchordText, linkText, anchordUrl, linkUrl, renderButto
           <Link to='/account' className='options__option'>
             <LazyLoadImage
               loading='lazy'
+              effect='blur'
               src={userData.picture || defaultImage}
               width={45}
               height={45}

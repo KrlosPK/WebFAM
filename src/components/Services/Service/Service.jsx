@@ -164,6 +164,7 @@ const Service = () => {
           <LazyLoadImage
             src={service[0] && service[0].foto_servicio}
             loading='lazy'
+            effect='blur'
             width={500}
             height={500}
             className='service-info__img'
