@@ -1,4 +1,5 @@
 .long-card {
+  border: 1px solid #000;
   border-radius: 15px;
   cursor: pointer;
   display: grid;
@@ -36,6 +37,9 @@
   font-family: syne;
   font-size: 1.5rem;
   font-weight: 700;
+}
+.long-card-service-info img {
+  min-width: 250px;
 }
 
 .column__date {

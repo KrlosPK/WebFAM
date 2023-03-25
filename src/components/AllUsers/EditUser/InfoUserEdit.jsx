@@ -457,20 +457,36 @@ const InfoUserEdit = () => {
               <>
                 <form className='edit-form' onSubmit={updateUserData}>
                   <div className='edit-main-form main-form'>
-                    {userData.id_usuario !== 1 && (
-                      <Select
-                        innerDefaultValue={rolUsuario || 2}
-                        innerName='rol'
-                        text='Rol del usuario'
-                        value={[1, 2, 3, 4]}
-                        option={['Administrador', 'Cliente', 'Soldador', 'RRHH']}
-                        innerRef={rolInputEl}
-                        bold={'true'}
-                        font={'12px'}
-                        padding={'0 0 0 11px'}
-                        innerOnChange={selectChange}
-                      />
-                    )}
+                    {userData.id_usuario !== 1
+                      ? (
+                        <Select
+                          innerDefaultValue={rolUsuario || 2}
+                          innerName='rol'
+                          text='Rol del usuario'
+                          value={[1, 2, 3, 4]}
+                          option={['Administrador', 'Cliente', 'Soldador', 'RRHH']}
+                          innerRef={rolInputEl}
+                          bold={'true'}
+                          font={'12px'}
+                          padding={'0 0 0 11px'}
+                          innerOnChange={selectChange}
+                        />
+                      )
+                      : (
+                        <Select
+                          innerDefaultValue={rolUsuario || 2}
+                          innerName='rol'
+                          text='Rol del usuario'
+                          value={[1, 2, 3, 4]}
+                          option={['Administrador', 'Cliente', 'Soldador', 'RRHH']}
+                          innerRef={rolInputEl}
+                          bold={'true'}
+                          innerDisabled
+                          font={'12px'}
+                          padding={'0 0 0 11px'}
+                          innerOnChange={selectChange}
+                        />
+                      )}
                     <Input
                       innerOnChange={inputChange}
                       innerDefaultValue={userData.name}

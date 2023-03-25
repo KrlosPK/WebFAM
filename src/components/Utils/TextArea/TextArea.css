@@ -1,15 +1,18 @@
 .textarea {
+  border: none;
   border-radius: 6px;
   margin-bottom: 1rem;
+  outline: 1.7px solid gray;
   padding: 1rem;
   resize: none;
 }
 .textarea:hover {
-  border: 1.7px solid #222;
+  border: none;
+  outline: 1.7px solid #222;
 }
 .textarea:focus {
-  border: 1.7px solid var(--icon-color);
-  outline: none;
+  border: none;
+  outline: 1.7px solid var(--icon-color);
 }
 .label-textarea {
   color: rgba(0, 0, 0, 0.7);

@@ -33,13 +33,13 @@ const LongCard = ({
           borderRadius='50%'
         />
       </article>
-      <article className='long-card__column long-card-date-info'>
+      <article className='long-card__column long-card-date-info' data-aos='zoom-out'>
         <h2 className='long-card__title'>Servicio solicitado: {nombre_servicio}</h2>
         <p className='long-card__text'>
           <strong>Descripción del Usuario:</strong> &ldquo;{descripcion_cita}&quot;
         </p>
       </article>
-      <article className='long-card__column long-card-service-info'>
+      <article className='long-card__column long-card-service-info' data-aos='zoom-out' >
         <LazyLoadImage
           src={foto_servicio}
           alt={nombre_servicio}
