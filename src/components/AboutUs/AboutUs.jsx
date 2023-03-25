@@ -50,7 +50,7 @@ const AboutUs = () => {
             ? (
               services.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
                 <Link to={`/services/${id_servicio}`} key={id_servicio}>
-                  <Card src={foto_servicio} title={nombre_servicio} description={resumen_servicio} />
+                  <Card src={foto_servicio} title={nombre_servicio} description={resumen_servicio} isButton buttonText={'Detalles'} />
                 </Link>
               ))
             )
