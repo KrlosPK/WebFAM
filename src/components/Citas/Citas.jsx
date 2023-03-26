@@ -71,8 +71,9 @@ const Citas = () => {
     try {
       const { data } = await axios.get(API_URL('citasPendientes'))
       const updatedCitas = await fetchPhotos(data.citas)
-      updatedCitas.push({ ...updatedCitas[0], isLink: true })
-      updatedCitas.shift()
+      updatedCitas.forEach((cita) => {
+        cita.isLink = true
+      })
       updateCitasPendientesData(updatedCitas)
     } catch (err) {
       updateCitasPendientesData(false)
