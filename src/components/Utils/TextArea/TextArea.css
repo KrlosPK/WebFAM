@@ -1,6 +1,8 @@
 .textarea {
+  border: none;
   border-radius: 6px;
   margin-bottom: 1rem;
+  outline: 1.7px solid gray;
   padding: 1rem;
   resize: none;
   outline: 1.7px solid gray;
@@ -11,8 +13,8 @@
   outline: 1.7px solid #222;
 }
 .textarea:focus {
-  outline: 1.7px solid var(--icon-color);
   border: none;
+  outline: 1.7px solid var(--icon-color);
 }
 .label-textarea {
   color: rgba(0, 0, 0, 0.7);

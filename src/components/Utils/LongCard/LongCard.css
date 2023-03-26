@@ -6,8 +6,16 @@
   min-height: 300px;
   overflow: hidden;
   place-items: center;
-  transition: background 300ms ease-in-out;
+  position: relative;
   width: 100%;
+}
+.long-card::after {
+  background-color: #22222283;
+  bottom: 0;
+  content: '';
+  height: 1px;
+  position: absolute;
+  width: 40%;
 }
 
 .long-card__column {
@@ -22,6 +30,7 @@
   width: 100%;
 }
 .long-card__column img {
+  border-radius: 15px;
   object-fit: cover;
   width: 100%;
 }
@@ -36,6 +45,9 @@
   font-family: syne;
   font-size: 1.5rem;
   font-weight: 700;
+}
+.long-card-service-info img {
+  min-width: 250px;
 }
 
 .column__date {
@@ -62,17 +74,9 @@
 }
 
 /* * Estado */
-.long-card.pendiente {
-  background-color: hsla(28, 92%, 56%, 0.15);
-}
-.long-card.pendiente:hover {
-  background-color: hsla(28, 50%, 38%, 0.232);
-}
-.long-card.respondido {
-  background-color: hsla(153, 100%, 94%, 0.15);
-}
+.long-card.pendiente:hover,
 .long-card.respondido:hover {
-  background-color: hsla(153, 69%, 82%, 0.2);
+  background-color: rgba(14, 8, 2, 0.08);
 }
 
 @media all and (max-width: 768px) {
