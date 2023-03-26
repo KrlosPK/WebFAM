@@ -54,12 +54,9 @@ const Citas = () => {
     }
   }
 
-  const updateCitasPendientesData = (citas) => {
-    setCitasPendientesData(citas)
-  }
-  const updateCitasRespondidasData = (citas) => {
-    setCitasRespondidasData(citas)
-  }
+  const updateCitasPendientesData = (citas) => setCitasPendientesData(citas)
+
+  const updateCitasRespondidasData = (citas) => setCitasRespondidasData(citas)
 
   const fetchCitasPendientes = async () => {
     try {

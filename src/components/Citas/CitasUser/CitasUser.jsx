@@ -112,7 +112,7 @@ const CitasUser = () => {
           ? (
             <section className='mis-citas'>
               <h1 className='title__center'>Estas son tus citas:</h1>
-              {/* <LongCard /> */}
+              {/* <LongCard  /> */}
             </section>
           )
           : (

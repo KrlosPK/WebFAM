@@ -29,6 +29,16 @@ const Services = () => {
         theme: 'colored'
       })
     }
+    if (toastify === 'serviceDesactive') {
+      toast.success('¡Servicio desactivado con éxito!', {
+        theme: 'colored'
+      })
+    }
+    if (toastify === 'serviceActive') {
+      toast.success('¡Servicio activado con éxito!', {
+        theme: 'colored'
+      })
+    }
   }, [toastify])
 
   useEffect(() => {

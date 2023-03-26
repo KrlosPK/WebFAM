@@ -38,7 +38,13 @@
   color: #000;
   font-size: 1.3rem;
 }
-
+.title-center {
+  text-align: center;
+}
+.gap-2 {
+  display: flex;
+  gap: 1rem;
+}
 .loader {
   left: 200%;
 }
@@ -114,6 +120,10 @@
   }
   .cards {
     grid-template-columns: 1fr;
+  }
+  .d-flex-column {
+    display: flex;
+    flex-direction: column;
   }
 }
 @media (max-width: 630px) {
