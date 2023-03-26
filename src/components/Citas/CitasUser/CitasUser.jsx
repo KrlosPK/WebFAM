@@ -1,29 +1,14 @@
-import './CitasUser.css'
-
-// ? Components
-import { API_URL, LongCard, /* LongCard, */ Navbar, ResponsiveNav } from '../../Utils'
 import { useContext, useEffect, useMemo, useState } from 'react'
-import { SessionContext } from '../../../context/SessionContext'
-import { Footer } from '../../Home/Footer/Footer'
 import { useNavigate } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { Button } from '@mui/material'
+import './CitasUser.css'
+import { API_URL, LongCard, Navbar, ResponsiveNav } from '../../Utils'
+import { SessionContext } from '../../../context/SessionContext'
+import { Footer } from '../../Home/Footer/Footer'
 import { Cita } from '../Cita'
-// import { Button } from '@mui/material'
-
-// ? Hooks
-// import { useContext, useEffect, useState } from 'react'
-// import { Link, useNavigate } from 'react-router-dom'
-
-// ? Context
-// import { SessionContext } from '../../context/SessionContext'
-
-// ? Libraries
-// import jwtDecode from 'jwt-decode'
-// import axios from 'axios'
-// import Cookies from 'js-cookie'
 
 const CitasUser = () => {
   const { session } = useContext(SessionContext)
