@@ -24,7 +24,7 @@ const Cita = ({
             : { color: '#3ae374', outline: '2px solid #3ae374' }
         }
       >
-        {estado.charAt(0).toUpperCase() + estado.slice(1)}
+        {`${estado.charAt(0).toUpperCase() + estado.slice(1)} #${id_cita}`}
       </label>
       <LongCard
         foto_usuario={userPhoto || '/default-avatar.png'}
