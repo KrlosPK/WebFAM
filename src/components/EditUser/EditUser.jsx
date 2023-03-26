@@ -228,7 +228,7 @@ const EditUser = () => {
     setDisabled(true)
     if (disabled) return
 
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-.#+*$~%&=ñÑ]{8,16}$/
 
     const data = {
       contrasenaActual: e.target[0].value,

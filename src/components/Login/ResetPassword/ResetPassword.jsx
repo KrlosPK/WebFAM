@@ -70,7 +70,7 @@ const ResetPassword = () => {
     const contrasena = e.target[0].value
     const confirmarContrasena = e.target[1].value
 
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-.#+*$~%&=ñÑ]{8,16}$/
 
     if (validatePassword(contrasena, /^\s+$/)) {
       e.preventDefault()
