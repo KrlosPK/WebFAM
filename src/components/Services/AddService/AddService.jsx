@@ -248,7 +248,7 @@ const AddService = () => {
                 innerId='nombre-servicio'
                 type='text'
                 nameID='nombre_servicio'
-                max={100}
+                max={50}
                 innerRef={nombre_servicioInputEl}
               />
               <Input
@@ -263,7 +263,7 @@ const AddService = () => {
                 text='Resumen del servicio'
                 innerId='resumen-servicio'
                 type='text'
-                max={100}
+                max={80}
                 nameID='resumen_servicio'
                 innerRef={resumen_servicioInputEl}
               />
