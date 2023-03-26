@@ -1,6 +1,5 @@
 .long-card {
   border-radius: 15px;
-  cursor: pointer;
   display: grid;
   margin: 1rem 0.5rem;
   min-height: 300px;
@@ -74,8 +73,11 @@
 }
 
 /* * Estado */
-.long-card.pendiente:hover,
-.long-card.respondido:hover {
+.cita-hover {
+  cursor: pointer;
+  transition: background 300ms ease;
+}
+.cita-hover:hover {
   background-color: rgba(14, 8, 2, 0.08);
 }
 

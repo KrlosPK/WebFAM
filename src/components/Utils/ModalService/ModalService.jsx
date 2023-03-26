@@ -92,24 +92,36 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
       setAlertMessage('¡El Número de Celular debe tener entre 9 y 11 dígitos!')
       focusInput(numCelularInputEl)
     }
+    // * Si ya tiene una cita, no puede agendar una nueva
     axios
-      .post(API_URL('citas'), {
-        nombre_completo: nombre,
-        correo,
-        num_celular,
-        hora_creacion_cita,
-        fecha_creacion_cita,
-        id_usuario: userData.id_usuario,
-        nombre_servicio,
-        descripcion_cita,
-        id_servicio
-      })
-      .then(() => {
-        setToastify('citaAgendada')
-        setOpenModal(false)
-      })
-      .catch(() => {
-        setToastify('citaAgendadaError')
+      .get(API_URL(`citasPendientesUsuario/${userData.id_usuario}`))
+      .then((res) => {
+        const { cita } = res.data
+        if (cita.length > 0) {
+          setOpenModal(false)
+          setToastify('citaAgendadaRepetida')
+        } else {
+          // * Si no tiene una cita, se agendará una nueva
+          axios
+            .post(API_URL('citas'), {
+              nombre_completo: nombre,
+              correo,
+              num_celular,
+              hora_creacion_cita,
+              fecha_creacion_cita,
+              id_usuario: userData.id_usuario,
+              nombre_servicio,
+              descripcion_cita,
+              id_servicio
+            })
+            .then(() => {
+              setToastify('citaAgendada')
+              setOpenModal(false)
+            })
+            .catch(() => {
+              setToastify('citaAgendadaError')
+            })
+        }
       })
   }
 

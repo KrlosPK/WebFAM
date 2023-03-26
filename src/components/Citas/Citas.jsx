@@ -9,9 +9,12 @@ import { SessionContext } from '../../context/SessionContext'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { toast, ToastContainer, Zoom } from 'react-toastify'
+import { ToastifyContext } from '../../context/ToastifyContext'
 
 const Citas = () => {
   const { session } = useContext(SessionContext)
+  const { toastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
   const navigate = useNavigate()
@@ -31,6 +34,12 @@ const Citas = () => {
     !session ? setButton(1) : setButton(2)
 
     document.title = 'FADEMET Montajes | Citas'
+
+    if (toastify === 'citaRespondida') {
+      toast.success('Cita respondida con éxito', {
+        theme: 'colored'
+      })
+    }
   }, [])
 
   const fetchPhotos = async (citas) => {
@@ -62,6 +71,8 @@ const Citas = () => {
     try {
       const { data } = await axios.get(API_URL('citasPendientes'))
       const updatedCitas = await fetchPhotos(data.citas)
+      updatedCitas.push({ ...updatedCitas[0], isLink: true })
+      updatedCitas.shift()
       updateCitasPendientesData(updatedCitas)
     } catch (err) {
       updateCitasPendientesData(false)
@@ -92,6 +103,7 @@ const Citas = () => {
 
   return (
     <>
+      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
         linkText={['Inicio', 'Agendas', 'Servicios']}
         linkUrl={['/', '/citas', '/services']}
@@ -131,10 +143,10 @@ const Citas = () => {
 
         {!loading && (
           <>
-            {(!memoizedPendientesData && datesState === 'pendientes') ||
-              (!memoizedRespondidasData && datesState === 'respondidas' && (
-                <div className='title__center'>No hay citas {datesState}</div>
-              ))}
+            {((!memoizedRespondidasData && datesState === 'respondidas') ||
+              (!memoizedPendientesData && datesState === 'pendientes')) && (
+              <div className='title__center'>No hay citas {datesState}</div>
+            )}
           </>
         )}
 
