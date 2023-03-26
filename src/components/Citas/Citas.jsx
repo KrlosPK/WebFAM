@@ -154,7 +154,8 @@ const Citas = () => {
 
         {memoizedRespondidasData &&
           datesState === 'respondidas' &&
-          getCitas(memoizedRespondidasData)}
+          getCitas(memoizedRespondidasData)
+        }
       </section>
       <Footer />
     </>
