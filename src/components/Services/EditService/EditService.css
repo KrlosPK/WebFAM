@@ -1,0 +1,7 @@
+.info-create{
+  display: grid;
+  place-content: center;
+}
+.center {
+  margin: 0 auto;
+}
