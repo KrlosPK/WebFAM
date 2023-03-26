@@ -87,6 +87,15 @@ const Register = () => {
       setDisabled(false)
 
       return false
+    } else if (/\d/.test(nombre)) {
+      toast.error('¡El Nombre NO puede tener números!', {
+        theme: 'colored'
+      })
+
+      focusInput(nombreInputEl)
+      setDisabled(false)
+
+      return false
     } else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
       // Validación Apellidos
 
@@ -100,6 +109,15 @@ const Register = () => {
       return false
     } else if (apellidos.length < 3) {
       toast.error('¡Los Apellidos deben tener mínimo 3 letras!', {
+        theme: 'colored'
+      })
+
+      focusInput(apellidosInputEl)
+      setDisabled(false)
+
+      return false
+    } else if (/\d/.test(apellidos)) {
+      toast.error('¡Los Apellidos NO pueden tener números!', {
         theme: 'colored'
       })
 

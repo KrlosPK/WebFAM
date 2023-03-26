@@ -177,6 +177,15 @@ const InfoUserEdit = () => {
       focusInput(nombreInputEl)
 
       return false
+    } else if (/\d/.test(nombre)) {
+      toast.error('¡El Nombre NO puede tener números!', {
+        theme: 'colored'
+      })
+
+      focusInput(nombreInputEl)
+      setDisabled(false)
+
+      return false
     } else if (apellidos.length === 0 || /^\s+$/.test(apellidos)) {
       // Validación Apellidos
       toast.error('¡Los Apellidos no puede estar vacío!', {
@@ -192,6 +201,15 @@ const InfoUserEdit = () => {
       })
 
       focusInput(apellidosInputEl)
+
+      return false
+    } else if (/\d/.test(apellidos)) {
+      toast.error('¡Los Apellidos NO pueden tener números!', {
+        theme: 'colored'
+      })
+
+      focusInput(apellidosInputEl)
+      setDisabled(false)
 
       return false
     } else if (num_celular.length === 0) {
