@@ -3,13 +3,16 @@
   margin-bottom: 1rem;
   padding: 1rem;
   resize: none;
+  outline: 1.7px solid gray;
+  border: none;
 }
 .textarea:hover {
-  border: 1.7px solid #222;
+  border: none;
+  outline: 1.7px solid #222;
 }
 .textarea:focus {
-  border: 1.7px solid var(--icon-color);
-  outline: none;
+  outline: 1.7px solid var(--icon-color);
+  border: none;
 }
 .label-textarea {
   color: rgba(0, 0, 0, 0.7);

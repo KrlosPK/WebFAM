@@ -4,9 +4,13 @@
 }
 .title__center {
   font-family: 'Syne', sans-serif;
-  font-size: 42px;
+  font-size: 32px;
   font-weight: 700;
   margin-bottom: 1rem;
   max-width: 1300px;
   text-align: center;
+}
+.citas-nav {
+  display: grid;
+  place-content: center;
 }
