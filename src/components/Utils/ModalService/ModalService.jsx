@@ -17,6 +17,7 @@ import { style } from './ModalStyle'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import Cookies from 'js-cookie'
+import emailjs from '@emailjs/browser'
 
 // ? Context
 import { SessionContext } from '../../../context/SessionContext'
@@ -27,6 +28,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
   const correoInputEl = useRef()
   const numCelularInputEl = useRef()
   const descripcionCitaInputEl = useRef()
+  const form = useRef(null)
 
   const { session } = useContext(SessionContext)
   const { setToastify } = useContext(ToastifyContext)
@@ -38,12 +40,26 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
 
   const navigate = useNavigate()
 
+  const fecha = new Date()
+  const hora_creacion_cita_correo =
+    fecha.getHours().toString().padStart(2, '0') +
+    ':' +
+    fecha.getMinutes().toString().padStart(2, '0')
+  const fecha_creacion_cita_correo =
+    fecha.getFullYear() + '-' + (fecha.getMonth() + 1) + '-' + fecha.getDate()
+
   const handleModalClick = () => {
     openModal ? setOpenModal(false) : setOpenModal(true)
     validateSession()
   }
+
   const handleSnackbarClick = () => (openSnackbar ? setOpenSnackbar(false) : setOpenSnackbar(true))
+
   const focusInput = (input) => input.current.focus()
+
+  const sendEmail = () => {
+    emailjs.sendForm('service_nl11uxr', 'template_nxx5woka', form.current, '-cZX9PkvRspHkBQSX')
+  }
 
   const validateSession = () => {
     if (!session) {
@@ -57,8 +73,6 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
     const correo = correoInputEl.current.value
     const num_celular = numCelularInputEl.current.value
     const descripcion_cita = descripcionCitaInputEl.current.value
-
-    const fecha = new Date()
     const hora_creacion_cita =
       fecha.getHours() + ':' + fecha.getMinutes() + ':' + fecha.getSeconds()
     const fecha_creacion_cita =
@@ -92,7 +106,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
       setAlertMessage('¡El Número de Celular debe tener entre 9 y 11 dígitos!')
       focusInput(numCelularInputEl)
     }
-    // * Si ya tiene una cita, no puede agendar una nueva
+    // * Si ya tiene una cita pendiente, no puede agendar una nueva
     axios
       .get(API_URL(`citasPendientesUsuario/${userData.id_usuario}`))
       .then((res) => {
@@ -101,7 +115,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
           setOpenModal(false)
           setToastify('citaAgendadaRepetida')
         } else {
-          // * Si no tiene una cita, se agendará una nueva
+          // * Si no tiene una cita pendiente, se agendará una nueva
           axios
             .post(API_URL('citas'), {
               nombre_completo: nombre,
@@ -117,6 +131,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
             .then(() => {
               setToastify('citaAgendada')
               setOpenModal(false)
+              sendEmail()
             })
             .catch(() => {
               setToastify('citaAgendadaError')
@@ -165,7 +180,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'
       >
-        <form>
+        <div>
           <Snackbar
             open={openSnackbar}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -186,14 +201,14 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
             <Typography sx={style.modalTitle} id='modal-modal-title' variant='h2' component='h2'>
               Agendar cita
             </Typography>
-            <div className='main-form'>
+            <form className='main-form' ref={form}>
               <Input
                 text='Nombre *'
                 innerDefaultValue={
                   userData.name && userData.lastname ? `${userData.name} ${userData.lastname}` : ''
                 }
                 innerRef={nombreInputEl}
-                nameID='nombre'
+                nameID='nombre_completo'
               />
               <Input
                 text='Correo *'
@@ -213,8 +228,33 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
                 innerRef={descripcionCitaInputEl}
                 placeholder='Describe brevemente que quieres'
                 max={400}
+                name='descripcion_cita'
               />
-            </div>
+              <input
+                style={{ display: 'none' }}
+                readOnly
+                type='text'
+                id='nombre_servicio'
+                name='nombre_servicio'
+                value={nombre_servicio}
+              />
+              <input
+                style={{ display: 'none' }}
+                readOnly
+                type='text'
+                id='hora_creacion_cita'
+                name='hora_creacion_cita'
+                value={hora_creacion_cita_correo}
+              />
+              <input
+                style={{ display: 'none' }}
+                readOnly
+                type='text'
+                id='fecha_creacion_cita'
+                name='fecha_creacion_cita'
+                value={fecha_creacion_cita_correo}
+              />
+            </form>
             <Button onClick={validateForm} variant='outlined' color='warning'>
               Agendar
             </Button>
@@ -223,7 +263,7 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
               con esta empresa.
             </Typography>
           </Box>
-        </form>
+        </div>
       </Modal>
     </div>
   )
