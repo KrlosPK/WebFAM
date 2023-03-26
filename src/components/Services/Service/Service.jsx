@@ -219,7 +219,7 @@ const Service = () => {
             </div>
           </div>
         </article>
-        {service[0] && service[0].galeria_servicios && (
+        {(service[0] && (service[0].galeria_servicios !== '0')) && (
           <>
             <h3 className='gallery__title'>Galería</h3>
             <figure className='service-info__gallery'>
