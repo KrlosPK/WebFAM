@@ -14,7 +14,7 @@ import { ToastifyContext } from '../../context/ToastifyContext'
 
 const Citas = () => {
   const { session } = useContext(SessionContext)
-  const { toastify } = useContext(ToastifyContext)
+  const { toastify, setToastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
   const navigate = useNavigate()
@@ -39,6 +39,7 @@ const Citas = () => {
       toast.success('Cita respondida con éxito', {
         theme: 'colored'
       })
+      setToastify(false)
     }
   }, [])
 

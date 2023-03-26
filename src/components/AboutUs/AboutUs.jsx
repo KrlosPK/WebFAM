@@ -58,7 +58,7 @@ const AboutUs = () => {
     getActiveServices()
   }, [])
 
-  const loading = (memoizedActiveService && memoizedActiveService.length === 0) || (memoizedInactiveService && memoizedInactiveService.length === 0)
+  const loading = (!memoizedActiveService) || (!memoizedInactiveService)
 
   return (
     <section className='about-us-container'>
@@ -85,26 +85,14 @@ const AboutUs = () => {
           </div>
         )}
 
-        {loading
-          ? (
-            <>
-              {(memoizedInactiveService && !memoizedInactiveService) &&
-                (
-                  <div className='title__center'>No hay servicios inactivos</div>
-                )
-              }
-            </>
-          )
-          : (
-            <>
-              {(memoizedActiveService && !memoizedActiveService) &&
-                (
-                  <div className='title__center'>No hay servicios activos</div>
-                )
-              }
-            </>
-          )
-        }
+        {(loading && !servicesState) && <div className='citas-loader'>Cargando...</div>}
+
+        {((memoizedActiveService && memoizedActiveService.length === 0) && (servicesState && servicesState === 'active')) && (
+          <div className='title__center'>No hay servicios activos</div>
+        )}
+        {((memoizedInactiveService && memoizedInactiveService.length === 0) && (servicesState && servicesState === 'inactive')) && (
+          <div className='title__center'>No hay servicios inactivos</div>
+        )}
 
         <div className='cards'>
           {(memoizedActiveService && servicesState === 'active') && memoizedActiveService.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
@@ -120,7 +108,6 @@ const AboutUs = () => {
           ))}
         </div>
 
-        {/* <div className='loader'>Cargando...</div> */}
       </div>
     </section>
   )

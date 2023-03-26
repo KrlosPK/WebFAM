@@ -55,8 +55,6 @@ const AddService = () => {
     const nombre_servicio = e.target[0].value
     const descripcion_servicio = e.target[1].value
     const resumen_servicio = e.target[2].value
-    const foto_servicio = await uploadPhoto()
-    const galeria_servicios = await uploadGallery()
 
     if (nombre_servicio.length === 0 || /^\s+$/.test(nombre_servicio)) {
       toast.error('¡El nombre del servicio no puede estar vacío!', {
@@ -115,16 +113,21 @@ const AddService = () => {
       })
       setDisabled(false)
       return
-    } else if (
-      !galeria_serviciosInputEl.current.files ||
-      galeria_serviciosInputEl.current.files.length === 0
-    ) {
-      toast.error('¡Debes seleccionar al menos una foto!', {
+    } else if (foto_servicioInputEl.current.files[0].size > 5000000) {
+      toast.error('¡El tamaño de la foto debe ser menor a 5MB!', {
+        theme: 'colored'
+      })
+      setDisabled(false)
+      return
+    } else if (galeria_serviciosInputEl.current.files.size > 5000000) {
+      toast.error('¡El tamaño de la foto debe ser menor a 5MB!', {
         theme: 'colored'
       })
       setDisabled(false)
       return
     }
+    const foto_servicio = await uploadPhoto()
+    const galeria_servicios = await uploadGallery()
     setToastify('serviceCreated')
     return {
       nombre_servicio,
@@ -248,7 +251,7 @@ const AddService = () => {
                 innerId='nombre-servicio'
                 type='text'
                 nameID='nombre_servicio'
-                max={100}
+                max={50}
                 innerRef={nombre_servicioInputEl}
               />
               <Input
@@ -263,7 +266,7 @@ const AddService = () => {
                 text='Resumen del servicio'
                 innerId='resumen-servicio'
                 type='text'
-                max={100}
+                max={80}
                 nameID='resumen_servicio'
                 innerRef={resumen_servicioInputEl}
               />

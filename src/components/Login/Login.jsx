@@ -30,7 +30,7 @@ import { SessionContext } from '../../context/SessionContext'
 const Login = () => {
   // ? Context
 
-  const { toastify } = useContext(ToastifyContext)
+  const { toastify, setToastify } = useContext(ToastifyContext)
   const { setSession } = useContext(SessionContext)
 
   useEffect(() => {
@@ -39,18 +39,21 @@ const Login = () => {
         theme: 'colored'
       })
       focusInput(correoInputEl)
+      setToastify(false)
     }
     if (toastify === 'recover') {
       toast.success('¡Contraseña restablecida con éxito!', {
         theme: 'colored'
       })
       focusInput(correoInputEl)
+      setToastify(false)
     }
     if (toastify === 'citaValidar') {
       toast.info('¡Debes iniciar sesión para agendar una cita!', {
         theme: 'colored'
       })
       focusInput(correoInputEl)
+      setToastify(false)
     }
   }, [toastify])
 
