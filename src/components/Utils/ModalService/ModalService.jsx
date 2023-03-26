@@ -86,6 +86,10 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
       handleSnackbarClick()
       setAlertMessage('¡El Nombre debe tener mínimo 2 letras!')
       focusInput(nombreInputEl)
+    } else if (/\d/.test(nombre)) {
+      handleSnackbarClick()
+      setAlertMessage('¡El Nombre NO puede tener números!')
+      focusInput(nombreInputEl)
     } else if (correo.length === 0 || /^\s+$/.test(correo)) {
       handleSnackbarClick()
       setAlertMessage('¡El correo no puede estar vacío!')
