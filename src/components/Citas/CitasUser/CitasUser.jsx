@@ -90,7 +90,7 @@ const CitasUser = () => {
 
   const loading = !memoizedPendientesData && !memoizedRespondidasData
 
-  const getCitas = (data) => data.map(Cita)
+  const getCitas = (data) => data.map(Cita).reverse()
 
   return (
     <>
@@ -104,7 +104,7 @@ const CitasUser = () => {
         linkUrl={['/', '/services', '/mis-citas']}
         renderButtons={button}
       />
-      <section>
+      <section className='citas'>
         <nav className='citas-nav'>
           <ul className='citas-nav__ul'>
             <Button
@@ -169,8 +169,8 @@ const CitasUser = () => {
           datesState === 'respondidas' &&
           getCitas(memoizedRespondidasData)
         }
-        <Footer />
       </section>
+      <Footer />
     </>
   )
 }
