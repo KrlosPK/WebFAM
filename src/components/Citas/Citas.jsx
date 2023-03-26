@@ -100,7 +100,7 @@ const Citas = () => {
   const memoizedPendientesData = useMemo(() => citasPendientesData, [citasPendientesData])
   const memoizedRespondidasData = useMemo(() => citasRespondidasData, [citasRespondidasData])
 
-  const getCitas = (data) => data.map(Cita)
+  const getCitas = (data) => data.map(Cita).reverse()
 
   const loading = !memoizedPendientesData && !memoizedRespondidasData
 
