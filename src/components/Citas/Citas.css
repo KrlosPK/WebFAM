@@ -30,7 +30,10 @@ button.cita-active {
   position: relative;
 }
 .id-cita {
+  background-color: #fff;
+  border-radius: 50px;
   left: 2rem;
+  padding: 0.3rem 0.8rem;
   position: absolute;
   top: 2rem;
 }
@@ -99,6 +102,11 @@ button.cita-active {
 @media (max-width: 768px) {
   .citas-nav__ul {
     justify-content: center;
+  }
+  .id-cita {
+    left: 0.8rem;
+    top: 0.8rem;
+    scale: 0.9;
   }
 }
 

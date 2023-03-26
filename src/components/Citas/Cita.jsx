@@ -16,10 +16,19 @@ const Cita = ({
 }) => {
   return (
     <Link to={`/citas/${id_cita}`} key={id_cita} className='cita'>
-      <span className='id-cita'>#{id_cita}</span>
+      <label
+        className='id-cita'
+        style={
+          estado === 'pendiente'
+            ? { color: '#fd8b26', outline: '2px solid #fd8b26' }
+            : { color: '#3ae374', outline: '2px solid #3ae374' }
+        }
+      >
+        {estado.charAt(0).toUpperCase() + estado.slice(1)}
+      </label>
       <LongCard
         foto_usuario={userPhoto || '/default-avatar.png'}
-        nombre_completo={nombre_completo}
+        nombre_completo={`Solicitante: ${nombre_completo}`}
         correo={correo}
         num_celular={`+57 ${num_celular}`}
         nombre_servicio={nombre_servicio}
