@@ -26,6 +26,7 @@ import {
   storage
 } from '../../Utils'
 import './EditService.css'
+import Swal from 'sweetalert2'
 
 const EditService = () => {
   // * Navigate
@@ -258,12 +259,31 @@ const EditService = () => {
   }
 
   const desactiveService = () => {
-    axios
-      .patch(API_URL(`inhabilitarServicios/${serviceId}`), { estado: 'inactivo' })
-      .then(() => {
-        setToastify('serviceDesactive')
-        navigate('/services')
-      })
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¡No podrás revertir este cambio!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#aaa',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isDismissed) return
+      axios
+        .patch(API_URL(`inhabilitarServicios/${serviceId}`), { estado: 'inactivo' })
+        .then(() => {
+          setToastify('serviceDesactive')
+          navigate('/services')
+        })
+        .catch(() => {
+          toast.error('¡Ha ocurrido un error al desactivar el servicio!', {
+            theme: 'colored'
+          })
+          setDisabled(false)
+        })
+    })
       .catch(() => {
         toast.error('¡Ha ocurrido un error al desactivar el servicio!', {
           theme: 'colored'
@@ -273,11 +293,31 @@ const EditService = () => {
   }
 
   const activeService = () => {
-    axios
-      .patch(API_URL(`inhabilitarServicios/${serviceId}`), { estado: 'activo' })
-      .then(() => {
-        setToastify('serviceActive')
-        navigate('/services')
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¡No podrás revertir este cambio!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#aaa',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    })
+      .then((result) => {
+        if (result.isDismissed) return
+        axios
+          .patch(API_URL(`inhabilitarServicios/${serviceId}`), { estado: 'activo' })
+          .then(() => {
+            setToastify('serviceActive')
+            navigate('/services')
+          })
+          .catch(() => {
+            toast.error('¡Ha ocurrido un error al activar el servicio!', {
+              theme: 'colored'
+            })
+            setDisabled(false)
+          })
       })
       .catch(() => {
         toast.error('¡Ha ocurrido un error al activar el servicio!', {

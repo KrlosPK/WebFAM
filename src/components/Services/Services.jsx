@@ -18,7 +18,7 @@ import Cookies from 'js-cookie'
 const Services = () => {
   // ? Context
   const { session } = useContext(SessionContext)
-  const { toastify } = useContext(ToastifyContext)
+  const { toastify, setToastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
   const [idRol, setIdRol] = useState(null)
@@ -28,16 +28,19 @@ const Services = () => {
       toast.success('¡Servicio creado con éxito!', {
         theme: 'colored'
       })
+      setToastify(false)
     }
     if (toastify === 'serviceDesactive') {
       toast.success('¡Servicio desactivado con éxito!', {
         theme: 'colored'
       })
+      setToastify(false)
     }
     if (toastify === 'serviceActive') {
       toast.success('¡Servicio activado con éxito!', {
         theme: 'colored'
       })
+      setToastify(false)
     }
   }, [toastify])
 

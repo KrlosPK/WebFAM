@@ -14,7 +14,6 @@ const Card = ({
   descriptionColor,
   titleFont,
   descriptionFont,
-  size = '100%',
   src,
   isButton = false,
   buttonText,

@@ -45,6 +45,7 @@ const CitasUser = () => {
       })
       .catch(() => {
         setCitaPendientesData(false)
+        setDatesState('inexistentes')
         throw new Error('ERROR_GET_SCHEDULES')
       })
   }, [])
@@ -89,7 +90,7 @@ const CitasUser = () => {
 
   const loading = !memoizedPendientesData && !memoizedRespondidasData
 
-  const getCitas = (data) => data.map(Cita)
+  const getCitas = (data) => data.map(Cita).reverse()
 
   return (
     <>
@@ -103,7 +104,7 @@ const CitasUser = () => {
         linkUrl={['/', '/services', '/mis-citas']}
         renderButtons={button}
       />
-      <section>
+      <section className='citas'>
         <nav className='citas-nav'>
           <ul className='citas-nav__ul'>
             <Button
@@ -127,12 +128,11 @@ const CitasUser = () => {
           </ul>
         </nav>
 
-        {loading && <div className='citas-loader'>Cargando...</div>}
+        {(loading && !datesState) && <div className='citas-loader'>Cargando...</div>}
 
-        {!loading && (
+        {(datesState) && (
           <>
-            {((!memoizedRespondidasData && datesState === 'respondidas') ||
-              (!memoizedPendientesData && datesState === 'pendientes')) && (
+            {((!memoizedRespondidasData && datesState === 'respondidas') || (!memoizedPendientesData && datesState === 'pendientes') || (datesState === 'inexistentes')) && (
               <div className='title__center'>No hay citas {datesState}</div>
             )}
           </>
@@ -169,8 +169,8 @@ const CitasUser = () => {
           datesState === 'respondidas' &&
           getCitas(memoizedRespondidasData)
         }
-        <Footer />
       </section>
+      <Footer />
     </>
   )
 }

@@ -32,10 +32,6 @@ const Home = () => {
   const [idRol, setIdRol] = useState(null)
 
   useEffect(() => {
-    setToastify(false)
-  }, [setToastify])
-
-  useEffect(() => {
     const token = Cookies.get('token')
 
     if (!token) return
@@ -64,6 +60,7 @@ const Home = () => {
       toast.error('¡El enlace ha expirado!', {
         theme: 'colored'
       })
+      setToastify(false)
     }
   }, [])
 
