@@ -1,12 +1,11 @@
 import './CitaDetalle.css'
 
 // ? Components
-import { ToastContainer, Zoom } from 'react-toastify'
-import { Navbar, ResponsiveNav } from '../../Utils'
+import { API_URL, Navbar, ResponsiveNav } from '../../Utils'
 import { Footer } from '../../Home/Footer/Footer'
 
 // ? Hooks
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 
 // ? Context
@@ -15,13 +14,18 @@ import jwtDecode from 'jwt-decode'
 
 // * Libs
 import Cookies from 'js-cookie'
+import axios from 'axios'
+import { Button } from '@mui/material'
+import { ToastifyContext } from '../../../context/ToastifyContext'
 
 const CitaDetalle = () => {
   const { idCita } = useParams()
   const { session } = useContext(SessionContext)
+  const { setToastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
   const [idRol, setIdRol] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const token = Cookies.get('token')
@@ -45,9 +49,17 @@ const CitaDetalle = () => {
     document.title = 'FADEMET Montajes | Cita'
   }, [])
 
+  const responderCita = () => {
+    axios
+      .patch(API_URL(`eliminarCita/${idCita}`), { estado: 'respondido' })
+      .then(() => {
+        setToastify('citaRespondida')
+        navigate('/citas')
+      })
+  }
+
   return (
     <>
-      <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
       <ResponsiveNav
         linkText={
           !session
@@ -82,7 +94,12 @@ const CitaDetalle = () => {
         }
         renderButtons={button}
       />
-      <h1>Cita {idCita}</h1>
+      <section className='cita-detalle'>
+        <h1>Cita #{idCita}</h1>
+        <Button onClick={responderCita} variant='outlined'>
+          Marcar como Respondida
+        </Button>
+      </section>
       <Footer />
     </>
   )
