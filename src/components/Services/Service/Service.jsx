@@ -57,6 +57,14 @@ const Service = () => {
         theme: 'colored'
       })
     }
+    if (toastify === 'citaAgendadaRepetida') {
+      toast.warning(
+        '¡Ya tienes una cita pendiente! Por favor, elimínala si ya no la necesitas o espera a que te demos una respuesta.',
+        {
+          theme: 'colored'
+        }
+      )
+    }
   }, [toastify])
 
   useEffect(() => {
