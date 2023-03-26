@@ -17,6 +17,7 @@ import Cookies from 'js-cookie'
 // * Utils
 import {
   API_URL,
+  Button,
   Button2,
   Input,
   inputChangeCheck,
@@ -24,6 +25,7 @@ import {
   ResponsiveNav,
   storage
 } from '../../Utils'
+import './EditService.css'
 
 const EditService = () => {
   // * Navigate
@@ -130,7 +132,7 @@ const EditService = () => {
       galeria_servicios
     }
   }
-  const getUserData = () => {
+  const getServiceData = () => {
     axios
       .get(API_URL(`servicios/${serviceId}`))
       .then(({ data }) => {
@@ -138,7 +140,8 @@ const EditService = () => {
         setTextServices({
           nombre_servicio: service.nombre_servicio,
           descripcion_servicio: service.descripcion_servicio,
-          resumen_servicio: service.resumen_servicio
+          resumen_servicio: service.resumen_servicio,
+          estado: service.estado
         })
         setDisabled(true)
       })
@@ -148,7 +151,7 @@ const EditService = () => {
   }
 
   useEffect(() => {
-    serviceId && getUserData()
+    serviceId && getServiceData()
   }, [serviceId])
 
   useEffect(() => {
@@ -254,6 +257,36 @@ const EditService = () => {
     setDisabled(true)
   }
 
+  const desactiveService = () => {
+    axios
+      .patch(API_URL(`inhabilitarServicios/${serviceId}`), { estado: 'inactivo' })
+      .then(() => {
+        setToastify('serviceDesactive')
+        navigate('/services')
+      })
+      .catch(() => {
+        toast.error('¡Ha ocurrido un error al desactivar el servicio!', {
+          theme: 'colored'
+        })
+        setDisabled(false)
+      })
+  }
+
+  const activeService = () => {
+    axios
+      .patch(API_URL(`inhabilitarServicios/${serviceId}`), { estado: 'activo' })
+      .then(() => {
+        setToastify('serviceActive')
+        navigate('/services')
+      })
+      .catch(() => {
+        toast.error('¡Ha ocurrido un error al activar el servicio!', {
+          theme: 'colored'
+        })
+        setDisabled(false)
+      })
+  }
+
   return (
     <>
       <ResponsiveNav
@@ -270,7 +303,14 @@ const EditService = () => {
         <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
         <section className='add-service-form'>
           <div className='info-create'>
-            <p>Llena este formulario para crear un nuevo servicio</p>
+            <p>Edita este formulario para modificar {textServices && ((textServices.nombre_servicio).toLowerCase())}</p>
+            {textServices && textServices.estado === 'activo'
+              ? (
+                <Button text={'Deshabilitar Servicio'} width={150} innerClassName='center' innerOnClick={desactiveService} />
+              )
+              : (
+                <Button text={'Habilitar Servicio'} width={150} innerClassName='center' innerOnClick={activeService} />
+              )}
             <div className='buttons'></div>
           </div>
           <form className='service-form' onSubmit={submitService}>

@@ -5,6 +5,8 @@
   outline: 1.7px solid gray;
   padding: 1rem;
   resize: none;
+  outline: 1.7px solid gray;
+  border: none;
 }
 .textarea:hover {
   border: none;
