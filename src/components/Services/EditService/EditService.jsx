@@ -293,11 +293,31 @@ const EditService = () => {
   }
 
   const activeService = () => {
-    axios
-      .patch(API_URL(`inhabilitarServicios/${serviceId}`), { estado: 'activo' })
-      .then(() => {
-        setToastify('serviceActive')
-        navigate('/services')
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¡No podrás revertir este cambio!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#aaa',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    })
+      .then((result) => {
+        if (result.isDismissed) return
+        axios
+          .patch(API_URL(`inhabilitarServicios/${serviceId}`), { estado: 'activo' })
+          .then(() => {
+            setToastify('serviceActive')
+            navigate('/services')
+          })
+          .catch(() => {
+            toast.error('¡Ha ocurrido un error al activar el servicio!', {
+              theme: 'colored'
+            })
+            setDisabled(false)
+          })
       })
       .catch(() => {
         toast.error('¡Ha ocurrido un error al activar el servicio!', {
