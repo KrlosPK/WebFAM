@@ -45,6 +45,7 @@ const CitasUser = () => {
       })
       .catch(() => {
         setCitaPendientesData(false)
+        setDatesState('inexistentes')
         throw new Error('ERROR_GET_SCHEDULES')
       })
   }, [])
@@ -127,12 +128,11 @@ const CitasUser = () => {
           </ul>
         </nav>
 
-        {loading && <div className='citas-loader'>Cargando...</div>}
+        {(loading && !datesState) && <div className='citas-loader'>Cargando...</div>}
 
-        {!loading && (
+        {(datesState) && (
           <>
-            {((!memoizedRespondidasData && datesState === 'respondidas') ||
-              (!memoizedPendientesData && datesState === 'pendientes')) && (
+            {((!memoizedRespondidasData && datesState === 'respondidas') || (!memoizedPendientesData && datesState === 'pendientes') || (datesState === 'inexistentes')) && (
               <div className='title__center'>No hay citas {datesState}</div>
             )}
           </>

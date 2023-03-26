@@ -27,7 +27,7 @@ import { BsPatchCheck, BsCalendarEvent } from 'react-icons/bs'
 const Service = () => {
   // ? Context
   const { session } = useContext(SessionContext)
-  const { toastify } = useContext(ToastifyContext)
+  const { toastify, setToastify } = useContext(ToastifyContext)
 
   const [button, setButton] = useState(null)
   const [idRol, setIdRol] = useState(null)
@@ -46,16 +46,19 @@ const Service = () => {
       toast.success('¡Servicio modificado con éxito!', {
         theme: 'colored'
       })
+      setToastify(false)
     }
     if (toastify === 'citaAgendada') {
       toast.success('¡Cita agendada con éxito!', {
         theme: 'colored'
       })
+      setToastify(false)
     }
     if (toastify === 'citaAgendadaError') {
       toast.error('¡Hubo un error al crear la cita!', {
         theme: 'colored'
       })
+      setToastify(false)
     }
     if (toastify === 'citaAgendadaRepetida') {
       toast.warning(
@@ -64,6 +67,7 @@ const Service = () => {
           theme: 'colored'
         }
       )
+      setToastify(false)
     }
   }, [toastify])
 

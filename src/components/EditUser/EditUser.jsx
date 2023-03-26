@@ -368,7 +368,8 @@ const EditUser = () => {
       confirmButtonColor: '#d33',
       cancelButtonColor: '#aaa',
       confirmButtonText: 'Confirmar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
     }).then((result) => {
       if (result.isDismissed) return
       axios
