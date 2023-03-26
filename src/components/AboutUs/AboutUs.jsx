@@ -1,11 +1,11 @@
 import './AboutUs.css'
 
 // ? Components
-import { API_URL, Button2, Card } from '../Utils'
+import { API_URL, Button, Button2, Card } from '../Utils'
 import { Link } from 'react-router-dom'
 
 // * Hooks
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 // ? Libraries
 import axios from 'axios'
@@ -13,8 +13,10 @@ import jwtDecode from 'jwt-decode'
 import Cookies from 'js-cookie'
 
 const AboutUs = () => {
-  const [services, setServices] = useState(null)
+  const [activeServices, setActiveServices] = useState(null)
+  const [inactiveServices, setInactiveServices] = useState(null)
   const [idRol, setIdRol] = useState(null)
+  const [servicesState, setServicesState] = useState('active')
 
   useEffect(() => {
     const token = Cookies.get('token')
@@ -27,11 +29,37 @@ const AboutUs = () => {
     }
   }, [])
 
+  const memoizedActiveService = useMemo(() => activeServices, [activeServices])
+  const memoizedInactiveService = useMemo(() => inactiveServices, [inactiveServices])
+
+  const updateActiveServices = (servicios) => setActiveServices(servicios)
+  const updateInactiveServices = (servicios) => setInactiveServices(servicios)
+
+  const getActiveServices = async () => {
+    try {
+      const { data } = await axios.get(API_URL('servicios'))
+      updateActiveServices(data.services)
+    } catch (err) {
+      updateActiveServices(false)
+    }
+  }
+
+  const getInactiveServices = async () => {
+    try {
+      const { data } = await axios.get(API_URL('serviciosInactivos'))
+      updateInactiveServices(data.services)
+    } catch (err) {
+      updateInactiveServices(false)
+    }
+  }
+
   useEffect(() => {
-    axios.get(API_URL('servicios')).then(({ data }) => {
-      setServices(data.services)
-    })
+    getInactiveServices()
+    getActiveServices()
   }, [])
+
+  const loading = (memoizedActiveService && memoizedActiveService.length === 0) || (memoizedInactiveService && memoizedInactiveService.length === 0)
+
   return (
     <section className='about-us-container'>
       <div className='info'>
@@ -41,23 +69,58 @@ const AboutUs = () => {
           servicios que se adapten a tus necesidades y sean de la más alta calidad.
         </p>
         {idRol && idRol !== 2 && (
-          <Link to='/add-service'>
-            <Button2 text={'Crear servicio'} />
-          </Link>
+          <div className="gap-2 d-flex-column">
+            <Link to='/add-service'>
+              <Button2 width={200} text={'Crear servicio'} />
+            </Link>
+            {(servicesState && servicesState === 'active')
+              ? (
+                <Button width={200} innerOnClick={() => setServicesState('inactive')} text={'Servicios inactivos'} />
+
+              )
+              : (
+                <Button width={200} innerOnClick={() => setServicesState('active')} text={'Servicios activos'} />
+              )
+            }
+          </div>
         )}
+
+        {loading
+          ? (
+            <>
+              {(memoizedInactiveService && !memoizedInactiveService) &&
+                (
+                  <div className='title__center'>No hay servicios inactivos</div>
+                )
+              }
+            </>
+          )
+          : (
+            <>
+              {(memoizedActiveService && !memoizedActiveService) &&
+                (
+                  <div className='title__center'>No hay servicios activos</div>
+                )
+              }
+            </>
+          )
+        }
+
         <div className='cards'>
-          {services
-            ? (
-              services.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
-                <Link to={`/services/${id_servicio}`} key={id_servicio}>
-                  <Card src={foto_servicio} title={nombre_servicio} description={resumen_servicio} isButton buttonText={'Detalles'} />
-                </Link>
-              ))
-            )
-            : (
-              <div className='loader'>Cargando...</div>
-            )}
+          {(memoizedActiveService && servicesState === 'active') && memoizedActiveService.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
+            <Link to={`/services/${id_servicio}`} key={id_servicio}>
+              <Card src={foto_servicio} title={nombre_servicio} description={resumen_servicio} isButton buttonText={'Detalles'} />
+            </Link>
+          ))}
+
+          {(memoizedInactiveService && servicesState === 'inactive') && memoizedInactiveService.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
+            <Link to={`/services/${id_servicio}`} key={id_servicio}>
+              <Card src={foto_servicio} title={nombre_servicio} description={resumen_servicio} isButton buttonText={'Detalles'} />
+            </Link>
+          ))}
         </div>
+
+        {/* <div className='loader'>Cargando...</div> */}
       </div>
     </section>
   )
