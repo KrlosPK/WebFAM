@@ -134,10 +134,10 @@ const Citas = () => {
 
         {!loading && (
           <>
-            {(!memoizedPendientesData && datesState === 'pendientes') ||
-              (!memoizedRespondidasData && datesState === 'respondidas' && (
-                <div className='title__center'>No hay citas {datesState}</div>
-              ))}
+            {((!memoizedRespondidasData && datesState === 'respondidas') ||
+              (!memoizedPendientesData && datesState === 'pendientes')) && (
+              <div className='title__center'>No hay citas {datesState}</div>
+            )}
           </>
         )}
 
