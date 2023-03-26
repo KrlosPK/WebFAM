@@ -15,6 +15,12 @@ const Cita = ({
   servicePhoto,
   isLink
 }) => {
+  const id_cita_capitalized = estado.charAt(0).toUpperCase() + estado.slice(1)
+  const style =
+    estado === 'pendiente'
+      ? { color: '#fd8b26', outline: '2px solid #fd8b26' }
+      : { color: '#3ae374', outline: '2px solid #3ae374' }
+
   return isLink
     ? (
       <Link to={`/citas/${id_cita}`} key={id_cita} className={`cita ${isLink && 'cita-hover'}`}>
@@ -44,15 +50,8 @@ const Cita = ({
     )
     : (
       <div key={id_cita} className='cita'>
-        <label
-          className='id-cita'
-          style={
-            estado === 'pendiente'
-              ? { color: '#fd8b26', outline: '2px solid #fd8b26' }
-              : { color: '#3ae374', outline: '2px solid #3ae374' }
-          }
-        >
-          {`${estado.charAt(0).toUpperCase() + estado.slice(1)} #${id_cita}`}
+        <label className='id-cita' style={style}>
+          {`${id_cita_capitalized} #${id_cita}`}
         </label>
         <LongCard
           foto_usuario={userPhoto || '/default-avatar.png'}

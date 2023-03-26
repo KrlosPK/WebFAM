@@ -4,6 +4,7 @@
   left: 50%;
   margin: 2rem 2rem 2rem 0;
   max-width: 1400px;
+  min-height: 350px;
   position: relative;
   translate: -50%;
 }
@@ -105,8 +106,8 @@ button.cita-active {
   }
   .id-cita {
     left: 0.8rem;
-    top: 0.8rem;
     scale: 0.9;
+    top: 0.8rem;
   }
 }
 
