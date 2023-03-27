@@ -10,6 +10,7 @@ import { CitasUser } from './components/Citas/CitasUser/CitasUser'
 import { EditUser } from './components/EditUser/EditUser'
 import { InfoUserEdit } from './components/AllUsers/EditUser/InfoUserEdit'
 import { FAQ } from './components/FAQ/FAQ'
+import { AddFAQ } from './components/FAQ/AddFAQ/AddFAQ'
 import { Home } from './components/Home/Home'
 import { Login } from './components/Login/Login'
 import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
@@ -58,6 +59,7 @@ export const App = () => {
       <Route path='/info-user-edit/:id' element={<InfoUserEdit />} />
 
       <Route path='/frequent-questions' element={<FAQ />} />
+      <Route path='/add-frequent-question' element={<AddFAQ />} />
 
       <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='*' element={<NotFound />} />
