@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { LongCard } from '../Utils'
+import { Button, LongCard } from '../Utils'
 
 const Cita = ({
   id_cita,
@@ -46,6 +46,7 @@ const Cita = ({
           hora_servicio={hora_creacion_cita.substring(0, 5)}
           estado_servicio={estado}
         />
+        <Button text='Detalles' innerClassName='ver-detalles-cita' />
       </Link>
     )
     : (
