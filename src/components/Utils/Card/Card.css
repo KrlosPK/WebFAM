@@ -41,6 +41,13 @@ picture {
 .card__button {
   margin: 0.5rem auto;
 }
+.modal__card-button {
+  margin-block: 0.5rem;
+  margin-inline: auto;
+}
+.card__servicio-personalizado {
+  cursor: default;
+}
 
 @media (max-width: 630px) {
   picture {
