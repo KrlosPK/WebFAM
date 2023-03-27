@@ -4,6 +4,7 @@
   left: 50%;
   margin: 2rem 2rem 2rem 0;
   max-width: 1400px;
+  min-height: 350px;
   position: relative;
   translate: -50%;
 }
@@ -26,6 +27,7 @@ button.cita-active {
 }
 .cita {
   display: flex;
+  margin-bottom: 2rem;
   place-content: center;
   position: relative;
 }
@@ -36,6 +38,12 @@ button.cita-active {
   padding: 0.3rem 0.8rem;
   position: absolute;
   top: 2rem;
+}
+.ver-detalles-cita {
+  bottom: 1.5rem;
+  left: 50%;
+  position: absolute;
+  translate: -50%;
 }
 
 .citas-loader {
@@ -99,14 +107,28 @@ button.cita-active {
   }
 }
 
+@media (max-width: 959px) {
+  .ver-detalles-cita {
+    left: auto;
+    right: 2rem;
+    top: 1.9rem;
+    translate: 0;
+  }
+}
 @media (max-width: 768px) {
   .citas-nav__ul {
     justify-content: center;
   }
   .id-cita {
     left: 0.8rem;
-    top: 0.8rem;
     scale: 0.9;
+    top: 0.8rem;
+  }
+  .ver-detalles-cita {
+    left: auto;
+    right: 0.8rem;
+    scale: 0.9;
+    top: 0.7rem;
   }
 }
 
@@ -118,5 +140,16 @@ button.cita-active {
   }
   .citas-nav {
     border-radius: 0;
+  }
+  .id-cita {
+    left: 0.5rem;
+    scale: 0.7;
+    top: 0.8rem;
+  }
+  .ver-detalles-cita {
+    left: auto;
+    right: 0.5rem;
+    scale: 0.7;
+    top: 0.7rem;
   }
 }

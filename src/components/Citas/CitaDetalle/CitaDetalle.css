@@ -1,9 +1,28 @@
 .cita-detalle {
+  background: linear-gradient(to top, #232526, #414345);
   border-radius: 15px;
   box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+  color: #fff;
   display: grid;
   gap: 1rem;
-  margin: 2rem;
-  min-height: 50vh;
+  margin: 3rem auto;
+  max-width: 500px;
+  min-height: 350px;
   place-content: center;
+  width: 100%;
+}
+.cita-detalle__title {
+  font-family: syne;
+  font-size: 32px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .cita-detalle {
+    border-radius: 0;
+    box-shadow: none;
+    margin: auto;
+    max-width: 100%;
+  }
 }

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { LongCard } from '../Utils'
+import { Button, LongCard } from '../Utils'
 
 const Cita = ({
   id_cita,
@@ -15,6 +15,12 @@ const Cita = ({
   servicePhoto,
   isLink
 }) => {
+  const id_cita_capitalized = estado.charAt(0).toUpperCase() + estado.slice(1)
+  const style =
+    estado === 'pendiente'
+      ? { color: '#fd8b26', outline: '2px solid #fd8b26' }
+      : { color: '#3ae374', outline: '2px solid #3ae374' }
+
   return isLink
     ? (
       <Link to={`/citas/${id_cita}`} key={id_cita} className={`cita ${isLink && 'cita-hover'}`}>
@@ -40,19 +46,13 @@ const Cita = ({
           hora_servicio={hora_creacion_cita.substring(0, 5)}
           estado_servicio={estado}
         />
+        <Button text='Detalles' innerClassName='ver-detalles-cita' />
       </Link>
     )
     : (
       <div key={id_cita} className='cita'>
-        <label
-          className='id-cita'
-          style={
-            estado === 'pendiente'
-              ? { color: '#fd8b26', outline: '2px solid #fd8b26' }
-              : { color: '#3ae374', outline: '2px solid #3ae374' }
-          }
-        >
-          {`${estado.charAt(0).toUpperCase() + estado.slice(1)} #${id_cita}`}
+        <label className='id-cita' style={style}>
+          {`${id_cita_capitalized} #${id_cita}`}
         </label>
         <LongCard
           foto_usuario={userPhoto || '/default-avatar.png'}
