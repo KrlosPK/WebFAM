@@ -12,6 +12,7 @@ import { Box } from '@mui/system'
 
 // ? Styles
 import { style } from './ModalStyle'
+import './ModalService.css'
 
 // ? Libraries
 import axios from 'axios'
@@ -23,7 +24,7 @@ import emailjs from '@emailjs/browser'
 import { SessionContext } from '../../../context/SessionContext'
 import { ToastifyContext } from '../../../context/ToastifyContext'
 
-const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
+const ModalService = ({ nombre_servicio = '', id_servicio = '', innerClassNameButton, innerCenterButton }) => {
   const nombreInputEl = useRef()
   const correoInputEl = useRef()
   const numCelularInputEl = useRef()
@@ -177,7 +178,16 @@ const ModalService = ({ nombre_servicio = '', id_servicio = '' }) => {
 
   return (
     <div>
-      <Button2 innerOnClick={handleModalClick} text='Solicitar' width={220} />
+      {innerCenterButton
+        ? (
+          <section className='section__button-grid-center'>
+            <Button2 innerOnClick={handleModalClick} text='Solicitar' width={220} innerClassName={innerClassNameButton} />
+          </section>
+        )
+        : (
+          <Button2 innerOnClick={handleModalClick} text='Solicitar' width={220} />
+        )
+      }
       <Modal
         open={openModal}
         onClose={handleModalClick}
