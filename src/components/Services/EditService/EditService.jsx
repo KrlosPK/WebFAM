@@ -69,8 +69,6 @@ const EditService = () => {
     const nombre_servicio = e.target[0].value
     const descripcion_servicio = e.target[1].value
     const resumen_servicio = e.target[2].value
-    const foto_servicio = await uploadPhoto()
-    const galeria_servicios = await uploadGallery()
 
     if (nombre_servicio.length === 0 || /^\s+$/.test(nombre_servicio)) {
       toast.error('¡El nombre del servicio no puede estar vacío!', {
@@ -123,7 +121,21 @@ const EditService = () => {
       })
       setDisabled(false)
       return
+    } else if (foto_servicioInputEl.current.files[0].size > 5000000) {
+      toast.error('¡El tamaño de la foto debe ser menor a 5MB!', {
+        theme: 'colored'
+      })
+      setDisabled(false)
+      return
+    } else if (galeria_serviciosInputEl.current.files.size > 5000000) {
+      toast.error('¡El tamaño de la foto de la galería debe ser menor a 5MB!', {
+        theme: 'colored'
+      })
+      setDisabled(false)
+      return
     }
+    const foto_servicio = await uploadPhoto()
+    const galeria_servicios = await uploadGallery()
     setToastify('serviceModified')
     return {
       nombre_servicio,

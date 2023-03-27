@@ -120,7 +120,7 @@ const AddService = () => {
       setDisabled(false)
       return
     } else if (galeria_serviciosInputEl.current.files.size > 5000000) {
-      toast.error('¡El tamaño de la foto debe ser menor a 5MB!', {
+      toast.error('¡El tamaño de la foto de la galería debe ser menor a 5MB!', {
         theme: 'colored'
       })
       setDisabled(false)
