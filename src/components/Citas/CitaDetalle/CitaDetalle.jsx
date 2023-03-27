@@ -46,16 +46,14 @@ const CitaDetalle = () => {
 
     window.scrollTo(0, 0)
 
-    document.title = 'FADEMET Montajes | Cita'
+    document.title = `FADEMET Montajes | Cita ${idCita}`
   }, [])
 
   const responderCita = () => {
-    axios
-      .patch(API_URL(`eliminarCita/${idCita}`), { estado: 'respondido' })
-      .then(() => {
-        setToastify('citaRespondida')
-        navigate('/citas')
-      })
+    axios.patch(API_URL(`eliminarCita/${idCita}`), { estado: 'respondido' }).then(() => {
+      setToastify('citaRespondida')
+      navigate('/citas')
+    })
   }
 
   return (
@@ -95,8 +93,13 @@ const CitaDetalle = () => {
         renderButtons={button}
       />
       <section className='cita-detalle'>
-        <h1>Cita #{idCita}</h1>
-        <Button onClick={responderCita} variant='outlined'>
+        <h1 className='cita-detalle__title'>Cita #{idCita}</h1>
+        <Button
+          onClick={responderCita}
+          sx={{ borderRadius: '10px' }}
+          color='success'
+          variant='contained'
+        >
           Marcar como Respondida
         </Button>
       </section>
