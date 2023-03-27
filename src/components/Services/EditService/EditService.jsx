@@ -121,18 +121,6 @@ const EditService = () => {
       })
       setDisabled(false)
       return
-    } else if (foto_servicioInputEl.current.files[0].size > 5000000) {
-      toast.error('¡El tamaño de la foto debe ser menor a 5MB!', {
-        theme: 'colored'
-      })
-      setDisabled(false)
-      return
-    } else if (galeria_serviciosInputEl.current.files.size > 5000000) {
-      toast.error('¡El tamaño de la foto de la galería debe ser menor a 5MB!', {
-        theme: 'colored'
-      })
-      setDisabled(false)
-      return
     }
     const foto_servicio = await uploadPhoto()
     const galeria_servicios = await uploadGallery()
@@ -281,21 +269,22 @@ const EditService = () => {
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar',
       reverseButtons: true
-    }).then((result) => {
-      if (result.isDismissed) return
-      axios
-        .patch(API_URL(`inhabilitarServicios/${serviceId}`), { estado: 'inactivo' })
-        .then(() => {
-          setToastify('serviceDesactive')
-          navigate('/services')
-        })
-        .catch(() => {
-          toast.error('¡Ha ocurrido un error al desactivar el servicio!', {
-            theme: 'colored'
-          })
-          setDisabled(false)
-        })
     })
+      .then((result) => {
+        if (result.isDismissed) return
+        axios
+          .patch(API_URL(`inhabilitarServicios/${serviceId}`), { estado: 'inactivo' })
+          .then(() => {
+            setToastify('serviceDesactive')
+            navigate('/services')
+          })
+          .catch(() => {
+            toast.error('¡Ha ocurrido un error al desactivar el servicio!', {
+              theme: 'colored'
+            })
+            setDisabled(false)
+          })
+      })
       .catch(() => {
         toast.error('¡Ha ocurrido un error al desactivar el servicio!', {
           theme: 'colored'
@@ -355,13 +344,26 @@ const EditService = () => {
         <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
         <section className='add-service-form'>
           <div className='info-create'>
-            <p>Edita este formulario para modificar {textServices && ((textServices.nombre_servicio).toLowerCase())}</p>
+            <p>
+              Edita este formulario para modificar{' '}
+              {textServices && textServices.nombre_servicio.toLowerCase()}
+            </p>
             {textServices && textServices.estado === 'activo'
               ? (
-                <Button text={'Deshabilitar Servicio'} width={150} innerClassName='center' innerOnClick={desactiveService} />
+                <Button
+                  text={'Deshabilitar Servicio'}
+                  width={150}
+                  innerClassName='center'
+                  innerOnClick={desactiveService}
+                />
               )
               : (
-                <Button text={'Habilitar Servicio'} width={150} innerClassName='center' innerOnClick={activeService} />
+                <Button
+                  text={'Habilitar Servicio'}
+                  width={150}
+                  innerClassName='center'
+                  innerOnClick={activeService}
+                />
               )}
             <div className='buttons'></div>
           </div>
@@ -372,7 +374,7 @@ const EditService = () => {
                 innerId='nombre-servicio'
                 type='text'
                 nameID='nombre_servicio'
-                max={100}
+                max={50}
                 innerOnChange={handleInputChange}
                 innerDefaultValue={textServices && textServices.nombre_servicio}
                 innerRef={nombre_servicioInputEl}
@@ -391,7 +393,7 @@ const EditService = () => {
                 text='Resumen del servicio'
                 innerId='resumen-servicio'
                 type='text'
-                max={100}
+                max={60}
                 innerOnChange={handleInputChange}
                 nameID='resumen_servicio'
                 innerDefaultValue={textServices && textServices.resumen_servicio}
