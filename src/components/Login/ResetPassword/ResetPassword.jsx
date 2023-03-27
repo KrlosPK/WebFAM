@@ -127,10 +127,18 @@ const ResetPassword = () => {
           setToastify('recover')
           navigate('/login')
         })
-        .catch(() => {
+        .catch(({ response }) => {
+          if (response.status === 302) {
+            toast.error('¡La contraseña que has ingresado es la actual! Por favor, intenta ingresar una contraseña diferente si deseas recuperarla.', {
+              theme: 'colored'
+            })
+            setDisabled(false)
+            return
+          }
           toast.error('¡Hubo un error al cambiar la contraseña!', {
             theme: 'colored'
           })
+          setDisabled(false)
         })
     }
   }
