@@ -70,7 +70,7 @@ const ResetPassword = () => {
     const contrasena = e.target[0].value
     const confirmarContrasena = e.target[1].value
 
-    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-*$%&=ñÑ]{8,16}$/
+    const regexContrasena = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@¡!/¿?_\-.#+*$~%&=ñÑ]{8,16}$/
 
     if (validatePassword(contrasena, /^\s+$/)) {
       e.preventDefault()
@@ -127,10 +127,18 @@ const ResetPassword = () => {
           setToastify('recover')
           navigate('/login')
         })
-        .catch(() => {
+        .catch(({ response }) => {
+          if (response.status === 302) {
+            toast.error('¡La contraseña que has ingresado es la actual! Por favor, intenta ingresar una contraseña diferente si deseas recuperarla.', {
+              theme: 'colored'
+            })
+            setDisabled(false)
+            return
+          }
           toast.error('¡Hubo un error al cambiar la contraseña!', {
             theme: 'colored'
           })
+          setDisabled(false)
         })
     }
   }

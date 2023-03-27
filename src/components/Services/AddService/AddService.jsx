@@ -194,6 +194,9 @@ const AddService = () => {
       const foto_servicio = foto_servicioInputEl.current.files[0]
       if (!foto_servicio) return
       const imgRef = ref(storage, `servicesPhoto${lastId + 1}/${foto_servicio.name + uuidv4()}`)
+      toast.info('¡Subiendo imagen', {
+        theme: 'colored'
+      })
       await uploadBytes(imgRef, foto_servicio)
       const url = await getDownloadURL(imgRef)
       return url
