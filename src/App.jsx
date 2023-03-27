@@ -3,23 +3,23 @@ import { Route, Routes } from 'react-router-dom'
 import { useContext } from 'react'
 
 //* Components
+import { AllUsers } from './components/AllUsers/AllUsers'
+import { Citas } from './components/Citas/Citas'
+import { CitaDetalle } from './components/Citas/CitaDetalle/CitaDetalle'
+import { CitasUser } from './components/Citas/CitasUser/CitasUser'
+import { EditUser } from './components/EditUser/EditUser'
+import { InfoUserEdit } from './components/AllUsers/EditUser/InfoUserEdit'
+import { FAQ } from './components/FAQ/FAQ'
 import { Home } from './components/Home/Home'
 import { Login } from './components/Login/Login'
+import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
+import { ResetPassword } from './components/Login/ResetPassword/ResetPassword'
+import { NotFound } from './components/Not-found/NotFound'
 import { Register } from './components/Register/Register'
 import { Services } from './components/Services/Services'
 import { Service } from './components/Services/Service/Service'
-import { Citas } from './components/Citas/Citas'
-import { CitaDetalle } from './components/Citas/CitaDetalle/CitaDetalle'
-import { EditUser } from './components/EditUser/EditUser'
-import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
 import { AddService } from './components/Services/AddService/AddService'
-import { AllUsers } from './components/AllUsers/AllUsers'
-import { InfoUserEdit } from './components/AllUsers/EditUser/InfoUserEdit'
 import { EditService } from './components/Services/EditService/EditService'
-import { CitasUser } from './components/Citas/CitasUser/CitasUser'
-
-import { NotFound } from './components/Not-found/NotFound'
-import { ResetPassword } from './components/Login/ResetPassword/ResetPassword'
 
 import { ProtectedRoute } from './components/Utils'
 
@@ -56,6 +56,8 @@ export const App = () => {
 
       <Route path='/all-users' element={<AllUsers />} />
       <Route path='/info-user-edit/:id' element={<InfoUserEdit />} />
+
+      <Route path='/frequent-questions' element={<FAQ />} />
 
       <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='*' element={<NotFound />} />
