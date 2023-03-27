@@ -6,6 +6,7 @@ import AOS from 'aos'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import { Button2 } from '../Button2/Button2'
+import { ModalService } from '../ModalService/ModalService'
 
 const Card = ({
   title,
@@ -16,13 +17,16 @@ const Card = ({
   descriptionFont,
   src,
   isButton = false,
+  isModal = false,
   buttonText,
+  innerOnClick,
+  innerClassName,
   alt = 'Servicio que ofrece Fademet Montajes'
 }) => {
   AOS.init({ duration: 700 })
 
   return (
-    <div className='card' data-aos='fade-right'>
+    <div className={`card ${innerClassName}`} data-aos='fade-right'>
       <picture>
         <LazyLoadImage
           className='card__image'
@@ -41,7 +45,13 @@ const Card = ({
         {description}
       </p>
       {isButton && (
-        <Button2 width={150} text={buttonText} innerClassName='card__button' />
+        <Button2 width={150} text={buttonText} innerClassName='card__button' innerOnClick={innerOnClick} />
+      )}
+      {isModal && (
+        <ModalService innerClassNameButton={'modal__card-button'} innerCenterButton
+          nombre_servicio={'Servicio personalizado'}
+          id_servicio={0}
+        />
       )}
     </div>
   )

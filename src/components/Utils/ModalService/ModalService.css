@@ -1,0 +1,4 @@
+.section__button-grid-center {
+  display: grid;
+  place-items: center;
+}

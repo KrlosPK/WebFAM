@@ -42,6 +42,27 @@ const Services = () => {
       })
       setToastify(false)
     }
+    if (toastify === 'citaAgendada') {
+      toast.success('¡Cita agendada con éxito!', {
+        theme: 'colored'
+      })
+      setToastify(false)
+    }
+    if (toastify === 'citaAgendadaError') {
+      toast.error('¡Hubo un error al crear la cita!', {
+        theme: 'colored'
+      })
+      setToastify(false)
+    }
+    if (toastify === 'citaAgendadaRepetida') {
+      toast.warning(
+        '¡Ya tienes una cita pendiente! Por favor, elimínala si ya no la necesitas o espera a que te demos una respuesta.',
+        {
+          theme: 'colored'
+        }
+      )
+      setToastify(false)
+    }
   }, [toastify])
 
   useEffect(() => {
