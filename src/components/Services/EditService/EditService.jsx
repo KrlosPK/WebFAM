@@ -121,18 +121,6 @@ const EditService = () => {
       })
       setDisabled(false)
       return
-    } else if (foto_servicioInputEl && foto_servicioInputEl.current.files[0].size > 5000000) {
-      toast.error('¡El tamaño de la foto debe ser menor a 5MB!', {
-        theme: 'colored'
-      })
-      setDisabled(false)
-      return
-    } else if (galeria_serviciosInputEl && galeria_serviciosInputEl.current.files.size > 5000000) {
-      toast.error('¡El tamaño de la foto de la galería debe ser menor a 5MB!', {
-        theme: 'colored'
-      })
-      setDisabled(false)
-      return
     }
     const foto_servicio = await uploadPhoto()
     const galeria_servicios = await uploadGallery()
@@ -386,7 +374,7 @@ const EditService = () => {
                 innerId='nombre-servicio'
                 type='text'
                 nameID='nombre_servicio'
-                max={100}
+                max={50}
                 innerOnChange={handleInputChange}
                 innerDefaultValue={textServices && textServices.nombre_servicio}
                 innerRef={nombre_servicioInputEl}
@@ -405,7 +393,7 @@ const EditService = () => {
                 text='Resumen del servicio'
                 innerId='resumen-servicio'
                 type='text'
-                max={100}
+                max={60}
                 innerOnChange={handleInputChange}
                 nameID='resumen_servicio'
                 innerDefaultValue={textServices && textServices.resumen_servicio}

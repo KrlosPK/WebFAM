@@ -269,7 +269,7 @@ const AddService = () => {
                 text='Resumen del servicio'
                 innerId='resumen-servicio'
                 type='text'
-                max={80}
+                max={60}
                 nameID='resumen_servicio'
                 innerRef={resumen_servicioInputEl}
               />

@@ -190,7 +190,7 @@ const Service = () => {
               />
               {idRol && idRol !== 2 && (
                 <Link to={`/edit-service/${serviceId}`}>
-                  <Button text={'Editar servicio'} height={'41px'} width={'220px'} />
+                  <Button text={'Editar servicio'} height={41} width={220} />
                 </Link>
               )}
             </div>
