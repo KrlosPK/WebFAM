@@ -16,6 +16,7 @@
   font-family: 'Syne', sans-serif;
   font-size: 42px;
   font-weight: 700;
+  max-width: 40ch;
   padding: 0 4rem;
   text-align: center;
 }
@@ -31,12 +32,6 @@
   gap: 2rem;
   grid-template-columns: repeat(3, 1fr);
   height: max-content;
-}
-
-#add-service-link {
-  border-bottom: 1px solid black;
-  color: #000;
-  font-size: 1.3rem;
 }
 .title-center {
   text-align: center;
@@ -131,10 +126,11 @@
     left: 0;
   }
   .info__subtitle {
-    width: 90%;
+    width: 100%;
   }
   .info__title {
     font-size: 36px;
+    padding: 0 1rem;
   }
   .info {
     width: 100%;
