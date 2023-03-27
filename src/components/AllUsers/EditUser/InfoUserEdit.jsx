@@ -135,6 +135,11 @@ const InfoUserEdit = () => {
         theme: 'colored'
       })
       return false
+    } else if (userImageEl.current.files[0].size > 5000000) {
+      toast.error('¡La imagen no puede pesar más de 5MB!', {
+        theme: 'colored'
+      })
+      return false
     }
 
     try {
