@@ -47,6 +47,25 @@ footer a {
 .office-hours__item strong {
   user-select: text;
 }
+.footer__contact-info {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.footer__contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.footer__contact-item strong {
+  font-family: system-ui;
+}
+.footer__contact-item {
+  user-select: text;
+}
 .footer__contact-links {
   align-items: center;
   display: flex;
