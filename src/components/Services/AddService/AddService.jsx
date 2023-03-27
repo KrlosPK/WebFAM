@@ -107,13 +107,13 @@ const AddService = () => {
       })
       setDisabled(false)
       return
-    } else if (foto_servicioInputEl.current.files[0].type.split('/')[0] !== 'image') {
+    } else if (foto_servicioInputEl && foto_servicioInputEl.current.files[0].type.split('/')[0] !== 'image') {
       toast.error('¡El formato de la foto debe ser jpg, jpeg o png!', {
         theme: 'colored'
       })
       setDisabled(false)
       return
-    } else if (foto_servicioInputEl.current.files[0].size > 5000000) {
+    } else if (foto_servicioInputEl && foto_servicioInputEl.current.files[0].size > 5000000) {
       toast.error('¡El tamaño de la foto debe ser menor a 5MB!', {
         theme: 'colored'
       })
