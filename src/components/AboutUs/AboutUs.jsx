@@ -100,6 +100,7 @@ const AboutUs = () => {
               <Card src={foto_servicio} title={nombre_servicio} description={resumen_servicio} isButton buttonText={'Detalles'} />
             </Link>
           ))}
+          <Card src={'https://firebasestorage.googleapis.com/v0/b/fademetuserimg.appspot.com/o/pregunta.jpg?alt=media&token=5ae2cb81-22e8-4e53-9b93-4810bf385883'} title={'¿No encuentras lo que buscas?'} description='Puedes pedir tu servicio metalmecánico personalizado' isModal innerClassName={'card__servicio-personalizado'} />
 
           {(memoizedInactiveService && servicesState === 'inactive') && memoizedInactiveService.map(({ id_servicio, foto_servicio, nombre_servicio, resumen_servicio }) => (
             <Link to={`/services/${id_servicio}`} key={id_servicio}>
