@@ -8,6 +8,7 @@
   --text-color: #181515;
   --white-color: #eeeeee;
   --orange-gradient: linear-gradient(-160deg, #ff2525 40%, #ffe53b);
+  --blue-gradient: linear-gradient(to right, #0f2027, #203a43, #2c5364);
 }
 
 *,

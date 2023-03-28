@@ -1,12 +1,11 @@
 .textarea {
   border: none;
   border-radius: 6px;
+  height: 100px;
   margin-bottom: 1rem;
   outline: 1.7px solid gray;
   padding: 1rem;
   resize: none;
-  outline: 1.7px solid gray;
-  border: none;
 }
 .textarea:hover {
   border: none;

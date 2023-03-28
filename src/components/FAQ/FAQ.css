@@ -1,0 +1,106 @@
+.faq {
+  margin: auto;
+  max-width: 1300px;
+  padding: 2rem;
+}
+.faq__title {
+  font-family: syne;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  text-align: center;
+  width: fit-content;
+}
+.faq__title::after {
+  background: var(--blue-gradient);
+  background-color: #fff;
+  bottom: 1px;
+  content: '';
+  height: 2px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+.faq__text {
+  font-size: 15px;
+  margin-bottom: 1rem;
+  max-width: 60ch;
+}
+.faq__button {
+  margin-bottom: 1.5rem;
+}
+
+/* TODO */
+.faq__cards {
+  display: grid;
+  gap: 1rem;
+  grid-auto-flow: row dense;
+  place-items: center;
+}
+
+.get-in-touch {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 4rem;
+}
+.get-in-touch__info {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+.get-in-touch__info img {
+  border-radius: 50%;
+}
+.info-text__title {
+  margin: 0.4rem 0;
+}
+.info-text__text {
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 65ch;
+  padding-right: 5rem;
+}
+
+@media (max-width: 768px) {
+  .faq {
+    padding: 0.8rem;
+  }
+  .get-in-touch {
+    flex-direction: column;
+    gap: 1.8rem;
+    padding: 1.5rem 0.5rem;
+  }
+  .get-in-touch__info img {
+    height: 48px;
+    width: 48px;
+  }
+  .info-text__text {
+    padding-right: 0;
+  }
+}
+@media (max-width: 500px) {
+  .MuiPaper-root {
+    width: 100% !important;
+  }
+}
+
+/* * Cards Responsive */
+@media all and (min-width: 320px) {
+  .faq__cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media all and (min-width: 768px) {
+  .faq__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media all and (min-width: 1060px) {
+  .faq__cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+/* * Fin Cards Responsive */

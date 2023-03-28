@@ -1,10 +1,20 @@
 import './TextArea.css'
 
-const TextArea = ({ name, id, cols = '30', rows = '10', placeholder, max = 100, innerRef }) => {
+const TextArea = ({
+  name,
+  id,
+  cols = '30',
+  rows = '10',
+  placeholder,
+  max = 100,
+  innerRef,
+  innerDefaultValue
+}) => {
   return (
     <>
       <div className='input-container'>
         <textarea
+          defaultValue={innerDefaultValue}
           ref={innerRef}
           name={name}
           id={id}

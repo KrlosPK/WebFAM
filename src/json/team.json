@@ -34,7 +34,7 @@
     "src": "/avatar4.png",
     "alt": "Empleado de FADEMET",
     "header": "Ruby David",
-    "text": "Auxiliar administrativo",
+    "text": "Auxiliar administrativa",
     "textColor": "var(--icon-color)",
     "animation": "zoom-in-up",
     "borderRadius": "50%"

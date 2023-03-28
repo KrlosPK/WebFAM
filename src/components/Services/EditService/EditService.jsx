@@ -159,7 +159,7 @@ const EditService = () => {
     !session ? setButton(1) : setButton(2)
     window.scrollTo(0, 0)
 
-    document.title = 'FADEMET Montajes | Crear Servicio'
+    document.title = 'FADEMET Montajes | Editar Servicio'
   }, [])
 
   // * Validate if user is admin
