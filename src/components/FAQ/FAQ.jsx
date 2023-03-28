@@ -29,6 +29,12 @@ const FAQ = () => {
       })
       setToastify(false)
     }
+    if (toastify === 'faqEditado') {
+      toast.success('Pregunta frecuente editada con éxito', {
+        theme: 'colored'
+      })
+      setToastify(false)
+    }
 
     !session ? setButton(1) : setButton(2)
 
@@ -112,19 +118,35 @@ const FAQ = () => {
         )}
         <div className='faq__cards'>
           {!faqs && <div className='citas-loader'>Cargando...</div>}
-          {faqs &&
-            faqs.map(({ id_faq, titulo, respuesta }) => (
-              <Card key={id_faq} variant='outlined' style={style.card}>
-                <CardContent>
-                  <Typography style={style.cardTitle} component='div'>
-                    {titulo}
-                  </Typography>
-                  <Typography style={style.cardText} variant='body2'>
-                    {respuesta}
-                  </Typography>
-                </CardContent>
-              </Card>
-            ))}
+          {idRol && idRol !== 2
+            ? faqs &&
+              faqs.map(({ id_faq, titulo, respuesta }) => (
+                <Link to={`/edit-frequent-question/${id_faq}`} key={id_faq}>
+                  <Card variant='outlined' style={style.linkCard}>
+                    <CardContent>
+                      <Typography style={style.cardTitle} component='div'>
+                        {titulo}
+                      </Typography>
+                      <Typography style={style.cardText} variant='body2'>
+                        {respuesta}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))
+            : faqs &&
+              faqs.map(({ id_faq, titulo, respuesta }) => (
+                <Card key={id_faq} variant='outlined' style={style.card}>
+                  <CardContent>
+                    <Typography style={style.cardTitle} component='div'>
+                      {titulo}
+                    </Typography>
+                    <Typography style={style.cardText} variant='body2'>
+                      {respuesta}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))}
         </div>
         <section className='get-in-touch'>
           <article className='get-in-touch__info'>
@@ -138,7 +160,9 @@ const FAQ = () => {
             />
             <div className='info__text'>
               <h3 className='info-text__title'>¿Todavía tienes dudas?</h3>
-              <p className='info-text__text'>Por favor, contacta con nuestro equipo y te responderemos lo más pronto posible.</p>
+              <p className='info-text__text'>
+                Por favor, contacta con nuestro equipo y te responderemos lo más pronto posible.
+              </p>
             </div>
           </article>
           <a

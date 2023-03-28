@@ -6,6 +6,16 @@ export const style = {
     width: '320px',
     minHeight: '210px'
   },
+  linkCard: {
+    boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.1)',
+    display: 'flex',
+    flexDirection: 'column',
+    width: '320px',
+    minHeight: '210px',
+    hover: {
+      background: 'red'
+    }
+  },
   cardTitle: {
     fontFamily: 'system-ui, sans-serif',
     fontSize: '22px',

@@ -11,6 +11,7 @@ import { EditUser } from './components/EditUser/EditUser'
 import { InfoUserEdit } from './components/AllUsers/EditUser/InfoUserEdit'
 import { FAQ } from './components/FAQ/FAQ'
 import { AddFAQ } from './components/FAQ/AddFAQ/AddFAQ'
+import { EditFAQ } from './components/FAQ/EditFAQ/EditFAQ'
 import { Home } from './components/Home/Home'
 import { Login } from './components/Login/Login'
 import { RecoverPassword } from './components/Login/RecoverPassword/RecoverPassword'
@@ -53,13 +54,14 @@ export const App = () => {
       <Route path='/services' element={<Services />} />
       <Route path='/add-service' element={<AddService />} />
       <Route path='/services/:serviceId' element={<Service />} />
-      <Route path='/edit-service/:serviceId' element={<EditService />} />
+      {session && <Route path='/edit-service/:serviceId' element={<EditService />} />}
 
       <Route path='/all-users' element={<AllUsers />} />
       <Route path='/info-user-edit/:id' element={<InfoUserEdit />} />
 
       <Route path='/frequent-questions' element={<FAQ />} />
       <Route path='/add-frequent-question' element={<AddFAQ />} />
+      {session && <Route path='/edit-frequent-question/:faqId' element={<EditFAQ />} />}
 
       <Route path='/recover-password' element={<RecoverPassword />} />
       <Route path='*' element={<NotFound />} />
