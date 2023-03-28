@@ -63,15 +63,15 @@ const CitaDetalle = () => {
           !session
             ? ['Inicio', 'Servicios']
             : idRol && idRol === 2
-              ? ['Inicio', 'Servicios', 'Mis Agendas']
-              : ['Inicio', 'Agendas', 'Servicios']
+              ? ['Inicio', 'Servicios', 'Mis Agendas', 'Preguntas Frecuentes']
+              : ['Inicio', 'Agendas', 'Servicios', 'Preguntas Frecuentes']
         }
         linkUrl={
           !session
             ? ['/', '/services']
             : idRol && idRol === 2
-              ? ['/', '/services', '/mis-citas']
-              : ['/', '/citas', '/services']
+              ? ['/', '/services', '/mis-citas', '/frequent-questions']
+              : ['/', '/citas', '/services', '/frequent-questions']
         }
         renderButtons={button}
       />
@@ -80,15 +80,15 @@ const CitaDetalle = () => {
           !session
             ? ['Inicio', 'Servicios']
             : idRol && idRol === 2
-              ? ['Inicio', 'Servicios', 'Mis Agendas']
-              : ['Inicio', 'Agendas', 'Servicios']
+              ? ['Inicio', 'Servicios', 'Mis Agendas', 'Preguntas Frecuentes']
+              : ['Inicio', 'Agendas', 'Servicios', 'Preguntas Frecuentes']
         }
         linkUrl={
           !session
             ? ['/', '/services']
             : idRol && idRol === 2
-              ? ['/', '/services', '/mis-citas']
-              : ['/', '/citas', '/services']
+              ? ['/', '/services', '/mis-citas', '/frequent-questions']
+              : ['/', '/citas', '/services', '/frequent-questions']
         }
         renderButtons={button}
       />

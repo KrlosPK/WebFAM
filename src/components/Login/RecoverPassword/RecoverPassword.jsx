@@ -146,10 +146,6 @@ const RecoverPassword = () => {
       <main className='recover-password'>
         <ToastContainer transition={Zoom} limit={3} pauseOnFocusLoss={false} />
         <Navbar
-          elementTextLeft={['Inicio']}
-          urlLeft={['/']}
-          elementTextRight={['']}
-          urlRight={['']}
           renderButtons={3}
         />
         <section className='recover-password__container'>
