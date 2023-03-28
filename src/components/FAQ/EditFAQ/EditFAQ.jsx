@@ -95,7 +95,7 @@ const EditFAQ = () => {
 
   const getFaqData = () => {
     axios
-      .get(API_URL('faq/1'))
+      .get(API_URL(`faq/${faqId}`))
       .then(({ data }) => {
         const [faq] = data.faq
         setTextFaq({
@@ -104,7 +104,6 @@ const EditFAQ = () => {
         })
       })
       .catch((err) => {
-        console.log(err)
         throw new Error('Error al obtener los datos del servicio')
       })
   }
