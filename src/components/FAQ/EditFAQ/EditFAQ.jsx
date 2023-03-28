@@ -104,7 +104,6 @@ const EditFAQ = () => {
         })
       })
       .catch((err) => {
-        console.log(err)
         throw new Error('Error al obtener los datos del servicio')
       })
   }
